@@ -27,15 +27,39 @@ const LETTER_POOL = {
   Z: 1,
 };
 
+// Helper Function
+function shuffle(array) {
+  let currentIndex = array.length,
+    randomIndex;
+
+  // While there remain elements to shuffle.
+  while (currentIndex != 0) {
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex],
+      array[currentIndex],
+    ];
+  }
+
+  return array;
+}
+
+// Functions
+
 export const drawLetters = () => {
-  // Implement this method for wave 1
+  // Wave 1
   const letterPoolList = [];
 
   for (const [key, value] of Object.entries(LETTER_POOL)) {
-    // console.log(`${key} ${value}`);
     for (let i = 0; i < value; i++) {
       letterPoolList.push(key);
     }
+    hand_list = [];
+    shuffle(letterPoolList);
   }
   // Randomly shuffle the hand once before adding to hand list
 };
