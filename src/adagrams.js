@@ -3,7 +3,7 @@ import {letters, letterDict} from './CONSTANTS.js'
 
 export class Adagrams {
 
-drawLetters = () => {
+static drawLetters = () => {
   // Implement this method for wave 1
   const letterSampleArray = [];
   
@@ -14,11 +14,11 @@ drawLetters = () => {
   };
   const returnLetters = _.sample(letterSampleArray,10);
   return returnLetters;
-}
+};
 
-usesAvailableLetters = (input, lettersInHand) => {
-  const hand = this.MultiSet(lettersInHand);
-  const word = this.MultiSet(input);
+static usesAvailableLetters = (input, lettersInHand) => {
+  const hand = AGUtilities.MultiSet(lettersInHand);
+  const word = AGUtilities.MultiSet(input);
   for (const letter in word) {
     if (!(letter in hand)) {
       return false;
@@ -29,20 +29,9 @@ usesAvailableLetters = (input, lettersInHand) => {
     };
   };
   return true;
-}
+};
 
-MultiSet = (aString) => {
-  const returnObject = {}
-  for (const letter of aString){
-    if (!(letter in returnObject)) {
-      returnObject[letter] = 0
-    };
-    returnObject[letter]++;
-  };
-  return returnObject;
-}
-
-scoreWord = (word) => {
+static scoreWord = (word) => {
   // Implement this method for wave 3
   
   let score = 0;
@@ -60,14 +49,14 @@ scoreWord = (word) => {
     score += 8
   };
   return score;
-}
+};
 
-highestScoreFrom = (words) => {
+static highestScoreFrom = (words) => {
   // Implement this method for wave 4
   let maxi = 0
   let returnArray = []
   for (const word of words) {
-    let currentScore = this.scoreWord(word)
+    let currentScore = Adagrams.scoreWord(word)
     if (currentScore > maxi) {
       returnArray = [word];
       maxi = currentScore
@@ -78,27 +67,42 @@ highestScoreFrom = (words) => {
   };
   let word
   if (returnArray.length>1) {
-    word =  this.pickString(returnArray)
+    word =  AGUtilities.pickString(returnArray)
   }
   else {
     word = returnArray[0]
   };
   const retValue = {"score":maxi, "word":word}
   return retValue
-}
+};}
 
-pickString = (arr) => {
-  let word = "XXXXXXXXXXX"
-  for (let i=0;i<arr.length;i++) {
-    if (arr[i].length===10 && word.length!=10) {
-      return arr[i]
-    }
-    else if (word.length > arr[i].length) {
-      word = arr[i]
+
+
+class AGUtilities {
+  
+  static MultiSet = (aString) => {
+    const returnObject = {}
+    for (const letter of aString){
+      if (!(letter in returnObject)) {
+        returnObject[letter] = 0
+      };
+      returnObject[letter]++;
     };
-  };
-  return word;
-};};
+    return returnObject;
+  }
+
+  static pickString = (arr) => {
+    let word = "XXXXXXXXXXX"
+    for (let i=0;i<arr.length;i++) {
+      if (arr[i].length===10 && word.length!=10) {
+        return arr[i]
+      }
+      else if (word.length > arr[i].length) {
+        word = arr[i]
+      };
+    };
+    return word;
+  };};
 
 export default Adagrams
 // module.exports =  {Adagrams}
