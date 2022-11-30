@@ -50,6 +50,25 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
 
+  /* Input: input is user input of a word. lettersInHand is a list of 10 strings (each a letter)
+  Output: Returns True or False if word contains letters within lettersInHand */
+  
+  // const lettersInHandCopy = lettersInHand.map(letter => letter;);
+  const lettersInHandCopy = lettersInHand.slice();
+  const word = input.toUpperCase();
+  
+  for ( let i = 0 ; i < word.length ; i++) {
+    if (!lettersInHandCopy.includes(word[i])) {
+      return false;
+    } else {
+      for (let j = 0  ; j < lettersInHandCopy.length ; j++){
+        if (lettersInHandCopy[j] === word[i]) {
+          lettersInHandCopy.splice(j, 1);
+          break
+        } 
+      };
+    };
+  };return true;
 };
 
 export const scoreWord = (word) => {
