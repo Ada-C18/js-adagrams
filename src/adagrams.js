@@ -10,6 +10,8 @@ export const drawLetters = () => {
     playerHand.push(singleLetter);
     alphabetPool = alphabetPool.replace(singleLetter, '');
   } while (i < 10);
+
+  return playerHand;
 }
 
 export const usesAvailableLetters = (input, lettersInHand) => {
