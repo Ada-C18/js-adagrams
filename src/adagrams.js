@@ -1,9 +1,9 @@
 import _, { map } from 'underscore';
 import {letters, letterDict} from './CONSTANTS.js'
 
-// export class Adagrams {
+export class Adagrams {
 
-export const drawLetters = () => {
+drawLetters = () => {
   // Implement this method for wave 1
   const letterSampleArray = [];
   
@@ -16,9 +16,9 @@ export const drawLetters = () => {
   return returnLetters;
 }
 
- export const usesAvailableLetters = (input, lettersInHand) => {
-  const hand = MultiSet(lettersInHand);
-  const word = MultiSet(input);
+usesAvailableLetters = (input, lettersInHand) => {
+  const hand = this.MultiSet(lettersInHand);
+  const word = this.MultiSet(input);
   for (const letter in word) {
     if (!(letter in hand)) {
       return false;
@@ -42,7 +42,7 @@ MultiSet = (aString) => {
   return returnObject;
 }
 
-export const scoreWord = (word) => {
+scoreWord = (word) => {
   // Implement this method for wave 3
   
   let score = 0;
@@ -62,12 +62,12 @@ export const scoreWord = (word) => {
   return score;
 }
 
-export const highestScoreFrom = (words) => {
+highestScoreFrom = (words) => {
   // Implement this method for wave 4
   let maxi = 0
   let returnArray = []
   for (const word of words) {
-    let currentScore = scoreWord(word)
+    let currentScore = this.scoreWord(word)
     if (currentScore > maxi) {
       returnArray = [word];
       maxi = currentScore
@@ -78,7 +78,7 @@ export const highestScoreFrom = (words) => {
   };
   let word
   if (returnArray.length>1) {
-    word =  pickString(returnArray)
+    word =  this.pickString(returnArray)
   }
   else {
     word = returnArray[0]
@@ -98,7 +98,7 @@ pickString = (arr) => {
     };
   };
   return word;
-};
+};};
 
-
-// export default Adagrams
+export default Adagrams
+// module.exports =  {Adagrams}
