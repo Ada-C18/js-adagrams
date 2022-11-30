@@ -58,13 +58,13 @@ export const drawLetters = () => {
     for (let i = 0; i < value; i++) {
       letterPoolList.push(key);
     }
-    hand_list = [];
-    shuffle(letterPoolList);
-    // for loop to pop a letter from the letter pool list and add to hand
-    for (const letter of letterPoolList) {
-      handList.push(letterPoolList.pop());
-    }
   }
+  const handList = [];
+  shuffle(letterPoolList);
+  for (let i = 0; i < 10; i++) {
+    handList.push(letterPoolList.pop());
+  }
+  return handList;
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
