@@ -2,7 +2,7 @@ import {
   drawLetters,
   usesAvailableLetters,
   scoreWord,
-  highestScoreFrom,
+  highestScoreFrom
 } from "adagrams";
 
 const LETTER_POOL = {

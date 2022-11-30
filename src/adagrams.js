@@ -1,6 +1,8 @@
 import _, { map } from 'underscore';
 import {letters, letterDict} from './CONSTANTS.js'
 
+// export class Adagrams {
+
 export const drawLetters = () => {
   // Implement this method for wave 1
   const letterSampleArray = [];
@@ -12,9 +14,9 @@ export const drawLetters = () => {
   };
   const returnLetters = _.sample(letterSampleArray,10);
   return returnLetters;
-};
+}
 
-export const usesAvailableLetters = (input, lettersInHand) => {
+ export const usesAvailableLetters = (input, lettersInHand) => {
   const hand = MultiSet(lettersInHand);
   const word = MultiSet(input);
   for (const letter in word) {
@@ -27,9 +29,9 @@ export const usesAvailableLetters = (input, lettersInHand) => {
     };
   };
   return true;
-};
+}
 
-const MultiSet = (aString) => {
+MultiSet = (aString) => {
   const returnObject = {}
   for (const letter of aString){
     if (!(letter in returnObject)) {
@@ -38,7 +40,7 @@ const MultiSet = (aString) => {
     returnObject[letter]++;
   };
   return returnObject;
-};
+}
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
@@ -58,7 +60,7 @@ export const scoreWord = (word) => {
     score += 8
   };
   return score;
-};
+}
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
@@ -76,16 +78,16 @@ export const highestScoreFrom = (words) => {
   };
   let word
   if (returnArray.length>1) {
-    word =  longestString(returnArray)
+    word =  pickString(returnArray)
   }
   else {
     word = returnArray[0]
   };
   const retValue = {"score":maxi, "word":word}
   return retValue
-};
+}
 
-const longestString = (arr) => {
+pickString = (arr) => {
   let word = "XXXXXXXXXXX"
   for (let i=0;i<arr.length;i++) {
     if (arr[i].length===10 && word.length!=10) {
@@ -97,3 +99,6 @@ const longestString = (arr) => {
   };
   return word;
 };
+
+
+// export default Adagrams
