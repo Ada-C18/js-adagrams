@@ -1,7 +1,7 @@
 export const drawLetters = () => {
   // Implement this method for wave 1
 };
-
+console.log("Hi")
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
 };
