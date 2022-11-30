@@ -26,7 +26,7 @@ const LETTER_POOL_COUNT = {
   Y: 2,
   Z: 1,
 };
-
+// --------------------------------------------------------wave 1------------------------------------------------
 export const drawLetters = () => {
   // Implement this method for wave 1
   let count_obj = {};
@@ -53,9 +53,26 @@ export const drawLetters = () => {
   // console.log(letter_list.length);
   return letter_list;
 };
-
+// --------------------------------------------------------wave 2------------------------------------------------
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
+  let handLettercount = {};
+  for (let i = 0; i < lettersInHand.length; i++) {
+    if (!(lettersInHand[i] in handLettercount)) {
+      handLettercount[lettersInHand[i]] = 1;
+    } else {
+      handLettercount[lettersInHand[i]] += 1;
+    }
+  }
+  for (let letter of input) {
+    if (letter in handLettercount && handLettercount[letter] > 0) {
+      handLettercount[letter] -= 1;
+      continue;
+    } else {
+      return false;
+    }
+  }
+  return true;
 };
 
 export const scoreWord = (word) => {
