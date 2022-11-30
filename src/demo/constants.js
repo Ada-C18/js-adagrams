@@ -62,3 +62,5 @@ export const letterScore = {
   Y: 4,
   Z: 10
 };
+
+export default { letterDistribution, letterPoolArr, letterScore };
