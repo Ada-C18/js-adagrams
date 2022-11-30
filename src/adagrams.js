@@ -17,23 +17,12 @@ static drawLetters = () => {
 };
 
 static usesAvailableLetters = (input, lettersInHand) => {
-  const hand = AGUtilities.MultiSet(lettersInHand);
-  const word = AGUtilities.MultiSet(input);
-  for (const letter in word) {
-    if (!(letter in hand)) {
-      return false;
-    }
-    hand[letter] = hand[letter] - word[letter];
-    if ((hand[letter]<0)) {
-      return false;
-    };
-  };
-  return true;
+  const hand = new MultiSet(lettersInHand);
+  const word = new MultiSet(input);
+  return word.isSubSet(hand);
 };
 
 static scoreWord = (word) => {
-  // Implement this method for wave 3
-  
   let score = 0;
   let nonLetterCount = 0;
   word = word.toUpperCase();
@@ -44,7 +33,6 @@ static scoreWord = (word) => {
       nonLetterCount++;
     }
   }
-  
   if (word.length-nonLetterCount > 6) {
     score += 8
   };
@@ -76,11 +64,9 @@ static highestScoreFrom = (words) => {
   return retValue
 };}
 
+class MultiSet {
 
-
-class AGUtilities {
-  
-  static MultiSet = (aString) => {
+  constructor(aString) {
     const returnObject = {}
     for (const letter of aString){
       if (!(letter in returnObject)) {
@@ -88,8 +74,24 @@ class AGUtilities {
       };
       returnObject[letter]++;
     };
-    return returnObject;
+    this.mSet = returnObject
   }
+
+  isSubSet(superSet) {
+    for (const letter in this.mSet) {
+      if (!(letter in superSet.mSet)) {
+        return false;
+      }
+      superSet.mSet[letter] = superSet.mSet[letter] - this.mSet[letter];
+      if ((superSet.mSet[letter]<0)) {
+        return false;
+      }
+    };
+    return true;
+  };
+};
+
+class AGUtilities {
 
   static pickString = (arr) => {
     let word = "XXXXXXXXXXX"
