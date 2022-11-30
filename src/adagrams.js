@@ -14,6 +14,8 @@ const removeLetter = function (arr, target) {
 };
 
 //main functions
+
+//Wave 1
 export const drawLetters = () => {
   const bagOfLetters = {
     A: 9,
@@ -58,9 +60,18 @@ export const drawLetters = () => {
   return hand;
 };
 
-// export const usesAvailableLetters = (input, lettersInHand) => {
-//   // Implement this method for wave 2
-// };
+//wave 2
+export const usesAvailableLetters = (input, lettersInHand) => {
+  const inputArray = Array.from(input);
+  for (let letter of inputArray) {
+    console.log(letter);
+    if (lettersInHand.includes(letter) === false) {
+      return false;
+    }
+    removeLetter(lettersInHand, letter);
+  }
+  return true;
+};
 
 // export const scoreWord = (word) => {
 //   // Implement this method for wave 3
