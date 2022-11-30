@@ -31,43 +31,14 @@ export const drawLetters = () => {
 
   let all_letters = [];
 
-  /*function shuffle(array) {
-    let currentIndex = array.length,
-      randomIndex;
-
-    // While there remain elements to shuffle.
-    while (currentIndex != 0) {
-      // Pick a remaining element.
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-
-      // And swap it with the current element.
-      [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex],
-        array[currentIndex],
-      ];
+  for (const letter in LETTER_POOL) {
+    for (let value = 0; value < LETTER_POOL[letter]; value++) {
+      all_letters.push(letter);
     }
-
-    return array;
   }
-*/
-  const letterPool = function (LETTER_POOL) {
-    for (const key in LETTER_POOL) {
-      /*for (let letter = key; value > 1; ) {
-        console.log(`This is inside the LETTER_POOL function ${letter}`);
-        all_letters.push(letter);
-      } */
-      for (let value = 0; value < LETTER_POOL[key]; value++) {
-        all_letters.push(key);
-      }
-      // LETTER_POOL[key] is value
-    }
-    //shuffle(all_letters.keys());
-  };
-  letterPool(LETTER_POOL);
-
+  // Fisher-Yates shuffle algo
   for (let i = all_letters.length - 1; i >= 1; i--) {
-    let j = Math.floor(Math.random() * (i + 1)); // 0 <= j <= i
+    let j = Math.floor(Math.random() * (i + 1));
     let temp = all_letters[j];
     all_letters[j] = all_letters[i];
     all_letters[i] = temp;
@@ -83,8 +54,7 @@ export const drawLetters = () => {
     }
     return hand;
   };
-  let hand = handFunction(all_letters);
-  return hand;
+  return handFunction(all_letters);
 };
 
 //export const usesAvailableLetters = (input, lettersInHand) => {
