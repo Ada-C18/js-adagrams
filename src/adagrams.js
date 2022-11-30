@@ -61,6 +61,9 @@ export const drawLetters = () => {
     hand_list = [];
     shuffle(letterPoolList);
     // for loop to pop a letter from the letter pool list and add to hand
+    for (const letter of letterPoolList) {
+      handList.push(letterPoolList.pop());
+    }
   }
 };
 
