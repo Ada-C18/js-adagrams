@@ -1,12 +1,14 @@
 //helper functions
-const randomInt = function (max) {
-  return Math.floor(Math.random() * max);
-};
+
+// const randomInt = function (max) {
+//   return Math.floor(Math.random() * max);
+// };
+const randomInt = (max) => Math.floor(Math.random() * max);
 
 const removeLetter = function (arr, target) {
-  var idx = arr.indexOf(target);
-  if (idx > -1) {
-    arr.splice(idx, 1);
+  let i = arr.indexOf(target);
+  if (i > -1) {
+    arr.splice(i, 1);
   }
   return arr;
 };
