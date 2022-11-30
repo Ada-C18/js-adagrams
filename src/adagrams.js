@@ -68,7 +68,21 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  // wave 2
+  // check to make sure each letter in input is found in letters in hand
+  // assess letters in hand and make a copy of this list
+  // check if letter in hand and remove from list if so
+  // map function to make copy of list
+  const lettersInHandCopy = Array.from(lettersInHand);
+  for (let i = 0, len = input.length; i < len; i++) {
+    if (lettersInHandCopy.includes(input[i])) {
+      const index = lettersInHandCopy.indexOf(input[i]);
+      lettersInHandCopy.splice(index, 1);
+    } else {
+      return false;
+    }
+  }
+  return true;
 };
 
 export const scoreWord = (word) => {
