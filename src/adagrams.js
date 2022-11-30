@@ -115,23 +115,32 @@ export const highestScoreFrom = (words) => {
   for (const word of words) {
     scoreDict[word] = scoreWord(word);
   };
-  const maxi = Math.max(scoreDict)
-  const returnArray = []
+  let maxi = 0
+  let returnArray = []
   for (const key in scoreDict) {
-    if (scoreDict[key] == maxi) {
-      returnArray.push(key);
-    };
+    if (scoreDict[key] > maxi) {
+      returnArray = [key];
+      maxi = scoreDict[key]
+    }
+    else if (scoreDict[key] === maxi) {
+      returnArray.push(key)
+    }
   };
+  let word = returnArray[0]
   if (returnArray.length>1) {
-    return longestString(returnArray)
+    word =  longestString(returnArray)
   }
-  return returnArray[0]
+  const retValue = {"score":maxi, "word":word}
+  return retValue
 };
 
 const longestString = (arr) => {
-  let word = ""
+  let word = "XXXXXXXXXXX"
   for (let i=0;i<arr.length;i++) {
-    if (word.length < arr[i].length) {
+    if (arr[i].length===10 && word.length!=10) {
+      return arr[i]
+    }
+    else if (word.length > arr[i].length) {
       word = arr[i]
     };
   };
