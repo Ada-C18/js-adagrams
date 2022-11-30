@@ -115,10 +115,49 @@ export const scoreWord = (word) => {
   if ( word.length > 6) {
     score += 8 ;
   };
-  
+
   return score ;
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  /*
+  Input: words, which is a list of words.
+  Output: Object with the key : word, whose value is a string of a word.
+  and value :score, whose value is the score of that word.
+  */
+
+  let wordsScore = {} ;
+  let returnWord = '' ;
+  let highestScore = 0 ;
+
+  for (const word of words) {
+    const score = scoreWord(word);
+    // Object.assign(wordsScore, {word: score});
+    wordsScore[word] = score;
+  }
+
+  for ( const word in wordsScore) {
+    //  Only runs if highestScore = 0 
+    if(! highestScore) {
+      returnWord = word ;
+      highestScore = wordsScore[word] ;
+    } else if (wordsScore[word] > highestScore){
+      returnWord = word ;
+      highestScore = wordsScore[word] ;
+    }
+    // prefer the word with the fewest letters...unless one word has 10 letters
+    else if (wordsScore[word] == highestScore){
+      if (word.length < returnWord.length && returnWord.length !== 10){
+        returnWord = word ;
+        highestScore = wordsScore[word] ;
+      } 
+      // If the there are multiple words that are the same score and the same length, 
+      // pick the first one in the supplied list
+      else if (word.length === 10 && word.length !== returnWord.length) {
+        returnWord = word ;
+        highestScore = wordsScore[word] ;
+      }
+    }
+  };
+  return {word:returnWord , score: highestScore}
 };
