@@ -1,6 +1,14 @@
 export const drawLetters = () => {
-  // Implement this method for wave 1
-};
+  let alphabetPool = 'aaaaaaaaaabbccddddeeeeeeeeeeeeffggghhiiiiiiiiijkllllmmnnnnnnooooooooppqrrrrrrssssttttttuuuuvvwwxyyz'
+  let i = 0;
+  let playerHand = []
+  
+  do {
+    i++;
+    let singleLetter = alphabetPool.charAt(Math.random()*alphabetPool.length);
+    playerHand.push(singleLetter);
+    alphabetPool = alphabetPool.replace(singleLetter, '');
+  } while (i < 10);
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
