@@ -71,6 +71,7 @@ describe("Adagrams", () => {
 		});
 	});
 
+	// WAVE 2
 	// remove .skip later
 	// it.skip
 	describe.skip("usesAvailableLetters", () => {
@@ -99,6 +100,8 @@ describe("Adagrams", () => {
 		});
 	});
 
+
+	// WAVE 3
 	describe.skip("scoreWord", () => {
 		const expectScores = (wordScores) => {
 			Object.entries(wordScores).forEach(([word, score]) => {
@@ -136,6 +139,8 @@ describe("Adagrams", () => {
 		});
 	});
 
+
+	// WAVE 4
 	describe.skip("highestScoreFrom", () => {
 		it("returns a hash that contains the word and score of best word in an array", () => {
 			const words = ["X", "XX", "XXX", "XXXX"];
