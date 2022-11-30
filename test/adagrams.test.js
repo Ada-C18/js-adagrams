@@ -125,6 +125,13 @@ describe("Adagrams", () => {
       });
     });
 
+    it("ignores non-letter characters in scoring, including in word length calculation", () => {
+      expectScores({
+        "Dog@@@":5,
+        "whims!!!y":17,
+      });
+    });
+
     it("adds an extra 8 points if word is 7 or more characters long", () => {
       expectScores({
         XXXXXXX: 64,
