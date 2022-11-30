@@ -44,9 +44,11 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   const hand = MultiSet(lettersInHand);
   const word = MultiSet(input);
   for (const letter in word) {
+    if (!(letter in hand)) {
+      return false;
+    }
     hand[letter] = hand[letter] - word[letter];
-    console.log(hand,word);
-    if (hand[letter]<0 || !(letter in hand)) {
+    if ((hand[letter]<0)) {
       return false;
     };
   };
@@ -96,7 +98,7 @@ export const scoreWord = (word) => {
 }
   
   let score = 0;
-  
+  word = word.toUpperCase();
   for (const letter of word){
     score += letterDict[letter];
     };
