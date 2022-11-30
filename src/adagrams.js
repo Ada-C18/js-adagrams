@@ -27,6 +27,35 @@ const LETTER_POOL = {
   Z: 1,
 };
 
+const SCORE_CHART_DICT = {
+  A: 1,
+  B: 3,
+  C: 3,
+  D: 2,
+  E: 1,
+  F: 4,
+  G: 2,
+  H: 4,
+  I: 1,
+  J: 8,
+  K: 5,
+  L: 1,
+  M: 3,
+  N: 1,
+  O: 1,
+  P: 3,
+  Q: 10,
+  R: 1,
+  S: 1,
+  T: 1,
+  U: 1,
+  V: 4,
+  W: 4,
+  X: 8,
+  Y: 4,
+  Z: 10,
+};
+
 // Helper Function
 function shuffle(array) {
   let currentIndex = array.length,
@@ -69,10 +98,6 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // wave 2
-  // check to make sure each letter in input is found in letters in hand
-  // assess letters in hand and make a copy of this list
-  // check if letter in hand and remove from list if so
-  // map function to make copy of list
   const lettersInHandCopy = Array.from(lettersInHand);
   for (let i = 0, len = input.length; i < len; i++) {
     if (lettersInHandCopy.includes(input[i])) {
@@ -86,7 +111,30 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 };
 
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
+  // wave 3
+
+  /*const longWords = word => {
+    const len = word.length;
+    if (len >= 7) {
+      const sum = 8;
+      return sum;
+    } else {
+      return 0;
+    }
+  }*/
+
+  let sum = 0;
+  const len = word.length;
+
+  if (len >= 7) {
+    sum += 8;
+  }
+  for (let i = 0; i < word.length; i++) {
+    let letter = word[i];
+    sum += SCORE_CHART_DICT[letter];
+  }
+  return sum;
+  //(const [key, value] of Object.entries(SCORE_CHART_DICT)) {
 };
 
 export const highestScoreFrom = (words) => {
