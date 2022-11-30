@@ -27,6 +27,35 @@ const letterPool = {
   Z: 1,
 };
 
+const letterValues = {
+  A: 1,
+  B: 3,
+  C: 3,
+  D: 2,
+  E: 1,
+  F: 4,
+  G: 2,
+  H: 4,
+  I: 1,
+  J: 8,
+  K: 5,
+  L: 1,
+  M: 3,
+  N: 1,
+  O: 1,
+  P: 3,
+  Q: 10,
+  R: 1,
+  S: 1,
+  T: 1,
+  U: 1,
+  V: 4,
+  W: 4,
+  X: 8,
+  Y: 4,
+  Z: 10,
+};
+
 // Wave 1
 
 // if you want to make a copy of an object, use spreader function - can also add keys
@@ -63,7 +92,23 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 };
 
 // Wave 3
-export const scoreWord = (word) => {};
+export const scoreWord = (word) => {
+  let upper_word = word.toUpperCase();
+  let word_score = 0;
+
+  if (upper_word.length === 0) {
+    return word_score;
+  }
+
+  for (let i in upper_word) {
+    word_score += letterValues[upper_word[i]];
+  }
+
+  if (upper_word.length >= 7 && upper_word.length <= 10) {
+    word_score += 8;
+  }
+  return word_score;
+};
 
 // Wave 4
 export const highestScoreFrom = (words) => {
