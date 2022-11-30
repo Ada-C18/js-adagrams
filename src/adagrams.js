@@ -130,9 +130,10 @@ export const highestScoreFrom = (words) => {
   let returnWord = '' ;
   let highestScore = 0 ;
 
+  // iterating through the array words and in each iteration call the function scorWord and set 
+  // the word as an argument , the add the word and it's score as a key value pair in the Object wordsScore
   for (const word of words) {
     const score = scoreWord(word);
-    // Object.assign(wordsScore, {word: score});
     wordsScore[word] = score;
   }
 
