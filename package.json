@@ -27,7 +27,15 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^24.8.0",
     "babel-plugin-module-resolver": "^3.2.0",
+    "eslint": "^8.28.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.11",
     "jest": "^24.8.0",
+    "prettier": "^2.8.0",
     "regenerator-runtime": "^0.12.1"
   },
   "dependencies": {

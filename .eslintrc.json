@@ -1,26 +1,22 @@
 {
-  "env": {
-    "browser": true,
-    "es2021": true,
-    "node": true
-  },
-  "extends": ["plugin:jest/recommended", "eslint:recommended"],
-  "parserOptions": {
-    "ecmaVersion": 12,
-    "sourceType": "module"
-  },
-  "plugins": ["jest"],
-  "rules": {
-    "no-unused-vars": "warn",
-    "no-var": "warn",
-    "no-console": "off",
-    "func-names": "off",
-    "comma-dangle": ["warn", "only-multiline"],
-    "quotes": [
-      1,
-      "single",
-      { "allowTemplateLiterals": true, "avoidEscape": true }
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "jest": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended"
     ],
-    "camelcase": "error"
-  }
+    "overrides": [
+    ],
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+    }
 }

@@ -1,14 +1,11 @@
 import Model from 'demo/model';
 import Adagrams from 'demo/adagrams';
 
-describe.skip('Game Model', () => {
+describe('Game Model', () => {
   const config = {
-    players: [
-      'Player A',
-      'Player B',
-    ],
+    players: ['Player A', 'Player B'],
     rounds: 3,
-    time: 60, // Seconds
+    time: 60 // Seconds
   };
 
   describe('constructor', () => {
@@ -139,7 +136,7 @@ describe.skip('Game Model', () => {
       });
 
       it('winner', () => {
-        const model = new Model({ ...config, rounds : 2 });
+        const model = new Model({ ...config, rounds: 2 });
 
         // Start game, no one has won yet
         let gameState = model.nextRound();
@@ -167,7 +164,7 @@ describe.skip('Game Model', () => {
         // Game is over now, first player has won
         expect(gameState.winner).toMatchObject({
           player: config.players[0],
-          score: p1Score,
+          score: p1Score
         });
       });
     });
@@ -247,7 +244,7 @@ describe.skip('Game Model', () => {
         expect(roundOverState.winner).toMatchObject({
           word,
           score,
-          player: config.players[config.players.length - 1],
+          player: config.players[config.players.length - 1]
         });
       });
     });
@@ -291,11 +288,18 @@ describe.skip('Game Model', () => {
 
         const word1 = getWord(model);
         model.playWord(word1);
-        expect(getPlays(model, player, model.round)).toEqual([...origPlays, word1]);
+        expect(getPlays(model, player, model.round)).toEqual([
+          ...origPlays,
+          word1
+        ]);
 
         const word2 = getWord(model);
         model.playWord(word2);
-        expect(getPlays(model, player, model.round)).toEqual([...origPlays, word1, word2]);
+        expect(getPlays(model, player, model.round)).toEqual([
+          ...origPlays,
+          word1,
+          word2
+        ]);
       });
 
       it('validates word case-insensitively', () => {
@@ -310,9 +314,11 @@ describe.skip('Game Model', () => {
     describe('for invalid words', () => {
       const getWord = (model) => {
         const letter = model.letterBank[0];
-        return letter.repeat(model.letterBank.filter((l) => {
-          return l === letter;
-        }).length + 1);
+        return letter.repeat(
+          model.letterBank.filter((l) => {
+            return l === letter;
+          }).length + 1
+        );
       };
 
       it('it returns null', () => {
@@ -327,7 +333,7 @@ describe.skip('Game Model', () => {
       it('does not add word to history', () => {
         const model = getModel();
         const word = getWord(model);
-        const origPlays = {...model.plays};
+        const origPlays = { ...model.plays };
 
         model.playWord(word);
 
