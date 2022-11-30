@@ -28,6 +28,8 @@ const letterPool = {
 };
 
 // Wave 1
+
+// if you want to make a copy of an object, use spreader function - can also add keys
 export const drawLetters = () => {
   const letters = Object.keys(letterPool);
   const hand = [];
@@ -49,13 +51,19 @@ export const drawLetters = () => {
 
 // Wave 2
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  for (let i in input) {
+    if (lettersInHand.includes(input[i])) {
+      const hand_index = lettersInHand.indexOf(input[i]);
+      const remove_letter = lettersInHand.splice(hand_index, 1);
+    } else {
+      return false;
+    }
+  }
+  return true;
 };
 
 // Wave 3
-export const scoreWord = (word) => {
-  // Implement this method for wave 3
-};
+export const scoreWord = (word) => {};
 
 // Wave 4
 export const highestScoreFrom = (words) => {
