@@ -32,37 +32,37 @@ static scoreWord = (word) => {
     } else {
       nonLetterCount++;
     }
-  }
+  };
   if (word.length-nonLetterCount > 6) {
-    score += 8
+    score += 8;
   };
   return score;
 };
 
 static highestScoreFrom = (words) => {
   // Implement this method for wave 4
-  let maxi = 0
-  let returnArray = []
+  let maxi = 0;
+  let returnArray = [];
   for (const word of words) {
-    let currentScore = Adagrams.scoreWord(word)
+    let currentScore = Adagrams.scoreWord(word);
     if (currentScore > maxi) {
       returnArray = [word];
-      maxi = currentScore
+      maxi = currentScore;
     }
     else if (currentScore === maxi) {
-      returnArray.push(word)
-    }
+      returnArray.push(word);
+    };
   };
+
   let word
   if (returnArray.length>1) {
-    word =  AGUtilities.pickString(returnArray)
+    word =  AGUtilities.pickString(returnArray);
   }
   else {
-    word = returnArray[0]
+    word = returnArray[0];
   };
-  const retValue = {"score":maxi, "word":word}
-  return retValue
-};}
+  return {"score":maxi, "word":word};
+};};
 
 class MultiSet {
 
@@ -74,8 +74,8 @@ class MultiSet {
       };
       returnObject[letter]++;
     };
-    this.mSet = returnObject
-  }
+    this.mSet = returnObject;
+  };
 
   isSubSet(superSet) {
     for (const letter in this.mSet) {
@@ -97,10 +97,10 @@ class AGUtilities {
     let word = "XXXXXXXXXXX"
     for (let i=0;i<arr.length;i++) {
       if (arr[i].length===10 && word.length!=10) {
-        return arr[i]
+        return arr[i];
       }
       else if (word.length > arr[i].length) {
-        word = arr[i]
+        word = arr[i];
       };
     };
     return word;

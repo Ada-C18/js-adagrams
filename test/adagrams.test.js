@@ -31,8 +31,6 @@ const LETTER_POOL = {
   Z: 1,
 };
 
-// const adagrams = new Adagrams();
-
 describe("Adagrams", () => {
   describe("drawLetters", () => {
     it("draws ten letters from the letter pool", () => {
