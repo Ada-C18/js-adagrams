@@ -54,13 +54,7 @@ static highestScoreFrom = (words) => {
     };
   };
 
-  let word
-  if (returnArray.length>1) {
-    word =  AGUtilities.pickString(returnArray);
-  }
-  else {
-    word = returnArray[0];
-  };
+  const word = AGUtilities.AGString(returnArray);
   return {"score":maxi, "word":word};
 };};
 
@@ -92,7 +86,14 @@ class MultiSet {
 };
 
 class AGUtilities {
-
+  static AGString = (returnArray) => {
+    if (returnArray.length>1) {
+      return AGUtilities.pickString(returnArray);
+    }
+    else {
+      return returnArray[0];
+    };
+  }
   static pickString = (arr) => {
     let word = "XXXXXXXXXXX"
     for (let i=0;i<arr.length;i++) {
