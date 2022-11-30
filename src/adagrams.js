@@ -60,8 +60,8 @@ export const drawLetters = () => {
     }
     hand_list = [];
     shuffle(letterPoolList);
+    // for loop to pop a letter from the letter pool list and add to hand
   }
-  // Randomly shuffle the hand once before adding to hand list
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
