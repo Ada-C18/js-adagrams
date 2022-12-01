@@ -63,9 +63,8 @@ const LETTER_SCORE = {
 export const drawLetters = () => {
   let letters = [];
 
-
   for (var key in LETTER_POOL) {
-    for (let j = 0; j < LETTER_POOL[key]; ++j)
+    for (let j = 0; j < LETTER_POOL[key]; ++j);
       letters.push(key);
   }
   let drawn = []
@@ -77,25 +76,38 @@ export const drawLetters = () => {
   }
   return drawn
 };
-
+// *********** wave2 ************
 export const usesAvailableLetters = (input, lettersInHand) => {
-  input = input.toUpperCase()
+  input = input.toUpperCase();
   let lettersInHandCopy = [...lettersInHand];
 
   for (let i in input) {
     if (lettersInHandCopy.includes(input[i])) {
-      lettersInHandCopy.splice(i,1)
+      lettersInHandCopy.splice(i,1);
     } else {
       return false;
     }
     return true;
   }
-  
   }
 
-
+// *********** wave3 ************
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
+  let score = 0;
+  word = word.toUpperCase();
+
+  if (word.length >=7 && word.length <= 10){
+    score += 8;
+  }
+
+  for (let letter of word){
+    if(LETTER_SCORE.hasOwnProperty(letter)){
+    score += LETTER_SCORE[letter]
+    }else{
+      score +=0
+    }
+  }
+  return score;
 };
 
 export const highestScoreFrom = (words) => {
