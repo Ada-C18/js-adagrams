@@ -88,18 +88,33 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 export const scoreWord = (word) => {
   let score = 0;
 
-  for (const letter of word) {
+  word.forEach((letter) => {
     score += SCORE_DICT[letter.toUpperCase()];
-  }
+  });
 
   if (word.length >= 7) {
     score += 8;
   }
 
   return score;
-
-  // Implement this method for wave 3
 };
+
+/* // alternative solution to wave 3 with forEach loop:
+const scoreWord = (word) => {
+  let score = 0;
+  const wordArray = word.split('');
+
+  wordArray.forEach((letter) => {
+    score += SCORE_DICT[letter.toUpperCase()];
+    console.log(SCORE_DICT[letter.toUpperCase()]);
+  });
+
+  if (wordArray.length >= 7) {
+    score += 8;
+  }
+
+  return score;
+}; */
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
