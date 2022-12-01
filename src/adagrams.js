@@ -42,7 +42,19 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  const lettersInHandCopy = JSON.parse(JSON.stringify(lettersInHand));
+  if (input.length > lettersInHandCopy.length) {
+    return false;
+  }
+  for (let letter of input) {
+        const index = lettersInHandCopy.indexOf(letter);
+        if (index < 0){
+            return false;
+        }else if (index >= 0) {
+        lettersInHandCopy.splice(index, 1);
+        }
+    } 
+    return (true);
 };
 
 export const scoreWord = (word) => {
