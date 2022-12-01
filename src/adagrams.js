@@ -29,13 +29,13 @@ const letterPOOL = {
 export const drawLetters = () => {
   // Implement this method for wave 1
 
-  let pool_list = [];
+  let poolList = [];
   for (const letter in letterPOOL) {
     for (let i = 0; i < letterPOOL[letter]; i++) {
-      pool_list.push(letter);
+      poolList.push(letter);
     }
   }
-  const shuffled = pool_list.sort(() => 0.5 - Math.random());
+  const shuffled = poolList.sort(() => 0.5 - Math.random());
   return shuffled.slice(0, 10);
 };
 
