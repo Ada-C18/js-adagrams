@@ -27,38 +27,16 @@ const letterPool = {
 	Z: 1,
 };
 
-// a set in JS is diff
-// .has(arg) method checks if a value is in a Set objec
-// const SCORE_TABLE = {
-//   1: {'A', 'E', "I", "O", "U", "L", "N", "R", "S", "T"},
-//   2: {"D", "G"},
-//   3: {"B", "C", "M", "P"},
-//   4: {"F", "H", "V", "W", "Y"},
-//   5: {"K"},
-//   8: {"J", "X"},
-//   10: {"Q", "Z"}
-// };
-
-// Implement this method for wave 1
 // WAVE 1
 // TODO
-// - debug letter count, pass last test
 // - later: refactor using closure -> change hand length
 export const drawLetters = () => {
+	// Implement this method for wave 1
 	// const drawLetters = () => {
-	// returns array with 10 letter strings
-	// const handLength = 10;
-	// for (let i = 0; i < handLength; i++) {
-	// 	hand.push(upperLetters.charAt(Math.floor(Math.random() * handLength)));
-	// }
 
 	const upperLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	let hand = [];
-	// generate 1 letter at a time
 	let handCount = {};
-	// for (let letter of hand) {
-	// 	handCount[letter] = handCount[letter] ? handCount[letter] + 1 : 1;
-	// }
 
 	while (hand.length < 10) {
 		let random_letter =
@@ -75,31 +53,10 @@ export const drawLetters = () => {
 			hand.push(random_letter);
 			handCount[random_letter] = 1;
 		}
-		// if (hand.includes(random)) {
-		// 	if (letterCount < letterPool[random_letter]) {
-		// 		hand.push(random_letter);
 	}
 	return hand;
-
-	// for (let letter of hand) {
-	// 	if (letter in letterCount) {
-	// 		letterCount[letter] += 1
-	// 	} else {
-	// 		letterCount[letter] = 1
-	// 	}
-	// 	if (letter in letterPool) {
-
-	// 	}
-	// }
-
-	// DEBUG: letter count
-	// The letters should be randomly drawn from a pool of letters
-	// This letter pool should reflect the distribution of letters as described in the table below
-	// There are only 2 available C letters, so drawLetters cannot ever return more than 2 Cs
-	// Since there are 12 Es but only 1 Z, it should be 12 times as likely to draw an E as a Z
 };
-
-console.log(drawLetters());
+// console.log(drawLetters());
 
 // WAVE 2
 // export const usesAvailableLetters = (input, lettersInHand) => {
