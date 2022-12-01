@@ -99,6 +99,17 @@ export const drawLetters = function() {
 
 
 
+export const usesAvailableLetters = function(input, lettersInHand) {
+  for(let letter of input.toUpperCase()) {
+    if(lettersInHand.includes(letter)) {
+     const indexOfLetter = lettersInHand.indexOf(letter);
+     lettersInHand.splice(indexOfLetter,1)
+    } else {
+      return false;
+    }  
+  }
+  return true;
+}
 
     
 
