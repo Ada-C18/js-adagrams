@@ -1,4 +1,4 @@
-export const drawLetters = () => {
+const drawLetters = () => {
   // Implement this method for wave 1
 
   const availableLetters = {
@@ -29,24 +29,28 @@ export const drawLetters = () => {
     Y: 2,
     Z: 1,
   };
-};
 
-let handAvailable = [];
+  let letterBowl = [];
+  let quantity = Object.values(availableLetters);
+  let letter = Object.keys(availableLetters);
+  // let handAvailable = [];
 
-for (const i of Object.entries(availableLetters)) {
-  if (handAvailable.length < 10) {
-    handAvailable.push(i);
+  for (let i = 0; i < quantity; i++) {
+    letterBowl.push(letter);
+    console.log(letterBowl);
   }
-}
-
-export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
 };
 
-export const scoreWord = (word) => {
-  // Implement this method for wave 3
-};
+// drawLetters();
 
-export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
-};
+// export const usesAvailableLetters = (input, lettersInHand) => {
+//   // Implement this method for wave 2
+// };
+
+// export const scoreWord = (word) => {
+//   // Implement this method for wave 3
+// };
+
+// export const highestScoreFrom = (words) => {
+//   // Implement this method for wave 4
+// };
