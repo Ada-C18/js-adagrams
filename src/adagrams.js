@@ -1,3 +1,4 @@
+// import { LETTER_POOL } from "adagrams.test.js";
 const LETTER_POOL = {
   A: 9,
   B: 2,
@@ -42,7 +43,7 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+
 };
 
 export const scoreWord = (word) => {
