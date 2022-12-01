@@ -88,9 +88,9 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 export const scoreWord = (word) => {
   let score = 0;
 
-  word.forEach((letter) => {
+  for (const letter of word) {
     score += SCORE_DICT[letter.toUpperCase()];
-  });
+  }
 
   if (word.length >= 7) {
     score += 8;
