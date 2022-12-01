@@ -1,4 +1,6 @@
 export const drawLetters = () => {
+  const letterList = [];
+  const poolList = [];
   const letterPool = {
     "A": 9,
     "B": 2,
@@ -27,12 +29,24 @@ export const drawLetters = () => {
     "Y": 2,
     "Z": 1,
 };
-  const letterList = [];
-  const poolList = [];
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+let listNum = poolList.length + 1
+let number = getRandomInt(listNum)
 
-  for(let i = 0; i < letterPool.length; ++i)
-  // Implement this method for wave 1
+  for (const key in letterPool) {
+    for(let i = 0; i < letterPool[key]; ++i) {
+        poolList.push(key);  {
+
+  while (letterList.length !== 10) {
+      letterList.push(poolList[number]);
+  }   
+  }
+  }
+}   return letterList
 };
+
 // i = 0
 //     for letter in LETTER_POOL.keys():
 //         for i in range(LETTER_POOL[letter]):
