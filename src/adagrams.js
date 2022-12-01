@@ -29,18 +29,19 @@ const LETTER_POOL = {
 
 
 export const drawLetters = () => { //wave 1
-  // python code to replicate: 
-  // for letter, frequency in LETTER_POOL.items():
-  //   random_list += list(letter*frequency)
-  // return random.sample(random_list, 10)
-
   let letterArray = [];
   for (const [key, value] of Object.entries(LETTER_POOL)) {
     for (let i = 0; i < value; i++) {
       letterArray.push(key)
     }
   }
-  return letterArray;
+
+  let resultArray = [];
+  for (let i = 0; i < 10; i++) {
+    let index = Math.floor(Math.random() * 26);
+    resultArray.push(letterArray[index]);
+  }
+  return resultArray;
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
