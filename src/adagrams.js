@@ -1,5 +1,4 @@
 export const drawLetters = () => {
-  let lettersArr = [];
   const letters = {
     A: 9,
     O: 8,
@@ -31,6 +30,9 @@ export const drawLetters = () => {
   // Implement this method for wave 1
   // choose letter randomly from letters object. If chosen decrease it
 
+  // make array to hold letters
+  let lettersArr = [];
+
   // made copy of letters object
   let lettersCopy = JSON.parse(JSON.stringify(letters));
 
@@ -49,21 +51,97 @@ export const drawLetters = () => {
       i++;
     }
   }
-  // console.log(lettersCopy);
-
-  // for(let i = 0; i < 11; i++){
-  //   return lette
-  // }
   return lettersArr;
 };
 
-// export const usesAvailableLetters = (input, lettersInHand) => {
-//   // Implement this method for wave 2
+export const usesAvailableLetters = (input, lettersInHand) => {
+  // Implement this method for wave 2
+
+  //  version 1
+
+  for (let i = 0; i < input.length; i++) {
+    if (!lettersInHand.includes(input[i])) {
+      return false;
+    } else {
+      console.log(lettersInHand[lettersInHand.indexOf(input[i])]);
+      lettersInHand.splice(lettersInHand.indexOf(input[i]), 1);
+    }
+  }
+  return true;
+};
+
+//  version 2
+
+//   for (let i = 0; i < input.length; i++) {
+//     if (lettersInHand.includes(input[i])) {
+//       lettersInHand.splice((lettersInHand.indexOf(input[i]), 1));
+//       // console.log(lettersInHand[lettersInHand.indexOf(input[i])]);
+//     } // if (!lettersInHand.includes(input[i])) {
+//     //   return false;
+//     // }
+//   }
+
+//   console.log(lettersInHand);
 // };
 
-// export const scoreWord = (word) => {
-//   // Implement this method for wave 3
-// };
+export const scoreWord = (word) => {
+  // Implement this method for wave 3
+  let letterPoints = {};
+
+  // all letters and points
+  letterPoints.A =
+    letterPoints.E =
+    letterPoints.I =
+    letterPoints.O =
+    letterPoints.U =
+    letterPoints.L =
+    letterPoints.N =
+    letterPoints.R =
+    letterPoints.S =
+    letterPoints.T =
+      1;
+  letterPoints.D = letterPoints.G = 2;
+
+  letterPoints.B = letterPoints.C = letterPoints.M = letterPoints.P = 3;
+
+  letterPoints.F =
+    letterPoints.H =
+    letterPoints.V =
+    letterPoints.W =
+    letterPoints.Y =
+      4;
+
+  letterPoints.K = 5;
+
+  letterPoints.J = letterPoints.X = 8;
+
+  letterPoints.Q = letterPoints.Z = 10;
+
+  // const keys = Object.keys(letters);
+
+  // make all letters uppercase in word
+  // for each letter in word access it's value in dictionary
+  // use reduce to sum up total points
+  // reduce syntax :sum = objects.reduce((accumulator, currentValue) => accumulator + currentValue.x,
+
+  // guard clause:
+  if (word.length === 0) {
+    return 0;
+  }
+
+  // if valid input:
+  word = word.toUpperCase().split("");
+  console.log(word);
+  let total = 0;
+
+  // get total points
+  total = word.reduce((acc, letter) => acc + letterPoints[letter], 0);
+
+  if (word.length >= 7) {
+    total += 8;
+  }
+  return total;
+};
 
 // export const highestScoreFrom = (words) => {
 //   // Implement this method for wave 4
