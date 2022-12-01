@@ -9,7 +9,7 @@
     "demo-game": "babel-node src/demo.js"
   },
   "repository": {
-    "type": "git",
+    "type": "module",
     "url": "git://github.com/AdaGold/js-adagrams.git"
   },
   "author": "Ada Developers Academy <contact@adadevelopersacademy.org>",
