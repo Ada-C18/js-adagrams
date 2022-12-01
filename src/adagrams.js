@@ -76,6 +76,42 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
+  let input_freq = {};
+  let lettersInHand_freq = {};
+
+  for (let char of input) {
+    if (!char in input_freq) {
+      input_freq[char] = 1;
+    } else {
+      input_freq[char] += 1;
+    }
+  }
+  for (let char of lettersInHand) {
+    if (!char in lettersInHand_freq) {
+      lettersInHand_freq[char] = 1;
+    } else {
+      lettersInHand_freq[char] += 1;
+    }
+  }
+  if (input_freq >= lettersInHand_freq) {
+    return true;
+  } else {
+    return false;
+  }
+
+  // for (let char of input) {
+  //   if (
+  //     !(input.match(/char/g) || []).length <=
+  //     (lettersInHand.match(/char/g) || []).length
+  //   ) {
+  //     console.log(`LOOK HERE(inside if stmnt): char=${char}, #in input= ${
+  //       (input.match(/char/g) || []).length
+  //     }
+  //     #in lettersInHand= ${(lettersInHand.match(/char/g) || []).length} `);
+  //     return false;
+  //   }
+  // }
+  // return true;
 };
 
 export const scoreWord = (word) => {
