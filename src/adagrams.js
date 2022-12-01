@@ -83,7 +83,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   for (let i in input) {
     if (lettersInHand.includes(input[i])) {
       const hand_index = lettersInHand.indexOf(input[i]);
-      const remove_letter = lettersInHand.splice(hand_index, 1);
+      lettersInHand.splice(hand_index, 1);
     } else {
       return false;
     }
