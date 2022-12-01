@@ -42,33 +42,40 @@ export const drawLetters = () => {
   }
   return lettersForUser;
 };
+//----------------------------------------------------------
+
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
-  // letter_bank_copy = copy.copy(letter_bank)
-  // word = word.upper()
-  // for letter in word:
-  //     if letter in letter_bank_copy:
-  //         letter_bank_copy.remove(letter)
-  //     else:
-  //         return False
-  // return True
-
-  // const copiedLettersInHand = JSON.parse(JSON.stringify(lettersInHand));
-  // letter_bank_copy = copy.copy(letter_bank)
-  // word = word.upper()
-  // for letter in word:
-  //     if letter in letter_bank_copy:
-  //         letter_bank_copy.remove(letter)
-  //     else:
-  //         return False
-  // return True
+  let copiedLettersInHand = JSON.parse(JSON.stringify(lettersInHand));
+  let inputWord = input.toUpperCase();
+  for (let letter of inputWord){
+      if (copiedLettersInHand.includes(letter)){
+        let index = copiedLettersInHand.indexOf(letter);
+        copiedLettersInHand.splice(index, 1);
+        } else {
+          return false;
+        }
+      }
+  return true;
 };
 
+//----------------------------------------------------------
 export const scoreWord = (word) => {
   // Implement this method for wave 3
+  // score = 0
+  // word = word.upper()
+  // for letter in word: 
+  //     for key, value in SCORE_CHART.items():
+  //         if letter in value:
+  //             score += key
+  // if len(word) in range(7, 11):
+  //     score += 8
+  // return score
+
+  
 };
 
+//----------------------------------------------------------
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
 };
