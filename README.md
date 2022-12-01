@@ -101,7 +101,7 @@ This repository has a baseline structure for the project that includes several f
 
 ## Implementation Requirements
 
-### Wave 1
+### Wave 1 DONE
 
 Our first job is to build a hand of 10 letters. To do so, implement the function named `drawLetters` in `src/adagrams.js`. This function should have the following properties:
 
@@ -136,7 +136,7 @@ Our first job is to build a hand of 10 letters. To do so, implement the function
 
 **Note:** Making sure that the drawn letters match the rules of the letter pool can be straightforward or very difficult, depending on how you build the data structure for the letter pool. It is worth spending some time to think carefully about this.
 
-### Wave 2
+ ### DONE Wave 2
 
 Next, we need a way to check if an input word (a word a player submits) only uses characters that are contained within a collection (or hand) of drawn letters. Essentially, we need a way to check if the word is, indeed, an anagram of some or all of the given letters in the hand.
 
@@ -149,9 +149,9 @@ To do so, implement the function named `usesAvailableLetters` in `src/adagrams.j
 - Returns `true` if every letter in the `input` word is available (in the right quantities) in the `lettersInHand`
 - Returns `false` if not; if there is a letter in `input` that is not present in the `lettersInHand` or has too much of compared to the `lettersInHand`
 
-### Wave 3
+### Wave 3 
 
-We want a function that returns the score of a given word as defined by the Adagrams game.
+TODO We want a function that returns the score of a given word as defined by the Adagrams game.
 
 Implement the function named `scoreWord` in `src/adagrams.js`. This method should have the following properties:
 

@@ -66,7 +66,20 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  const freqMapHand = {};
+  lettersInHand.forEach(function (letter) {
+    freqMapHand[letter]
+      ? (freqMapHand[letter] += 1)
+      : (freqMapHand[letter] = 1);
+  });
+  for (const letter of input) {
+    if (!freqMapHand[letter]) {
+      return false;
+    } else {
+      freqMapHand[letter] -= 1;
+    }
+  }
+  return true;
 };
 
 export const scoreWord = (word) => {
