@@ -33,7 +33,24 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  const hashTable = new Map();
+  for (let i = 0; i < lettersInHand.length; i++) {
+    if(hashTable.has(lettersInHand[i])) {
+      hashTable.set(lettersInHand[i], hashTable.get(lettersInHand[i])+1);
+    } else {
+      hashTable.set(lettersInHand[i], 1);
+    }
+  }
+  
+  for (let i = 0; i < input.length; i++) {
+    if(hashTable.has(input[i]) && hashTable.get(input[i]) > 0) {
+      hashTable.set(input[i],hashTable.get(input[i])-1);
+    } else {
+      return false;
+    }
+  }
+  return true;
+
 };
 
 export const scoreWord = (word) => {
