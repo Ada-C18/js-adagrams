@@ -47,11 +47,21 @@ export const drawLetters = () => {
   return hand;
 };
 
-
-// const rand = Math.floor(Math.random()*100);
-  // console.log(rand);
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
+  const uppercaseInput = input.toUpperCase();
+  const lettersInHandCopy = [...lettersInHand];
+  for (const letter in uppercaseInput) {
+        if (lettersInHandCopy.includes(uppercaseInput[letter]) === true); {
+          const index = lettersInHandCopy.indexOf(uppercaseInput[letter]);
+          if (index > -1) {
+            lettersInHandCopy.splice(index, 1);
+          } else {
+            return false;
+          }
+        } 
+  }
+  return true;
 };
 
 export const scoreWord = (word) => {
