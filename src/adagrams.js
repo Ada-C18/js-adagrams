@@ -27,10 +27,10 @@ const LETTER_POOL = {
   Z: 1,
 };
 
-const scoreBoard = {}
-// Range function that defines the start, end, and length -> outputs
-// a list numbers between start and end 
-const range = (start, end, length = end - start + 1) => {
+const scoreBoard = {A: 1, E: 1, I: 1, O: 1, U: 1, L: 1, N: 1, R: 1, S: 1, T:1, D:2, G:2,
+B:3, C:3, M:3, P:3, F:4, H:4, V:4, W:4, Y:4, K:5, J:8, X:8, Q:10, Z:10}
+
+const range = (start, end) => {
   return Array.from({length:end}, (_, i) => start + i)
 }
 
@@ -59,7 +59,17 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 };
 
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
+  word = word.toUpperCase()
+  let score = 0;
+
+  if (word.length >= 7){
+    score += 8;
+  }
+  for (let i = 0; i<word.length; ++i){
+      console.log(word[i]);
+      score += scoreBoard[word[i]];
+    }
+    return score;
 };
 
 export const highestScoreFrom = (words) => {
