@@ -39,7 +39,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 3
 export const scoreWord = (word) => {
 
-  let upperWord = word.toUpperCase()
+  let upperWord = word.toUpperCase();
   let score = 0;
   
   let list1 = ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'];
@@ -77,23 +77,21 @@ return score;
 
 // Implement this method for wave 4
 export const highestScoreFrom = (words) => {
-  let winningWord = {}
-  let highestScore = 0
-  let highestStr = ''
-  // want to use a function closure 
-  let wordScore = scoreWord()
+  // want to use a callback function
+  
+  let result = ({'score': 0, 'word': ''});
   for (const word of words){
-    if (wordScore > highestScore){
-      let highestScore = wordScore;
-      let highestStr = word;
-  } else if (wordScore === highestScore){
-      if ((word.length < highestStr.length) && (highestStr.length !== 10)){
-        let highestStr = word;
-      } else if ((word.length === 10) && (highestStr.length !== 10)) {
-        let highestStr = word;
+    let wordScore = scoreWord(word);
+    if (wordScore > result['score']){
+        (result['score'] = wordScore); 
+        (result['word'] = word);
+  } else if (wordScore === result['score']){ 
+      if ((word.length < result['word'].length) && (result['word'].length !== 10)){
+        result['word'] = word;
+      } else if ((word.length === 10) && (result['word'].length !== 10)) {
+        result['word'] = word;
       }
   }
-}
-let result = (winningWord[highestStr] = highestScore);
-return result;
+  }
+  return result;
 };
