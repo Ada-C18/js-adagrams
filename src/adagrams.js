@@ -120,7 +120,7 @@ export const scoreWord = (word) => {
   }
   return score_totla;
 };
-
+// --------------------------------------------------------wave 4------------------------------------------------
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
   let best_word = [];
