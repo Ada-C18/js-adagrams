@@ -1,4 +1,6 @@
-LETTER_DATA = [
+import collect from 'collect.js';
+
+const LETTER_DATA = [
   { letter: "A", quantity: 9, value: 1 },
   { letter: "B", quantity: 2, value: 3 },
   { letter: "C", quantity: 2, value: 3 },
@@ -27,8 +29,31 @@ LETTER_DATA = [
   { letter: "Z", quantity: 1, value: 10 },
 ];
 
+const letterSoup = (letterData) => {
+  let letterList = []
+
+  for (const data of letterData) {
+    for (let runner = 0; runner < data['quantity']; runner++) {
+      letterList.push(data['letter']);
+    }
+  } return letterList;
+}
+
+const todaysSoup = collect(letterSoup(LETTER_DATA));
+
 export const drawLetters = () => {
-  // Implement this method for wave 1
+  let letters = []
+
+  while (letters.length < 10) {
+    let collectionLetters = collect(letters);
+
+    const randomLetter = todaysSoup[(Math.random() * letters.length)+1];
+    
+    if (collectionLetters.count(randomLetter) < todaysSoup.count(randomLetter)) {
+      letters.push(randomLetter);
+    }
+  }
+  return console.log(letters)
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
