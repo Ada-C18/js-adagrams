@@ -57,11 +57,6 @@ const SCORE_DICT = {
 };
 
 export const drawLetters = () => {
-  // Returns an array of ten strings of exactly one letter
-  // The letters should be randomly drawn from a pool of letters
-  // This letter pool should reflect the distribution of letters as described in the table below
-  // Invoking this function should not change the pool of letters
-  // Imagine that the user returns their hand to the pool before drawing new letters
   const letterPoolArray = [];
   for (const [k, v] of Object.entries(LETTER_POOL)) {
     for (let i = 0; i < v; i++) {
@@ -76,12 +71,18 @@ export const drawLetters = () => {
     );
     hand.push(pickedLetter);
   }
-  console.log(hand);
   return hand;
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  for (const letter of input) {
+    if (!lettersInHand.includes(letter)) {
+      return false;
+    } else {
+      lettersInHand.splice(lettersInHand.indexOf(letter), 1, null);
+    }
+  }
+  return true;
 };
 
 export const scoreWord = (word) => {
