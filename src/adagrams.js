@@ -89,5 +89,18 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  words.sort((w, x) => {
+    if (w.length === x.length) return 0;
+    if (w.length === 10) return -1;
+    if (x.length === 10) return 1;
+    return w.length - x.length;
+  });
+  let word_scores = words.map((word) => {
+    return { word: word, score: scoreWord(word) };
+  });
+  let highest_score = word_scores.reduce(
+    (prev, curr) => (curr.score > prev.score ? curr : prev),
+    { word: "", score: 0 }
+  );
+  return highest_score;
 };
