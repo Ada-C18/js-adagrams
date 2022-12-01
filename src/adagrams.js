@@ -27,15 +27,20 @@ const LETTER_POOL = {
   Z: 1,
 };
 
+const dictToStr = (dict) => {
+  let result = '';
+  for (const [k, v] of Object.entries(dict)) {
+    for (let i = 0; i < v; i++) {
+        result += k;
+    }
+  }
+  return result;
+};
+
 export const drawLetters = () => {
   // Implement this method for wave 1
   let hands = [];
-  let letterPool = '';
-  for (const [k, v] of Object.entries(LETTER_POOL)) {
-      for (let i = 0; i < v; i++) {
-          letterPool+= k;
-      }
-  }
+  let letterPool = dictToStr(LETTER_POOL);
   for (let i = 0; i < 10; i++) {
     let randomNum = letterPool[Math.floor(Math.random()*letterPool.length)];
     hands.push(randomNum);
@@ -45,14 +50,14 @@ export const drawLetters = () => {
 };
 
 
-// export const usesAvailableLetters = (input, lettersInHand) => {
-//   // Implement this method for wave 2
-// };
+export const usesAvailableLetters = (input, lettersInHand) => {
+  // Implement this method for wave 2
+};
 
-// export const scoreWord = (word) => {
-//   // Implement this method for wave 3
-// };
+export const scoreWord = (word) => {
+  // Implement this method for wave 3
+};
 
-// export const highestScoreFrom = (words) => {
-//   // Implement this method for wave 4
-// };
+export const highestScoreFrom = (words) => {
+  // Implement this method for wave 4
+};
