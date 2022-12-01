@@ -1,6 +1,10 @@
+// import {
+//   LETTER_POOL
+// } from "data";
+
 export const drawLetters = () => {
   // Implement this method for wave 1
-  let drawPool = [];
+  const drawPool = [];
   const LETTER_POOL = {
     A: 9,
     B: 2,
@@ -66,6 +70,43 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
+  const scoreMap = {
+        'A' : 1, 
+        'E' : 1, 
+        'I' : 1, 
+        'O' : 1, 
+        'U' : 1, 
+        'L' : 1, 
+        'N' : 1, 
+        'R' : 1, 
+        'S' : 1, 
+        'T' : 1, 
+        'D' : 2, 
+        'G' : 2, 
+        'B' : 3, 
+        'C' : 3, 
+        'M' : 3, 
+        'P' : 3, 
+        'F' : 4, 
+        'H' : 4, 
+        'V' : 4, 
+        'W' : 4, 
+        'Y' : 4, 
+        'K' : 5, 
+        'J' : 8, 
+        'X' : 8, 
+        'Q' : 10, 
+        'Z' : 10
+  }
+  let points = 0;
+  word = word.toUpperCase();
+  const newWord = word.split("");
+  for (const letter of newWord) {
+    points += scoreMap[letter];
+  } if (newWord.length >= 7) {
+    points += 8;
+  }    
+  return points;
 };
 
 export const highestScoreFrom = (words) => {
