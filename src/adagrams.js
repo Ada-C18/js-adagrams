@@ -66,7 +66,15 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  for (const letter of input) {
+    let idx = lettersInHand.findIndex((e) => e === letter);
+    if (idx != -1) {
+      lettersInHand.splice(idx, 1);
+    } else {
+      return false;
+    }
+  }
+  return true;
 };
 
 export const scoreWord = (word) => {
