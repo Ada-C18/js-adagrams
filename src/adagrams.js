@@ -125,16 +125,19 @@ export const scoreWord = (word) => {
 
   let sum = 0;
   const len = word.length;
+  const wordUpper = word.toUpperCase();
 
-  if (len >= 7) {
+  if (len === 0) {
+    return sum;
+  } else if (len >= 7) {
     sum += 8;
   }
-  for (let i = 0; i < word.length; i++) {
-    let letter = word[i];
+
+  for (let i = 0; i < len; i++) {
+    let letter = wordUpper[i];
     sum += SCORE_CHART_DICT[letter];
   }
   return sum;
-  //(const [key, value] of Object.entries(SCORE_CHART_DICT)) {
 };
 
 export const highestScoreFrom = (words) => {
