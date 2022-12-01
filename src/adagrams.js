@@ -1,3 +1,5 @@
+import { removeItem } from "vorpal/dist/local-storage";
+
 const LETTER_POOL = {
   'A': 9, 
   'B': 2, 
@@ -77,8 +79,20 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
-};
+  input = input.toUpperCase()
+  let lettersInHandCopy = [...lettersInHand];
+
+  for (let i in input) {
+    if (lettersInHandCopy.includes(input[i])) {
+      lettersInHandCopy.splice(i,1)
+    } else {
+      return false;
+    }
+    return true;
+  }
+  
+  }
+
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
