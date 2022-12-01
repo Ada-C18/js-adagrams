@@ -61,14 +61,7 @@ static highestScoreFrom = (words) => {
 class MultiSet {
 
   constructor(aString) {
-    const returnObject = {}
-    for (const letter of aString){
-      if (!(letter in returnObject)) {
-        returnObject[letter] = 0
-      };
-      returnObject[letter]++;
-    };
-    this.mSet = returnObject;
+    this.mSet = MultiSet.gimmeMSet(aString);
   };
 
   isSubSet(superSet) {
@@ -82,6 +75,17 @@ class MultiSet {
       }
     };
     return true;
+  };
+
+  static gimmeMSet (aString) {
+    const returnObject = {}
+    for (const letter of aString){
+      if (!(letter in returnObject)) {
+        returnObject[letter] = 0
+      };
+      returnObject[letter]++;
+    }
+    return returnObject;
   };
 };
 
