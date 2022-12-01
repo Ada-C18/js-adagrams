@@ -8,19 +8,27 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
-  // if word.length <= 7
+
+  // if word.length <= 7, add 8pts to counter, else counter = 0
   if (word.length<= 7) {
-    // add 8pts to counter
     score === 8;
   } else {
-    // else counter = 0
     score === 0;
   }
   // loop through letter in word
-  // if letter in obj add point value to counter
+  for (let i=0; i < word.length; ++i) {
+    // if letter in obj add point value to counter
+
+    if (word[i] in obj) { //need to correct object name
+      score += obj[word[i]];
+    } //conditional
+  } //loop
   // return counter
+  return score;
 };
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+
+
 };
