@@ -56,7 +56,7 @@ const SCORE_DICT = {
   Z: 10,
 };
 
-export const drawLetters = () => {
+const drawLetters = () => {
   // Returns an array of ten strings of exactly one letter
   // The letters should be randomly drawn from a pool of letters
   // This letter pool should reflect the distribution of letters as described in the table below
@@ -68,6 +68,7 @@ export const drawLetters = () => {
       letterPoolArray.push(k);
     }
   }
+  console.log(letterPoolArray.length);
 
   let hand = [];
   for (let i = 0; i < 10; i++) {
@@ -77,17 +78,7 @@ export const drawLetters = () => {
     hand.push(pickedLetter);
   }
   console.log(hand);
-  return hand;
+  console.log(letterPoolArray.length);
 };
 
-export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
-};
-
-export const scoreWord = (word) => {
-  // Implement this method for wave 3
-};
-
-export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
-};
+drawLetters();
