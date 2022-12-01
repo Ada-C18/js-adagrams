@@ -49,7 +49,7 @@ References LETTER_POOL from the outer scope. It shuffles
 the deck in-place by swapping characters at the head with 
 a random other character in the deck. 
 
-It passes the test but I'm not certain if it meets the requirements 
+It passes the tests but I'm not certain if it meets the requirements 
 for "draw with replacement."
 */
 
