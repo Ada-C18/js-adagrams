@@ -15,7 +15,14 @@ export const drawLetters = () => {
 }
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  // check whether type(input) === str
+  
+  // return true if: 
+  // - used letter is available in hand
+  
+  // return false if: 
+  // - used letter in not available in hand
+  // - letter has been used in input word once
 };
 
 export const scoreWord = (word) => {
