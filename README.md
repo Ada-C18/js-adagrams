@@ -134,6 +134,8 @@ Our first job is to build a hand of 10 letters. To do so, implement the function
 |     L : 4     |     Y : 2     |
 |     M : 2     |     Z : 1     |
 
+['A','A','A','A','A','A','A','A','A','B','B','C','C','D','D','D','D',]
+
 **Note:** Making sure that the drawn letters match the rules of the letter pool can be straightforward or very difficult, depending on how you build the data structure for the letter pool. It is worth spending some time to think carefully about this.
 
 ### Wave 2
@@ -194,7 +196,7 @@ Implement the function named `highestScoreFrom` in `src/adagrams.js`. This metho
 
 This Wave has 3 parts:
 
-1. Adjust the syntax for the tests for `highestScoreFrom` to run, instead of skip. To do this, find the `describe` block for the tests of `highestScoreFrom`, and change the syntax from `describe.skip` to `describe`
+1. Adjust the syntax for the tests for `highestScoreFrom` to run, instead of skip. To do this, find the `describe` block for the tests of `highestScoreFrom`, and change the syntax from `describe.skip` to [](README.md)`describe`
 2. Write the pseudocode for this function, using whatever resources and references
 3. Translate the pseudocode into JavaScript, using whatever resources and references
 
