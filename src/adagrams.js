@@ -21,7 +21,7 @@ function range(start, stop, step) {
   return result;
 };
 
-const drawLetters = () => {
+export const drawLetters = () => {
   const letterPool = {
     'A': 9, 
     'B': 2, 
@@ -63,25 +63,21 @@ const drawLetters = () => {
   while (returnList.length < 10) {
     let letter = letterBank[Math.floor(Math.random()* letterBank.length)];
     returnList.push(letter);
-    let index = array.indexOf(letter);
-    letterBank.splice(index, 1);
+    let index = letterBank.indexOf(letter);
+    letterBank.splice(index,1);
+  }
 
-  console.log(returnList);
-  console.log(letterBank);
   return returnList;
 };
 
-drawLetters()
+export const usesAvailableLetters = (input, lettersInHand) => {
+  // Implement this method for wave 2
+};
 
+export const scoreWord = (word) => {
+  // Implement this method for wave 3
+};
 
-// export const usesAvailableLetters = (input, lettersInHand) => {
-//   // Implement this method for wave 2
-// };
-
-// export const scoreWord = (word) => {
-//   // Implement this method for wave 3
-// };
-
-// export const highestScoreFrom = (words) => {
-//   // Implement this method for wave 4
+export const highestScoreFrom = (words) => {
+  // Implement this method for wave 4
 };
