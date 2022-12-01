@@ -86,6 +86,18 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 };
 
 export const scoreWord = (word) => {
+  let score = 0;
+
+  for (const letter of word) {
+    score += SCORE_DICT[letter.toUpperCase()];
+  }
+
+  if (word.length >= 7) {
+    score += 8;
+  }
+
+  return score;
+
   // Implement this method for wave 3
 };
 
