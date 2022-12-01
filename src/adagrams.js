@@ -56,10 +56,10 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 export const scoreWord = (word) => {
   // Implement this method for wave 3
   let score = 0;
-  if (7 <= word.length <= 10){
+  if (7 <=word.length && word.length <= 10){
     score += 8;
-    
-  }for(let i = 0; i < word.length; i++){
+  }
+  for(let i = 0; i < word.length; i++){
     score += scoreChart[word[i].toUpperCase()];
   }
   return score;
