@@ -27,10 +27,30 @@ const letterPool = {
   Z: 1,
 };
 
+////////////////////////////
+// BEGIN HELPER FUNCTIONS //
+////////////////////////////
+
 function getRandomLetter(obj) {
   const letters = Object.keys(obj);
   return letters[Math.floor(Math.random() * letters.length)];
 }
+
+function toObject(arr) {
+  const obj = {};
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] in obj) {
+      obj[arr[i]] += 1;
+    } else {
+      obj[arr[i]] = 1;
+    }
+  }
+  return obj;
+}
+
+////////////////////////////
+// END HELPER FUNCTIONS //
+////////////////////////////
 
 export const drawLetters = () => {
   let letterPoolcopy = JSON.parse(JSON.stringify(letterPool));
@@ -47,6 +67,16 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
+  const hand = toObject(lettersInHand);
+  const word = input.split("");
+  for (let i = 0; i < input.length; i++) {
+    if (word[i] in hand && hand[word[i]] > 0) {
+      hand[word[i]] -= 1;
+    } else {
+      return false;
+    }
+  }
+  return true;
 };
 
 export const scoreWord = (word) => {
