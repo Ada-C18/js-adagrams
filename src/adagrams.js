@@ -74,7 +74,21 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
-};
+  const letterPool = {};
+  for (let letter of lettersInHand) {
+    letterPool[letter] = lettersInHand.filter((character) => character === letter).length;
+  };
+  for (let letter of input) {
+    const check = input.split(letter).length - 1
+    if (!lettersInHand.includes(letter)) {
+      return false;
+    } else if (check > letterPool[letter]) {
+      return false;
+    };
+  };
+  return true;
+  };
+
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
