@@ -91,7 +91,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 export const scoreWord = (word) => {
   // Implement this method for wave 3
   // let score = word.length >= 7 ? 8 : 0;
-  const score = 0;
+  let score = 0;
   for (let letter of word.toUpperCase()) {
     score += letterPoints[letter];
   }
