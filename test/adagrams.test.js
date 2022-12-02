@@ -63,11 +63,14 @@ describe("Adagrams", () => {
           }
         }
 
-        for (let letter of drawn) {
+        for (let letter of drawn) { 
+        //   if( (LETTER_POOL[letter] < letter_freq[letter])) {
+        //   console.log(letter)
+        //   }
           expect(letter_freq[letter]).toBeLessThanOrEqual(LETTER_POOL[letter]);
         }
       }
-    });
+  });
   });
 
   describe("usesAvailableLetters", () => {
@@ -120,8 +123,10 @@ describe("Adagrams", () => {
     });
 
     it("returns a score of 0 if given an empty input", () => {
-      throw "Complete test";
+      expectScores({
+        "": 0
     });
+  });
 
     it("adds an extra 8 points if word is 7 or more characters long", () => {
       expectScores({

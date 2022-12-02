@@ -1,8 +1,5 @@
 
 
-export const scoreWord = (word) => {
-  // Implement this method for wave 3
-};
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
@@ -111,8 +108,28 @@ export const usesAvailableLetters = function(input, lettersInHand) {
   return true;
 }
 
+export const scoreWord = function(word) {
+
+    
+    let score = 0;
+    for(let letter of word.toUpperCase()) {
+      if (scoreChart.hasOwnProperty(letter)) {
+        // if (letter in scoreChart) {
+        score += scoreChart[letter] ;//should add value to score
+
+        
+    }
+  }
+    if (word.length <= 10 && word.length >= 7 ) {
+      score += 8;
+    }
+    return score
+    
+
+
+}
+
     
 
     
       
-
