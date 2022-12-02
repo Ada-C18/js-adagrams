@@ -10,6 +10,7 @@
     "sourceType": "module"
   },
   "plugins": ["jest"],
+  "ignorePatterns": ["test/**/*.js"],
   "rules": {
     "no-unused-vars": "warn",
     "no-var": "warn",
