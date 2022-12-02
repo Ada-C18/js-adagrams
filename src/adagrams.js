@@ -1,35 +1,31 @@
-
 const LETTER_POOL = {
-  A: 9,
-  B: 2,
-  C: 2,
-  D: 4,
-  E: 12,
-  F: 2,
-  G: 3,
-  H: 2,
-  I: 9,
-  J: 1,
-  K: 1,
-  L: 4,
-  M: 2,
-  N: 6,
-  O: 8,
-  P: 2,
-  Q: 1,
-  R: 6,
-  S: 4,
-  T: 6,
-  U: 4,
-  V: 2,
-  W: 2,
-  X: 1,
-  Y: 2,
-  Z: 1,
+  A: [9, 1],
+  B: [2, 3],
+  C: [2, 3],
+  D: [4, 2],
+  E: [12, 1],
+  F: [2, 4],
+  G: [3, 2],
+  H: [2, 4],
+  I: [9, 1],
+  J: [1, 8],
+  K: [1, 5],
+  L: [4, 1],
+  M: [2, 3],
+  N: [6, 1],
+  O: [8, 1],
+  P: [2, 3],
+  Q: [1, 10],
+  R: [6, 1],
+  S: [4, 1],
+  T: [6, 1],
+  U: [4, 1],
+  V: [2, 4],
+  W: [2, 4],
+  X: [1, 8],
+  Y: [2, 4],
+  Z: [1, 10],
 };
-
-const scoreBoard = {A: 1, E: 1, I: 1, O: 1, U: 1, L: 1, N: 1, R: 1, S: 1, T:1, D:2, G:2,
-B:3, C:3, M:3, P:3, F:4, H:4, V:4, W:4, Y:4, K:5, J:8, X:8, Q:10, Z:10}
 
 const range = (start, end) => {
   return Array.from({length:end}, (_, i) => start + i)
@@ -44,7 +40,7 @@ export const drawLetters = () => {
   let deck = [];
 
   for (const [key, cnt] of Object.entries(LETTER_POOL)){
-    for (let i of range(0, cnt)){
+    for (let i of range(0, cnt[0])){
       deck.push(key);
     }
   }
@@ -72,14 +68,14 @@ export const scoreWord = (word) => {
     score += 8;
   }
   for (let i = 0; i<word.length; ++i){
-      score += scoreBoard[word[i]];
+      score += LETTER_POOL[word[i]][1];
     }
     return score;
 };
 
 export const highestScoreFrom = (words) => {
   let scoreBoard = {}
-  let topScore = []
+  let highScores = []
   for (const word of words){
       scoreBoard[word] = scoreWord(word);
   }
@@ -88,17 +84,17 @@ export const highestScoreFrom = (words) => {
 
   for (const [word, score] of Object.entries(scoreBoard)){
     if (score === maxScore){
-      topScore.push(word);
+      highScores.push(word);
     } 
   };
-  if (topScore.length === 1){
-    return {word: topScore[0], score:maxScore};
-  } else if (topScore.length > 1){
-    for (const word of topScore){
+  if (highScores.length === 1){
+    return {word: highScores[0], score:maxScore};
+  } else if (highScores.length > 1){
+    for (const word of highScores){
       if (word.length === 10){
         return {word, score:maxScore};
       } else {
-        const wordLength = topScore.every( w => w.length < 10);
+        const wordLength = highScores.every( w => w.length < 10);
         if (wordLength === true && word.length === minLength){
         return {word, score:maxScore};
         }
