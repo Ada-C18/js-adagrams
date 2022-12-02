@@ -48,14 +48,14 @@ export const usesAvailableLetters = (input, lettersInHand) => {
     return false;
   }
   for (let letter of input) {
-        const index = lettersInHandCopy.indexOf(letter);
-        if (index < 0){
-            return false;
-        }else if (index >= 0) {
-        lettersInHandCopy.splice(index, 1);
-        }
-    } 
-    return (true);
+    const index = lettersInHandCopy.indexOf(letter);
+    if (index < 0) {
+      return false;
+    } else if (index >= 0) {
+      lettersInHandCopy.splice(index, 1);
+    }
+  }
+  return true;
 };
 
 export const scoreWord = (word) => {
