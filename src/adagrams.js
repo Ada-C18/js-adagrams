@@ -36,9 +36,8 @@ export const drawLetters = () => {
     for (let i = 0; i < letterPool[letter]; i++) {
       flatLetterPool.push(letter);
     }
-    //console.log(flatLetterPool);
   }
-  console.log(flatLetterPool);
+  //console.log(flatLetterPool);
 
   // Draw ten random letters from flatLetterPool
   let drawLetter = "";
@@ -57,6 +56,21 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
+
+  // convert to uppercase
+  let upperInput;
+  upperInput = input.toUpperCase();
+
+  // as we loop thru char in upper input, delete each matching char in array of resLetters;
+  // Return False if unable to find, else True;
+  for (let char of upperInput) {
+    if (!lettersInHand.includes(char)) {
+      return false;
+    } else if (lettersInHand.includes(char)) {
+      lettersInHand.splice(lettersInHand.indexOf(char), 1);
+    }
+  }
+  return true;
 };
 
 export const scoreWord = (word) => {
