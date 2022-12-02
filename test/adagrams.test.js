@@ -79,6 +79,14 @@ describe("Adagrams", () => {
       expect(isValid).toBe(true);
     });
 
+    it("adding test returns true if the submitted letters are valid against the drawn letters different order", () => {
+      const drawn = ["D", "X", "X", "X", "O","X", "X", "X", "X","G"];
+      const word = "DOG";
+
+      const isValid = usesAvailableLetters(word, drawn);
+      expect(isValid).toBe(true);
+    });
+
     it("returns false when word contains letters not in the drawn letters", () => {
       const drawn = ["D", "O", "X", "X", "X", "X", "X", "X", "X", "X"];
       const word = "DOG";
