@@ -12,7 +12,6 @@ export const drawLetters = () => {
             
             letterPool.push(letter)
         }
-            // console.log(letterPool);
     }
     for  (let i = 0; i< 10; i++){
         const i = Math.floor(Math.random() * letterPool.length);
@@ -25,6 +24,26 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
+  const letterDict = {}
+
+  for (const letter of lettersInHand){
+    if (!letterDict[letter]){
+      letterDict[letter] = 1;
+    }
+    else { 
+      letterDict[letter] += 1;
+    }
+  }
+  for (const letter of input){
+    if (letter in letterDict && letterDict[letter] > 0){
+      letterDict[letter] -= 1;
+      continue
+    }
+    else {
+      return false 
+    }
+  }
+  return true
 };
 
 export const scoreWord = (word) => {
