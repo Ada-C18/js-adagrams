@@ -138,5 +138,15 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  //words -> array of input words
+  //loop through array,
+  //find score value of each word in array
+  //if tie:
+  //if same length:
+  //return first one in list
+  //if word one or word two length is 10:
+  //return whichever one has length of 10
+  //if length of word one/two < word two/one
+  // return word one/two
+  // returns --> object ({word: 'winningWord', score: value})
 };
