@@ -108,8 +108,6 @@ export const scoreWord = (word) => {
   return word_score;
 };
 
-console.log("yepper");
-
 // Wave 4
 /////////////////Pseudocode//////////////////
 // 1. create two new variables to hold best_word_score and best_word
@@ -123,14 +121,33 @@ console.log("yepper");
 // 3. return the best word and score in an object word:score
 
 export const highestScoreFrom = (words) => {
-  let bestScore = 0;
-  let bestWord = None;
+  console.log(words);
+  let bestScore = scoreWord(words[0]);
+  let bestWord = words[0];
+
   for (const word of words) {
     const wordScore = scoreWord(word);
+
+    // normal case - word has higher score than best word
     if (wordScore > bestScore) {
       bestScore = wordScore;
       bestWord = word;
+
+      // ties
     } else if (wordScore === bestScore) {
+      // if scores are tied and words are same length, tie goes to current best word
+      //if the scores are the same short word is best word
+      if (
+        (word.length === 10 || word.length < bestWord.length) &&
+        bestWord.length !== 10
+      ) {
+        bestScore = wordScore;
+        bestWord = word;
+      }
     }
   }
+  return {
+    word: bestWord,
+    score: bestScore,
+  };
 };
