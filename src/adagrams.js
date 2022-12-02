@@ -28,42 +28,56 @@ const LETTER_POOL = {
 };
 
 export const drawLetters = () => {
-  let alphabet = [
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-    "H",
-    "I",
-    "J",
-    "K",
-    "L",
-    "M",
-    "N",
-    "O",
-    "P",
-    "Q",
-    "R",
-    "S",
-    "T",
-    "U",
-    "V",
-    "W",
-    "X",
-    "Y",
-    "Z",
-  ];
+  let alphabet = {
+    A: 0,
+    B: 0,
+    C: 0,
+    D: 0,
+    E: 0,
+    F: 0,
+    G: 0,
+    H: 0,
+    I: 0,
+    J: 0,
+    K: 0,
+    L: 0,
+    M: 0,
+    N: 0,
+    O: 0,
+    P: 0,
+    Q: 0,
+    R: 0,
+    S: 0,
+    T: 0,
+    U: 0,
+    V: 0,
+    W: 0,
+    X: 0,
+    Y: 0,
+    Z: 0,
+  };
   let lettersInHand = [];
-  for (let i = 1; i <= 10; i++) {
-    let letterIndex = Math.floor(Math.random() * alphabet.length);
-    lettersInHand.push(alphabet.splice(letterIndex, 1).toString());
+  while (lettersInHand.length < 10) {
+    let letterIndex = Math.floor(Math.random() * 26);
+    let letter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[letterIndex];
+    if (alphabet[letter] < LETTER_POOL[letter]) {
+      alphabet[letter]++;
+      lettersInHand.push(letter);
+    }
   }
   console.log(lettersInHand);
   return lettersInHand;
 };
+
+// create frequency object literal in function
+// randomly select letters
+// if they the value of the letter key in our object literal is <=
+// to the value of that same letter key in LETTER_POOL
+// --> then add one to that value in frequency object literal
+// --> add that letter to the hand
+// --> continue the loop
+// ELSE --> continue the loop
+// return the hand
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
