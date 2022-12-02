@@ -44,8 +44,39 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 };
 
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
+  // let word = word.toUpperCase();
+  const scoreChart = {
+    1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
+    2: ['D', 'G'],
+    3: ['B', 'C', 'M', 'P'],
+    4: ['F', 'H', 'V', 'W', 'Y'],
+    5: ['K'],
+    8: ['J', 'X'],
+    10: ['Q', 'Z']
+  };
+  
+  let wordScore = 0;
+  for (let i = 0; i < word.length; i++) {
+    for (const [key, value] of Object.entries(scoreChart)) {
+      for (const v of value) {
+        if (word[i].toUpperCase() === v) {
+          wordScore += Math.floor(key)
+        }
+      }
+    }
+  };
+  if (word.length >= 7) {
+    wordScore += Math.floor(8) 
+  };
+  
+  return wordScore
+  
+  // iterate through word and add points to wordScore
+  // if len(word) >= 7, wordScore +8
+  // return int(totalPoints)
 };
+
+
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
