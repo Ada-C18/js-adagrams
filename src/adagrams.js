@@ -129,12 +129,12 @@ export const scoreWord = (word) => {
   } else {
     score += 8;
   }
-  console.log("What is my score here", score);
+  // console.log("What is my score here", score);
 
   if (wordUpper.length === 0) {
     return score;
   } else {
-    for (const letter of wordUpper ) {
+    for (const letter of wordUpper) {
       // console.log(wordUpper );
       if (letter in SCORE_CHART) {
         score += SCORE_CHART[letter];
@@ -144,7 +144,40 @@ export const scoreWord = (word) => {
   return score;
 };
 
-
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+
+  let highestScore = 0;
+  let highestScoreList = [];
+
+  for (const word of words) {
+    let score = scoreWord(word);
+    if (score > highestScore) {
+      highestScore = score;
+      highestScoreList.length = 0;
+      highestScoreList.push(word);
+    } else if (score === highestScore) {
+      highestScoreList.push(word);
+    }
+  }
+  let shortestWord = highestScoreList[0];
+  let lenShortestWord = shortestWord.length;
+
+  for (const item of highestScoreList) {
+    if (item.length === 10) {
+      console.log({ word: item, score: highestScore });
+      return { word: item, score: highestScore };
+    } else if (item.length < lenShortestWord) {
+      shortestWord = item;
+      lenShortestWord = shortestWord.length;
+      console.log(shortestWord);
+      console.log("length of shortest word", lenShortestWord);
+    }
+  }
+  console.log({ word: shortestWord, score: highestScore });
+  return { word: shortestWord, score: highestScore };
+
+  // console.log(highestScoreList)
 };
+
+highestScoreFrom(["MMMM", "WWW"]);
