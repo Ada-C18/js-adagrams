@@ -180,21 +180,21 @@ describe("Adagrams", () => {
         expect(highestScoreFrom(words.reverse())).toEqual(correct);
       });
 
-      //     it("selects the first word when both have same length", () => {
-      //       const words = ["AAAAAAAAAA", "EEEEEEEEEE"];
-      //       const first = {
-      //         word: "AAAAAAAAAA",
-      //         score: scoreWord("AAAAAAAAAA"),
-      //       };
-      //       const second = {
-      //         word: "EEEEEEEEEE",
-      //         score: scoreWord("EEEEEEEEEE"),
-      //       };
-      //       expectTie(words);
+      it("selects the first word when both have same length", () => {
+        const words = ["AAAAAAAAAA", "EEEEEEEEEE"];
+        const first = {
+          word: "AAAAAAAAAA",
+          score: scoreWord("AAAAAAAAAA"),
+        };
+        const second = {
+          word: "EEEEEEEEEE",
+          score: scoreWord("EEEEEEEEEE"),
+        };
+        expectTie(words);
 
-      //       expect(highestScoreFrom(words)).toEqual(first);
-      //       expect(highestScoreFrom(words.reverse())).toEqual(second);
-      //     });
+        expect(highestScoreFrom(words)).toEqual(first);
+        expect(highestScoreFrom(words.reverse())).toEqual(second);
+      });
     });
   });
 });
