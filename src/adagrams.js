@@ -27,24 +27,25 @@ const letterPool = {
   Z: 1,
 };
 export const drawLetters = () => {
-  let arrayletters = "";
+  let arrayLetters = "";
   for (let letter in letterPool) {
     const amountOftimes = letterPool[letter];
     for (let i = 0; i < amountOftimes; i++) {
-      arrayletters += letter;
+      arrayLetters += letter;
     }
-    let drawn = [];
-    let arrayLength = arrayletters.length;
-
-    for (let i = 0; i < 10; i++) {
-      letter = arrayletters.charAt(Math.floor(Math.random() * arrayLength));
-      // If letter is in array 9 times then do another loop
-
-      drawn.push(letter);
-    }
-    console.log(drawn);
-    return drawn;
   }
+  let drawn = [];
+
+  for (let i = 0; i < 10; i++) {
+    let letter = arrayLetters.charAt(
+      Math.floor(Math.random() * arrayLetters.length)
+    );
+    // If letter is in array 9 times then do another loop
+    arrayLetters = arrayLetters.replace(letter, "");
+    drawn.push(letter);
+  }
+  console.log(drawn);
+  return drawn;
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
