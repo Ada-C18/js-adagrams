@@ -34,8 +34,8 @@ export const drawLetters = () => {
     newLetterPool[letter] = letterPool[letter];
   }
 
+  //creates and returns hand of 10 random letters
   const lettersInHand = [];
-
   while (lettersInHand.length < 10) {
     //makes list of letter keys
     const letters = Object.keys(newLetterPool);
@@ -50,7 +50,30 @@ export const drawLetters = () => {
   return lettersInHand;
 };
 
-export const usesAvailableLetters = (input, lettersInHand) => {};
+export const usesAvailableLetters = (input, lettersInHand) => {
+  const handDict = {};
+  input = input.toUpperCase();
+
+  //keeping count of how many times a letter is in hand
+  for (const letter of lettersInHand) {
+    if (!letter in handDict) {
+      handDict[letter] = 0;
+    } else {
+      handDict[letter] = ~~handDict[letter] + 1;
+    }
+  }
+  //checking if letter is valid returns boolean value
+  for (let letter of input) {
+    if (letter in handDict === false) {
+      return false;
+    } else if (handDict[letter] === 0) {
+      return false;
+    } else {
+      handDict[letter]--;
+    }
+  }
+  return true;
+};
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
