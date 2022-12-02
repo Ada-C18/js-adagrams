@@ -55,13 +55,13 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  lettersInHand = lettersInHand.join('')
+  lettersInHand = lettersInHand.join('');
 
   return lettersInHand.includes(input);
 };
 
 export const scoreWord = (word) => {
-  word = word.toUpperCase()
+  word = word.toUpperCase();
   let score = 0;
 
   if (word.length >= 7){
@@ -74,8 +74,8 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  let scoreBoard = {}
-  let highScores = []
+  let scoreBoard = {};
+  let highScores = [];
   for (const word of words){
       scoreBoard[word] = scoreWord(word);
   }
