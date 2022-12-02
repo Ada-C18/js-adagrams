@@ -127,7 +127,7 @@ export const highestScoreFrom = (words) => {
   for (const word of words) {
     const wordScore = scoreWord(word);
 
-    // normal case - word has higher score than best word
+    // normal case - current word has higher score than best word
     if (wordScore > bestScore) {
       bestScore = wordScore;
       bestWord = word;
