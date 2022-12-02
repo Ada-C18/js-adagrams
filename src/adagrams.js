@@ -137,32 +137,16 @@ export const scoreWord = (word) => {
   return score;
 };
 
-export const highestScoreFrom = (words) => {
-  //words -> array of input words
-  //create empty object OR create empty list and score=0
-  //loop through words array,
-  //if object empty, store "word: value" in object and word in an array
-  //if object not empty:
-  //if value of word === value of word in object:
-  //add word: value to object
-  //if value of word > value of word in object:
-  //delete current word from object
-  //add new word: value
-  //otherwise, do nothing
+export const highestScoreToDict = (highestWord, highestScore) => {
+  let highest = {
+    word: highestWord,
+    score: highestScore,
+  };
 
-  //find score value of each word in array
-  //store values in array
-  //find highest value
-  //store value in variable
-  //put word: value in object
-  //if object length > 1:
-  //if both words same length:
-  //return first one in list ???
-  //if word one or word two length is 10:
-  //return whichever one has length of 10
-  //if length of word one/two < word two/one
-  //return word one/two
-  //returns --> object ({word: 'winningWord', score: value})
+  return highest;
+};
+
+export const highestScoreFrom = (words) => {
   let highest = {};
   let highestWord = [];
   let highestScore = 0;
@@ -184,36 +168,19 @@ export const highestScoreFrom = (words) => {
 
   if (highestWord.length > 1) {
     if (highestWord[0].length === highestWord[1].length) {
-      highest["word"] = highestWord[0];
-      highest["score"] = highestScore;
+      highest = highestScoreToDict(highestWord[0], highestScore);
     } else if (highestWord[0].length === 10) {
-      highest["word"] = highestWord[0];
-      highest["score"] = highestScore;
+      highest = highestScoreToDict(highestWord[0], highestScore);
     } else if (highestWord[1].length === 10) {
-      highest["word"] = highestWord[1];
-      highest["score"] = highestScore;
+      highest = highestScoreToDict(highestWord[1], highestScore);
     } else if (highestWord[0].length < highestWord[1].length) {
-      highest["word"] = highestWord[0];
-      highest["score"] = highestScore;
+      highest = highestScoreToDict(highestWord[0], highestScore);
     } else if (highestWord[0].length > highestWord[1].length) {
-      highest["word"] = highestWord[1];
-      highest["score"] = highestScore;
+      highest = highestScoreToDict(highestWord[1], highestScore);
     }
   } else {
-    highest["word"] = highestWord[0];
-    highest["score"] = highestScore;
+    highest = highestScoreToDict(highestWord[0], highestScore);
   }
 
   return highest;
-  //words -> array of input words
-  //loop through array,
-  //find score value of each word in array
-  //if tie:
-  //if same length:
-  //return first one in list
-  //if word one or word two length is 10:
-  //return whichever one has length of 10
-  //if length of word one/two < word two/one
-  // return word one/two
-  // returns --> object ({word: 'winningWord', score: value})
 };
