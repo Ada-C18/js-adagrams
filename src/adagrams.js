@@ -80,8 +80,8 @@ export const drawLetters = () => {
 export const usesAvailableLetters = (input, lettersInHand) => {
   for (let i in input) {
     if (lettersInHand.includes(input[i])) {
-      const hand_index = lettersInHand.indexOf(input[i]);
-      lettersInHand.splice(hand_index, 1);
+      const handIndex = lettersInHand.indexOf(input[i]);
+      lettersInHand.splice(handIndex, 1);
     } else {
       return false;
     }
@@ -91,37 +91,36 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
 // Wave 3
 export const scoreWord = (word) => {
-  let upper_word = word.toUpperCase();
-  let word_score = 0;
+  let upperWord = word.toUpperCase();
+  let wordScore = 0;
 
-  if (upper_word.length === 0) {
-    return word_score;
+  if (upperWord.length === 0) {
+    return wordScore;
   }
 
-  for (let i in upper_word) {
-    word_score += letterValues[upper_word[i]];
+  for (let i in upperWord) {
+    wordScore += letterValues[upperWord[i]];
   }
 
-  if (upper_word.length >= 7 && upper_word.length <= 10) {
-    word_score += 8;
+  if (upperWord.length >= 7 && upperWord.length <= 10) {
+    wordScore += 8;
   }
-  return word_score;
+  return wordScore;
 };
 
 // Wave 4
 /////////////////Pseudocode//////////////////
-// 1. create two new variables to hold best_word_score and best_word
+// 1. create two new variables to hold best score and best word
 // 2. iterate over list of words and call scoreWord function,
 //        if score is > than last word, replace value of best_word_score with new score and
 //                                           reassign value of best_word to be current word
-//        if score = last word, replace value of best_word_score  with score of shortest word
-//                                           and update best_word
+//        if score = best score, replace value of best score  with score of shortest word
+//                                           and update best word
 //                                           unless one word has 10 letters - update best score and best word
 //        if score = last word and are the same length, keep the current score and word
 // 3. return the best word and score in an object word:score
 
 export const highestScoreFrom = (words) => {
-  console.log(words);
   let bestScore = scoreWord(words[0]);
   let bestWord = words[0];
 
@@ -133,10 +132,8 @@ export const highestScoreFrom = (words) => {
       bestScore = wordScore;
       bestWord = word;
 
-      // ties
+      // tie cases
     } else if (wordScore === bestScore) {
-      // if scores are tied and words are same length, tie goes to current best word
-      //if the scores are the same short word is best word
       if (
         (word.length === 10 || word.length < bestWord.length) &&
         bestWord.length !== 10
