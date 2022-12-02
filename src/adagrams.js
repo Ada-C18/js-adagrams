@@ -31,6 +31,7 @@ const drawLetters = () => {
   };
 
   const letterBowl = [];
+  let letterBowlCopy = [];
 
   Object.keys(availableLetters).forEach((key) => {
     const quantity = availableLetters[key];
@@ -42,13 +43,15 @@ const drawLetters = () => {
   const letterHand = [];
   for (let i = 0; i < 10; i++) {
     const randomLetter =
-      letterBowl[Math.floor(Math.random() * letterBowl.length)];
+      letterBowlCopy[Math.floor(Math.random() * letterBowl.length)];
     // console.log(randomLetter);
     letterHand.push(randomLetter);
-    return letterHand;
+    letterBowlCopy.splice(randomLetter, 1);
+    // I need to somehow make a copy of the letterBowl to modify, then reset
   }
+  return letterHand;
 };
-drawLetters();
+// drawLetters();
 
 // export const usesAvailableLetters = (input, lettersInHand) => {
 //   // Implement this method for wave 2
