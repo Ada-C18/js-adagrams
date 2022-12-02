@@ -1,6 +1,6 @@
 import collect from 'collect.js';
 
-const LETTER_DATA = [
+const letterData = [
   { letter: "A", quantity: 9, value: 1 },
   { letter: "B", quantity: 2, value: 3 },
   { letter: "C", quantity: 2, value: 3 },
@@ -29,35 +29,106 @@ const LETTER_DATA = [
   { letter: "Z", quantity: 1, value: 10 },
 ];
 
-const letterSoup = (letterData) => {
-  let letterList = []
-
-  for (const data of letterData) {
-    for (let runner = 0; runner < data['quantity']; runner++) {
-      letterList.push(data['letter']);
-    }
-  } return letterList;
+const letterPool = {
+  'A': 9, 
+  'B': 2, 
+  'C': 2, 
+  'D': 4, 
+  'E': 12, 
+  'F': 2, 
+  'G': 3, 
+  'H': 2, 
+  'I': 9, 
+  'J': 1, 
+  'K': 1, 
+  'L': 4, 
+  'M': 2, 
+  'N': 6, 
+  'O': 8, 
+  'P': 2, 
+  'Q': 1, 
+  'R': 6, 
+  'S': 4, 
+  'T': 6, 
+  'U': 4, 
+  'V': 2, 
+  'W': 2, 
+  'X': 1, 
+  'Y': 2, 
+  'Z': 1
 }
 
-const todaysSoup = collect(letterSoup(LETTER_DATA));
+const scoreChart = {
+  'A': 1, 
+  'B': 3, 
+  'C': 3, 
+  'D': 2, 
+  'E': 1, 
+  'F': 4, 
+  'G': 2, 
+  'H': 4, 
+  'I': 1, 
+  'J': 8, 
+  'K': 5, 
+  'L': 1, 
+  'M': 3, 
+  'N': 1, 
+  'O': 1, 
+  'P': 3, 
+  'Q': 10, 
+  'R': 1, 
+  'S': 1, 
+  'T': 1, 
+  'U': 1, 
+  'V': 4, 
+  'W': 4, 
+  'X': 8, 
+  'Y': 4, 
+  'Z': 10
+}
+
+// converts letterPool into one array of letters according to their quantity 
+const letterSoup = (letterPool) => {
+  let letterArray = [];
+
+  for (const letter in letterPool) {
+    for (let runner = 0; runner < letterPool[letter]; runner++) {
+      letterArray.push(letter);
+    }
+  } return letterArray;
+}
+
+const todaysSoup = letterSoup(letterPool);
 
 export const drawLetters = () => {
-  let letters = []
+  // array to store ten drawn letters
+  const tenLetters = [];
 
-  while (letters.length < 10) {
-    let collectionLetters = collect(letters);
+  // loop to randomly populate tenLetters
+  while (tenLetters.length < 10) {
 
-    const randomLetter = todaysSoup[(Math.random() * letters.length)+1];
-    
-    if (collectionLetters.count(randomLetter) < todaysSoup.count(randomLetter)) {
-      letters.push(randomLetter);
+    // choose randomLetter from randomized index from todaysSoup array, between 0 and todaysSoup length
+    let randomLetter = todaysSoup[Math.floor(Math.random() * todaysSoup.length+1)];
+
+    // check if randomLetter count within tenLetters is less than allotted letter quantity
+    // if true, add randomLetter to tenLetters array
+    if (collect(tenLetters).count(randomLetter) < letterPool[randomLetter]) {
+      tenLetters.push(randomLetter);
     }
   }
-  return console.log(letters)
+
+  console.log(todaysSoup);
+  console.log(tenLetters);
+  return tenLetters;
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  // use js method on input word to ignore case: input.toUpperCase()
+  // loop through input word, 
+  // check if letter from input is also in letterInHand
+  // return False if not
+  // outside of loop, return true 
+
 };
 
 export const scoreWord = (word) => {
