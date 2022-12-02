@@ -112,7 +112,33 @@ export const scoreWord = (word) => {
   }
   return score;
 };
+export const highestScoreFrom = (words) => {
+  // Implement this method for wave 4
+  let wordScoreDict = {};
+  let maxScore = -1;
+  for (var i = 0; i < words.length; i++) {
+    let score = scoreWord(words[i]);
+    wordScoreDict[words[i]] = score;
+    if (score > maxScore) {
+      maxScore = score;
+    }
+  }
+  let winningWord = {};
+  let minWordLength = 11;
 
-// export const highestScoreFrom = (words) => {
-//   // Implement this method for wave 4
-// };
+  for (const key in wordScoreDict) {
+    let sum = wordScoreDict[key];
+    if (sum === maxScore) {
+      if (key.length === 10) {
+        winningWord[key] = sum;
+        break;
+      }
+      if (key.length < minWordLength) {
+        minWordLength = key.length;
+        console.log(minWordLength);
+        winningWord = { word: key, score: sum };
+      }
+    }
+  }
+  return winningWord;
+};
