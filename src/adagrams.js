@@ -1,5 +1,6 @@
 export const drawLetters = () => {
-  const letterList = [];
+  const _ = require("lodash");
+  let letterList = [];
   const poolList = [];
   const letterPool = {
     "A": 9,
@@ -39,20 +40,15 @@ let number = getRandomInt(listNum)
     for(let i = 0; i < letterPool[key]; ++i) {
         poolList.push(key);  {
 
-  while (letterList.length !== 10) {
-      letterList.push(poolList[number]);
-  }   
-  }
-  }
-}   return letterList
+    letterList = _.sampleSize(poolList,10);
+}  
+}
+}
+  console.log(letterList)
+    return letterList
 };
 
-// i = 0
-//     for letter in LETTER_POOL.keys():
-//         for i in range(LETTER_POOL[letter]):
-//             pool_list.append(letter)
-//     letter_list = random.sample(pool_list, 10)
-//     return letter_list
+
 
 
 
