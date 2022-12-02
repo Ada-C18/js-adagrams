@@ -13,6 +13,11 @@ const removeLetter = function (arr, target) {
   return arr;
 };
 
+const uppercaseArray = (str) => {
+  let string = str.toUpperCase();
+  return Array.from(string);
+};
+
 //main functions
 
 //Wave 1
@@ -62,9 +67,8 @@ export const drawLetters = () => {
 
 //wave 2
 export const usesAvailableLetters = (input, lettersInHand) => {
-  const inputArray = Array.from(input);
+  const inputArray = uppercaseArray(input);
   for (let letter of inputArray) {
-    console.log(letter);
     if (lettersInHand.includes(letter) === false) {
       return false;
     }
@@ -73,9 +77,36 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   return true;
 };
 
-// export const scoreWord = (word) => {
-//   // Implement this method for wave 3
-// };
+//wave 3
+export const scoreWord = (word) => {
+  let score = 0;
+  if (word === false) {
+    return 0;
+  }
+
+  const scoreboard = {
+    1: "A, E, I, O, U, L, N, R, S, T",
+    2: "D, G",
+    3: "B, C, M, P",
+    4: "F, H, V, W, Y",
+    5: "K",
+    8: "J, X",
+    10: "Q, Z",
+  };
+  const wordArray = uppercaseArray(word);
+
+  wordArray.forEach((letter) => {
+    for (const [key, value] of Object.entries(scoreboard)) {
+      if (value.includes(letter)) {
+        score += parseInt(key);
+      }
+    }
+  });
+  if (wordArray.length > 6) {
+    score += 8;
+  }
+  return score;
+};
 
 // export const highestScoreFrom = (words) => {
 //   // Implement this method for wave 4
