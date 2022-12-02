@@ -27,6 +27,35 @@ let letterPool = {
   Z: 1,
 };
 
+let scorePool = {
+  A: 1,
+  B: 3,
+  C: 3,
+  D: 2,
+  E: 1,
+  F: 4,
+  G: 2,
+  H: 4,
+  I: 1,
+  J: 8,
+  K: 5,
+  L: 1,
+  M: 3,
+  N: 1,
+  O: 1,
+  P: 3,
+  Q: 10,
+  R: 1,
+  S: 1,
+  T: 1,
+  U: 1,
+  V: 4,
+  W: 4,
+  X: 8,
+  Y: 4,
+  Z: 10,
+};
+
 export const drawLetters = () => {
   // Implement this method for wave 1
 
@@ -61,7 +90,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   let upperInput;
   upperInput = input.toUpperCase();
 
-  // as we loop thru char in upper input, delete each matching char in array of resLetters;
+  // As we loop thru char in upperInput, delete each matching char in array of resLetters;
   // Return False if unable to find, else True;
   for (let char of upperInput) {
     if (!lettersInHand.includes(char)) {
@@ -75,6 +104,24 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
+  let sumScore = 0;
+  let upperWord;
+  upperWord = word.toUpperCase();
+
+  if (upperWord.length === 0) {
+    sumScore = 0;
+  } else if (upperWord.length >= 7 && upperWord.length <= 10) {
+    sumScore += 8;
+  } 
+  
+
+  for (let char of upperWord) {
+    if (char in scorePool) {
+      sumScore += scorePool[char];
+    }
+  }
+  console.log(sumScore);
+  return sumScore;
 };
 
 export const highestScoreFrom = (words) => {
