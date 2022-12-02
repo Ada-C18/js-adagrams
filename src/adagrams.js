@@ -76,22 +76,47 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
   const letterPool = {};
   for (let letter of lettersInHand) {
-    letterPool[letter] = lettersInHand.filter((character) => character === letter).length;
-  };
+    letterPool[letter] = lettersInHand.filter(
+      (character) => character === letter
+    ).length;
+  }
   for (let letter of input) {
-    const check = input.split(letter).length - 1
+    const check = input.split(letter).length - 1;
     if (!lettersInHand.includes(letter)) {
       return false;
     } else if (check > letterPool[letter]) {
       return false;
-    };
-  };
+    }
+  }
   return true;
-  };
-
+};
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
+  const points = {
+    1: ["A", "E", "I", "O", "U", "L", "N", "R", "S", "T"],
+    2: ["D", "G"],
+    3: ["B", "C", "M", "P"],
+    4: ["F", "H", "V", "W", "Y"],
+    5: ["K"],
+    8: ["J", "X"],
+    10: ["Q", "Z"],
+  };
+  let score = 0;
+  if (word.length >= 7) {
+    score += 8;
+  }
+
+  for (const letter of word) {
+    for (const point of Object.keys(points)) {
+      const intPoint = parseInt(point);
+      if (points[intPoint].includes(letter.toUpperCase())) {
+        score += intPoint;
+        break;
+      }
+    }
+  }
+  return score;
 };
 
 export const highestScoreFrom = (words) => {
