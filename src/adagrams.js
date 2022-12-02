@@ -1,5 +1,3 @@
-//fix case style on variables!!!!!!!!!!!
-
 const pool = {
   A: 9,
   B: 2,
@@ -32,19 +30,19 @@ const pool = {
 export const drawLetters = () => {
   const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   let hand = [];
-  let hand_freq = {};
+  let handFreq = {};
 
   while (hand.length < 10) {
-    let random_int = Math.floor(Math.random() * 26);
-    let random_letter = characters.charAt(random_int);
+    let randomInt = Math.floor(Math.random() * 26);
+    let randomLetter = characters.charAt(randomInt);
 
-    if (!hand.includes(random_letter)) {
-      hand.push(random_letter);
-      hand_freq[random_letter] = 1;
+    if (!hand.includes(randomLetter)) {
+      hand.push(randomLetter);
+      handFreq[randomLetter] = 1;
     } else {
-      if (hand_freq[random_letter] < pool[random_letter]) {
-        hand.push(random_letter);
-        hand_freq[random_letter] += 1;
+      if (handFreq[randomLetter] < pool[randomLetter]) {
+        hand.push(randomLetter);
+        handFreq[randomLetter] += 1;
       }
     }
   }
