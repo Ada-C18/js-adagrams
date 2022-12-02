@@ -32,12 +32,12 @@ export const drawLetters = () => {
   let revLetterPool = [...letterPool]
   let hand = []
   for (let i = 0; i < 10; i++){
-  let randLetter = revLetterPool[Math.floor(Math.random() * revLetterPool.length)];
-  let randLetterIndex = revLetterPool.indexOf(randLetter);
-  revLetterPool.splice(randLetterIndex, 1);
-  hand.push(randLetter)
+    let randLetter = revLetterPool[Math.floor(Math.random() * revLetterPool.length)];
+    let randLetterIndex = revLetterPool.indexOf(randLetter);
+    revLetterPool.splice(randLetterIndex, 1);
+    hand.push(randLetter)
   }
-  return hand
+  return hand;
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
@@ -94,8 +94,8 @@ export const highestScoreFrom = (words) => {
       winningScore = currentScore;
       winningWord = word
     } else if (currentScore === winningScore && word.length < winningWord.length) {
-      winningWord = word
+      winningWord = word;
     }
   }
-  return {word:winningWord, score:winningScore}
+  return {word:winningWord, score:winningScore};
 };
