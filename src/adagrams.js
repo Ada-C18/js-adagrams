@@ -33,6 +33,13 @@ export const drawLetters = () => {
       letterPool.push(letter);
     }
   }
+  const drawnLetters = [];
+  for (let i = 0; i < 10; i++) {
+    const letterIndex = Math.floor(Math.random() * letterPool.length);
+    drawnLetters.push(letterPool[letterIndex]);
+    letterPool.splice(letterIndex, 1);
+  }
+  return drawnLetters;
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
