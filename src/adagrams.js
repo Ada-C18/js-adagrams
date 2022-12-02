@@ -75,7 +75,16 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
-
+  let letterBankCopy = [...lettersInHand];
+  for (let letter of input) {
+    letter = letter.toUpperCase();
+    if (letterBankCopy.includes(letter)) {
+      letterBankCopy.splice(letter, 1);
+    } else {
+      return false;
+    }
+  }
+  return true;
   
 };
 
