@@ -95,7 +95,7 @@ export const highestScoreFrom = (words) => {
     return {word: topScore[0], score:maxScore};
   } else if (topScore.length > 1){
     for (const word of topScore){
-      if (word.length === 10 && scoreBoard[word] === maxScore){
+      if (word.length === 10){
         return {word, score:maxScore};
       } else {
         const wordLength = topScore.every( w => w.length < 10);
