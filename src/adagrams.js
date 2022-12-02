@@ -40,7 +40,7 @@ export const drawLetters = () => {
   for (let i = all_letters.length - 1; i >= 1; i--) {
     let j = Math.floor(Math.random() * (i + 1));
     let temp = all_letters[j];
-    all_letters[j] = all_letters[i];
+    all_letters[j] = all_letters[i]; // swapping begins here
     all_letters[i] = temp;
   }
 
@@ -57,9 +57,20 @@ export const drawLetters = () => {
   return handFunction(all_letters);
 };
 
-//export const usesAvailableLetters = (input, lettersInHand) => {
-// Implement this method for wave 2
-//};
+export const usesAvailableLetters = (input, lettersInHand) => {
+  // Implement this method for wave 2
+  for (let i = 0; i < input.length; i++) {
+    let letter = input[i];
+    let letterIndex = lettersInHand.indexOf(letter); // indexOf letter inside lettersInHand
+    if (letterIndex < 0) return false;
+    lettersInHand.splice(letterIndex, 1); // (starting index, how many to remove starting from starting index)
+  }
+  return true;
+};
+
+// GIT ADD AND GIT COMMIT ABOVE WAVE 2!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 //export const scoreWord = (word) => {
 // Implement this method for wave 3
