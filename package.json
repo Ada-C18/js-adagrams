@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "JavaScript version of the Adagrams project",
   "main": "index.js",
-  "type":"module",
+
 
 
   

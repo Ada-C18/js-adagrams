@@ -146,6 +146,8 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+  //pseudocode
+  //empty an array arr.length = 0: https://www.javascripttutorial.net/array/4-ways-empty-javascript-array/
 
   let highestScore = 0;
   let highestScoreList = [];
@@ -165,7 +167,6 @@ export const highestScoreFrom = (words) => {
 
   for (const item of highestScoreList) {
     if (item.length === 10) {
-      console.log({ word: item, score: highestScore });
       return { word: item, score: highestScore };
     } else if (item.length < lenShortestWord) {
       shortestWord = item;
@@ -177,7 +178,6 @@ export const highestScoreFrom = (words) => {
   console.log({ word: shortestWord, score: highestScore });
   return { word: shortestWord, score: highestScore };
 
-  // console.log(highestScoreList)
 };
 
-highestScoreFrom(["MMMM", "WWW"]);
+
