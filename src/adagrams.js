@@ -30,17 +30,15 @@ const drawLetters = () => {
     Z: 1,
   };
 
-  let letterBowl = [];
-  let quantity = Object.values(availableLetters);
-  let letter = Object.keys(availableLetters);
-  // let handAvailable = [];
+  const letterBowl = [];
 
-  for (let i = 0; i < quantity; i++) {
-    letterBowl.push(letter);
-    console.log(letterBowl);
-  }
+  Object.keys(availableLetters).forEach((key) => {
+    const quantity = availableLetters[key];
+    for (let i = 0; i < quantity; i++) {
+      letterBowl.push(key);
+    }
+  });
 };
-
 // drawLetters();
 
 // export const usesAvailableLetters = (input, lettersInHand) => {
