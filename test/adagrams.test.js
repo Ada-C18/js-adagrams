@@ -143,15 +143,22 @@ describe("Adagrams", () => {
       expect(highestScoreFrom(words)).toEqual(correct);
     });
 
-    //   describe("in case of tied score", () => {
-    //     const expectTie = (words) => {
-    //       const scores = words.map((word) => scoreWord(word));
-    //       const highScore = scores.reduce((h, s) => (h < s ? s : h), 0);
-    //       const tiedWords = scores.filter((s) => s == highScore);
+    it("accurately finds best scoring word even if not sorted", () => {
+      const words = ["XXX", "XXXX", "X", "XX"];
+      const correct = { word: "XXXX", score: scoreWord("XXXX") };
+      // throw "Complete test by adding an assertion";
+      expect(highestScoreFrom(words)).toEqual(correct);
+    });
 
-    //       // Expect at least two tied words
-    //       expect(tiedWords.length).toBeGreaterThan(1);
-    //     };
+    // describe("in case of tied score", () => {
+    //   const expectTie = (words) => {
+    //     const scores = words.map((word) => scoreWord(word));
+    //     const highScore = scores.reduce((h, s) => (h < s ? s : h), 0);
+    //     const tiedWords = scores.filter((s) => s == highScore);
+
+    //     // Expect at least two tied words
+    //     expect(tiedWords.length).toBeGreaterThan(1);
+    //   };
 
     //     it("selects the word with 10 letters", () => {
     //       const words = ["AAAAAAAAAA", "BBBBBB"];
