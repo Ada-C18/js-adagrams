@@ -130,7 +130,7 @@ export const highestScoreFrom = (words) => {
     let sum = wordScoreDict[key];
     if (sum === maxScore) {
       if (key.length === 10) {
-        winningWord[key] = sum;
+        winningWord = { word: key, score: sum };
         break;
       }
       if (key.length < minWordLength) {
