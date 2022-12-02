@@ -38,8 +38,17 @@ const drawLetters = () => {
       letterBowl.push(key);
     }
   });
+
+  const letterHand = [];
+  for (let i = 0; i < 10; i++) {
+    const randomLetter =
+      letterBowl[Math.floor(Math.random() * letterBowl.length)];
+    // console.log(randomLetter);
+    letterHand.push(randomLetter);
+    return letterHand;
+  }
 };
-// drawLetters();
+drawLetters();
 
 // export const usesAvailableLetters = (input, lettersInHand) => {
 //   // Implement this method for wave 2
