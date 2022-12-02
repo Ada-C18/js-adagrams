@@ -68,13 +68,40 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   return true;
 };
 
-// GIT ADD AND GIT COMMIT ABOVE WAVE 2!!!!!!!!!!!!!
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+export const scoreWord = (word) => {
+  // Implement this method for wave 3
+  const scoreChart = {
+    1: ["A", "E", "I", "O", "U", "L", "N", "R", "S", "T"],
+    2: ["D", "G"],
+    3: ["B", "C", "M", "P"],
+    4: ["F", "H", "V", "W", "Y"],
+    5: ["K"],
+    8: ["J", "X"],
+    10: ["Q", "Z"],
+  };
 
-//export const scoreWord = (word) => {
-// Implement this method for wave 3
-//};
+  let score = 0;
+  const scoreLetters = Object.values(scoreChart); // seperates into array of arrays of letters
+  const scorePoints = Object.keys(scoreChart); // seperates into array of numbers
+
+  for (let i = 0; i < word.length; i++) {
+    let currentLetter = word[i].toUpperCase();
+    for (let j = 0; j < scoreLetters.length; j++) {
+      if (scoreLetters[j].includes(currentLetter)) {
+        score = score + parseInt(scorePoints[j]); // scorePoints[j] has same index of scoreLetters[j]
+      }
+    }
+  }
+  if (
+    word.length === 7 ||
+    word.length === 8 ||
+    word.length === 9 ||
+    word.length === 10
+  ) {
+    score = score + 8;
+  }
+  return score;
+};
 
 //export const highestScoreFrom = (words) => {
 // Implement this method for wave 4
