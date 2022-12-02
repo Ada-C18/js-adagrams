@@ -1,3 +1,4 @@
+
 const LETTER_POOL = {
   A: 9,
   B: 2,
@@ -32,7 +33,12 @@ B:3, C:3, M:3, P:3, F:4, H:4, V:4, W:4, Y:4, K:5, J:8, X:8, Q:10, Z:10}
 
 const range = (start, end) => {
   return Array.from({length:end}, (_, i) => start + i)
-}
+};
+
+const shortestWord = (array) => {
+  array.sort((a, b) => a.length - b.length);
+  return array[0].length;
+};
 
 export const drawLetters = () => {
   let deck = [];
@@ -66,12 +72,39 @@ export const scoreWord = (word) => {
     score += 8;
   }
   for (let i = 0; i<word.length; ++i){
-      console.log(word[i]);
       score += scoreBoard[word[i]];
     }
     return score;
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  let scoreBoard = {}
+  let topScore = []
+  for (const word of words){
+      scoreBoard[word] = scoreWord(word);
+  }
+  const maxScore = Math.max(...Object.values(scoreBoard));
+  const minLength = shortestWord(Object.keys(scoreBoard));
+
+  for (const [word, score] of Object.entries(scoreBoard)){
+    if (score === maxScore){
+      topScore.push(word);
+    } 
+  };
+  if (topScore.length === 1){
+    return {word: topScore[0], score:maxScore};
+  } else if (topScore.length > 1){
+    for (const word of topScore){
+      if (word.length === 10 && scoreBoard[word] === maxScore){
+        return {word, score:maxScore};
+      } else {
+        const wordLength = topScore.every( w => w.length < 10);
+        if (wordLength === true && word.length === minLength){
+        return {word, score:maxScore};
+        }
+      }
+    }
+  } 
 };
+  
+
