@@ -25,7 +25,7 @@ const letterQuantity = {
   "X": 1,
   "Y": 2,
   "Z": 1
-}
+};
 const letterValue = {
   "A": 1,
   "B": 3,
@@ -53,7 +53,7 @@ const letterValue = {
   "X": 8,
   "Y": 4,
   "Z": 10
-}
+};
 
 export const drawLetters = () => {
   // Implement this method for wave 1
@@ -62,15 +62,15 @@ export const drawLetters = () => {
   const letters = [];
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   while (letterHand < 10){
-    let letter = alphabet.charAt(Math.floor(Math.random() * alphabet.length))
+    let letter = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
     if (!lettersDrawn[letter]){
-      lettersDrawn[letter] = 1
-      letterHand += 1
-      letters.push(letter)
+      lettersDrawn[letter] = 1;
+      letterHand += 1;
+      letters.push(letter);
     } else if (lettersDrawn[letter] < letterQuantity[letter]){
-      lettersDrawn[letter] += 1
-      letterHand += 1
-      letters.push(letter)
+      lettersDrawn[letter] += 1;
+      letterHand += 1;
+      letters.push(letter);
 
     } else {
       continue;
@@ -81,18 +81,18 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
-  const letterBankCount = {}
+  const letterBankCount = {};
   for (const letter of lettersInHand){
     if (!letterBankCount[letter]){
-      letterBankCount[letter] = 1
+      letterBankCount[letter] = 1;
     } else {
-      letterBankCount[letter] += 1
+      letterBankCount[letter] += 1;
     }
   }
   for (const letter of input){
     if (letter in letterBankCount && letterBankCount[letter] > 0){
-      letterBankCount[letter] -= 1
-      continue
+      letterBankCount[letter] -= 1;
+      continue;
     } else{
       return false;
     }
@@ -102,24 +102,24 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
-  let upperWord = word.toUpperCase()
-  let score = 0
+  let upperWord = word.toUpperCase();
+  let score = 0;
   if (upperWord.length >= 7){
-    score += 8
+    score += 8;
   }
   for (const letter of upperWord) {
-    score += letterValue[letter]
+    score += letterValue[letter];
   }
   return score;
 };
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
-  const wordScores = {}
-  const bestWord = {}
+  const wordScores = {};
+  const bestWord = {};
   for (const word of words){
-    let score = scoreWord(word)
-    wordScores[word] = score
+    let score = scoreWord(word);
+    wordScores[word] = score;
   }
   for (const [key, value] of Object.entries(wordScores)){
     if (Object.keys(bestWord).length === 0){
