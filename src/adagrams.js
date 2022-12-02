@@ -29,20 +29,20 @@ const letterObj = {
 
 export const drawLetters = () => {
   // creates a letter pool based on the frequency of that letter in letterObj
-  let letterPool;
+  let letterPool = [];
   for (const letter in letterObj) {
     letterPool += letter.repeat(letterObj[letter].frequency)
   };
-  letterPool = Array.from(letterPool);
+  letterPool = letterPool.split('');
 
   // draws 10 letters from letterPool based on a random index and removes drawn letters from the pool.
   let letterDraw = [];
-  for (let i=1; i <= 10; i++) {
+  while (letterDraw.length < 10) {
     const randomIndex = Math.floor(letterPool.length * Math.random());
-    letterDraw += letterPool[randomIndex];
+    letterDraw.push(letterPool[randomIndex]);
     letterPool.splice(randomIndex, 1)
   };
-  return Array.from(letterDraw)
+  return letterDraw
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
