@@ -57,8 +57,6 @@ const letterValues = {
 };
 
 // Wave 1
-
-// if you want to make a copy of an object, use spreader function - can also add keys
 export const drawLetters = () => {
   const letters = Object.keys(letterPool);
   const hand = [];
@@ -110,7 +108,29 @@ export const scoreWord = (word) => {
   return word_score;
 };
 
+console.log("yepper");
+
 // Wave 4
+/////////////////Pseudocode//////////////////
+// 1. create two new variables to hold best_word_score and best_word
+// 2. iterate over list of words and call scoreWord function,
+//        if score is > than last word, replace value of best_word_score with new score and
+//                                           reassign value of best_word to be current word
+//        if score = last word, replace value of best_word_score  with score of shortest word
+//                                           and update best_word
+//                                           unless one word has 10 letters - update best score and best word
+//        if score = last word and are the same length, keep the current score and word
+// 3. return the best word and score in an object word:score
+
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  let bestScore = 0;
+  let bestWord = None;
+  for (const word of words) {
+    const wordScore = scoreWord(word);
+    if (wordScore > bestScore) {
+      bestScore = wordScore;
+      bestWord = word;
+    } else if (wordScore === bestScore) {
+    }
+  }
 };
