@@ -78,14 +78,11 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 };
 
 export const scoreWord = (word) => {
-  let score = 0;
-  for (const letter of word.toUpperCase()) {
-    score += LETTER_POINTS[letter];
-  }
-  if (word.length > 6) {
-    score += 8;
-  }
-  return score;
+  let score = [...word.toUpperCase()]
+    .map((letter) => LETTER_POINTS[letter])
+    .reduce((acc, curr) => acc + curr, 0);
+  let bonus = word.length > 6 ? 8 : 0;
+  return score + bonus;
 };
 
 export const highestScoreFrom = (words) => {
