@@ -1,4 +1,4 @@
-const LETTER_POOL = {
+const letterBank = {
   A: [9, 1],
   B: [2, 3],
   C: [2, 3],
@@ -39,7 +39,7 @@ const shortestWord = (array) => {
 export const drawLetters = () => {
   let deck = [];
 
-  for (const [key, cnt] of Object.entries(LETTER_POOL)){
+  for (const [key, cnt] of Object.entries(letterBank)){
     for (let i of range(0, cnt[0])){
       deck.push(key);
     }
@@ -68,7 +68,7 @@ export const scoreWord = (word) => {
     score += 8;
   }
   for (let i = 0; i<word.length; ++i){
-      score += LETTER_POOL[word[i]][1];
+      score += letterBank[word[i]][1];
     }
     return score;
 };
