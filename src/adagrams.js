@@ -47,14 +47,33 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
-  //check that letters in input are IN lettersInHand
+  // this code is passing 2 of 3 wave 2 tests
+  // for (let i = 0; i < input.length; i++) {
+  //   //letter = input[i]
+  //   if (lettersInHand.includes(input[i]) === false) {
+  //     console.log(input[i]);
+  //     return false;
+  //   }
+  // }
+  // return true;
+
+  let filteredHand = lettersInHand;
 
   for (let i = 0; i < input.length; i++) {
+    console.log(input[i]);
+    //console.log(i);
+
+    //result lettersInHand.forEach(function);
+
     //letter = input[i]
-    if (lettersInHand.includes(input[i]) === false) {
-      console.log(input[i]);
+    if (filteredHand.includes(input[i]) === false) {
+      //console.log(input[i]);
       return false;
+    } else if (filteredHand.includes(input[i]) === true) {
+      console.log(i);
+      console.log("this letter is in word");
+      delete filteredHand[i];
+      console.log(filteredHand);
     }
   }
   return true;
