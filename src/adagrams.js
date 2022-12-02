@@ -1,4 +1,4 @@
-const letter_obj = {
+const letterObj = {
   A: { frequency: 9, score: 1 },
   B: { frequency: 2, score: 3 },
   C: { frequency: 2, score: 3 },
@@ -28,7 +28,21 @@ const letter_obj = {
 };
 
 export const drawLetters = () => {
-  // Implement this method for wave 1
+  // creates a letter pool based on the frequency of that letter in letterObj
+  let letterPool;
+  for (const letter in letterObj) {
+    letterPool += letter.repeat(letterObj[letter].frequency)
+  };
+  letterPool = Array.from(letterPool);
+
+  // draws 10 letters from letterPool based on a random index and removes drawn letters from the pool.
+  let letterDraw = [];
+  for (let i=1; i <= 10; i++) {
+    const randomIndex = Math.floor(letterPool.length * Math.random());
+    letterDraw += letterPool[randomIndex];
+    letterPool.splice(randomIndex, 1)
+  };
+  return Array.from(letterDraw)
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
