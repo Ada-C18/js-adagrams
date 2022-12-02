@@ -53,7 +53,18 @@ let number = getRandomInt(listNum)
 
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  let flag = true;
+  for(let letter of input){
+    if(lettersInHand.includes(letter) === false){
+    flag = false;
+    break
+
+}
+    else {
+      delete lettersInHand[lettersInHand.indexOf(letter)]
+    }
+}
+  return flag
 };
 
 export const scoreWord = (word) => {
