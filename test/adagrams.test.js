@@ -171,14 +171,14 @@ describe("Adagrams", () => {
         expect(highestScoreFrom(words.reverse())).toEqual(correct);
       });
 
-      //     it("selects the word with fewer letters when neither are 10 letters", () => {
-      //       const words = ["MMMM", "WWW"];
-      //       const correct = { word: "WWW", score: scoreWord("WWW") };
-      //       expectTie(words);
+      it("selects the word with fewer letters when neither are 10 letters", () => {
+        const words = ["MMMM", "WWW"];
+        const correct = { word: "WWW", score: scoreWord("WWW") };
+        expectTie(words);
 
-      //       expect(highestScoreFrom(words)).toEqual(correct);
-      //       expect(highestScoreFrom(words.reverse())).toEqual(correct);
-      //     });
+        expect(highestScoreFrom(words)).toEqual(correct);
+        expect(highestScoreFrom(words.reverse())).toEqual(correct);
+      });
 
       //     it("selects the first word when both have same length", () => {
       //       const words = ["AAAAAAAAAA", "EEEEEEEEEE"];
