@@ -57,17 +57,23 @@ const letterValue = {
 
 export const drawLetters = () => {
   // Implement this method for wave 1
-  const letters_drawn = {};
-  const letters = []
+  let letterHand = 0;
+  const lettersDrawn = {};
+  const letters = [];
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  for (let i=0; i < 10; i++){
+  while (letterHand < 10){
     let letter = alphabet.charAt(Math.floor(Math.random() * alphabet.length))
-    if (!letters_drawn[letter]){
-      letters_drawn[letter] = 1
+    if (!lettersDrawn[letter]){
+      lettersDrawn[letter] = 1
+      letterHand += 1
       letters.push(letter)
-    } else if (letters_drawn[letter] < letterQuantity[letter]){
-      letters_drawn[letter] += 1
+    } else if (lettersDrawn[letter] < letterQuantity[letter]){
+      lettersDrawn[letter] += 1
+      letterHand += 1
       letters.push(letter)
+
+    } else {
+      continue;
     }
   }
   return letters;
@@ -109,4 +115,29 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+  const wordScores = {}
+  const bestWord = {}
+  for (const word of words){
+    let score = scoreWord(word)
+    wordScores[word] = score
+  }
+  for (const [key, value] of Object.entries(wordScores)){
+    if (Object.keys(bestWord).length === 0){
+      bestWord["word"] = key;
+      bestWord["score"] = value;
+    } else if (bestWord["score"] < value){
+      bestWord["word"] = key;
+      bestWord["score"] = value;
+    } else if (bestWord["score"] === value){
+      if (bestWord["word"].length == key.length || bestWord["word"].length === 10){
+        continue;
+      } else if (bestWord["word"].length > key.length || key.length === 10){
+        bestWord["word"] = key;
+        bestWord["score"] = value;
+      } else if (bestWord["word"].length < key.length){
+        continue;
+      }
+    }
+  }
+  return bestWord;
 };
