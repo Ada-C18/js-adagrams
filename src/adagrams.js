@@ -147,20 +147,20 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   return true;
 };
 
-// handQuantity = {}
-
-// // populates handQuantity with the frequency of drawn letters within the hand
-// for (let i = 0; i < lettersInHand.length; i++){
-//   if (lettersInHand[i] in handQuantity){
-//     lettersInHand[i] += 1
-//   }
-//   else {
-//     lettersInHand[i] = 1
-//   }
-// }
-
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
+  let score = 0;
+  let upperWord = word.toUpperCase();
+
+  for (let letter of upperWord) {
+    if (letter in scoreChart) {
+      score += scoreChart[letter];
+    }
+  }
+
+  if (word.length >= 7) {
+    score += 8;
+  }
+  return score
 };
 
 export const highestScoreFrom = (words) => {
