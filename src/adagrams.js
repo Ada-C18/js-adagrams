@@ -117,5 +117,41 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  if (!words || words.length === 0) {
+    return null;
+  }
+
+  // Calculate the scores of all words
+  const scores = words.map((word) => ({
+    word,
+    score: scoreWord(word),
+  }));
+
+  // Sort the words by score, with the highest score first
+  scores.sort((a, b) => b.score - a.score);
+
+  // Find the first word with the highest score
+  const [highestScore] = scores.filter(
+    (s) => s.score === scores[0].score
+  );
+
+  // If there are multiple words with the same high score, find the one with 10 letters
+  // If there are no words with 10 letters, find the one with the fewest letters
+  // If all words have the same number of letters, return the first one
+  const tieBreakers = [
+    (s) => s.word.length === 10,
+    (s) => s.word.length < highestScore.word.length,
+    (s) => true,
+  ];
+
+  for (const tieBreaker of tieBreakers) {
+    const winner = scores.find(tieBreaker);
+    if (winner) {
+      return winner;
+    }
+  }
+
+  // If no word was found, return null
+  return null;
 };
+
