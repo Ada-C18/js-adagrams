@@ -1,7 +1,3 @@
-// import { _ } from "core-js";
-// import { keys } from "core-js/core/array";
-// import { random } from "core-js/core/number";
-
 const LETTERPOOL = {
   A: 9,
   B: 2,
@@ -39,10 +35,10 @@ export const createLetterPool = () => {
   return letterPoolList;
 };
 
-export const findRandomLetter = (allLetters) => {
-  let randomIndex = Math.floor(Math.random() * allLetters.length);
-  return allLetters[randomIndex];
-};
+// export const findRandomLetter = (allLetters) => {
+//   let randomIndex = Math.floor(Math.random() * allLetters.length);
+//   return allLetters[randomIndex];
+// };
 
 export const drawLetters = () => {
   let allLetters = createLetterPool(LETTERPOOL);
@@ -51,13 +47,38 @@ export const drawLetters = () => {
     let randomIndex = Math.floor(Math.random() * allLetters.length);
     hand.push(allLetters[randomIndex]);
     allLetters.splice(randomIndex, 1);
+    //consider adding map here
   }
   return hand;
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
+  let lettersInHandCopy = [...lettersInHand];
+
+  for (let i = 0; i < input.length; i++) {
+    if (lettersInHandCopy.includes(input[i])) {
+      lettersInHandCopy.splice(input[i], 1);
+    } else {
+      return false;
+    }
+  }
+  return true;
 };
+
+// for (let letter in input.toUpperCase()) {
+//   if (letter in lettersInHand === false) {
+//     return false;
+//   }
+//   if (letter in allLetters === false) {
+//     return false;
+//   }
+//   if (letter in allLetters) {
+//     let letterIndex = allLetters.indexOf(letter);
+//     allLetters.splice(letterIndex, 1);
+//   }
+// }
+// return true;
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
