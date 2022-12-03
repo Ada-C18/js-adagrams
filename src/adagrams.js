@@ -153,6 +153,35 @@ export const scoreWord = (word) => {
   return wordTotal;
 };
 
+const tenLetterTieBreaker = (a, b) => {
+  /* the comparator function for sort needs to 
+  return negative, positive, or zero. Assign 
+  a fake score to a and b, if either or both are 
+  10 characters in length. 
+  
+  Returns zero if:
+  1. Both words are < 10 characters.
+  2. Both words are 10 characters. */
+  const aScore = a.length == 10 ? 100 : 0;
+  const bScore = b.length == 10 ? 100 : 0;
+
+  // bump the higher value to the front of
+  // the list.
+  return bScore - aScore;
+};
+
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  const sortedWords = words.sort((a, b) => {
+    return (
+      // try to sort by score first.
+      scoreWord(b) - scoreWord(a) ||
+      // if scores are equal check the tenLetterTieBreaker.
+      tenLetterTieBreaker(a, b) ||
+      // if there's no 10 letter tiebreaker, favor the shortest.
+      a.length - b.length
+      // and if everything is equal, sort should be stable
+      // (I'm grateful for that.)
+    );
+  });
+  return { word: sortedWords[0], score: scoreWord(sortedWords[0]) };
 };
