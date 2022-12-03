@@ -1,3 +1,5 @@
+import { toPrimitive } from "core-js/fn/symbol";
+
 const LETTERPOOL = [
   'A','A','A','A','A','A','A','A','A',
   'B','B',
@@ -99,6 +101,19 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
-
-
+  let high_score = 0;
+  let top_word = "";
+  for (let i=0; i < words.length; ++i) {
+    if (scoreWord(words[i]) === high_score) {
+      if (words[i].length === 10) {
+        top_word = words[i];
+      } else if (words[i].length < top_word.length & top_word.length !== 10) {
+        top_word = words[i]
+      } //conditional
+    } else if (scoreWord(words[i]) > high_score) {
+      high_score = scoreWord(words[i]);
+      top_word = words[i];
+    } //conditional
+  } //loop
+  return {word: top_word, score: high_score}
 };
