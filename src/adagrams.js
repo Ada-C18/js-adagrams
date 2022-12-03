@@ -110,6 +110,17 @@ export const scoreWord = (word) => {
   }
   return score;
 };
+// pseudocode for wave 4:
+// Call the above scoreWord function and calculate score of each word within the word array and
+// store it in a dictionary object named wordScoreDict with key as the word and value as score of each word and
+// in the same loop keep a track of the maxscore
+// initialize another resultant dictionary winningWord which will return the winning word and score
+// Loop through all keys in wordScoreDict dictionary object and check if any value matches with
+// maxvalue. If it does match, checjk if the length of that word is equal to 10.
+// if it equals 10, then return it and break the loop
+// also check minimum word length side by side in each key value and at the end, return the word
+// which has min word length and its score in result dictionary object.
+
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
   let wordScoreDict = {};
@@ -133,7 +144,6 @@ export const highestScoreFrom = (words) => {
       }
       if (key.length < minWordLength) {
         minWordLength = key.length;
-        console.log(minWordLength);
         winningWord = { word: key, score: sum };
       }
     }
