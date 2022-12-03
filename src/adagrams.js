@@ -131,6 +131,7 @@ export const highestScoreFrom = (words) => {
     if (score > maxScore) {
       maxScore = score;
     }
+    // maxScore = Math.max(maxScore, score);
   }
   let winningWord = {};
   let minWordLength = 11;
