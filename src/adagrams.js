@@ -125,6 +125,7 @@ export const scoreWord = (word) => {
 
 	// handle empty input
 	if (word.length === 0) {
+	// if (word === null) {
 		console.log(points);
 		return points;
 	}
