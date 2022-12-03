@@ -1,4 +1,4 @@
-export const letters = {
+const letters = {
     A: 9,
     B: 2,
     C: 2,
@@ -27,7 +27,7 @@ export const letters = {
     Z: 1,
   };
 
-export const letterDict = {
+const letterDict = {
     D:2,
     G:2,
     B:3,
@@ -55,6 +55,11 @@ export const letterDict = {
     S:1,
     T:1
 };
+
+module.exports = {letters, letterDict}
+// export default {letters, letterDict}
+
+// both export statements work, I want to keep both for reference the bottom needs export before consts
 
 /* 
 for (const letter of word) {
@@ -84,5 +89,3 @@ for (const letter of word) {
 }
 */
 
-// module.exports = {letters, letterDict}
-export default {letters, letterDict}
