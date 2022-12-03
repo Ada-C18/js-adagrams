@@ -28,12 +28,11 @@ const letterPool = {
 };
 
 // WAVE 1
+// Implement this method for wave 1
 // TODO
 // - later: refactor using closure -> change hand length
+// const drawLetters = () => {
 export const drawLetters = () => {
-	// Implement this method for wave 1
-	// const drawLetters = () => {
-
 	const upperLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	let hand = [];
 	let handCount = {};
@@ -59,18 +58,34 @@ export const drawLetters = () => {
 // console.log(drawLetters());
 
 // WAVE 2
-// export const usesAvailableLetters = (input, lettersInHand) => {
-const usesAvailableLetters = (input, lettersInHand) => {
-	// Implement this method for wave 2
-	// const lettersInHand = drawLetters();
-	// for (let letter of input) {
-	// 	if (letter not in lettersInHand) {
-	// 		return false;
-	// 	}
-	// 	return true;
-	// }
-	// Returns true if every letter in the input word is available (in the right quantities) in the lettersInHand
-	// Returns false if not; if there is a letter in input that is not present in the lettersInHand or has too much of compared to the lettersInHand
+// Implement this method for wave 2
+// const usesAvailableLetters = (input, lettersInHand) => {
+export const usesAvailableLetters = (input, lettersInHand) => {
+	// input: word str, array of letter strings in hand
+	// output: true if all input chars in lettersInHand and <= letter count, else false
+
+	const handDict = {};
+	for (let letter of lettersInHand) {
+		if (letter in handDict) {
+			handDict[letter] += 1;
+		} else {
+			handDict[letter] = 1;
+		}
+	}
+
+	let upperCaseInput = input.toUpperCase();
+
+	for (let letter of upperCaseInput) {
+		// if inputDict doesn't contain the letter default to 0
+		const currentCount = handDict[letter] || 0; 
+		if (currentCount === 0) {
+			return false;
+		} else {
+			handDict[letter] = currentCount - 1;
+		}
+	}
+
+	return true;
 };
 
 // WAVE 3

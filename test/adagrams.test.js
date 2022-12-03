@@ -74,7 +74,7 @@ describe("Adagrams", () => {
 	// WAVE 2
 	// remove .skip later
 	// it.skip
-	describe.skip("usesAvailableLetters", () => {
+	describe("usesAvailableLetters", () => {
 		it("returns true if the submitted letters are valid against the drawn letters", () => {
 			const drawn = ["D", "O", "G", "X", "X", "X", "X", "X", "X", "X"];
 			const word = "DOG";
@@ -99,7 +99,6 @@ describe("Adagrams", () => {
 			expect(isValid).toBe(false);
 		});
 	});
-
 
 	// WAVE 3
 	describe.skip("scoreWord", () => {
@@ -138,7 +137,6 @@ describe("Adagrams", () => {
 			});
 		});
 	});
-
 
 	// WAVE 4
 	describe.skip("highestScoreFrom", () => {
