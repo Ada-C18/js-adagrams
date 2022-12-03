@@ -1,5 +1,24 @@
 export const drawLetters = () => {
   // Implement this method for wave 1
+  //1. Convert LETTERPOOL INTO LETTERARRAY
+  const LETTERARRAY = [];
+  for (const key in LETTERPOOL) {
+    for (let i = 0; i < LETTERPOOL[key]; i++) {
+      LETTERARRAY.push(key);
+    }
+  }
+  //2. Draw 10 letters and output them in an array
+  let deepCopyLETTERPOOL = JSON.parse(JSON.stringify(LETTERPOOL));
+  let outputArray = [];
+  while (outputArray.length < 10) {
+    const drawnLetter =
+      LETTERARRAY[Math.floor(Math.random() * LETTERARRAY.length)];
+    if (deepCopyLETTERPOOL[drawnLetter] > 0) {
+      outputArray.push(drawnLetter);
+      deepCopyLETTERPOOL[drawnLetter] -= 1;
+    }
+  }
+  return outputArray;
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
@@ -12,4 +31,33 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+};
+
+const LETTERPOOL = {
+  A: 9,
+  B: 2,
+  C: 2,
+  D: 4,
+  E: 12,
+  F: 2,
+  G: 3,
+  H: 2,
+  I: 9,
+  J: 1,
+  K: 1,
+  L: 4,
+  M: 2,
+  N: 6,
+  O: 8,
+  P: 2,
+  Q: 1,
+  R: 6,
+  S: 4,
+  T: 6,
+  U: 4,
+  V: 2,
+  W: 2,
+  X: 1,
+  Y: 2,
+  Z: 1,
 };
