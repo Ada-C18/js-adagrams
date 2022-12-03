@@ -1,4 +1,4 @@
-const letters = {
+export const letters = {
     A: 9,
     B: 2,
     C: 2,
@@ -27,7 +27,7 @@ const letters = {
     Z: 1,
   };
 
-const letterDict = {
+export const letterDict = {
     D:2,
     G:2,
     B:3,
@@ -84,4 +84,5 @@ for (const letter of word) {
 }
 */
 
-module.exports = {letters, letterDict}
+// module.exports = {letters, letterDict}
+export default {letters, letterDict}
