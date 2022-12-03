@@ -27,6 +27,35 @@ const letterPool = {
 	Z: 1,
 };
 
+const letterPoints = {
+	A: 1,
+	B: 3,
+	C: 3,
+	D: 2,
+	E: 1,
+	F: 4,
+	G: 2,
+	H: 4,
+	I: 1,
+	J: 8,
+	K: 5,
+	L: 1,
+	M: 3,
+	N: 1,
+	O: 1,
+	P: 3,
+	Q: 10,
+	R: 1,
+	S: 1,
+	T: 1,
+	U: 1,
+	V: 4,
+	W: 4,
+	X: 8,
+	Y: 4,
+	Z: 10,
+};
+
 // WAVE 1
 // Implement this method for wave 1
 // TODO
@@ -77,7 +106,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
 	for (let letter of upperCaseInput) {
 		// if inputDict doesn't contain the letter default to 0
-		const currentCount = handDict[letter] || 0; 
+		const currentCount = handDict[letter] || 0;
 		if (currentCount === 0) {
 			return false;
 		} else {
@@ -89,13 +118,35 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 };
 
 // WAVE 3
-// export const scoreWord = (word) => {
-const scoreWord = (word) => {
-	// Implement this method for wave 3
+// Implement this method for wave 3
+export const scoreWord = (word) => {
+	// const scoreWord = (word) => {
+	let points = 0;
+
+	// handle empty input
+	if (word.length === 0) {
+		console.log(points);
+		return points;
+	}
+
+	for (let letter of word.toUpperCase()) {
+		// console.log(`letter: ${letter}`);
+		// console.log(`letter pt: ${letterPoints[letter]}`);
+		if (letter in letterPoints) {
+			points += letterPoints[letter];
+		}
+		console.log(points);
+	}
+
+	if (word.length > 6 && word.length < 11) {
+		points += 8;
+	}
+
+	return points;
 };
 
 // WAVE 4
-// export const highestScoreFrom = (words) => {
-const highestScoreFrom = (words) => {
+export const highestScoreFrom = (words) => {
+	// const highestScoreFrom = (words) => {
 	// Implement this method for wave 4
 };

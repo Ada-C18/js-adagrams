@@ -101,7 +101,7 @@ describe("Adagrams", () => {
 	});
 
 	// WAVE 3
-	describe.skip("scoreWord", () => {
+	describe("scoreWord", () => {
 		const expectScores = (wordScores) => {
 			Object.entries(wordScores).forEach(([word, score]) => {
 				expect(scoreWord(word)).toBe(score);
