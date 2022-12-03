@@ -43,7 +43,7 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  const letters = input.toUpperCase().split("");
+  let letters = input.toUpperCase();
   for (const letter of letters) {
     if (!lettersInHand.includes(letter)) {
       return false;
@@ -131,21 +131,20 @@ export const highestScoreFrom = (words) => {
   scores.sort((a, b) => b.score - a.score);
 
   // Find the first word with the highest score
-  const [highestScore] = scores.filter(
-    (s) => s.score === scores[0].score
-  );
-
+  const highestScores = scores.filter((s) => s.score === scores[0].score);
+  const [highestScore] = highestScores;
+  
   // If there are multiple words with the same high score, find the one with 10 letters
   // If there are no words with 10 letters, find the one with the fewest letters
   // If all words have the same number of letters, return the first one
   const tieBreakers = [
     (s) => s.word.length === 10,
-    (s) => s.word.length < highestScore.word.length,
+    (s) => s.word.length < highestScores[0].word.length,
     (s) => true,
   ];
-
+  
   for (const tieBreaker of tieBreakers) {
-    const winner = scores.find(tieBreaker);
+    const winner = highestScores.find(tieBreaker);
     if (winner) {
       return winner;
     }
@@ -154,4 +153,3 @@ export const highestScoreFrom = (words) => {
   // If no word was found, return null
   return null;
 };
-
