@@ -1,4 +1,3 @@
-
 const LETTER_POOL = {
   A: 9, 
   B: 2, 
@@ -28,33 +27,95 @@ const LETTER_POOL = {
   Z: 1
 };
 
-export const drawLetters = () => {
-  let copy = {};
-  let key;
-  for (key in LETTER_POOL) {
-    copy[key] = LETTER_POOL[key];
-  }
-  const letterBank = [];
-  while (letterBank.length < 10) {
-    const letterList = Object.keys(copy);
-    const randomIndex = Math.floor(Math.random() * letterList.length);
-    let letter = letterList[randomIndex];
+const SCORE_CHART = {
+  A: 1, 
+  B: 3, 
+  C: 3, 
+  D: 2, 
+  E: 1, 
+  F: 4, 
+  G: 2, 
+  H: 4, 
+  I: 1, 
+  J: 8, 
+  K: 5, 
+  L: 1, 
+  M: 3, 
+  N: 1, 
+  O: 1, 
+  P: 3, 
+  Q: 10, 
+  R: 1, 
+  S: 1, 
+  T: 1, 
+  U: 1, 
+  V: 4, 
+  W: 4, 
+  X: 8, 
+  Y: 4, 
+  Z: 10
+}
 
-    if (copy[letter] > 0) {
-      letterBank.push(letter);
-      copy[letter] -= 1;
-    } 
+// export const drawLetters = () => {
+//   let copy = {};
+//   let key;
+//   for (key in LETTER_POOL) {
+//     copy[key] = LETTER_POOL[key];
+//   }
+//   const letterBank = [];
+//   while (letterBank.length < 10) {
+//     const letterList = Object.keys(copy);
+//     const randomIndex = Math.floor(Math.random() * letterList.length);
+//     let letter = letterList[randomIndex];
+
+//     if (copy[letter] > 0) {
+//       letterBank.push(letter);
+//       copy[letter] -= 1;
+//     } 
+//   } 
+//   return letterBank;
+// };
+
+export const drawLetters = () => {
+  const letterBank = []
+  const keys = Object.keys(LETTER_POOL);
+  while (letterBank.length < 10) {
+    const randomLetter = keys[Math.floor(Math.random() * keys.length)];
+    if (letterBank.filter(x => x === randomLetter).length < LETTER_POOL[randomLetter]) {
+    letterBank.push(randomLetter);
+    }
   } 
-  return letterBank;
+  return letterBank; 
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
-};
+  const inputUpperCase = input.toUpperCase();
+  const inputList = inputUpperCase.split("");
+  for (let i = 0; i < inputList.length; i++) {
+    let char = inputList[i];
+    if (!lettersInHand.includes(char)) {
+      return false;
+    } else if (inputList.filter(x => x === char).length > lettersInHand.filter(x => x === char).length) {
+      return false;
+    } 
+  }
+  return true;
+}
 
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
+  const wordUpperCase = word.toUpperCase();
+  const wordList = wordUpperCase.split("");
+  let score = 0;
+  if (wordList.length >= 7) {
+    score += 8;
+  }
+  for (let i = 0; i < wordList.length; i++) {
+    score += SCORE_CHART[wordList[i]]
+  }
+  return score;
 };
+
+
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
