@@ -62,6 +62,23 @@ const createLetterBag = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
+  /* 
+  Checks that word includes only letters available in hand
+  returns boolean
+  */
+  const handDict = {};
+  let inputCaptified = input.toUpperCase();
+
+  // citation - dict counter: https://stackoverflow.com/questions/48435191/how-do-i-build-an-object-counting-occurrences-in-an-array-in-javascript
+  for (let i = 0; i < lettersInHand.length; i++) {
+    handDict[lettersInHand[i]] = (handDict[lettersInHand[i]] || 0) + 1;
+  }
+
+  for (const letter of inputCaptified) {
+    if (!lettersInHand.includes(letter) || handDict[letter] === 0) return false;
+    handDict[letter] = handDict[letter] - 1;
+  }
+  return true;
 };
 
 export const scoreWord = (word) => {

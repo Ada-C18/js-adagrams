@@ -96,7 +96,7 @@ describe("Adagrams", () => {
     });
   });
 
-  describe("scoreWord", () => {
+  describe.skip("scoreWord", () => {
     const expectScores = (wordScores) => {
       Object.entries(wordScores).forEach(([word, score]) => {
         expect(scoreWord(word)).toBe(score);
