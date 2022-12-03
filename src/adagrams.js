@@ -44,7 +44,6 @@ export const drawLetters = () => {
   }
   return letterBank;
 };
-drawLetters();
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   const drawnLetters = lettersInHand.slice();
@@ -57,7 +56,6 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   }
   return true;
 };
-usesAvailableLetters();
 
 
 // export const scoreWord = (word) => {
