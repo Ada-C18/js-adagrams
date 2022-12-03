@@ -125,8 +125,8 @@ export const scoreWord = (word) => {
 
 	// handle empty input
 	if (word.length === 0) {
-	// if (word === null) {
-		console.log(points);
+		// if (word === null) {
+		// console.log(points);
 		return points;
 	}
 
@@ -136,7 +136,7 @@ export const scoreWord = (word) => {
 		if (letter in letterPoints) {
 			points += letterPoints[letter];
 		}
-		console.log(points);
+		// console.log(points);
 	}
 
 	if (word.length > 6 && word.length < 11) {
@@ -147,7 +147,76 @@ export const scoreWord = (word) => {
 };
 
 // WAVE 4
+// Implement this method for wave 4
+
 export const highestScoreFrom = (words) => {
 	// const highestScoreFrom = (words) => {
-	// Implement this method for wave 4
+	// input: words array
+	// output: highest score dict { word: 'str', score: points }
+
+	// 1. calculate scores for each word
+	let allWordScores = {};
+	for (let word of words) {
+		allWordScores[word] = scoreWord(word);
+	}
+	console.log("all scores dict: ", allWordScores);
+
+	// 2. find highest word, score pair in allWordScores dict
+	let highestScore = 0;
+	// let highestScoredWords = []; // maybe another data type
+	let highestScoredWord = "";
+	const highestScoreDict = {};
+
+	console.log("score dict before loop: ", highestScoreDict);
+	console.log("length of all scores: ", Object.keys(allWordScores).length);
+
+	// 3. check for ties
+	// -- conditions: word length (shortest, 10 or same len + score)
+	// tie rules:
+	// -- fewest letter wins, unless
+	// -- 10 letter word wins
+	// -- same score and same length, 1st word in words array input
+	for (let currentWord in allWordScores) {
+		let currentScore = allWordScores[currentWord];
+		console.log(`current word: ${currentWord}`);
+		console.log(`current score: ${currentScore}`);
+
+		if (currentScore > highestScore) {
+			highestScoreDict["score"] = currentScore;
+			highestScoreDict["word"] = currentWord;
+			// highestScoredWords = [currentWord];
+			console.log("score dict: ", highestScoreDict);
+		} else if (currentScore === highestScore) {
+			// ties
+			if (highestScoredWord.length === currentWord.length) {
+				// condition: same len + score
+				// return first one in the list
+				highestScoreDict["word"] = currentWord;
+				highestScoreDict["score"] = currentScore;
+				// early return?
+				// return {highestScoreDict[word] = currentScore};
+			} else if (currentWord.length === 10) {
+				// condition: len=10
+				highestScoreDict["word"] = currentWord;
+				highestScoreDict["score"] = currentScore;
+			} else if (currentWord.length < highestScoredWord.length) {
+				// condition: shortest of 2, current shorter than highest
+				highestScoreDict["word"] = currentWord;
+				highestScoreDict["score"] = currentScore;
+			} else {
+				// highestScoreWord.length < currentWord.length
+				highestScoreDict["word"] = highestScoredWord;
+				highestScoreDict["score"] = highestScore;
+			}
+			console.log("score dict: ", highestScoreDict);
+		}
+		// console.log('score dict: ', highestScoreDict)
+	}
+	console.log("score dict after loop: ", highestScoreDict);
+	return highestScoreDict;
 };
+
+// highestScoredWords.append(word)
+// Instead of appending highest score words into a list,
+// it might make sense to put all the if statements inside the for loop
+// to keep track of the best highest score word at all times.
