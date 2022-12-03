@@ -1,23 +1,12 @@
-function range(start, stop, step) {
-  if (typeof stop == 'undefined') {
-      // one param defined
-      stop = start;
-      start = 0;
-  }
+// helper function to call for range for letterBank
+function range(stop) {
+  let start = 0;
+  let step = 1;
 
-  if (typeof step == 'undefined') {
-      step = 1;
+  let result = [];
+  for (let i = start; step > 0 ? i < stop : 1 > stop; i += step) {
+    result.push(i);
   }
-
-  if ((step > 0 && start >= stop) || (step < 0 && start <= stop)) {
-      return [];
-  }
-
-  var result = [];
-  for (var i = start; step > 0 ? i < stop : i > stop; i += step) {
-      result.push(i);
-  }
-
   return result;
 };
 
@@ -75,7 +64,46 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 };
 
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
+  const scoreDict = {
+    'A': 1, 
+    'B': 3, 
+    'C': 3, 
+    'D': 2, 
+    'E': 1, 
+    'F': 4, 
+    'G': 2, 
+    'H': 4, 
+    'I': 1, 
+    'J': 8, 
+    'K': 5, 
+    'L': 1, 
+    'M': 3, 
+    'N': 1, 
+    'O': 1, 
+    'P': 3, 
+    'Q': 10, 
+    'R': 1, 
+    'S': 1, 
+    'T': 1, 
+    'U': 1, 
+    'V': 4, 
+    'W': 4, 
+    'X': 8, 
+    'Y': 4, 
+    'Z': 10
+  };
+
+  const wordUpper = word.toUpperCase();
+  const wordList = wordUpper.split('');
+  let score = 0;
+
+  wordList.forEach((letter) => {
+    score += scoreDict[letter];
+  })
+
+  if (word.length >= 7 && word.length <= 10) {
+    score += 8;
+  }
 };
 
 export const highestScoreFrom = (words) => {
