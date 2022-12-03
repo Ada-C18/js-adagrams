@@ -149,7 +149,7 @@ const LETTER_POOL = {
       const words = ["X", "XX", "XXX", "XXXX"];
       const correct = { word: "XXXX", score: Adagrams.scoreWord("XXXX") };
 
-      expect(Adagrams.highestScoreFrom(words)).toEqual(correct);
+    expect(Adagrams.highestScoreFrom(words)).toEqual(correct);
     });
 
     it("accurately finds best scoring word even if not sorted", () => {
