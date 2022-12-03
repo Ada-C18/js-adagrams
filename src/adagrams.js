@@ -29,22 +29,36 @@ const LETTER_POOL = {
 
 export const drawLetters = () => {
   // Implement this method for wave 1
+  /*
+  Creates user hand
+  */
+  const letterBag = createLetterBag();
+  const userHand = [];
+
+  while (userHand.length < 10) {
+    const randomIndex = Math.floor(Math.random() * letterBag.length);
+    userHand.push(letterBag[randomIndex]);
+    letterBag.splice(randomIndex, 1);
+  }
+  return userHand;
 };
 
-const generate_letter_list = () => {
+const createLetterBag = () => {
   /* 
-  Helper Function - generates an array that contains an instance of every letter in 
+  Generates an array that contains an instance of every letter in 
   the LETTER_POOL object, incl duplicates
   */
-  const letter_arr = [];
+  const letterBag = [];
 
   for (const letter in LETTER_POOL) {
-    for (let i = 0; i <= LETTER_POOL[letter]; i++) {
-      letter_arr.push(letter);
+    for (let i = 0; i < LETTER_POOL[letter]; i++) {
+      letterBag.push(letter);
     }
   }
-  return letter_arr;
+  return letterBag;
 };
+
+// const generate_letter_list = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
