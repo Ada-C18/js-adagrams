@@ -54,6 +54,9 @@ const letterPoints = {
   Q: 10,
   Z: 10,
 };
+//===========================================
+//                  WAVE 1
+//===========================================
 
 export const drawLetters = () => {
   // Implement this method for wave 1
@@ -71,6 +74,9 @@ export const drawLetters = () => {
   }
   return handList;
 };
+//===========================================
+//                  WAVE 2
+//===========================================
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
@@ -87,6 +93,9 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
   return true;
 };
+//===========================================
+//                  WAVE 3
+//===========================================
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
@@ -100,7 +109,28 @@ export const scoreWord = (word) => {
   }
   return score;
 };
+//===========================================
+//                  WAVE 4
+//===========================================
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+  let highestScore = 0;
+  let highestWord = "";
+
+  for (let word of words) {
+    if (scoreWord(word) === highestScore) {
+      if (highestWord.length === 10) {
+        continue;
+      } else if (word.length === 10 || word.length < highestWord.length) {
+        highestWord = word;
+      }
+    } else {
+      if (scoreWord(word) > highestScore) {
+        highestScore = scoreWord(word);
+        highestWord = word;
+      }
+    }
+  }
+  return { word: highestWord, score: highestScore };
 };
