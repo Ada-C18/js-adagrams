@@ -104,6 +104,8 @@ export const scoreWord = (word) => {
   if (word.length >= 7 && word.length <= 10) {
     score += 8;
   }
+
+  return score
 };
 
 export const highestScoreFrom = (words) => {
