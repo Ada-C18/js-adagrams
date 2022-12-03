@@ -22,7 +22,7 @@ const uppercaseArray = (str) => {
 
 //Wave 1
 export const drawLetters = () => {
-  const bagOfLetters = {
+  const lettersObject = {
     A: 9,
     B: 2,
     C: 2,
@@ -50,17 +50,20 @@ export const drawLetters = () => {
     Y: 2,
     Z: 1,
   };
-  const arrayOfLetters = [];
-  Object.keys(bagOfLetters).forEach((letter) => {
-    for (let i = 0; i < bagOfLetters[letter]; i++) {
-      arrayOfLetters.push(letter);
+  //create bag of letters
+  const bagOfLetters = [];
+  Object.keys(lettersObject).forEach((letter) => {
+    for (let i = 0; i < lettersObject[letter]; i++) {
+      bagOfLetters.push(letter);
     }
   });
+
+  //draw a hand of 10 random letters
   const hand = [];
   while (hand.length !== 10) {
-    let letterIndex = randomInt(arrayOfLetters.length);
-    hand.push(arrayOfLetters[letterIndex]);
-    removeLetter(arrayOfLetters, arrayOfLetters[letterIndex]);
+    let letterIndex = randomInt(bagOfLetters.length);
+    hand.push(bagOfLetters[letterIndex]);
+    removeLetter(bagOfLetters, bagOfLetters[letterIndex]);
   }
   return hand;
 };
@@ -108,6 +111,35 @@ export const scoreWord = (word) => {
   return score;
 };
 
-// export const highestScoreFrom = (words) => {
-//   // Implement this method for wave 4
-// };
+//wave 4
+export const highestScoreFrom = (words) => {
+  let winningWord = { word: "", score: 0 };
+  words.forEach((word) => {
+    const wordScore = scoreWord(word);
+    if (wordScore > winningWord.score) {
+      winningWord.word = word;
+      winningWord.score = wordScore;
+    }
+    // tie breaking logic
+    if (wordScore === winningWord.score) {
+      if (word.length === 10 && winningWord.word.length !== 10) {
+        winningWord.word = word;
+        winningWord.score = wordScore;
+        return winningWord;
+      }
+      if (
+        word.length < winningWord.word.length &&
+        winningWord.word.length !== 10
+      ) {
+        winningWord.word = word;
+        winningWord.score = wordScore;
+        return winningWord;
+      }
+    }
+  });
+  return winningWord;
+};
+
+// const words = ["BBBBBB", "AAAAAAAAAA"];
+const words = ["MMMM", "WWW"];
+highestScoreFrom(words);
