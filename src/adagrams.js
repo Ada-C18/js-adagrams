@@ -112,8 +112,7 @@ export const scoreWord = (word) => {
     sumScore = 0;
   } else if (upperWord.length >= 7 && upperWord.length <= 10) {
     sumScore += 8;
-  } 
-  
+  }
 
   for (let char of upperWord) {
     if (char in scorePool) {
@@ -126,4 +125,21 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+  // words is array of word; return should be {word: name; score: num}
+  // loop thru each word to calculate score, save in scoreDict {score: [array of words]}
+  // find highest score / scores
+  // if highest score array length = 1, return as result;
+  // if highest score array length > 1, going into tie logic;
+
+  // tie logic: <loop thru highest score array>
+  // 1. check if there is word with 10 letters -> return immediately; 
+  // 2. fewer letter: mark fewer word name and length, and update along loop; -> return the first one of fewest;
+  // 3. index first: above logic should satisfied index;
+
+  for (let word in words) {
+
+  }
+
+
+
 };
