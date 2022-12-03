@@ -120,5 +120,13 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  /*
+  (0) input: words - array of given word
+  (1) get word(s) in dict with highest score, i.e. {word1: score1, word2: score2, ...}
+  (2) list up the multiple max scored words
+  (3-1) if (2) is single: return the tuple of max scored word   
+  (3-2) if (2) is multiple: return winner
+  (3-2-a) tie breaker: with fewest number of letters unless 10 letters 
+                       or, if words have same number, then return first occurrence
+  */
 };
