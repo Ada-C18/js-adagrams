@@ -101,6 +101,38 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+  // Returns a single object that represents the data of a winning word and its score.
+  // TieBreaking Rule 1: Prefer the word with the fewest letters unless one word has 10 letters.
+  // Rule 2. If the there are multiple words that are the same score and the same length, pick the first one in the supplied list.
+
+  // 1. Check each word in the words list and calculate its score. Keep track of highest score, highest scoring word and lowest_length.
+  let highestScore = scoreWord(words[0]);
+  let highestScoringWord = words[0];
+  let output_obj = {};
+
+  for (const word of words) {
+    let score = scoreWord(word);
+
+    if (score > highestScore) {
+      highestScore = score;
+      highestScoringWord = word;
+    }
+
+    if (score === highestScore) {
+      if (word.length === 10 && word.length > highestScoringWord.length) {
+        highestScoringWord = word;
+      } else if (
+        word.length < highestScoringWord.length &&
+        highestScoringWord.length < 10
+      ) {
+        highestScoringWord = word;
+      }
+    }
+  }
+
+  output_obj["score"] = highestScore;
+  output_obj["word"] = highestScoringWord;
+  return output_obj;
 };
 
 const LETTERPOOL = {
