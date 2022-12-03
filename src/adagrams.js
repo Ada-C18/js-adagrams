@@ -1,5 +1,7 @@
 // import { random } from "core-js/core/number";
 
+// import { MIN_SAFE_INTEGER } from "core-js/core/number";
+
 export const drawLetters = () => {
   const LETTER_POOL = {
     'A': 9, 
@@ -105,5 +107,50 @@ export const scoreWord = (word) => {
 
 //----------------------------------------------------------
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+ 
+  //Pseudocode:
+  // 1) Loop through and find the highest score of words in words array and store in max_score variable
+  // 2) loop through list again and if the word's score  is equal to max score, make a dict with word and score and put in highest score list
+  // 3) If there is only one word in highest score list, return the object
+  // 4) Return the first word in list that's length is 10
+  // 5) Find the minimum length word and return it
+
+
+    let maxScore = 0;
+    const highestScoreWords = [];
+
+    for (let word of words) {
+      let wordScore = scoreWord(word);
+      if (wordScore > maxScore){
+        maxScore = wordScore
+      }
+    }
+
+    for (let word of words) {
+      let wordScore = scoreWord(word);
+      if (maxScore === wordScore) {
+        highestScoreWords.push(word)
+      }
+    }
+
+    if (highestScoreWords.length == 1) {
+      return {'word': highestScoreWords[0], 'score': maxScore};
+      }
+  
+    for (let word of highestScoreWords){
+    if (word.length == 10){
+      return {'word': word, 'score': maxScore};
+      }
+    }
+
+    let minLENGTH = highestScoreWords[0].length;
+    let minLengthWord = highestScoreWords[0]
+  
+    for (let word of highestScoreWords){
+      if (word.length < minLENGTH){
+       minLENGTH = word.length;
+       minLengthWord = word;
+        }
+      }
+    return {'word': minLengthWord, 'score': maxScore};
 };
