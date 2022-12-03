@@ -125,6 +125,7 @@ describe("Adagrams", () => {
         null: 0,
       })
       // throw "Complete test";
+      expectScores()
     });
 
     it("adds an extra 8 points if word is 7 or more characters long", () => {
