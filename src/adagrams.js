@@ -106,21 +106,23 @@ export const scoreWord = (word) => {
   // Implement this method for wave 3
   let sumScore = 0;
   let upperWord;
-  upperWord = word.toUpperCase();
 
-  if (upperWord.length === 0) {
-    sumScore = 0;
-  } else if (upperWord.length >= 7 && upperWord.length <= 10) {
-    sumScore += 8;
-  }
-
-  for (let char of upperWord) {
-    if (char in scorePool) {
-      sumScore += scorePool[char];
+  if (word !== undefined) {
+    upperWord = word.toUpperCase();
+    if (upperWord.length === 0) {
+      sumScore = 0;
+    } else if (upperWord.length >= 7 && upperWord.length <= 10) {
+      sumScore += 8;
     }
+
+    for (let char of upperWord) {
+      if (char in scorePool) {
+        sumScore += scorePool[char];
+      }
+    }
+    // console.log(sumScore);
+    return sumScore;
   }
-  console.log(sumScore);
-  return sumScore;
 };
 
 export const highestScoreFrom = (words) => {
@@ -135,11 +137,14 @@ export const highestScoreFrom = (words) => {
   // 1. check if there is word with 10 letters -> return immediately;
   // 2. fewer letter: mark fewer word name and length, and update along loop; -> return the fewest;
   // 3. index first: above logic should satisfied index;
+
   let scoreDict = {};
   let wordScore;
   let maxScore;
   let maxScoreArray;
-  let resDict = {"word": "", "score": 0};
+  let resDict = { word: "", score: 0 };
+  let fewerWordLength = 10;
+  let fewerWordName;
 
   for (let word of words) {
     wordScore = scoreWord(word);
@@ -148,20 +153,32 @@ export const highestScoreFrom = (words) => {
     }
     scoreDict[wordScore].push(word);
   }
-  
-  // console.log(Object.keys(scoreDict));
-  maxScore = Math.max(Object.keys(scoreDict));
+
+  maxScore = Math.max(...Object.keys(scoreDict));
+  //console.log(maxScore);
   maxScoreArray = scoreDict[maxScore];
-  if ((maxScoreArray.length = 1)) {
+  if (maxScoreArray.length === 1) {
     resDict["word"] = maxScoreArray.toString();
     resDict["score"] = maxScore;
     return resDict;
   } else {
-    
+    //tie logic thru maxScoreArray
+    for (let maxWord of maxScoreArray) {
+      if (maxWord.length === 10) {
+        resDict["word"] = maxWord;
+        resDict["score"] = maxScore;
+        return resDict;
+      } else {
+        //length != 10
+        if (maxWord.length < fewerWordLength) {
+          fewerWordLength = maxWord.length;
+          fewerWordName = maxWord;
+          resDict["word"] = fewerWordName;
+          resDict["score"] = scoreWord(fewerWordName);
+        }
+      }
+    }
+    //console.log(resDict);
+    return resDict;
   }
-
-  
-  // console.log(resDict);
-
-
 };
