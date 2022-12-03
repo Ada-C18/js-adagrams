@@ -132,14 +132,36 @@ export const highestScoreFrom = (words) => {
   // if highest score array length > 1, going into tie logic;
 
   // tie logic: <loop thru highest score array>
-  // 1. check if there is word with 10 letters -> return immediately; 
-  // 2. fewer letter: mark fewer word name and length, and update along loop; -> return the first one of fewest;
+  // 1. check if there is word with 10 letters -> return immediately;
+  // 2. fewer letter: mark fewer word name and length, and update along loop; -> return the fewest;
   // 3. index first: above logic should satisfied index;
+  let scoreDict = {};
+  let wordScore;
+  let maxScore;
+  let maxScoreArray;
+  let resDict = {"word": "", "score": 0};
 
-  for (let word in words) {
-
+  for (let word of words) {
+    wordScore = scoreWord(word);
+    if (!(wordScore in scoreDict)) {
+      scoreDict[wordScore] = [];
+    }
+    scoreDict[wordScore].push(word);
+  }
+  
+  // console.log(Object.keys(scoreDict));
+  maxScore = Math.max(Object.keys(scoreDict));
+  maxScoreArray = scoreDict[maxScore];
+  if ((maxScoreArray.length = 1)) {
+    resDict["word"] = maxScoreArray.toString();
+    resDict["score"] = maxScore;
+    return resDict;
+  } else {
+    
   }
 
+  
+  // console.log(resDict);
 
 
 };
