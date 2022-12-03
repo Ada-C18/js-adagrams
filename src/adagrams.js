@@ -1,5 +1,5 @@
-import _, { map } from 'underscore';
-import {letters, letterDict} from './CONSTANTS.js'
+import _ from 'underscore';
+import {letters, letterDict} from 'CONSTANTS.js'
 
 export class Adagrams {
 
