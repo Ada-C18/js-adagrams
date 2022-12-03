@@ -50,7 +50,23 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  /*
+  (1) read letter from word (in str) from user
+  (2) read letter_bank (in list) from the output of draw_letters()
+  (3) check if each letter in the letter_bank
+  */
+
+  input = input.toUpperCase();
+  for (let letter of input) {
+    if (lettersInHand.includes(letter)) {
+      let i = lettersInHand.indexOf(letter);
+      lettersInHand.splice(i, 1);
+      continue;
+    } else {
+      return false;
+    }
+  }
+  return true;
 };
 
 export const scoreWord = (word) => {
