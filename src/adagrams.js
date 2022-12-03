@@ -59,10 +59,6 @@ export const drawLetters = () => {
   return returnList;
 };
 
-// export const usesAvailableLetters = (input, lettersInHand) => {
-//   let letters = lettersInHand.copy();
-//   for (let i ) word.toUpperCase
-
 export const usesAvailableLetters = (word, letterBank) => {
   let letters = lettersBank.copyWithin();
   let wordUpper =  word.toUpperCase(); 
@@ -75,16 +71,6 @@ export const usesAvailableLetters = (word, letterBank) => {
     }
       }
 };
-
-```
-def uses_available_letters(word, letter_bank):
-    letters = letter_bank.copy()
-    for letter in word.upper():
-        if letter not in letters:
-            return False
-        letters.remove(letter)
-    return True        
-'''
 
 export const scoreWord = (word) => {
   const scoreDict = {
@@ -132,8 +118,6 @@ export const scoreWord = (word) => {
 };
 
 
-
-
-// export const highestScoreFrom = (words) => {
-//   // Implement this method for wave 4
-// };
+export const highestScoreFrom = (words) => {
+  // Implement this method for wave 4
+};
