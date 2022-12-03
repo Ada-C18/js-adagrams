@@ -26,21 +26,21 @@ const letterBank = {
   Y: [2, 4],
   Z: [1, 10],
 };
-
-const range = (start, end) => {
-  return Array.from({length:end}, (_, i) => start + i)
+const counter = array => {
+  let count = {};
+  array.forEach(val => count[val] = (count[val] || 0) + 1);
+  return count;
 };
 
 const shortestWord = (array) => {
   array.sort((a, b) => a.length - b.length);
   return array[0].length;
 };
-
 export const drawLetters = () => {
   let deck = [];
 
   for (const [key, cnt] of Object.entries(letterBank)){
-    for (let i of range(0, cnt[0])){
+    for (let i=0; i<cnt[0]; i++){
       deck.push(key);
     }
   }
@@ -55,24 +55,30 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  lettersInHand = lettersInHand.join('');
+  let objLInHand = counter(lettersInHand);
 
-  return lettersInHand.includes(input);
+  for (let l of input){
+    if (l in objLInHand && objLInHand[l] > 0){
+      objLInHand[l] -= 1;
+      continue
+    } else {
+      return false;
+    }
+  }
+  return true;
 };
-
 export const scoreWord = (word) => {
   word = word.toUpperCase();
   let score = 0;
 
-  if (word.length >= 7){
-    score += 8;
-  }
   for (let i = 0; i<word.length; ++i){
       score += letterBank[word[i]][1];
     }
+    if (word.length >= 7){
+      score += 8;
+    }
     return score;
 };
-
 export const highestScoreFrom = (words) => {
   let scoreBoard = {};
   let highScores = [];
@@ -80,7 +86,7 @@ export const highestScoreFrom = (words) => {
       scoreBoard[word] = scoreWord(word);
   }
   const maxScore = Math.max(...Object.values(scoreBoard));
-  const minLength = shortestWord(Object.keys(scoreBoard));
+  const minLength = shortestWord(words);
 
   for (const [word, score] of Object.entries(scoreBoard)){
     if (score === maxScore){

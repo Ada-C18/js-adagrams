@@ -87,7 +87,7 @@ describe("Adagrams", () => {
       expect(isValid).toBe(false);
     });
 
-    it("returns false when word contains repeated letters more than in the drawn letters", () => {
+    it("returns true when word contains repeated letters more than in the drawn letters", () => {
       const drawn = ["D", "O", "G", "X", "X", "X", "X", "X", "X", "X"];
       const word = "GOOD";
 
