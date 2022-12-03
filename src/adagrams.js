@@ -56,25 +56,6 @@ const SCORE_CHART = {
   Z: 10
 }
 
-// export const drawLetters = () => {
-//   let copy = {};
-//   let key;
-//   for (key in LETTER_POOL) {
-//     copy[key] = LETTER_POOL[key];
-//   }
-//   const letterBank = [];
-//   while (letterBank.length < 10) {
-//     const letterList = Object.keys(copy);
-//     const randomIndex = Math.floor(Math.random() * letterList.length);
-//     let letter = letterList[randomIndex];
-
-//     if (copy[letter] > 0) {
-//       letterBank.push(letter);
-//       copy[letter] -= 1;
-//     } 
-//   } 
-//   return letterBank;
-// };
 
 export const drawLetters = () => {
   const letterBank = []
@@ -88,11 +69,11 @@ export const drawLetters = () => {
   return letterBank; 
 };
 
+
 export const usesAvailableLetters = (input, lettersInHand) => {
   const inputUpperCase = input.toUpperCase();
   const inputList = inputUpperCase.split("");
-  for (let i = 0; i < inputList.length; i++) {
-    let char = inputList[i];
+  for (const char of inputList) {
     if (!lettersInHand.includes(char)) {
       return false;
     } else if (inputList.filter(x => x === char).length > lettersInHand.filter(x => x === char).length) {
@@ -102,6 +83,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   return true;
 }
 
+
 export const scoreWord = (word) => {
   const wordUpperCase = word.toUpperCase();
   const wordList = wordUpperCase.split("");
@@ -109,12 +91,11 @@ export const scoreWord = (word) => {
   if (wordList.length >= 7) {
     score += 8;
   }
-  for (let i = 0; i < wordList.length; i++) {
-    score += SCORE_CHART[wordList[i]]
+  for (const char of wordList) {
+    score += SCORE_CHART[char]
   }
   return score;
 };
-
 
 
 export const highestScoreFrom = (words) => {
