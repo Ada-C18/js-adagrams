@@ -27,29 +27,38 @@ const LETTER_POOL = {
   Z: 1,
 };
 
+const getRandomKey = (obj) => {
+  const keys = Object.keys(obj);
+  return keys[Math.floor(Math.random() * keys.length)];
+};
+
 export const drawLetters = () => {
   const copiedLetterPool = JSON.parse(JSON.stringify(LETTER_POOL));
   const letterBank = [];
   while (letterBank.length < 10) {
     let letter = getRandomKey(copiedLetterPool);
-    if (copiedLetterPool.letter > 0) {
+    if (copiedLetterPool[letter] > 0) {
       letterBank.push(letter);
-      copiedLetterPool.letter -= 1;
+      copiedLetterPool[letter] -= 1;
     }
   }
   return letterBank;
 };
-
-const getRandomKey = function (obj) {
-  const keys = Object.keys(obj);
-  return keys[Math.floor(Math.random() * keys.length)];
-};
-
 drawLetters();
 
-// export const usesAvailableLetters = (input, lettersInHand) => {
-//   // Implement this method for wave 2
-// };
+export const usesAvailableLetters = (input, lettersInHand) => {
+  const drawnLetters = lettersInHand.slice();
+  for (const i of input.toUpperCase()) {
+    if (!drawnLetters.includes(i)) {
+      return false;
+    } else {
+      drawnLetters.splice(i, 1);
+    }
+  }
+  return true;
+};
+usesAvailableLetters();
+
 
 // export const scoreWord = (word) => {
 //   // Implement this method for wave 3
