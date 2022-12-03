@@ -51,14 +51,6 @@ describe('Adagrams', () => {
       });
     });
 
-    // it('returns an array, and each item is a single-letter string', () => {
-    //   const drawn = drawLetters();
-
-    //   expect(Array.isArray(drawn)).toBe(true);
-    //   drawn.forEach((l) => {
-    //     expect(l).toMatch(/^[A-Z]$/);
-    //   });
-    // });
 
     it('does not draw a letter too many times', () => {
       for (let i = 0; i < 1000; i++) {
