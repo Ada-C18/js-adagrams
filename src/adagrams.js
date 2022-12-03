@@ -39,12 +39,6 @@ export const generateLetterPool = () => {
 };
 
 export const drawLetters = () => {
-  // no parameters, returns array of ten strings
-  // draw letters from a pool of letters
-  /* i want to go through each item in the letter pool and append x to
-    a list y amount of times, where x is the key and y is the value
-    then i want to return the list
-  */
   const letterPool = generateLetterPool();
   const playerHand = [];
   for (let i = 0; i < 10; i++) {
@@ -56,7 +50,26 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  const letterQuantities = {};
+  lettersInHand.forEach((letter) => {
+    if (letter in letterQuantities) {
+      letterQuantities[letter] += 1;
+    } else {
+      letterQuantities[letter] = 1;
+    }
+  });
+  for (let character of Array.from(input)) {
+    let isPresent = Object.keys(letterQuantities).includes(character);
+    if (isPresent) {
+      letterQuantities[character] -= 1;
+    } else {
+      return false;
+    }
+    if (letterQuantities[character] < 0) {
+      return false;
+    }
+  }
+  return true;
 };
 
 export const scoreWord = (word) => {
