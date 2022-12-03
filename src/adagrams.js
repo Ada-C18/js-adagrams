@@ -146,9 +146,12 @@ export const scoreWord = (word) => {
 	return points;
 };
 
+// TODO: fix find highest bug
+// what: for loop iterating thru allWordScores dict 2x
+// output: word:xxx, score:16 (unordered obj?)
+
 // WAVE 4
 // Implement this method for wave 4
-
 export const highestScoreFrom = (words) => {
 	// const highestScoreFrom = (words) => {
 	// input: words array
