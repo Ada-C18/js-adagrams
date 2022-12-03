@@ -122,11 +122,18 @@ export const scoreWord = (word) => {
 export const highestScoreFrom = (words) => {
   /*
   (0) input: words - array of given word
-  (1) get word(s) in dict with highest score, i.e. {word1: score1, word2: score2, ...}
-  (2) list up the multiple max scored words
-  (3-1) if (2) is single: return the tuple of max scored word   
-  (3-2) if (2) is multiple: return winner
-  (3-2-a) tie breaker: with fewest number of letters unless 10 letters 
+  (1) for loop to read every element word out of words
+  (2) calculate score using scoreWord
+  (3) create hash with word:score pair
+  (4) get word(s) in hash with highest score, i.e. {word1: score1, word2: score2, ...}
+  (5) list up the multiple max scored words
+  (6-1) if (5) is single: return the tuple of max scored word   
+  (6-2) if (5) is multiple: return winner
+  (6-2-a) tie breaker: with fewest number of letters unless 10 letters 
                        or, if words have same number, then return first occurrence
   */
+
+  for (let word of words) {
+    let score = scoreWord(word);
+  }
 };
