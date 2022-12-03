@@ -166,7 +166,7 @@ describe("Adagrams", () => {
       it("selects the word with 10 letters", () => {
         const words = ["AAAAAAAAAA", "BBBBBB"];
         const correct = {
-          word: "AAAAAAAAAA",
+          word: "AAAAAAAAAA", 
           score: scoreWord("AAAAAAAAAA"),
         };
         expectTie(words);
