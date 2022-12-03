@@ -66,7 +66,6 @@ export const drawLetters = () => {
       flatLetterPool.push(letter);
     }
   }
-  //console.log(flatLetterPool);
 
   // Draw ten random letters from flatLetterPool
   let drawLetter = "";
@@ -79,14 +78,12 @@ export const drawLetters = () => {
     resLetters.push(drawLetter);
     flatLetterPool.splice(indexToSelect, 1);
   }
-  //console.log(resLetters);
   return resLetters;
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
 
-  // convert to uppercase
   let upperInput;
   upperInput = input.toUpperCase();
 
@@ -114,13 +111,11 @@ export const scoreWord = (word) => {
     } else if (upperWord.length >= 7 && upperWord.length <= 10) {
       sumScore += 8;
     }
-
     for (let char of upperWord) {
       if (char in scorePool) {
         sumScore += scorePool[char];
       }
     }
-    // console.log(sumScore);
     return sumScore;
   }
 };
@@ -131,7 +126,7 @@ export const highestScoreFrom = (words) => {
   // loop thru each word to calculate score, save in scoreDict {score: [array of words]}
   // find highest score / scores
   // if highest score array length = 1, return as result;
-  // if highest score array length > 1, going into tie logic;
+  // else, going into tie logic;
 
   // tie logic: <loop thru highest score array>
   // 1. check if there is word with 10 letters -> return immediately;
@@ -153,9 +148,8 @@ export const highestScoreFrom = (words) => {
     }
     scoreDict[wordScore].push(word);
   }
-
+  // array spread operator
   maxScore = Math.max(...Object.keys(scoreDict));
-  //console.log(maxScore);
   maxScoreArray = scoreDict[maxScore];
   if (maxScoreArray.length === 1) {
     resDict["word"] = maxScoreArray.toString();
@@ -178,7 +172,6 @@ export const highestScoreFrom = (words) => {
         }
       }
     }
-    //console.log(resDict);
     return resDict;
   }
 };
