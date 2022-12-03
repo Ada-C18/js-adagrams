@@ -52,11 +52,10 @@ export const drawLetters = () => {
 ////////\\\\\\\    WAVE 2    ///////\\\\\\\\\\
 export const usesAvailableLetters = (input, lettersInHand) => {
   for (let i = 0; i < input.length; i++) {
-    if (lettersInHand.includes(input[i])) {
-    }
     if (!lettersInHand.includes(input[i])) {
-      console.log(input[i]);
       return false;
+    } else if (lettersInHand.includes(input[i])) {
+      lettersInHand.splice(input[i], i);
     }
   }
   return true;
@@ -66,6 +65,10 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 export const scoreWord = (word) => {
   // Implement this method for wave 3
 };
+
+
+
+
 
 ////////\\\\\\\    WAVE 4    ///////\\\\\\\\\\
 
