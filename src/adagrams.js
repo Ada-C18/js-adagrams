@@ -28,7 +28,7 @@ export const drawLetters = () => {
     Z: 1,
   };
   const letterPool = [];
-  for (let letter in letterFrequencies) {
+  for (const letter in letterFrequencies) {
     for (let i = 0; i < letterFrequencies[letter]; i++) {
       letterPool.push(letter);
     }
@@ -43,7 +43,16 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  let usableLetters = [...lettersInHand];
+  for (const letter of input) {
+    const usableLetterIndex = usableLetters.indexOf(letter);
+    if (usableLetterIndex === -1) {
+      return false;
+    } else {
+      usableLetters.splice(usableLetterIndex, 1);
+    }
+  }
+  return true;
 };
 
 export const scoreWord = (word) => {
