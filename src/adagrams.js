@@ -44,7 +44,7 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   const dictLettersInHand = {};
-  for (var i = 0; i < lettersInHand.length; i++) {
+  for (let i = 0; i < lettersInHand.length; i++) {
     if (lettersInHand[i] in dictLettersInHand) {
       let val = dictLettersInHand[lettersInHand[i]];
       dictLettersInHand[lettersInHand[i]] = val + 1;
@@ -52,7 +52,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
       dictLettersInHand[lettersInHand[i]] = 1;
     }
   }
-  for (var i = 0; i < input.length; i++) {
+  for (let i = 0; i < input.length; i++) {
     if (input[i] in dictLettersInHand) {
       let val1 = dictLettersInHand[input[i]];
       val1 = val1 - 1;
@@ -100,7 +100,7 @@ export const scoreWord = (word) => {
 
   let score = 0;
   word = word.toUpperCase();
-  for (var i = 0; i < word.length; i++) {
+  for (let i = 0; i < word.length; i++) {
     if (word.charAt(i) in scoreDict) {
       score = score + scoreDict[word.charAt(i)];
     }
@@ -125,16 +125,18 @@ export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
   let wordScoreDict = {};
   let maxScore = -1;
-  for (var i = 0; i < words.length; i++) {
+  let maxWord = "";
+  for (let i = 0; i < words.length; i++) {
     let score = scoreWord(words[i]);
     wordScoreDict[words[i]] = score;
     if (score > maxScore) {
       maxScore = score;
+      maxWord = words[i];
     }
     // maxScore = Math.max(maxScore, score);
   }
   let winningWord = {};
-  let minWordLength = 11;
+  let minWordLength = maxWord.length;
 
   for (const key in wordScoreDict) {
     let sum = wordScoreDict[key];
@@ -143,7 +145,7 @@ export const highestScoreFrom = (words) => {
         winningWord = { word: key, score: sum };
         break;
       }
-      if (key.length < minWordLength) {
+      if (key.length <= minWordLength) {
         minWordLength = key.length;
         winningWord = { word: key, score: sum };
       }
