@@ -23,6 +23,26 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
+  // - Returns `true` if every letter in the `input` word is available (in the right quantities) in the `lettersInHand`
+  // - Returns `false` if not; if there is a letter in `input` that is not present in the `lettersInHand` or has too much of compared to the `lettersInHand`
+  const handDict = {};
+  for (const letter of lettersInHand) {
+    if (handDict[letter]) {
+      handDict[letter] += 1;
+    } else {
+      handDict[letter] = 1;
+    }
+  }
+  for (const letter of input) {
+    if (!handDict[letter]) {
+      return false;
+    } else if (handDict[letter] === 0) {
+      return false;
+    } else {
+      handDict[letter] -= 1;
+    }
+  }
+  return true;
 };
 
 export const scoreWord = (word) => {
