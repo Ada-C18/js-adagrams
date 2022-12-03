@@ -77,16 +77,38 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   return true;
 };
 
-const points_dict = {
-  'A':1,'E':1,'I':1,'O':1,'U':1,'L':1,'N':1,'R':1,'S':1,'T':1,
-  'D':2,'G':2,
-  'B':3,'C':3,'M':3,'P':3,
-  'F':4,'H':4,'V':4,'W':4,'Y':4,
-  'K':5,
-  'J':8,'X':8,
-  'Q':10,'Z':10
-}
+//-----------------------------------------------------------------
 
+const points_dict = {
+  A: 1,
+  E: 1,
+  I: 1,
+  O: 1,
+  U: 1,
+  L: 1,
+  N: 1,
+  R: 1,
+  S: 1,
+  T: 1,
+  D: 2,
+  G: 2,
+  B: 3,
+  C: 3,
+  M: 3,
+  P: 3,
+  F: 4,
+  H: 4,
+  V: 4,
+  W: 4,
+  Y: 4,
+  K: 5,
+  J: 8,
+  X: 8,
+  Q: 10,
+  Z: 10,
+};
+
+//--------------------------scoreWord---------------------------------
 export const scoreWord = (word) => {
   let finalScore = 0;
   let currentScore = 0;
@@ -103,6 +125,32 @@ export const scoreWord = (word) => {
   return finalScore;
 };
 
+//--------------------------highestScoreFrom-------------------------
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  let currentScore = 0;
+  let finalResults = {
+    word: "",
+    score: 0,
+  };
+
+  for (let currentWord of words) {
+    currentScore = scoreWord(currentWord);
+
+    if (currentScore === finalResults.score) {
+      if (finalResults.word.length === 10) {
+        continue;
+      }
+      if (
+        currentWord.length < finalResults.word.length ||
+        currentWord.length === 10
+      ) {
+        finalResults.word = currentWord;
+        finalResults.score = currentScore;
+      }
+    } else if (currentScore > finalResults.score) {
+      finalResults.word = currentWord;
+      finalResults.score = currentScore;
+    }
+  }
+  return finalResults;
 };
