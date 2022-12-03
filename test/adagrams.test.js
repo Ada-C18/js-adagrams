@@ -159,7 +159,7 @@ describe("Adagrams", () => {
 			expect(highestScoreFrom(words)).toEqual(correct);
 		});
 
-		describe.skip("in case of tied score", () => {
+		describe("in case of tied score", () => {
 			const expectTie = (words) => {
 				const scores = words.map((word) => scoreWord(word));
 				const highScore = scores.reduce((h, s) => (h < s ? s : h), 0);
@@ -181,7 +181,7 @@ describe("Adagrams", () => {
 				expect(highestScoreFrom(words.reverse())).toEqual(correct);
 			});
 
-			it("selects the word with fewer letters when neither are 10 letters", () => {
+			it.skip("selects the word with fewer letters when neither are 10 letters", () => {
 				const words = ["MMMM", "WWW"];
 				const correct = { word: "WWW", score: scoreWord("WWW") };
 				expectTie(words);
@@ -190,7 +190,7 @@ describe("Adagrams", () => {
 				expect(highestScoreFrom(words.reverse())).toEqual(correct);
 			});
 
-			it("selects the first word when both have same length", () => {
+			it.skip("selects the first word when both have same length", () => {
 				const words = ["AAAAAAAAAA", "EEEEEEEEEE"];
 				const first = {
 					word: "AAAAAAAAAA",

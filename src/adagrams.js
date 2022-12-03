@@ -146,9 +146,9 @@ export const scoreWord = (word) => {
 	return points;
 };
 
-// TODO: fix find highest bug
-// what: for loop iterating thru allWordScores dict 2x
-// output: word:xxx, score:16 (unordered obj?)
+// TODO:
+// fix find highest bug -> DONE
+// fix tie bug - 10 letter word returned
 
 // WAVE 4
 // Implement this method for wave 4
@@ -165,10 +165,10 @@ export const highestScoreFrom = (words) => {
 	console.log("all scores dict: ", allWordScores);
 
 	// 2. find highest word, score pair in allWordScores dict
-	let highestScore = 0;
-	// let highestScoredWords = []; // maybe another data type
-	let highestScoredWord = "";
-	const highestScoreDict = {};
+	// let highestScore = 0;
+	// // let highestScoredWords = []; // maybe another data type
+	// let highestScoredWord = "";
+	const highestScoreDict = { score: 0, word: "" };
 
 	console.log("score dict before loop: ", highestScoreDict);
 	console.log("length of all scores: ", Object.keys(allWordScores).length);
@@ -179,37 +179,33 @@ export const highestScoreFrom = (words) => {
 	// -- fewest letter wins, unless
 	// -- 10 letter word wins
 	// -- same score and same length, 1st word in words array input
-	for (let currentWord in allWordScores) {
-		let currentScore = allWordScores[currentWord];
+	for (const [currentWord, currentScore] of Object.entries(allWordScores)) {
 		console.log(`current word: ${currentWord}`);
 		console.log(`current score: ${currentScore}`);
 
-		if (currentScore > highestScore) {
-			highestScoreDict["score"] = currentScore;
-			highestScoreDict["word"] = currentWord;
+		if (currentScore > highestScoreDict.score) {
+			highestScoreDict.score = currentScore;
+			highestScoreDict.word = currentWord;
 			// highestScoredWords = [currentWord];
 			console.log("score dict: ", highestScoreDict);
-		} else if (currentScore === highestScore) {
+		} else if (currentScore === highestScoreDict.score) {
 			// ties
 			if (highestScoredWord.length === currentWord.length) {
 				// condition: same len + score
 				// return first one in the list
-				highestScoreDict["word"] = currentWord;
-				highestScoreDict["score"] = currentScore;
+				highestScoreDict.score = currentScore;
+				highestScoreDict.word = currentWord;
 				// early return?
 				// return {highestScoreDict[word] = currentScore};
 			} else if (currentWord.length === 10) {
+				// TODO: DEBUG
 				// condition: len=10
-				highestScoreDict["word"] = currentWord;
-				highestScoreDict["score"] = currentScore;
+				highestScoreDict.score = currentScore;
+				highestScoreDict.word = currentWord;
 			} else if (currentWord.length < highestScoredWord.length) {
 				// condition: shortest of 2, current shorter than highest
-				highestScoreDict["word"] = currentWord;
-				highestScoreDict["score"] = currentScore;
-			} else {
-				// highestScoreWord.length < currentWord.length
-				highestScoreDict["word"] = highestScoredWord;
-				highestScoreDict["score"] = highestScore;
+				highestScoreDict.score = currentScore;
+				highestScoreDict.word = currentWord;
 			}
 			console.log("score dict: ", highestScoreDict);
 		}
