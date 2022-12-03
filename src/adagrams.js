@@ -1,6 +1,6 @@
 export const drawLetters = () => {
   // Implement this method for wave 1
-  var poolOfLettersDict = {
+  const poolOfLettersDict = {
     A: 9,
     B: 2,
     C: 2,
@@ -42,25 +42,24 @@ export const drawLetters = () => {
   return lettersInHand;
 };
 
-export const checkIfLetterPresent = (letter, letterBank) => {
-  const lettersCopy = Array.from(letterBank);
-  for (var i = 0; i < lettersCopy.length; i++) {
-    if (letter == lettersCopy[i]) {
-      const index = lettersCopy.indexOf(letterBank[i]);
-      if (index > -1) {
-        // only splice array when item is found
-        letterBank.splice(index, 1); // 2nd parameter means remove one item only
-      }
-      return true;
+export const usesAvailableLetters = (input, lettersInHand) => {
+  const dictLettersInHand = {};
+  for (var i = 0; i < lettersInHand.length; i++) {
+    if (lettersInHand[i] in dictLettersInHand) {
+      let val = dictLettersInHand[lettersInHand[i]];
+      dictLettersInHand[lettersInHand[i]] = val + 1;
+    } else {
+      dictLettersInHand[lettersInHand[i]] = 1;
     }
   }
-  return false;
-};
-
-export const usesAvailableLetters = (input, lettersInHand) => {
   for (var i = 0; i < input.length; i++) {
-    if (checkIfLetterPresent(input[i], lettersInHand) == true) {
-      continue;
+    if (input[i] in dictLettersInHand) {
+      let val1 = dictLettersInHand[input[i]];
+      val1 = val1 - 1;
+      dictLettersInHand[input[i]] = val1;
+      if (val1 === 0) {
+        delete dictLettersInHand[input[i]];
+      }
     } else {
       return false;
     }
