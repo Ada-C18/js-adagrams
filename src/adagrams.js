@@ -1,5 +1,8 @@
 export const drawLetters = () => {
   // Implement this method for wave 1
+  // Returns an array of ten strings(or letters),
+  // representing the hand of letters that the player has drawn.
+
   //1. Convert LETTERPOOL INTO LETTERARRAY
   const LETTERARRAY = convertFreqDictToArr(LETTERPOOL);
   //2. Make a deepcopy of LETTERPOOL dict, which can be modified as letters are drawn
@@ -27,28 +30,29 @@ const convertFreqDictToArr = (freqDict) => {
   }
   return outputArr;
 };
-// Helper method for Wave 1
+// Helper function for Wave 1
 const randomDraw = (arr) => {
   return arr[Math.floor(Math.random() * arr.length)];
 };
 
-// Helper method for Wave 1
+// Helper function for Wave 1
 const deepCopyDict = (dict) => {
   return JSON.parse(JSON.stringify(dict));
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
-  // - Returns `true` if every letter in the `input` word is available (in the right quantities) in the `lettersInHand`
-  // - Returns `false` if not; if there is a letter in `input` that is not present in the `lettersInHand` or has too much of compared to the `lettersInHand`
+  // Returns `true` if every letter in the `input` word is available (in the right quantities) in the `lettersInHand`
+  // Returns `false` if not; if there is a letter in `input` that is not present in the `lettersInHand` or has too much of compared to the `lettersInHand`
 
   //1. convert lettersInHAnd to a frequency dictionary, so that frequency
   //can be modified as letters are read.
   const handDict = convertArrToDictWithFreqAsVal(lettersInHand);
-  //2. Match each letter in "Input" to handDict keys and make sure its present in
+  //2. Match each letter in "input" to handDict keys and make sure its present in
   //the right quantities (values of dict keys).
   return isSubset(input, handDict);
 };
+
 //Helper function for wave 2
 const convertArrToDictWithFreqAsVal = (arr) => {
   const output_dict = {};
@@ -61,6 +65,7 @@ const convertArrToDictWithFreqAsVal = (arr) => {
   }
   return output_dict;
 };
+
 //Helper function for wave 2
 const isSubset = (arr, dict) => {
   for (const letter of arr) {
@@ -77,6 +82,21 @@ const isSubset = (arr, dict) => {
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
+  //Returns an integer representing the total score of `word` by summing
+  //the point value of each letter within `word`.
+
+  //1. Look up the value of each letter of the word in LETTERSCORE and
+  //add its value to the score.
+  let score = 0;
+  for (const letter of word) {
+    score += LETTERSCORES[letter.toUpperCase()]; //edge case: lower case letters
+  }
+  // 2.If the length of the word is 7, 8, 9, or 10,
+  // then the word gets an additional 8 points to the score.
+  if (word.length >= 7) {
+    score += 8;
+  }
+  return score;
 };
 
 export const highestScoreFrom = (words) => {
@@ -110,4 +130,41 @@ const LETTERPOOL = {
   X: 1,
   Y: 2,
   Z: 1,
+};
+// |            Letter            | Value |
+// | :--------------------------: | :---: |
+// | A, E, I, O, U, L, N, R, S, T |   1   |
+// |             D, G             |   2   |
+// |          B, C, M, P          |   3   |
+// |        F, H, V, W, Y         |   4   |
+// |              K               |   5   |
+// |             J, X             |   8   |
+// |             Q, Z             |  10   |
+const LETTERSCORES = {
+  A: 1,
+  B: 3,
+  C: 3,
+  D: 2,
+  E: 1,
+  F: 4,
+  G: 2,
+  H: 4,
+  I: 1,
+  J: 8,
+  K: 5,
+  L: 1,
+  M: 3,
+  N: 1,
+  O: 1,
+  P: 3,
+  Q: 10,
+  R: 1,
+  S: 1,
+  T: 1,
+  U: 1,
+  V: 4,
+  W: 4,
+  X: 8,
+  Y: 4,
+  Z: 10,
 };
