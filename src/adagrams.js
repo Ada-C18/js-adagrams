@@ -27,6 +27,16 @@ const LETTER_POOL = {
   Z: 1,
 };
 
+const SCORE_CHART = {
+  AEIOULNRST: 1,
+  DG: 2,
+  BCMP: 3,
+  FHVWY: 4,
+  K: 5,
+  JX: 8,
+  QZ: 10,
+};
+
 ////////\\\\\\\    WAVE 1    ///////\\\\\\\\\\
 export const drawLetters = () => {
   let letterArray = [];
@@ -38,6 +48,7 @@ export const drawLetters = () => {
   }
 
   let hand = [];
+
   for (let i = 0; i < 10; i++) {
     let randomIndex = Math.floor(Math.random() * letterArray.length);
     hand.push(letterArray[randomIndex]);
@@ -63,15 +74,35 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
 ////////\\\\\\\    WAVE 3    ///////\\\\\\\\\\
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
+  let score = 0;
+  let wordUpper = word.toUpperCase();
+
+  if (wordUpper === "") {
+    return 0;
+  }
+
+  for (let char of wordUpper) {
+    for (let elem of Object.keys(SCORE_CHART)) {
+      if (elem.includes(char)) {
+        score += SCORE_CHART[elem];
+      }
+    }
+  }
+  if (word.length > 6) {
+    score += 8;
+  }
+  return score;
 };
-
-
-
-
 
 ////////\\\\\\\    WAVE 4    ///////\\\\\\\\\\
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
 };
+
+//////\\\\    PSEUDOCODE    ////\\\\\\\
+
+// 1. initialize an empty string to hold highest scoring word
+// 2. initialize a variable to hold highest score 
+// 3. Score each word in words array 
+// 4. 
