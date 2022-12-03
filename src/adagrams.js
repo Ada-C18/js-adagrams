@@ -30,10 +30,9 @@ export const drawLetters = () => {
   };
   const lettersInHand = new Array();
   let counter = 0;
-  var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   while (counter < 10) {
-    var choice = characters.charAt(Math.floor(Math.random() * 26));
-    //choice = choice.toUpperCase();
+    let choice = characters.charAt(Math.floor(Math.random() * 26));
     if (poolOfLettersDict[choice] > 0) {
       lettersInHand.push(choice);
       counter += 1;
