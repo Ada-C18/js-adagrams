@@ -120,63 +120,6 @@ describe("scoreWord", () => {
     });
   });
 
-  describe("usesAvailableLetters", () => {
-    it("returns true if the submitted letters are valid against the drawn letters", () => {
-      const drawn = ["D", "O", "G", "X", "X", "X", "X", "X", "X", "X"];
-      const word = "DOG";
-
-      const isValid = Adagrams.usesAvailableLetters(word, drawn);
-      expect(isValid).toBe(true);
-    });
-
-    it("adding test returns true if the submitted letters are valid against the drawn letters different order", () => {
-      const drawn = ["D", "X", "X", "X", "O", "X", "X", "X", "X", "G"];
-      const word = "DOG";
-
-      const isValid = Adagrams.usesAvailableLetters(word, drawn);
-      expect(isValid).toBe(true);
-    });
-
-    it("returns false when word contains letters not in the drawn letters", () => {
-      const drawn = ["D", "O", "X", "X", "X", "X", "X", "X", "X", "X"];
-      const word = "DOG";
-
-      const isValid = Adagrams.usesAvailableLetters(word, drawn);
-      expect(isValid).toBe(false);
-    });
-
-    it("returns false when word contains repeated letters more than in the drawn letters", () => {
-      const drawn = ["D", "O", "G", "X", "X", "X", "X", "X", "X", "X"];
-      const word = "GOOD";
-
-      const isValid = Adagrams.usesAvailableLetters(word, drawn);
-      expect(isValid).toBe(false);
-    });
-  });
-
-  describe("scoreWord", () => {
-    const expectScores = (wordScores) => {
-      Object.entries(wordScores).forEach(([word, score]) => {
-        expect(Adagrams.scoreWord(word)).toBe(score);
-      });
-    };
-
-    it("returns an accurate numerical score according to the score chart", () => {
-      expectScores({
-        A: 1,
-        DOG: 5,
-        WHIMSY: 17,
-      });
-    });
-
-    it("returns a score regardless of the input case", () => {
-      expectScores({
-        a: 1,
-        dog: 5,
-        wHiMsY: 17,
-      });
-    });
-
     it("returns a score of 0 if given an empty input", () => {
       expectScores({
         "": 0,
@@ -211,7 +154,7 @@ describe("scoreWord", () => {
 
     describe("in case of tied score", () => {
       const expectTie = (words) => {
-        const scores = words.map((word) => scoreWord(word));
+        const scores = words.map((word) => Adagrams.scoreWord(word));
         const highScore = scores.reduce((h, s) => (h < s ? s : h), 0);
         const tiedWords = scores.filter((s) => s == highScore);
 
