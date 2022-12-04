@@ -133,7 +133,39 @@ export const highestScoreFrom = (words) => {
                        or, if words have same number, then return first occurrence
   */
 
+  let wordScoreHash = {};
+  let highestScore = 0;
+  let fewestletters = 10;
+  let already10LettersSameScore = 0;
+  let winner = { score: 0, word: "" };
+
   for (let word of words) {
     let score = scoreWord(word);
+    wordScoreHash[word] = score;
+    if (score > highestScore) {
+      highestScore = score;
+      winner["score"] = score;
+      winner["word"] = word;
+      if (word.length === 10) {
+        already10LettersSameScore = 1;
+      } else {
+        already10LettersSameScore = 0;
+        fewestletters = word.length;
+      }
+    } else if (score === highestScore) {
+      // when current tie
+      if (word.length === 10 && already10LettersSameScore === 0) {
+        winner["score"] = score;
+        winner["word"] = word;
+        already10LettersSameScore = 1;
+      } else if (
+        word.length < fewestletters &&
+        already10LettersSameScore === 0
+      ) {
+        winner["score"] = score;
+        winner["word"] = word;
+      }
+    }
   }
+  return winner;
 };
