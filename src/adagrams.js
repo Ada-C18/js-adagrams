@@ -113,4 +113,41 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+  let scoredWords = {};
+
+  for (let word of words) {
+    let scoreCalculator = scoreWord(word);
+    scoredWords[word] = scoreCalculator;
+  }
+
+  let winner = { word: "", score: 0 };
+  let hList = [];
+  let hValue = 0;
+  for (let w in scoredWords) {
+    if (scoredWords[w] > hValue) {
+      hValue = scoredWords[w];
+      hList = [w];
+    } else if (scoredWords[w] == hValue) {
+      hList.push(w);
+    }
+  }
+  if (hList.length === 1) {
+    winner = { word: hList[0], score: scoredWords[hList[0]] };
+  } else if (hList.length > 1) {
+    let maxx = hList.reduce((a, b) => {
+      return a.length > b.length ? a : b;
+    });
+    let minn = hList.reduce((a, b) => {
+      return a.length < b.length ? a : b;
+    });
+
+    if (hList[0].length === hList[1].length) {
+      winner = { word: hList[0], score: scoredWords[hList[0]] };
+    } else if (maxx.length > 9) {
+      winner = { word: maxx, score: scoredWords[maxx] };
+    } else if (maxx.length < 9) {
+      winner = { word: minn, score: scoredWords[minn] };
+    }
+  }
+  return winner;
 };
