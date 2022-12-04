@@ -38,8 +38,6 @@ const buildLetterPool = (LETTERPOOL) => {
   return letterPool;
 };
 
-console.log(`Pool: ${buildLetterPool(LETTERPOOL)}`);
-
 
 export const drawLetters = () => {
   // Implement this method for wave 1
@@ -54,12 +52,11 @@ export const drawLetters = () => {
   return hand;
 };
 
-drawLetters();
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
   let lettersInHandCopy = [...lettersInHand];
-  for (let letter in input.toUpperCase()) {
+  for (let letter of input.toUpperCase()) {
     if (!lettersInHandCopy.includes(letter)){
       return false
     }
@@ -69,9 +66,10 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   return true;
 };
 
-// export const scoreWord = (word) => {
-//   // Implement this method for wave 3
-// };
+export const scoreWord = (word) => {
+  // Implement this method for wave 3
+
+};
 
 // export const highestScoreFrom = (words) => {
 //   // Implement this method for wave 4
