@@ -122,7 +122,7 @@ export const scoreWord = (word) => {
     console.log(LETTER_SCORES[letter]);
     totalScore += LETTER_SCORES[letter];
   }
-  console.log(`The score is: ${totalScore}`);
+
   return totalScore;
 };
 
