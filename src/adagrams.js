@@ -48,15 +48,28 @@ export const drawLetters = () => {
 
 };
 
-
-
-
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
-};
+  const availableLetters = lettersInHand.map((x) => x);
+  for (const letter of input) {
+    if (availableLetters.includes(letter.toUpperCase())) {
+      let indexToBeRemoved = availableLetters.indexOf(letter);
+      availableLetters.splice(indexToBeRemoved, 1);
+    } else {
+      return false;
+      }
+    }
+    return true;
+  }; 
+
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
+
+
+
+
+  
 };
 
 export const highestScoreFrom = (words) => {
