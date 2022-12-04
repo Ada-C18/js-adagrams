@@ -58,22 +58,26 @@ const LETTER_VALUES = {
 
 export const drawLetters = () => {
   /*
+  (0) no input but read external contant LETTER_POOL
   (1-1) create letter bank from LETTER_POOL
   (1-2) letter cannot repeat greater than quantity of LETTER_POOL
   */
+
+  // declare inital values
   let letters = [];
   let letterPool = LETTER_POOL;
-  let i = 0;
-  while (i < 10) {
+
+  // loop until 10 letters
+  while (letters.length < 10) {
     let letter =
       Object.keys(LETTER_POOL)[
         Math.floor(Math.random() * Object.keys(LETTER_POOL).length)
       ];
+    // check if letter is left in the pool
     if (letterPool[letter] > 0) {
       letters.push(letter);
       letterPool[letter] = letterPool[letter] - 1;
     }
-    i++;
   }
   return letters;
 };
