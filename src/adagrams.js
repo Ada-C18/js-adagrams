@@ -3,7 +3,7 @@
 // for (let i = 0; i < alphabet.length; i++) {
 //   letterPool[alphabet[i]] = lettersFrequency[i];
 // }
-const letterPool = {
+const LETTERPOOL = {
   A: 9,
   B: 2,
   C: 2,
@@ -32,13 +32,14 @@ const letterPool = {
   Z: 1
 };
 
+
 export const drawLetters = () => {
   // Implement this method for wave 1
   const letterBank = [];
   const indexNumbersChosen = [];
   const handOfLetters = [];
   
-  for (const [k, v] of Object.entries(letterPool)) {
+  for (const [k, v] of Object.entries(LETTERPOOL)) {
     letterBank.push(...k.repeat(v));
   }
 
@@ -55,6 +56,23 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
+  const lettersInHandCount = {};
+  for (const letter of lettersInHand) {
+    if (lettersInHandCount.hasOwnProperty(letter)) {
+      lettersInHandCount[letter] += 1;
+    } else {
+      lettersInHandCount[letter] = 1;
+    }
+  }
+
+  for (const letter of input) {
+    if (!(lettersInHandCount.hasOwnProperty(letter)) || lettersInHandCount[letter] === 0) {
+      return false;
+    } else {
+      lettersInHandCount[letter] -= 1;
+    }
+  }
+  return true;
 };
 
 export const scoreWord = (word) => {
