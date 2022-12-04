@@ -70,23 +70,11 @@ const scoreTable = {
     10: ['Q', 'Z']
 };
 
-// def score_word(word):
-//     total_score = 0
-//     letter_count = dict(Counter(word.upper()))
-//     for letter in letter_count:
-//         for score, letters in score_table.items():
-//             if letter in letters:
-//                 total_score += score * letter_count[letter]
-//     if len(word) >= 7:
-//         total_score += 8
-//     return total_score
-
-export const scoreWord = (rawInput) => {
+export const createFreqDict = (rawInput) => {
   if (!rawInput){
     return 0;
   }
   let word = rawInput.toUpperCase();
-  let totalScore = 0;
   let freq = {};
   for (let i = 0; i < word.length; i++) {
     let char = word.charAt(i);
@@ -96,7 +84,13 @@ export const scoreWord = (rawInput) => {
       freq[char] = 1;
     }
   }
+  return freq
 
+};
+
+export const scoreWord = (rawInput) => {
+  let totalScore = 0;
+  const freq = createFreqDict(rawInput)
   for (let char in freq) {
     for (const [score, stringLetters] of Object.entries(scoreTable)) {
       if (stringLetters.includes(char)) {
@@ -104,40 +98,14 @@ export const scoreWord = (rawInput) => {
       }
     }
   }
-  if (word.length > 6){
+  if (rawInput.length > 6){
     totalScore += 8;
 
   }
   return totalScore;
 };
 
-// If the length of the word is 7, 8, 9, or 10, then the word gets an additional 8 points
-// const object1 = {
-//   a: 'somestring',
-//   b: 42
-// };
 
-// for (const [key, value] of Object.entries(object1)) {
-//   console.log(`${key}: ${value}`);
-// }
-
-// expected output:
-// "a: somestring"
-// "b: 42"
-
-// function getFrequency(string) {
-//   var freq = {};
-//   for (var i=0; i<string.length;i++) {
-//       var character = string.charAt(i);
-//       if (freq[character]) {
-//          freq[character]++;
-//       } else {
-//          freq[character] = 1;
-//       }
-//   }
-
-//   return freq;
-// };
 export const highestScoreFrom = (words) => {
   let highestScore = 0;
   let winningWord = null;
@@ -155,31 +123,7 @@ export const highestScoreFrom = (words) => {
 
       } else if (word.length < winningWord.length){
         winningWord = word;
-
     }
   }
 } return {word: winningWord, score: highestScore}
 };
-
-
-
-
-// def get_highest_word_score(word_list):
-//   highest_score = 0
-//   winning_word = None
-//   for word in word_list:
-//       if score_word(word) > highest_score:
-//           highest_score = score_word(word)
-//           winning_word = word
-//       elif score_word(word) == highest_score:
-//           if (len(word) == len(winning_word)
-//           or len(winning_word) == 10):
-//               continue
-//           elif len(word) == 10:
-//               winning_word = word
-//           elif len(word) < len(winning_word):
-//               winning_word = word
-//   return (winning_word, highest_score)
-
-
-
