@@ -59,7 +59,7 @@ export const drawLetters = () => {
   return returnList;
 };
 
-export export const usesAvailableLetters = (word, letterBank) => {
+export const usesAvailableLetters = (word, letterBank) => {
   let letters = letterBank.copyWithin();
   const checkWord = []
   for (let letter of word.toUpperCase()) {
@@ -75,8 +75,6 @@ export export const usesAvailableLetters = (word, letterBank) => {
     return false;
   }
 };
-
-console.log(usesAvailableLetters("GOOD", ["D", "O", "G", "X", "X", "X", "X", "X", "X", "X"]))
 
 export const scoreWord = (word) => {
   const scoreDict = {
