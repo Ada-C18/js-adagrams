@@ -102,4 +102,39 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+
+  // initialize return result
+  let result = {
+    word: null,
+    score: null
+  };
+  // create a list and add scores of words to it
+  const scoreList = [];
+  words.forEach(word => {
+    scoreList.push(scoreWord(word))
+  });
+  // find the highest score of the list
+  const maxScore = Math.max(...scoreList);
+  //create a list of index of words with max score
+  const highestScoreWords = [];
+  for (let i = 0; i < words.length; i++) {
+    if (scoreList[i] === maxScore) {
+      highestScoreWords.push(words[i])
+    }
+  }
+  // if the list only has one word, return the word
+  if (highestScoreWords.length === 1) {
+    result.word = highestScoreWords[0]
+  // if more than one word, sort the list by length from longest to shorted
+  } else {
+    const sortedList = highestScoreWords.sort((a, b) => b.length - a.length);
+  // if the first word has a length of 10, return the word, if not return the last word
+    if (sortedList[0].length === 10) {
+        result.word = sortedList[0];
+    } else {
+        result.word = sortedList[sortedList.length - 1];
+    }
+  }
+  result.score = maxScore;
+  return result;
 };
