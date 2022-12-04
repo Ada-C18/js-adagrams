@@ -128,6 +128,19 @@ class Adagrams {
   static highestScoreFrom = (words) => {
     // Implement this method for wave 4
     //pseudocode
+    /*
+    Create variable for highestscore =0 and highScoreList = [] to store words with the highest score. 
+    loop1) iterate through each word in words:
+     if the score of the word is higher than the current highestScore, then reassign the highestScore = current score. 
+     clear out the list if the current score > highestScore. Then we append the word with current highest score
+     if the score of the word = highest score, then we won't clear the list, we will continue to append the word to the list. At this point, we should have at least 2 words or more with the same highest score
+     
+     loop2) assumming the first item in the list is the shortest word
+     iterate through the word in the highestScorelist,
+     if the length of this word is 10, return the word in object structure right away
+     if the length of the word is shorter than the current word, then reassign the shortest word to the current word
+     return the shortest word and its rating at the end
+    */
     //empty an array arr.length = 0: https://www.javascripttutorial.net/array/4-ways-empty-javascript-array/
 
     let highestScore = 0;
