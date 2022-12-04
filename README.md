@@ -213,3 +213,5 @@ Encapsulate the functions in a class named `Adagrams`!
 - To export the `Adagrams` class, use the code `export default Adagrams` at the end of `adagrams.js`
 - Update the test file to use the `Adagrams` class. 
 - Remember, methods in classes are not comma-separated!
+
+
