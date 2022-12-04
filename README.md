@@ -215,3 +215,9 @@ Encapsulate the functions in a class named `Adagrams`!
 - Remember, methods in classes are not comma-separated!
 
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 487070283bcef5210c8c10f7713984b922b9909d

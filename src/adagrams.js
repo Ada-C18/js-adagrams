@@ -1,4 +1,6 @@
 class Adagrams {
+
+
   static drawLetters = () => {
     // Implement this method for wave 1
     const LETTER_POOL = {
@@ -42,6 +44,7 @@ class Adagrams {
     return userHand;
   };
 
+
   static usesAvailableLetters = (input, lettersInHand) => {
     // Implement this method for wave 2
     const itemCounter = (array, item) => {
@@ -68,6 +71,7 @@ class Adagrams {
     }
     return true;
   };
+
 
   static scoreWord = (word) => {
     // Implement this method for wave 3
@@ -99,7 +103,7 @@ class Adagrams {
       Y: 4,
       Z: 10,
     };
-
+    
     const wordUpper = word.toUpperCase();
 
     let score = 0;
