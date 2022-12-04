@@ -79,7 +79,6 @@ export const usesAvailableLetters = (input, lettersInHand) => {
       return false;
     }
   }
-  console.log(pizza);
   return true;
 };
 
