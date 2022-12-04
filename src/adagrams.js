@@ -86,7 +86,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
   const lettersInHandCount = {};
   for (const letter of lettersInHand) {
-    if (lettersInHandCount.hasOwnProperty(letter)) {
+    if (letter in lettersInHandCount) {
       lettersInHandCount[letter] += 1;
     } else {
       lettersInHandCount[letter] = 1;
@@ -94,7 +94,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   }
 
   for (const letter of input) {
-    if (!(lettersInHandCount.hasOwnProperty(letter)) || lettersInHandCount[letter] === 0) {
+    if (!(letter in lettersInHandCount) || lettersInHandCount[letter] === 0) {
       return false;
     } else {
       lettersInHandCount[letter] -= 1;
