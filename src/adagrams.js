@@ -27,29 +27,40 @@ const letterPool = {
   Z: 1,
 };
 export const drawLetters = () => {
-  let arrayLetters = "";
+  let allLetters = "";
   for (let letter in letterPool) {
     const amountOftimes = letterPool[letter];
     for (let i = 0; i < amountOftimes; i++) {
-      arrayLetters += letter;
+      allLetters += letter;
     }
   }
-  let drawn = [];
+  let hand = [];
 
   for (let i = 0; i < 10; i++) {
-    let letter = arrayLetters.charAt(
-      Math.floor(Math.random() * arrayLetters.length)
+    let letter = allLetters.charAt(
+      Math.floor(Math.random() * allLetters.length)
     );
     // If letter is in array 9 times then do another loop
-    arrayLetters = arrayLetters.replace(letter, "");
-    drawn.push(letter);
+    allLetters = allLetters.replace(letter, "");
+    hand.push(letter);
   }
-  console.log(drawn);
-  return drawn;
+  return hand;
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  let arrayOfInputValues = Array.from(input);
+  // console.log(`This is the new array created ${arrayOfInputValues}`);
+
+  // check if each individual charcter is found in the lettersInHand
+  for (let i = 0; i < arrayOfInputValues.length; i++) {
+    console.log(
+      `This is the characters you have in your hand ${lettersInHand}`
+    );
+    // This access the characters in the array
+    // console.log(arrayOfInputValues[i]);
+    // checks if an object is an a array
+    console.log(lettersInHand.includes(arrayOfInputValues[i]));
+  }
 };
 
 export const scoreWord = (word) => {
