@@ -102,5 +102,45 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  const wordWScore = [];
+  for (const word of words) {
+    wordWScore.push({
+      word: word,
+      score: scoreWord(word),
+    });
+  }
+
+  let highest = wordWScore[0];
+  for (const wordObj of wordWScore) {
+    if (wordObj.score > highest.score) {
+      highest = wordObj;
+    }
+  }
+
+  const wordObjBestScore = checkTie(highest, wordWScore);
+  return wordObjBestScore;
+};
+
+const checkTie = (highest, wordWScore) => {
+  const sameScores = [];
+  for (const wordObj of wordWScore) {
+    if (wordObj.score === highest.score) {
+      sameScores.push(wordObj);
+    }
+  }
+
+  if (sameScores.length === 1) {
+    return highest;
+  }
+
+  let tieBreakerWordObj = sameScores[0];
+  for (const wordObj of sameScores) {
+    const word = wordObj.word;
+    if (word.length === 10) {
+      return wordObj;
+    } else if (word.length < tieBreakerWordObj.word.length) {
+      tieBreakerWordObj = wordObj;
+    }
+  }
+  return tieBreakerWordObj;
 };
