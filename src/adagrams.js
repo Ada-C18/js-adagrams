@@ -27,46 +27,46 @@ const POOL_OF_LETTERS = {
   Z: 1,
 };
 
-// export const drawLetters = () => {
-//   // Implement this method for wave 1
-//   let weight = [];
-//   for (const [key, value] of Object.entries(POOL_OF_LETTERS)) {
-//     for (let i = 0; i < value; i++) {
-//       weight.push(key);
-//     }
-//   }
-//   // console.log(weight);
-//   let letters = [];
-//   for (let i = 0; i < 10; i++) {
-//     let index = Math.floor(Math.random() * weight.length);
-//     let letter = weight[index];
-//     letters.push(letter);
-//     weight.splice(index, 1);
-//   }
-//   return letters;
-// };
+export const drawLetters = () => {
+  // Implement this method for wave 1
+  let weight = [];
+  for (const [key, value] of Object.entries(POOL_OF_LETTERS)) {
+    for (let i = 0; i < value; i++) {
+      weight.push(key);
+    }
+  }
+  // console.log(weight);
+  let letters = [];
+  for (let i = 0; i < 10; i++) {
+    let index = Math.floor(Math.random() * weight.length);
+    let letter = weight[index];
+    letters.push(letter);
+    weight.splice(index, 1);
+  }
+  return letters;
+};
 
-// export const usesAvailableLetters = (input, lettersInHand) => {
-//   // Implement this method for wave 2
-//   let counter = {};
-//   lettersInHand.forEach((letter) => {
-//     if (letter in counter) {
-//       counter[letter]++;
-//     } else {
-//       counter[letter] = 1;
-//     }
-//   });
-//   console.log(counter);
+export const usesAvailableLetters = (input, lettersInHand) => {
+  // Implement this method for wave 2
+  let counter = {};
+  lettersInHand.forEach((letter) => {
+    if (letter in counter) {
+      counter[letter]++;
+    } else {
+      counter[letter] = 1;
+    }
+  });
+  console.log(counter);
 
-//   for (const c of input) {
-//     if (c in counter && counter[c] > 0) {
-//       counter[c]--;
-//     } else {
-//       return false;
-//     }
-//   }
-//   return true;
-// };
+  for (const c of input) {
+    if (c in counter && counter[c] > 0) {
+      counter[c]--;
+    } else {
+      return false;
+    }
+  }
+  return true;
+};
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
