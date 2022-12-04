@@ -1,6 +1,6 @@
 // import {
 //   LETTER_POOL
-// } from "data";
+// } from "../src/data.js";
 
 export const drawLetters = () => {
   // Implement this method for wave 1
@@ -111,4 +111,24 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+  let highScore = ['', 0];
+  for (let i = 0; i < words.length; i++) {
+    if (scoreWord(words[i]) > highScore[1]) {
+      highScore[1] = scoreWord(words[i])
+      highScore[0] = words[i]
+    } else if (scoreWord(words[i]) === highScore[1]) {
+      let highWord = highScore[0]; {
+      if (highWord.length === 10) {continue; } 
+      if (words[i].length===10) {
+        highScore[0] = words[i];
+      } else if (words[i].length < highWord.length) {
+        highScore[0] = words[i];
+      }
+      } 
+    }
+    
+  }
+  let retObj = {'score': highScore[1], 'word': highScore[0]};
+  return retObj
+  // return `{'score': ${highScore[1]}, 'word': '${highScore[0]}'}`;
 };
