@@ -1,4 +1,4 @@
-// import { hasOwnMetadata } from "core-js/fn/reflect";
+// import { hasOwnMetadata } from 'core-js/fn/reflect';
 const LETTER_POOL = {
   A: 9,
   B: 2,
@@ -60,10 +60,38 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   return true;
 };
 
-// export const scoreWord = (word) => {
-//   // Implement this method for wave 3
-// };
+export const scoreWord = (word) => {
+  // Implement this method for wave 3
+  let pointValues = {
+    1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
+    2: ['D', 'G'],
+    3: ['B', 'C', 'M', 'P'],
+    4: ['F', 'H', 'V', 'W', 'Y'],
+    5: ['K'],
+    8: ['J', 'X'],
+    10: ['Q', 'Z'],
+  };
 
+  let score = 0;
+  let upperWord = word.toUpperCase();
+  if (upperWord.length >= 7) {
+    score += 8;
+  }
+  for (let char of upperWord) {
+    for (const letterVal of Object.values(pointValues)) {
+      if (letterVal.includes(char)) {
+        let points = getKeyByValue(pointValues, letterVal);
+        let pointsInt = parseInt(points[0]);
+        score += pointsInt;
+      }
+    }
+  }
+  return score;
+};
+
+function getKeyByValue(obj, letterVal) {
+  return Object.entries(obj).find((i) => i[1] === letterVal);
+}
 // export const highestScoreFrom = (words) => {
 //   // Implement this method for wave 4
 // };
