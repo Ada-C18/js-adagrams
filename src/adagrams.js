@@ -84,7 +84,7 @@ export const scoreWord = (word) => {
   for (let char of wordUpper) {
     for (let elem of Object.keys(SCORE_CHART)) {
       if (elem.includes(char)) {
-        score += SCORE_CHART[elem];
+        score += SCORE_CHART[elem]; // adds value at that element (key)
       }
     }
   }
@@ -97,12 +97,33 @@ export const scoreWord = (word) => {
 ////////\\\\\\\    WAVE 4    ///////\\\\\\\\\\
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  let highestScore = 0;
+  let winningWord = null;
+
+  for (let word of words) {
+    if (scoreWord(word) > highestScore) {
+      highestScore = scoreWord(word);
+      winningWord = word;
+    } else if (scoreWord(word) === highestScore) {
+      if (word.length === winningWord.length || winningWord.length === 10) {
+        continue; // goes back to top of loop
+      } else if (word.length === 10) {
+        winningWord = word;
+      } else if (word.length < winningWord.length) {
+        winningWord = word;
+      }
+      console.log(winningWord, highestScore);
+    }
+  }
+  return {
+    word: winningWord,
+    score: highestScore,
+  };
 };
 
 //////\\\\    PSEUDOCODE    ////\\\\\\\
 
 // 1. initialize an empty string to hold highest scoring word
-// 2. initialize a variable to hold highest score 
-// 3. Score each word in words array 
-// 4. 
+// 2. initialize a variable to hold highest score
+// 3. Score each word in words array
+// 4.
