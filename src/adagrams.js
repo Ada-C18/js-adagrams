@@ -133,16 +133,38 @@ export const scoreWord = (word) => {
   console.log(word.length);
   if (7 <= word.length && word.length <= 10) {
     wordTotal += 8;
-    console.log(wordTotal);
   }
 
   for (const letter of upperCaseWord) {
     wordTotal += scoreDict[letter];
   }
-  console.log(wordTotal);
   return wordTotal;
 };
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+  const wordArr = words
+    .sort()
+    .map((word) => ({ word: word }))
+    .map((o) => {
+      o.score = scoreWord(o.word);
+      return o;
+    });
+
+  let highestScore = wordArr.reduce((maxScore, o) => {
+    if (o.score > maxScore) {
+      maxScore = o.score;
+    }
+    return maxScore;
+  }, -Infinity);
+
+  let highestScoringWords = [];
+
+  for (const o of wordArr) {
+    if (o.score === highestScore) {
+      highestScoringWords.push(o);
+    }
+  }
+
+  return highestScoringWords[0];
 };
