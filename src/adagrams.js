@@ -65,7 +65,7 @@ export const drawLetters = () => {
 
   // declare inital values
   let letters = [];
-  let letterPool = LETTER_POOL;
+  const letterPool = { ...LETTER_POOL };
 
   // loop until 10 letters
   while (letters.length < 10) {
