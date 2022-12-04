@@ -53,8 +53,21 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   for (let i = 0; i < arrayOfInputValues.length; i++) {
     let isStringValid = lettersInHand.includes(arrayOfInputValues[i]);
     arrayOfInputValuesBools.push(isStringValid);
+    // delete character from the list at hand
   }
   return arrayOfInputValuesBools.every((element) => element === true);
+  // for (let i = 0; i < arrayOfInputValues.length; i++) {
+  //   let isStringValid = lettersInHand.includes(arrayOfInputValues[i]);
+  //   if (isStringValid === true) {
+  //     arrayOfInputValuesBools.push(isStringValid);
+  //     // delete the characher from the array
+  //   }
+  // }
+  // if (arrayOfInputValuesBools.every((element) => element === true)) {
+  //   return true;
+  // } else {
+  //   return false;
+  // }
 };
 
 export const scoreWord = (word) => {
