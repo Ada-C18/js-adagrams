@@ -48,7 +48,24 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  let letters = {};
+  let alphaStart = 65;
+  for (let i = 0; i < 26; i += 1) {
+    letters[String.fromCharCode(alphaStart + i)] = 0;
+  }
+  for (let letter of lettersInHand) {
+    letters[letter] += 1;
+  }
+  for (let char of input) {
+    // construct a new RegExp object
+    let re = new RegExp(char, "gi");
+    // pass the new RegExp object into match (unable to use regular 'char' here)
+    let count = input.match(re).length;
+    if (count > letters[char]) {
+      return false;
+    }
+  }
+  return true;
 };
 
 export const scoreWord = (word) => {
