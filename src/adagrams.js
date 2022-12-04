@@ -59,7 +59,7 @@ export const drawLetters = () => {
   return returnList;
 };
 
-export const usesAvailableLetters = (word, letterBank) => {
+export export const usesAvailableLetters = (word, letterBank) => {
   let letters = letterBank.copyWithin();
   const checkWord = []
   for (let letter of word.toUpperCase()) {
