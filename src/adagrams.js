@@ -69,18 +69,18 @@ export const drawLetters = () => {
   return lettersInHand;
 };
 
-// create frequency object literal in function
-// randomly select letters
-// if they the value of the letter key in our object literal is <=
-// to the value of that same letter key in LETTER_POOL
-// --> then add one to that value in frequency object literal
-// --> add that letter to the hand
-// --> continue the loop
-// ELSE --> continue the loop
-// return the hand
-
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  const copyHand = lettersInHand.slice();
+  for (let i = 0; i < input.length; i++) {
+    let currentLetterIndex = copyHand.indexOf(input[i]);
+    if (currentLetterIndex > -1) {
+      copyHand.splice(currentLetterIndex, 1);
+    } else {
+      return false;
+    }
+  }
+  console.log(pizza);
+  return true;
 };
 
 export const scoreWord = (word) => {
