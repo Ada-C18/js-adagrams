@@ -30,9 +30,9 @@ export const drawLetters = () => {
     M: 2,
     Z: 1,
   };
-  //array letter bag for (const element of array1) 'in' for objects 'of' for arrays
-  for (const [letter, value] of Object.entries(letterObj)) {
-    for (let i = 0; i < value; i++) {
+  //array letter bag for (const element of array1) 'in' for objects 'of' for arrays PYTHON VERSION of dict.items()
+  for (const [letter, amount] of Object.entries(letterObj)) {
+    for (let i = 0; i < amount; i++) {
       letterBag.push(letter);
     }
   }
@@ -51,18 +51,22 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
+  //iterate over each letter, if letter in lettersInHand remove it from lettersInHand to make sure it can't be used again.
   for (const l of input) {
     if (lettersInHand.includes(l)) {
       lettersInHand.splice(l, 1);
     } else {
+      //If a letter isn't in lettersInHand return false to discontinue play.
       return false;
     }
   }
+  //returns true because it went through full loop without returning out
   return true;
 };
 
 export const scoreWord = (word) => {
   //wave3
+  // convert word to uppercase
   word = word.toUpperCase();
   const scoreObj = {
     A: 1,
@@ -93,27 +97,64 @@ export const scoreWord = (word) => {
     Z: 10,
   };
   let score = 0;
-  //guard condition
-  if (typeof word !== 'string' || word === "") {
+  //guard condition returns score
+  if (typeof word !== 'string' || word === '') {
     return score;
   }
+  //if letter is score object, add the value of that letter to 'score
   for (let letter of word) {
     if (letter in scoreObj) {
       score += scoreObj[letter];
     }
   }
+  //if length of word is more than 7 chars, add 8 points
   if (word.length >= 7) {
     score += 8;
   }
   return score;
 };
-
+//wave 4
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
-  // if letter in object: score+=i
-  //compare scores {{word:score},{word:score},{word:score}} by order? by iterating 'let highest=0' highest<i highest===i
-  //return obj{word:score}
-  //tie: word with fewest letters word.length < word
-  //tie: unless word.length === 10;
-  //tie: if word === word+1 return word (first)
+  let wordArr = [];
+  let highScore = { word: '', score: 0 };
+  let highScoreArr = [];
+  let low = { word: 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz', score: 0 };
+  for (const word of words) {
+    //use helper function above to score
+    const wordObj = { word: word, score: scoreWord(word) };
+    wordArr.push(wordObj);
+  }
+  for (const obj of wordArr) {
+    if (obj.score >= highScore.score) {
+      highScore = obj;
+    }
+    highScoreArr.push(highScore);
+    
+  }
+  //TIE LOGIC
+  if (highScoreArr.length > 1){
+  for (const obj of highScoreArr) {
+    if (obj.word.length === 10) {
+      return highScore = obj;
+    }
+
+    if (obj.word.length === low.word.length) {
+       highScore = low;
+    }
+
+    if (obj.word.length < low.word.length) {
+      low = obj;
+      highScore = low
+      
+    } 
+   
+  }}
+  return highScore;
 };
+
+
+//compare scores [{word:score},{word:score},{word:score}] by iterating 'let highScore=0' highScore<i highScore===i
+//return obj{word:score}
+//tie: word with fewest letters word.length < word
+//tie: unless word.length === 10;
+//tie: if word === word+1 return word (first)
