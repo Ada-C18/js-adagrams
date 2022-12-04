@@ -124,6 +124,7 @@ export const highestScoreFrom = (words) => {
   const maxScoreList = wordScores.filter(
     (wordObj) => wordObj.score === maxScore
   );
+
   const winner = maxScoreList.reduce((prev, current) =>
     prev.word.length >= 10 ||
     (prev.word.length < current.word.length && !(current.word.length === 10))
