@@ -53,11 +53,13 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   for (let i = 0; i < 26; i += 1) {
     letters[String.fromCharCode(alphaStart + i)] = 0;
   }
+
   for (let letter of lettersInHand) {
     letters[letter] += 1;
   }
+
   for (let char of input) {
-    // construct a new RegExp object
+    // construct a new RegExp object. 'gi' is global, case-insensitive
     let re = new RegExp(char, "gi");
     // pass the new RegExp object into match (unable to use regular 'char' here)
     let count = input.match(re).length;
