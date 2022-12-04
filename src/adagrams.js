@@ -144,7 +144,6 @@ export const scoreWord = (word) => {
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
   const wordArr = words
-    .sort()
     .map((word) => ({ word: word }))
     .map((o) => {
       o.score = scoreWord(o.word);
@@ -163,6 +162,28 @@ export const highestScoreFrom = (words) => {
   for (const o of wordArr) {
     if (o.score === highestScore) {
       highestScoringWords.push(o);
+    }
+  }
+  if (highestScoringWords.length === 1) {
+    return highestScoringWords[0];
+  } else if (highestScoringWords.length > 1) {
+    // sort highestScoringwords with shortest words first
+    // highestScoringWords.sort((a, b) => {
+    //   if (a.word.length < b.word.length) {
+    //     return -1;
+    //   }
+    //   if (a.word.length > b.word.length) {
+    //     return 1;
+    //   }
+    //   return 0;
+    // });
+    highestScoringWords.sort((a, b) => a.word.length - b.word.length);
+    // console.log(highestScoringWords);
+  }
+
+  for (const o of highestScoringWords) {
+    if (o.word.length >= 10) {
+      return o;
     }
   }
 
