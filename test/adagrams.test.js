@@ -120,7 +120,15 @@ describe("scoreWord", () => {
     });
   });
 
-    it("returns a score of 0 if given an empty input", () => {
+  it("returns a score regardless of the input case", () => {
+    expectScores({
+      a: 1,
+      dog: 5,
+      wHiMsY: 17,
+    });
+  });
+  
+  it("returns a score of 0 if given an empty input", () => {
       expectScores({
         "": 0,
       });
