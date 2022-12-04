@@ -33,7 +33,6 @@ export const drawLetters = () => {
   };
 
   const letterBowl = [];
-  // const letterBowlCopy = Array.from(letterBowl);
 
   Object.keys(availableLetters).forEach((key) => {
     const quantity = availableLetters[key];
@@ -44,15 +43,13 @@ export const drawLetters = () => {
 
   const letterHand = [];
   for (let i = 0; i < 10; i++) {
-    const randomLetter =
-      letterBowl[Math.floor(Math.random() * letterBowl.length)];
+    const i = Math.floor(Math.random() * letterBowl.length);
+    const randomLetter = letterBowl[i];
     letterHand.push(randomLetter);
-    letterBowl.splice(randomLetter, 1);
+    letterBowl.splice(i, 1);
   }
-  // console.log(letterHand);
   return letterHand;
 };
-// drawLetters();
 
 // export const usesAvailableLetters = (input, lettersInHand) => {
 //   // Implement this method for wave 2
