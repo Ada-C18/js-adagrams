@@ -54,7 +54,24 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  let available_letters = [];
+
+  for (let index in lettersInHand) {
+    let letter = lettersInHand[index];
+    let letter_capitalize = letter.toUpperCase();
+    available_letters.push(letter_capitalize);
+  }
+
+  for (let index in input) {
+    let letter = input[index];
+    let letter_capitalize = letter.toUpperCase();
+    if (available_letters.includes(letter_capitalize)) {
+      available_letters.splice(letter_capitalize, 1);
+    } else {
+      return false;
+    }
+  }
+  return true;
 };
 
 export const scoreWord = (word) => {
