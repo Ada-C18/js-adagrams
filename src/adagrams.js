@@ -123,5 +123,42 @@ export const scoreWord = (word) => {
 
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
-};
+  let dictOfScores = {}
+
+  for (let word of words) {
+    let wordScore = scoreWord(word);
+    dictOfScores[word] = wordScore;
+  } 
+  let highestScore = 0
+  for (let [key, value] of Object.entries(dictOfScores)){
+    if (value > highestScore){
+      highestScore = value;
+    } 
+    } 
+  let highestWords = []
+  for (let [key, value] of Object.entries(dictOfScores)) {
+    if (value === highestScore){
+      highestWords.push(key);
+    } 
+    if (highestWords.length === 1) {
+      return { word: highestWords[0], score: scoreWord(highestWords[0]) };
+    } else {
+    let bestWord = highestWords[0]
+    let counter = 1
+    while (counter < highestWords.length){
+    if (highestWords[counter].length === 10) {
+    bestWord = highestWords[counter];
+    } else if (highestWords[counter].length < bestWord.length && bestWord.length !== 10) {
+        bestWord = highestWords[counter];
+      }  
+
+      counter += 1
+    } 
+  } 
+  } return {word: bestWord, score: scoreWord(bestWord)}
+  }
+    highestScoreFrom(["X", "XX", "XXX", "XXXX"])
+  
+
+
+  
