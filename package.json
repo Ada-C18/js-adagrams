@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "JavaScript version of the Adagrams project",
   "main": "index.js",
+
+
+
+  
+
   "scripts": {
     "test": "jest",
     "coverage": "open coverage/lcov-report/index.html",
