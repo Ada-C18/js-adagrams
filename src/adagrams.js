@@ -116,11 +116,6 @@ const scoreWord = (word) => {
   return score;
 }; */
 
-// export const replaceHighestValues = (highestObject, newWord, newScore) => {
-//   highestObject[word] = newWord;
-//   highestObject[score] = newScore;
-// };
-
 export const highestScoreFrom = (words) => {
   let highestWord = '';
   let highestScore = 0;
@@ -128,6 +123,7 @@ export const highestScoreFrom = (words) => {
   for (const word of words) {
     const wordScore = scoreWord(word);
     console.log(wordScore, word);
+
     if (wordScore > highestScore) {
       highestWord = word;
       highestScore = wordScore;
