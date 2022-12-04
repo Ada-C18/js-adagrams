@@ -74,7 +74,31 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 };
 
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
+  const letterScores = {
+    1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
+    2: ['D', 'G'],
+    3: ['B', 'C', 'M', 'P'],
+    4: ['F', 'H', 'V', 'W', 'Y'],
+    5: ['K'],
+    8: ['J', 'X'],
+    10: ['Q', 'Z'],
+  };
+
+  let score = 0;
+
+  for (const property in letterScores) {
+    for (const letter of word) {
+      if (letterScores[property].includes(letter.toUpperCase())) {
+        score += parseFloat(property);
+      }
+    }
+  }
+
+  if (word.length > 6 && word.length < 11) {
+    score += 8;
+  }
+
+  return score;
 };
 
 export const highestScoreFrom = (words) => {
