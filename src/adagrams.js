@@ -64,7 +64,6 @@ const SCORECHART = {
 export const drawLetters = () => {
   // Implement this method for wave 1
   const letterBank = [];
-  const indexNumbersChosen = [];
   const handOfLetters = [];
   
   for (const [k, v] of Object.entries(LETTERPOOL)) {
@@ -74,10 +73,8 @@ export const drawLetters = () => {
   while (handOfLetters.length < 10) {
     let randomIndexNumber = Math.floor(Math.random() * letterBank.length);
 
-    if (!(randomIndexNumber in indexNumbersChosen)) {
-      handOfLetters.push(letterBank[randomIndexNumber]);
-      indexNumbersChosen.push(randomIndexNumber);
-    }
+    handOfLetters.push(letterBank[randomIndexNumber]);
+    letterBank.splice(randomIndexNumber, 1);
   }
   return handOfLetters;
 };
@@ -121,4 +118,12 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+  const wordScores = {}
+
+  for (const word of words) {
+    let score = scoreWord(word);
+    wordScores[word] = score
+  }
+
+
 };
