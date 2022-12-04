@@ -125,4 +125,33 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+let wordMap = new Map()
+let maxScore = 0
+let winningWords = []
+let tenLetterWinningWords = []
+
+  for (let word of words) {
+    let score = scoreWord(word)
+    wordMap.set(word, score)
+    if (score > maxScore) {
+      maxScore = score
+    }
+  } 
+  // destructuring
+  for (let [word,score] of wordMap) {
+    if (score === maxScore) {
+      if (word.length === 10) {
+        tenLetterWinningWords.push(word)
+      } else {
+      winningWords.push(word)
+    }
+  }
+  }
+  if (tenLetterWinningWords.length > 0) {
+    return {word : tenLetterWinningWords[0], score : maxScore}
+    } else {
+      if (winningWords.length > 1 && winningWords.length != 10 ) {
+        winningWords.sort((a, b) => a.length - b.length)
+      } return {word : winningWords[0], score : maxScore}
+    }
 };
