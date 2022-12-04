@@ -103,6 +103,60 @@ export const scoreWord = (word) => {
   return score;
 };
 
-//export const highestScoreFrom = (words) => {
-// Implement this method for wave 4
-//};
+export const highestScoreFrom = (words) => {
+  // Implement this method for wave 4
+  const scoreChart = {
+    1: ["A", "E", "I", "O", "U", "L", "N", "R", "S", "T"],
+    2: ["D", "G"],
+    3: ["B", "C", "M", "P"],
+    4: ["F", "H", "V", "W", "Y"],
+    5: ["K"],
+    8: ["J", "X"],
+    10: ["Q", "Z"],
+  };
+
+  const scoreLetters = Object.values(scoreChart);
+  const scorePoints = Object.keys(scoreChart);
+
+  let highScore = 0;
+  let highScoreWord = "";
+
+  for (let word of words) {
+    let score = 0;
+    for (let i = 0; i < word.length; i++) {
+      let currentLetter = word[i].toUpperCase();
+      for (let j = 0; j < scoreLetters.length; j++) {
+        if (scoreLetters[j].includes(currentLetter)) {
+          score = score + parseInt(scorePoints[j]);
+        }
+      }
+    }
+    if (
+      word.length === 7 ||
+      word.length === 8 ||
+      word.length === 9 ||
+      word.length === 10
+    ) {
+      score = score + 8;
+    }
+    if (highScore < score) {
+      highScore = score;
+      highScoreWord = word;
+    } else if (highScore === score) {
+      if (word.length < 10) {
+        if (highScoreWord.length === 10) {
+          break;
+        } else if (word.length < highScoreWord.length) {
+          highScoreWord = word;
+        }
+      } else if (word.length === 10) {
+        if (highScoreWord.length === 10) {
+          break;
+        }
+        highScoreWord = word;
+      }
+    }
+  }
+
+  return { score: highScore, word: highScoreWord };
+};
