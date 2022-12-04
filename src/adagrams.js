@@ -40,7 +40,6 @@ export const drawLetters = () => {
     let letter = allLetters.charAt(
       Math.floor(Math.random() * allLetters.length)
     );
-    // If letter is in array 9 times then do another loop
     allLetters = allLetters.replace(letter, "");
     hand.push(letter);
   }
@@ -49,18 +48,13 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   let arrayOfInputValues = Array.from(input);
-  // console.log(`This is the new array created ${arrayOfInputValues}`);
+  let arrayOfInputValuesBools = [];
 
-  // check if each individual charcter is found in the lettersInHand
   for (let i = 0; i < arrayOfInputValues.length; i++) {
-    console.log(
-      `This is the characters you have in your hand ${lettersInHand}`
-    );
-    // This access the characters in the array
-    // console.log(arrayOfInputValues[i]);
-    // checks if an object is an a array
-    console.log(lettersInHand.includes(arrayOfInputValues[i]));
+    let isStringValid = lettersInHand.includes(arrayOfInputValues[i]);
+    arrayOfInputValuesBools.push(isStringValid);
   }
+  return arrayOfInputValuesBools.every((element) => element === true);
 };
 
 export const scoreWord = (word) => {
