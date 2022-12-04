@@ -3,7 +3,6 @@ import {
   drawLetters,
   usesAvailableLetters,
   scoreWord,
-  replaceHighestValues,
   highestScoreFrom,
 } from 'adagrams';
 

@@ -56,13 +56,18 @@ const SCORE_DICT = {
   Z: 10,
 };
 
-export const drawLetters = () => {
+const createLetterPoolArray = () => {
   const letterPoolArray = [];
   for (const [k, v] of Object.entries(LETTER_POOL)) {
     for (let i = 0; i < v; i++) {
       letterPoolArray.push(k);
     }
   }
+  return letterPoolArray;
+};
+
+export const drawLetters = () => {
+  const letterPoolArray = createLetterPoolArray();
 
   let hand = [];
   for (let i = 0; i < 10; i++) {
@@ -106,7 +111,6 @@ const scoreWord = (word) => {
 
   wordArray.forEach((letter) => {
     score += SCORE_DICT[letter.toUpperCase()];
-    console.log(SCORE_DICT[letter.toUpperCase()]);
   });
 
   if (wordArray.length >= 7) {
@@ -122,19 +126,17 @@ export const highestScoreFrom = (words) => {
 
   for (const word of words) {
     const wordScore = scoreWord(word);
-    console.log(wordScore, word);
 
     if (wordScore > highestScore) {
       highestWord = word;
       highestScore = wordScore;
     } else if (wordScore === highestScore) {
+
       if (word.length === 10 && highestWord.length !== 10) {
         highestWord = word;
         highestScore = wordScore;
-      } else if (
-        word.length < highestWord.length &&
-        highestWord.length !== 10
-      ) {
+
+      } else if (word.length < highestWord.length && highestWord.length !== 10) {
         highestWord = word;
         highestScore = wordScore;
       }
