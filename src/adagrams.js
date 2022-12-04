@@ -116,6 +116,34 @@ const scoreWord = (word) => {
   return score;
 }; */
 
+// export const replaceHighestValues = (highestObject, newWord, newScore) => {
+//   highestObject[word] = newWord;
+//   highestObject[score] = newScore;
+// };
+
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  let highestWord = '';
+  let highestScore = 0;
+
+  for (const word of words) {
+    const wordScore = scoreWord(word);
+    console.log(wordScore, word);
+    if (wordScore > highestScore) {
+      highestWord = word;
+      highestScore = wordScore;
+    } else if (wordScore === highestScore) {
+      if (word.length === 10 && highestWord.length !== 10) {
+        highestWord = word;
+        highestScore = wordScore;
+      } else if (
+        word.length < highestWord.length &&
+        highestWord.length !== 10
+      ) {
+        highestWord = word;
+        highestScore = wordScore;
+      }
+    }
+  }
+
+  return { word: highestWord, score: highestScore };
 };
