@@ -28,13 +28,13 @@ const LETTER_POOL = {
 };
 
 export const drawLetters = () => {
-  let lettersStr = "";
+  let lettersStr = '';
   for (const letter in LETTER_POOL) {
     const allLetters = letter.repeat(LETTER_POOL[letter]);
     lettersStr += allLetters;
   }
 
-  const lettersArr = lettersStr.split("");
+  const lettersArr = lettersStr.split('');
 
   const drawnIndices = [];
   while (drawnIndices.length < 10) {
@@ -56,7 +56,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   const letterFrequency = {};
 
   for (const letter of lettersInHand) {
-    if (letter in letterFrequency === false) {
+    if (!(letter in letterFrequency)) {
       letterFrequency[letter] = 1;
     } else {
       letterFrequency[letter] += 1;
@@ -64,12 +64,10 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   }
 
   for (const char of input) {
-    if (letterFrequency[char] === undefined) {
-      return false;
-    } else if (letterFrequency[char] === 0) {
-      return false;
-    } else if (letterFrequency[char] >= 1) {
+    if (letterFrequency[char] >= 1) {
       letterFrequency[char] -= 1;
+    } else if (!letterFrequency[char]) {
+      return false;
     }
   }
   return true;
