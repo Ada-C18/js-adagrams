@@ -47,5 +47,25 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  // collect pairs of words and scores, find max
+  let scores = words.map((word) => ({ word, score: scoreWord(word) }));
+  let max = Math.max(...scores.map((word) => word.score));
+
+  // filter low scores
+  let ties = scores.filter(({ _, score }) => {
+    return score === max;
+  });
+
+  // find any words with winning score and length 10
+  let len_10 = [];
+  for (let { word, score } of ties) {
+    if (word.length === 10) return { word, score };
+  }
+
+  // return first word with winning score and shortest length
+  let min_length = Math.min(...ties.map((word) => word.word.length));
+  for (let word of ties.filter(({ word, _ }) => word.length === min_length)) {
+    return word;
+  }
+  throw "No words supplied";
 };
