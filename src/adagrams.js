@@ -125,14 +125,13 @@ export const highestScoreFrom = (words) => {
   // if the list only has one word, return the word
   if (highestScoreWords.length === 1) {
     result.word = highestScoreWords[0]
-  // if more than one word, sort the list by length from longest to shorted
-  } else {
-    const sortedList = highestScoreWords.sort((a, b) => b.length - a.length);
-  // if the first word has a length of 10, return the word, if not return the last word
-    if (sortedList[0].length === 10) {
-        result.word = sortedList[0];
+  } else { 
+    const sortedListL = highestScoreWords.sort((a,b) => b.length - a.length);
+    if (sortedListL[0].length === 10) {
+      result.word = sortedListL[0];
     } else {
-        result.word = sortedList[sortedList.length - 1];
+      const sortedListS = highestScoreWords.sort((a,b) => a.length - b.length);
+      result.word = sortedListS[0];
     }
   }
   result.score = maxScore;
