@@ -29,27 +29,21 @@ const LETTER_POOL = {
 
 export const drawLetters = () => {
   let lettersStr = '';
-  for (const letter in LETTER_POOL) {
-    const allLetters = letter.repeat(LETTER_POOL[letter]);
-    lettersStr += allLetters;
-  }
-
+  Object.entries(LETTER_POOL).map(([key, value]) => {
+    lettersStr += key.repeat(value);
+  });
   const lettersArr = lettersStr.split('');
 
-  const drawnIndices = [];
-  while (drawnIndices.length < 10) {
-    const indexLetter = Math.floor(Math.random() * lettersArr.length);
-    if (!drawnIndices.includes(indexLetter)) {
-      drawnIndices.push(indexLetter);
+  const indices = [];
+  const letters = [];
+  while (letters.length < 10) {
+    const randomIndex = Math.floor(Math.random() * lettersArr.length);
+    if (!indices.includes(randomIndex)) {
+      indices.push(randomIndex);
+      letters.push(lettersArr[randomIndex]);
     }
   }
-
-  const drawnLetters = [];
-  for (const index of drawnIndices) {
-    const addLetter = lettersArr[index];
-    drawnLetters.push(addLetter);
-  }
-  return drawnLetters;
+  return letters;
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
