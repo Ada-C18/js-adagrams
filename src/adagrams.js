@@ -108,22 +108,26 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // Identify the letters
-
+  // Creates a list that has information about scores
+  let scoreInfo = [];
   for (let oneWord of words) {
-    // console.log(`This is the word: ${word}`);
-    let score = 0;
-    // console.log(`This is the score: ${score}`);
-    let word = oneWord;
-    // console.log(`This is the word:${word}`);
-    for (let letter of oneWord) {
-      score += letterPool[letter];
-      // console.log(
-      //   `This is letter ${letter} with the value ${letterPool[letter]}`
-      // );
-    }
-    // console.log(`This is the score: ${score}`);
+    let infoAboutWords = {};
+    let score = scoreWord(oneWord);
+    infoAboutWords["score"] = score;
+    infoAboutWords["word"] = oneWord;
+    scoreInfo.push(infoAboutWords);
   }
+  // compare the Objects
+  // console.log(scoreInfo.length);
+  for (let Index = 0; Index < scoreInfo.length; Index++) {
+    console.log(scoreInfo[Index]);
+    // want to access the score
+    console.log(scoreInfo[Index]["score"]);
+    // want to access the word
+    console.log(scoreInfo[Index]["word"]);
+  }
+
+  // console.log(infoAboutWords);
   // tie cases
   // words with fewest letter
   // word.length === 10 (winner) > words with fewest letter
