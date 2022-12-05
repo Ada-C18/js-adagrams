@@ -26,6 +26,37 @@ const LETTERPOOL = {
   Y: 2,
   Z: 1,
 };
+export const createScoreMap = () => {
+  const ScoreMap = new Map();
+  ScoreMap.set("A", 1);
+  ScoreMap.set("B", 3);
+  ScoreMap.set("C", 3);
+  ScoreMap.set("D", 2);
+  ScoreMap.set("E", 1);
+  ScoreMap.set("F", 4);
+  ScoreMap.set("G", 2);
+  ScoreMap.set("H", 4);
+  ScoreMap.set("I", 1);
+  ScoreMap.set("J", 8);
+  ScoreMap.set("K", 5);
+  ScoreMap.set("L", 1);
+  ScoreMap.set("M", 3);
+  ScoreMap.set("N", 1);
+  ScoreMap.set("O", 1);
+  ScoreMap.set("P", 3);
+  ScoreMap.set("Q", 10);
+  ScoreMap.set("R", 1);
+  ScoreMap.set("S", 1);
+  ScoreMap.set("T", 1);
+  ScoreMap.set("U", 1);
+  ScoreMap.set("V", 4);
+  ScoreMap.set("W", 4);
+  ScoreMap.set("X", 8);
+  ScoreMap.set("Y", 4);
+  ScoreMap.set("Z", 10);
+
+  return ScoreMap;
+};
 
 export const createLetterPool = () => {
   const letterPoolList = [];
@@ -66,24 +97,41 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   return true;
 };
 
-// for (let letter in input.toUpperCase()) {
-//   if (letter in lettersInHand === false) {
-//     return false;
-//   }
-//   if (letter in allLetters === false) {
-//     return false;
-//   }
-//   if (letter in allLetters) {
-//     let letterIndex = allLetters.indexOf(letter);
-//     allLetters.splice(letterIndex, 1);
-//   }
-// }
-// return true;
-
 export const scoreWord = (word) => {
   // Implement this method for wave 3
+  const scoreMap = createScoreMap();
+
+  let score = 0;
+
+  for (let letter of word.toUpperCase()) {
+    score += scoreMap.get(letter);
+  }
+  if (word.length >= 7) {
+    score += 8;
+  }
+  return score;
 };
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+
+  let highestScore = 0;
+  let highestWord = "";
+
+  for (let word of words) {
+    let wordScore = scoreWord(word);
+    if (wordScore > highestScore) {
+      let highestWord = word;
+      let highestScore = wordScore;
+    } else if (wordScore === highestScore) {
+      if (word.length === 10 && highestWord.length !== 10) {
+        let highestWord = word;
+        let highestScore = wordScore;
+      } else if (word.length < highestWord.length && highestWord !== 10) {
+        let highestWord = word;
+        let highestScore = wordScore;
+      }
+      return { highestWord, highestScore };
+    }
+  }
 };
