@@ -95,5 +95,21 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  /* 
+  setup:
+  - get shortest length and highest score of all words
+  - create empty array for winning words
+  finding highest scoring words:
+  - iterate over each word in words
+  - for each word, call scoreWord
+  - if scoreWord == highest score, add word to winning words array
+  - if scoreWord == highest score and its length is 10, it wins by default
+  tiebreaker conditions:
+  - if length of winning words array > 1,
+  - get shortest length of all winning words
+  - iterate over every winning word
+  - if its length == shortest length, return it
+  - if length of winning words array == 1,
+  - return winning word
+  */
 };
