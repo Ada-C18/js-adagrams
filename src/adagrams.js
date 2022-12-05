@@ -29,7 +29,7 @@ export const drawLetters = () => {
 }
   let letters=[]
   for(const letter of Object.keys(letterpool)){
-    for(let i =0; i < letterpool[letter];i++){
+    for(let i = 0; i < letterpool[letter];i++){
       letters.push(letter);
 
     }
@@ -60,13 +60,12 @@ export const scoreWord = (word) => {
   let point = 0
   for (let letter of word ){
       point +=letterValue[letter.toUpperCase()]
-  }
-  if (word.length >= 7){
+  } if (word.length >= 7){
     point += 8
   }
   return point
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  
 };
