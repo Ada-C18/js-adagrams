@@ -64,7 +64,6 @@ export const usesAvailableLetters = (input, lettersInHand) => {
     if (!lettersInHand.includes(input[i])) {
       return false;
     } else {
-      console.log(lettersInHand[lettersInHand.indexOf(input[i])]);
       lettersInHand.splice(lettersInHand.indexOf(input[i]), 1);
     }
   }
