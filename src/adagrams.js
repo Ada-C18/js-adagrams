@@ -36,7 +36,7 @@ export const drawLetters = () => {
   }
 
   for (let i = 0; i < 10; i++) {
-    const j = Math.floor(Math.random() * (lettersArr.length - i) + i);
+    let j = Math.floor(Math.random() * (lettersArr.length - i) + i);
     let selectedLetter = lettersArr[j];
     hand.push(selectedLetter);
     lettersArr[j] = lettersArr[i];
