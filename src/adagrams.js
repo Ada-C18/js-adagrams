@@ -118,7 +118,6 @@ export const scoreWord = (word) => {
   for (let i=0; i<word.length; i++) {
     total+=letterValue[upperCaseWord[i]]
   }
-  console.log(total)
   return total
 };
 
