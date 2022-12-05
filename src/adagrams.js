@@ -129,36 +129,57 @@ export const highestScoreFrom = (words) => {
     let wordScore = scoreWord(word);
     dictOfScores[word] = wordScore;
   } 
+
   let highestScore = 0
   for (let [key, value] of Object.entries(dictOfScores)){
     if (value > highestScore){
       highestScore = value;
-    } 
-    } 
-  let highestWords = []
-  for (let [key, value] of Object.entries(dictOfScores)) {
-    if (value === highestScore){
-      highestWords.push(key);
-    } 
-    if (highestWords.length === 1) {
-      return { word: highestWords[0], score: scoreWord(highestWords[0]) };
-    } else {
-    let bestWord = highestWords[0]
-    let counter = 1
-    while (counter < highestWords.length){
-    if (highestWords[counter].length === 10) {
-    bestWord = highestWords[counter];
-    } else if (highestWords[counter].length < bestWord.length && bestWord.length !== 10) {
-        bestWord = highestWords[counter];
-      }  
-
-      counter += 1
-    } 
-  } 
-  } return {word: bestWord, score: scoreWord(bestWord)}
+    }
   }
-    highestScoreFrom(["X", "XX", "XXX", "XXXX"])
+
+  let maxScoreDict = {}
+  for (let [key,value] of Object.entries(dictOfScores)){
+      if (value === highestScore){
+        maxScoreDict[key] = value
+      }
+    }
+  
+  let minLenWord = Object.keys(maxScoreDict)[0]
+  for (let [key,value] of Object.entries(maxScoreDict)){
+    if (key < minLenWord){
+      minLenWord = key
+    }
+  }
+  
+  for (let [key, value] of Object.entries(maxScoreDict)){
+    if (key.length === 10){
+      return {word: key, score: value}
+    }
+    if (key === minLenWord){
+      return {word: key, score: value}
+    }
+  }
   
 
+  // let highestWords = []
+  // for (let [key, value] of Object.entries(dictOfScores)) {
+  //   if (value === highestScore){
+  //     highestWords.push(key);
+  //   } 
+  //   if (highestWords.length === 1) {
+  //     return { word: highestWords[0], score: scoreWord(highestWords[0]) };
+  //   } else {
+  //   let bestWord = highestWords[0]
+  //   let counter = 1
+  //   while (counter < highestWords.length){
+  //   if (highestWords[counter].length === 10) {
+  //   bestWord = highestWords[counter];
+  //   } else if (highestWords[counter].length < bestWord.length && bestWord.length !== 10) {
+  //       bestWord = highestWords[counter];
+  //     }  
 
-  
+  //     counter += 1
+  //   } 
+  // } 
+  // } return {word: bestWord, score: scoreWord(bestWord)}
+  };
