@@ -39,10 +39,21 @@ export const drawLetters = () => {
   return shuffled.slice(0, 10);
 };
 
-// export const usesAvailableLetters = (input, lettersInHand) => {
-//   // Implement this method for wave 2
-// };
+export const usesAvailableLetters = (input, lettersInHand) => {
+  // Implement this method for wave 2
+  let letterBankCopy = lettersInHand.map((x) => x);
 
+  for (const letter of input) {
+    if (!letterBankCopy.includes(letter)) {
+      return false;
+    } else {
+      letterBankCopy = letterBankCopy.filter((x) => x !== letter);
+    }
+  }
+  return true;
+};
+
+// usesAvailableLetters("DOG", ["D", "O", "G", "X", "X", "X", "X", "X", "X", "X"]);
 // export const scoreWord = (word) => {
 //   // Implement this method for wave 3
 // };
