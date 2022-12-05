@@ -35,7 +35,7 @@ export const drawLetters = () => {
   };
   letterPool = letterPool.split('');
 
-  // draws 10 letters from letterPool based on a random index and removes drawn letters from the pool.
+  // draws 10 letters from letterPool based on a random index and removes drawn letters from the pool
   let letterDraw = [];
   while (letterDraw.length < 10) {
     const randomIndex = Math.floor(letterPool.length * Math.random());
@@ -46,17 +46,16 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  for (const letter in input.toUpperCase()) {
-    if (!lettersInHand.includes(letter)) {
-      return false 
+  // checks if each letter in input is in lettersInHand. Removes letters from lettersInHand until all input letters are confirmed to be in hand, returns false otherwise
+  const word = input.toUpperCase();
+  for (const letter in word) {
+    if (!lettersInHand.includes(word[letter])) {
+      return false
     };
-    let letterIndex = lettersInHand.indexOf(letter);
-    lettersInHand.splice(letterIndex, 1)
+    lettersInHand.splice(lettersInHand.indexOf(word[letter]), 1)
   };
-  return true 
+   return true
 };
-
-
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
