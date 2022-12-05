@@ -122,5 +122,33 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  let tieBreaker = [];
+  let highestScore = 0;
+
+  for (let word in words) {
+      let score = scoreWord(word);
+      if (score > highestScore) {
+          highestScore = score;
+          tieBreaker = [(word, score)];
+      else if (score === highestScore) {
+          tieBreaker.push((word, score));
+      }
+    }
+  }
+
+  let shortestWord = 11;
+  let winner = ("", 0);
+
+  for (eachWord in tieBreaker) {
+      let winnerResult = len(eachWord[0]);
+      if (winnerResult === 10) {
+          winner = eachWord; 
+          break;
+      else if (winnerResult < shortestWord) {
+          shortestWord = winnerResult;
+          winner = eachWord;
+      
+    }
+  }
+  return winner;
 };
