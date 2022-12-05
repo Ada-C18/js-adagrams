@@ -118,28 +118,17 @@ export const highestScoreFrom = (words) => {
       highest = scores;
       scoredWords.push(scores);
       winningWord.word = word;
-      winningWord.score = scores; 
+      winningWord.score = scores;
     } 
-  
-    if (scores === highest && word.length && word.length === 10){
-      continue;
-    }      
-    if (scores === highest && word.length != 10){
-      if (winningWord.word.length === 10){
-      continue;
-      }
-      else if (word.length < winningWord.word.length){
-        winningWord.word = word;
-        
-      }
-    if (scores === highest && winningWord.word.length === 10){
+    if (scores === highest && word.length === 10){
+      winningWord.word = word;
+    }
+    if (scores === highest && word.length && winningWord.word.length === 10){
       break;
+    } 
+    if (scores === highest && word.length < winningWord.word.length) {
+        winningWord.word = word;
+      } 
     }
-    }
-    }
-  
-  console.log(winningWord.word.length);
-  console.log(winningWord.word);
-  console.log(winningWord);
   return winningWord;
 };
