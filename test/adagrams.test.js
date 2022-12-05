@@ -178,7 +178,7 @@ describe('Adagrams', () => {
         expect(highestScoreFrom(words)).toEqual(correct);
         expect(highestScoreFrom(words.reverse())).toEqual(correct);
       });
-      //I added this because my game logic is set up to return the 10 letters, and the first one based on it being the first 'if' statement. I changed these strings to both have 9 letters instead of 10. Below is the orginal ten letter test, which also passes.
+      //I added this because my game logic is set up to return the '10 letters' and the very first one, which might fail under tie words under 10.
       it('selects the first word when both have same length of 9', () => {
         const words = ['AAAAAAAAA', 'EEEEEEEEE'];
         const first = {
@@ -194,6 +194,8 @@ describe('Adagrams', () => {
         expect(highestScoreFrom(words)).toEqual(first);
         expect(highestScoreFrom(words.reverse())).toEqual(second);
       });
+
+      //check matching words that are 10 letters
       it('selects the first word when both have same length of 10', () => {
         const words = ['AAAAAAAAAA', 'EEEEEEEEEE'];
         const first = {
@@ -209,6 +211,8 @@ describe('Adagrams', () => {
         expect(highestScoreFrom(words)).toEqual(first);
         expect(highestScoreFrom(words.reverse())).toEqual(second);
       });
+
+      //check multiple tie words (since the others are just 2 words and sorted (ascending and descending) as a result which may let bugs fall through with tie arrays that are greater than 2, unsorted)
       it('selects the correct word of multiple words and unsorted to check tie logic for edge cases', () => {
         const words = ['XD', 'Z', 'AAAAFG', 'KDAAA'];
         const correct = { word: 'Z', score: scoreWord('Z') };
