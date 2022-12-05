@@ -27,6 +27,16 @@ const LETTERPOOL = {
   'Z': 1
 };
 
+const SCORECHART = {
+  'AEIOULNRST': 1,
+  'DG': 2,
+  'BCMP': 3,
+  'FHVWY': 4,
+  'K': 5,
+  'JX': 8,
+  'QZ': 10
+};
+
 const buildLetterPool = (LETTERPOOL) => {
   let letterPool = '';
 
@@ -68,7 +78,20 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
+  let score = 0;
 
+  if (7 <= word.length && word.length <= 10){
+    score += 8;
+  }
+
+  for (const [letters, points] of Object.entries(SCORECHART)){
+    for (const char of word.toUpperCase()){
+      if (letters.includes(char)){
+        score += points;
+      }
+    }
+  }
+  return score
 };
 
 // export const highestScoreFrom = (words) => {
