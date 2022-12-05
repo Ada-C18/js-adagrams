@@ -29,19 +29,21 @@ const lettersMap = {
 
 export const drawLetters = () => {
   let lettersArr = [];
+  let hand = [];
 
   for (const key in lettersMap) {
     lettersArr.push(...Array(lettersMap[key]).fill(key))
   }
 
-  for (let i = lettersArr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [lettersArr[i], lettersArr[j]] = [lettersArr[j], lettersArr[i]]
+  for (let i = 0; i < 10; i++) {
+    const j = Math.floor(Math.random() * (lettersArr.length - i) + i);
+    let selectedLetter = lettersArr[j];
+    hand.push(selectedLetter);
+    lettersArr[j] = lettersArr[i]
+    lettersArr[i] = selectedLetter;
   }
 
-  return lettersArr.slice(0, 10)
-
-
+  return hand;
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
