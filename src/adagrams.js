@@ -62,6 +62,12 @@ function toObject(arr) {
 function getKeyByValue(object, value) {
   return Object.keys(object).find((key) => object[key].includes(value));
 }
+
+const updateBestWord = (obj, word) => {
+  obj.word = word;
+  obj.score = scoreWord(word);
+};
+
 ////////////////////////////
 // END HELPER FUNCTIONS //
 ////////////////////////////
@@ -107,4 +113,29 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+  const bestWord = {
+    word: null,
+    score: 0,
+  };
+
+  for (const word of words) {
+    if (scoreWord(word) > bestWord.score) {
+      updateBestWord(bestWord, word);
+    } else if (bestWord.word === null) {
+      updateBestWord(bestWord, word);
+    } else if (
+      bestWord.score === scoreWord(word) &&
+      word.length < bestWord.word.length &&
+      bestWord.word.length != 10
+    ) {
+      updateBestWord(bestWord, word);
+    } else if (
+      bestWord.score === scoreWord(word) &&
+      word.length === 10 &&
+      word.length != bestWord.word.length
+    ) {
+      updateBestWord(bestWord, word);
+    }
+  }
+  return bestWord;
 };
