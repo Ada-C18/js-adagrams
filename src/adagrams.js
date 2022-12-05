@@ -49,8 +49,6 @@ export const drawLetters = () => {
 export const usesAvailableLetters = (input, lettersInHand) => {
   let arrayOfInputValues = Array.from(input);
   let arrayOfInputValuesBools = [];
-
-  // lettersInHand into a string
   let allLettersInHand = "";
   for (let letter of lettersInHand) {
     allLettersInHand += letter;
@@ -65,7 +63,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
       return false;
     }
   }
-  return arrayOfInputValuesBools.every((element) => element === true);
+  return true;
 };
 
 export const scoreWord = (word) => {
