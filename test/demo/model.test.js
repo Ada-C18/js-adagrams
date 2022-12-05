@@ -122,7 +122,7 @@ describe("Game Model", () => {
       });
     });
 
-    describe.skip("returns game state", () => {
+    describe("returns game state", () => {
       it("gameOver", () => {
         const model = new Model({ ...config, rounds: 1 });
 
@@ -268,7 +268,7 @@ describe("Game Model", () => {
       expect(model.playWord).toBeDefined();
     });
 
-    describe.skip("for valid words", () => {
+    describe("for valid words", () => {
       const getWord = (model) => {
         return model.letterBank.slice(0, 5).join("");
       };
