@@ -58,8 +58,8 @@ const letterValues = {
 
 export const drawLetters = () => {
   let letterCount = {};
-  let letterBank = [];
-  while (letterBank.length < 10) {
+  let drawnLetters = [];
+  while (drawnLetters.length < 10) {
     const letter =
       Object.keys(letterPool)[
         Math.floor(Math.random() * Object.keys(letterPool).length)
@@ -67,18 +67,28 @@ export const drawLetters = () => {
 
     if (letter in letterCount && letterCount.letter < letterPool.letter) {
       letterCount.letter += 1;
-      letterBank.push(letter);
+      drawnLetters.push(letter);
     } else if (!(letter in letterCount)) {
       letterCount[letter] = 1;
-      letterBank.push(letter);
+      drawnLetters.push(letter);
     }
   }
 
-  return letterBank;
+  return drawnLetters;
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  input = input.toUpperCase();
+
+  for (let letter of input) {
+    if (lettersInHand.includes(letter)) {
+      lettersInHand.splice(letter, 1);
+    } else {
+      return false;
+    }
+  }
+
+  return true;
 };
 
 export const scoreWord = (word) => {
