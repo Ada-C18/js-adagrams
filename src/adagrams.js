@@ -29,9 +29,6 @@ export const drawLetters = () => {
     Z: 1,
   };
 
-  // ############
-  //  alt
-  // ###########
   let lettersHand = [];
 
   let lettersCopy = JSON.parse(JSON.stringify(letters));
@@ -60,7 +57,7 @@ export const drawLetters = () => {
 
 // Wave 2
 export const usesAvailableLetters = (input, lettersInHand) => {
-  for (const i in input) {
+  for (let i in input) {
     if (!lettersInHand.includes(input[i])) {
       return false;
     } else {
