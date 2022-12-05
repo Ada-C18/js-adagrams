@@ -97,13 +97,17 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  const wordWScore = [];
-  for (const word of words) {
-    wordWScore.push({
-      word: word,
-      score: scoreWord(word),
-    });
-  }
+  // const wordWScore = [];
+  // for (const word of words) {
+  //   wordWScore.push({
+  //     word: word,
+  //     score: scoreWord(word),
+  //   });
+  // }
+  const wordWScore = words.map((word) => ({
+    word: word,
+    score: scoreWord(word),
+  }));
 
   let highest = wordWScore[0];
   for (const wordObj of wordWScore) {
@@ -117,12 +121,15 @@ export const highestScoreFrom = (words) => {
 };
 
 const checkTie = (highest, wordWScore) => {
-  const sameScores = [];
-  for (const wordObj of wordWScore) {
-    if (wordObj.score === highest.score) {
-      sameScores.push(wordObj);
-    }
-  }
+  // const sameScores = [];
+  // for (const wordObj of wordWScore) {
+  //   if (wordObj.score === highest.score) {
+  //     sameScores.push(wordObj);
+  //   }
+  // }
+  const sameScores = wordWScore.filter(
+    (wordObj) => wordObj.score === highest.score
+  );
 
   if (sameScores.length === 1) {
     return highest;
