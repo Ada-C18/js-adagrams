@@ -141,11 +141,11 @@ describe("Adagrams", () => {
       expect(highestScoreFrom(words)).toEqual(correct);
     });
 
-    it.skip("accurately finds best scoring word even if not sorted", () => {
+    it("accurately finds best scoring word even if not sorted", () => {
       const words = ["XXX", "XXXX", "X", "XX"];
       const correct = { word: "XXXX", score: scoreWord("XXXX") };
-
-      throw "Complete test by adding an assertion";
+      expect(correct.score).toEqual(32);
+      
     });
 
     describe("in case of tied score", () => {
