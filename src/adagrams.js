@@ -96,27 +96,11 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
 export const scoreWord = (word) => {
   let score = 0;
-
-  // These are three things that I tired and didn't work
-  // if (!word) {
-  //   return score;
-  // }
-  // if (word === "" || word === null) {
-  //   return score;
-  // }
-
-  // if (word === null) {
-  //   return score;
-  // }
-
-  word = word.trim();
-  if (word.length === 0) {
-    return score;
-  }
   word = word.toUpperCase();
   if (word.length >= 7) {
     score += 8;
   }
+  word = word.trim();
   for (let letter of word) {
     score += valueOfLetter[letter];
   }
