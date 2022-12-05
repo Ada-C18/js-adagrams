@@ -85,7 +85,7 @@ export const scoreWord = (word) => {
     Z: 10,
   };
   let wordScore = 0;
-  for (const letter of word) {
+  for (const letter of word.toUpperCase()) {
     wordScore += letterValues[letter];
   }
   return wordScore;
