@@ -120,11 +120,13 @@ export const highestScoreFrom = (words) => {
   // compare the Objects
   // console.log(scoreInfo.length);
   for (let Index = 0; Index < scoreInfo.length; Index++) {
-    console.log(scoreInfo[Index]);
+    // Access the data information
+    return scoreInfo[Index];
+    // console.log(scoreInfo[Index]);
     // want to access the score
-    console.log(scoreInfo[Index]["score"]);
+    // console.log(scoreInfo[Index]["score"]);
     // want to access the word
-    console.log(scoreInfo[Index]["word"]);
+    // console.log(scoreInfo[Index]["word"]);
   }
 
   // console.log(infoAboutWords);
