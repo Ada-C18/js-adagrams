@@ -99,12 +99,12 @@ export const highestScoreFrom = (words) => {
 
   for (let i = 0; i < highestScoringWords.length; i++) {
     if (highestScoringWords[i].length == 10)  {
-      return ([highestScoringWords[i],highestScore]);
+      return ({word:highestScoringWords[i],score:highestScore});
     }
   }
   
   highestScoringWords.sort((a,b)=> a.length - b.length);
-  return highestScoringWords[0];
+  return ({word:highestScoringWords[0],score:highestScore});
 
 };
 
