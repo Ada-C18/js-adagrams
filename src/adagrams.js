@@ -1,3 +1,5 @@
+import { indexOf } from "core-js/core/array";
+
 const letterPOOL = {
   A: 9,
   B: 2,
@@ -85,18 +87,6 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
 // usesAvailableLetters("DOG", ["D", "O", "G", "X", "X", "X", "X", "X", "X", "X"]);
 export const scoreWord = (word) => {
-  // word = word.upper()
-  // score = 0
-  // if len(word):
-  //   for letter in word:
-  //     if letter in SCORE_CHART:
-  //       score += SCORE_CHART[letter]
-
-  // if len(word) > 6:
-  //   score += 8
-  // return score
-  // return 0
-
   word = word.toUpperCase();
   let score = 0;
   if (!word.length) {
@@ -114,12 +104,50 @@ export const scoreWord = (word) => {
   if (word.length > 6) {
     score += 8
   }
-  
+
   return score
-
-
 };
 
-// export const highestScoreFrom = (words) => {
-//   // Implement this method for wave 4
-// };
+export const highestScoreFrom = (words) => {
+  // let words = ["AAAAAAAAAA", "BBBBBB"];
+
+  let score = 0;
+  let wordScores = {};
+  if (words.length) {
+    for (const word of words) {
+      score = scoreWord(word);
+      wordScores[word] = score;
+    }
+  };
+  const values = Object.values(wordScores);
+  const topScore = Math.max(...values)
+  console.log("top Score", topScore)
+
+  let topWord = []
+  for (const word in wordScores) {
+    if (wordScores[word] == topScore) {
+      topWord.push(word)
+    }
+  }
+  console.log("top word list", topWord)
+
+  let winner = {};
+  let min = 0;
+  for (let word of topWord) {
+    if (word.length === 10) {
+      winner["word"] = word;
+      winner["score"] = scoreWord(word);
+      return winner;
+    }
+    else if (word.length < 10) {
+      for (let w of topWord) {
+        min = Math.min(w.length);
+        winner["word"] = w;
+        winner["score"] = scoreWord(w);
+      }
+    }
+  }
+  winner["word"] = topWord[0];
+  winner["score"] = scoreWord(topWord[0]);
+  return winner;
+};
