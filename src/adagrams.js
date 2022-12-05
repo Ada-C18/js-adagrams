@@ -128,7 +128,6 @@ export const highestScoreFrom = (words) => {
     } else if (highestScoreInfo["score"] < scoreInfo[Index]["score"]) {
       highestScoreInfo["score"] = scoreInfo[Index]["score"];
       highestScoreInfo["word"] = scoreInfo[Index]["word"];
-      // console.log(highestScoreInfo);
     }
   }
   return highestScoreInfo;
