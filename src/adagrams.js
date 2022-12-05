@@ -1,3 +1,5 @@
+import { PassThrough } from "stream";
+
 const letterPool = {
   A: 9,
   B: 2,
@@ -26,6 +28,36 @@ const letterPool = {
   Y: 2,
   Z: 1,
 };
+
+const valueOfLetter = {
+  A: 1,
+  B: 3,
+  C: 3,
+  D: 2,
+  E: 1,
+  F: 4,
+  G: 2,
+  H: 4,
+  I: 1,
+  J: 8,
+  K: 5,
+  L: 1,
+  M: 3,
+  N: 1,
+  O: 1,
+  P: 3,
+  Q: 10,
+  R: 1,
+  S: 1,
+  T: 1,
+  U: 1,
+  V: 4,
+  W: 4,
+  X: 8,
+  Y: 4,
+  Z: 10,
+};
+
 export const drawLetters = () => {
   let allLetters = "";
   for (let letter in letterPool) {
@@ -35,7 +67,6 @@ export const drawLetters = () => {
     }
   }
   let hand = [];
-
   for (let i = 0; i < 10; i++) {
     let letter = allLetters.charAt(
       Math.floor(Math.random() * allLetters.length)
@@ -48,7 +79,6 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   let arrayOfInputValues = Array.from(input);
-  let arrayOfInputValuesBools = [];
   let allLettersInHand = "";
   for (let letter of lettersInHand) {
     allLettersInHand += letter;
@@ -56,8 +86,6 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   for (let i = 0; i < arrayOfInputValues.length; i++) {
     let isStringValid = allLettersInHand.includes(arrayOfInputValues[i]);
     if (isStringValid === true) {
-      arrayOfInputValuesBools.push(isStringValid);
-      console.log(arrayOfInputValuesBools);
       allLettersInHand = allLettersInHand.replace(arrayOfInputValues[i], "");
     } else {
       return false;
@@ -67,7 +95,35 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 };
 
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
+  // return the score
+  let score = 0;
+  word = word.toUpperCase();
+
+  console.log(`This is the word length ${word.length}`);
+  // if (word.length === 0) {
+  //   return score;
+  // }
+
+  // word is a string
+  // need to seperate the characters
+
+  //This idenifies ever letter in the word
+  for (let letter of word) {
+    score += valueOfLetter[letter];
+  }
+  return score;
+  //   //This idenifies ever letter in the word
+  // for (let letter of word) {
+  //     // console.log(letter);
+  //     PassThrough;
+  //   }
+
+  //   // this identifies value of each letter
+  //   for (let letter in valueOfLetter) {
+  //     const letterValue = valueOfLetter[letter];
+  //     console.log(letterValue);
+  //   }
+  // };
 };
 
 export const highestScoreFrom = (words) => {
