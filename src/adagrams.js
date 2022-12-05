@@ -51,7 +51,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
     if (!lettersInHand.includes(letter)) return false;
     lettersInHand.splice(lettersInHand.indexOf(letter), 1);
   }
-   return true
+  return true
 };
 
 export const scoreWord = (word) => {
