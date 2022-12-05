@@ -112,4 +112,17 @@ export const highestScoreFrom = (words) => {
   - if length of winning words array == 1,
   - return winning word
   */
+  let shortestLength = Math.min(...words.map((word) => word.length));
+  const highestScore = Math.max(...words.map((word) => scoreWord(word)));
+  const winningWords = [];
+
+  for (const word of words) {
+    const wordScore = scoreWord(word);
+    if (wordScore === highestScore) {
+      if (word.length === 10) {
+        return { word: word, score: wordScore };
+      }
+      winningWords.push(word);
+    }
+  }
 };
