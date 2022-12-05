@@ -128,6 +128,23 @@ export const highestScoreFrom = (words) => {
     } else if (highestScoreInfo["score"] < scoreInfo[Index]["score"]) {
       highestScoreInfo["score"] = scoreInfo[Index]["score"];
       highestScoreInfo["word"] = scoreInfo[Index]["word"];
+      // tie breaker of socre
+    } else if (highestScoreInfo["score"] === scoreInfo[Index]["score"]) {
+      let highestScoreInfoWord = highestScoreInfo["word"];
+      let highestScoreInfoWordLength = highestScoreInfoWord.length;
+      let scoreInfoWord = scoreInfo[Index]["word"];
+      let scoreInfoWordLength = scoreInfoWord.length;
+      if (highestScoreInfoWordLength === 10 && scoreInfoWordLength == 10) {
+        break;
+      } else if (highestScoreInfoWordLength === 10) {
+        highestScoreInfo["score"] = highestScoreInfo["score"];
+        highestScoreInfo["word"] = highestScoreInfo["word"];
+      } else if (scoreInfoWordLength === 10) {
+        highestScoreInfo["score"] = scoreInfo[Index]["score"];
+        highestScoreInfo["word"] = scoreInfo[Index]["word"];
+      }
+
+      // selects the word with fewer letters when neither are 10 letters
     }
   }
   return highestScoreInfo;
