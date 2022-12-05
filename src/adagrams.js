@@ -28,11 +28,32 @@ const letterObj = {
 };
 
 export const drawLetters = () => {
-  // Implement this method for wave 1
+  // creates a letter pool based on the frequency of that letter in letterObj
+  let letterPool = '';
+  for (const letter in letterObj) {
+    letterPool += letter.repeat(letterObj[letter].frequency)
+  };
+  letterPool = letterPool.split('');
+
+  // draws 10 letters from letterPool based on a random index and removes drawn letters from the pool
+  let letterDraw = [];
+  while (letterDraw.length < 10) {
+    const randomIndex = Math.floor(letterPool.length * Math.random());
+    letterDraw.push(letterPool[randomIndex]);
+    letterPool.splice(randomIndex, 1)
+  };
+  return letterDraw
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  // checks if each letter in input is in lettersInHand. Removes letters from lettersInHand until all input letters are confirmed to be in hand, returns false otherwise
+  for (const letter of input.toUpperCase()) {
+    if (!lettersInHand.includes(letter)) {
+      return false
+    };
+    lettersInHand.splice(lettersInHand.indexOf(letter), 1)
+  };
+   return true
 };
 
 export const scoreWord = (word) => {
