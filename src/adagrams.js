@@ -26,6 +26,36 @@ const letterPOOL = {
   Y: 2,
   Z: 1,
 };
+
+const scoreChart = {
+  "A": 1,
+  "E": 1,
+  "I": 1,
+  "O": 1,
+  "U": 1,
+  "L": 1,
+  "N": 1,
+  "R": 1,
+  "S": 1,
+  "T": 1,
+  "D": 2,
+  "G": 2,
+  "B": 3,
+  "C": 3,
+  "M": 3,
+  "P": 3,
+  "F": 4,
+  "H": 4,
+  "V": 4,
+  "W": 4,
+  "Y": 4,
+  "K": 5,
+  "J": 8,
+  "X": 8,
+  "Q": 10,
+  "Z": 10
+};
+
 export const drawLetters = () => {
   // Implement this method for wave 1
 
@@ -54,9 +84,41 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 };
 
 // usesAvailableLetters("DOG", ["D", "O", "G", "X", "X", "X", "X", "X", "X", "X"]);
-// export const scoreWord = (word) => {
-//   // Implement this method for wave 3
-// };
+export const scoreWord = (word) => {
+  // word = word.upper()
+  // score = 0
+  // if len(word):
+  //   for letter in word:
+  //     if letter in SCORE_CHART:
+  //       score += SCORE_CHART[letter]
+
+  // if len(word) > 6:
+  //   score += 8
+  // return score
+  // return 0
+
+  word = word.toUpperCase();
+  let score = 0;
+  if (!word.length) {
+    return 0;
+  }
+  else {
+    for (let letter of word) {
+      if (scoreChart[letter]) {
+        console.log(letter)
+        score += scoreChart[letter]
+      }
+    }
+  }
+
+  if (word.length > 6) {
+    score += 8
+  }
+  
+  return score
+
+
+};
 
 // export const highestScoreFrom = (words) => {
 //   // Implement this method for wave 4
