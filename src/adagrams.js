@@ -1,4 +1,3 @@
-// import { LETTER_POOL } from "adagrams.test.js";
 const LETTER_POOL = {
   A: 9,
   B: 2,
