@@ -113,15 +113,16 @@ export const highestScoreFrom = (words) => {
   for (let oneWord of words) {
     // console.log(`This is the word: ${word}`);
     let score = 0;
+    // console.log(`This is the score: ${score}`);
     let word = oneWord;
-    console.log(word);
+    // console.log(`This is the word:${word}`);
     for (let letter of oneWord) {
+      score += letterPool[letter];
       // console.log(
       //   `This is letter ${letter} with the value ${letterPool[letter]}`
       // );
-      // console.log(score);
-      // console.log(`This is the letter: ${letter}`);
     }
+    // console.log(`This is the score: ${score}`);
   }
   // tie cases
   // words with fewest letter
