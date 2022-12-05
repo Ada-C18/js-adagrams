@@ -29,7 +29,7 @@ const letterObj = {
 
 export const drawLetters = () => {
   // creates a letter pool based on the frequency of that letter in letterObj
-  let letterPool = [];
+  let letterPool = '';
   for (const letter in letterObj) {
     letterPool += letter.repeat(letterObj[letter].frequency)
   };
@@ -47,7 +47,7 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // checks if each letter in input is in lettersInHand. Removes letters from lettersInHand until all input letters are confirmed to be in hand, returns false otherwise
-  for (let letter of input.toUpperCase()) {
+  for (const letter of input.toUpperCase()) {
     if (!lettersInHand.includes(letter)) {
       return false
     };
