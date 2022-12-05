@@ -68,7 +68,6 @@ export const drawLetters = () => {
     j = split_list[Math.floor(Math.random() * split_list.length)];
     randomList.push(j);
     split_list.splice(split_list.indexOf(j), 1);
-    console.log(split_list.splice(split_list.indexOf(j), 1));
   }
   return randomList;
 };
@@ -102,5 +101,23 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
-  // 
+  let maxScore = {
+    word: " ",
+    score: 0
+  }
+  for (let word of words) {
+    const score = scoreWord(word)
+    if (score > maxScore.score) {
+        maxScore.score = score;
+        maxScore.word = word;
+    } else if (score === maxScore.score && maxScore.word.length !== 10) {
+        if (word.length < maxScore.word.length) {
+            maxScore.word = word;
+        } else if (word.length === 10) {
+            maxScore.word = word;
+        }
+    }
+}
+return maxScore;
 };
+
