@@ -50,24 +50,22 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   let arrayOfInputValues = Array.from(input);
   let arrayOfInputValuesBools = [];
 
+  // lettersInHand into a string
+  let allLettersInHand = "";
+  for (let letter of lettersInHand) {
+    allLettersInHand += letter;
+  }
   for (let i = 0; i < arrayOfInputValues.length; i++) {
-    let isStringValid = lettersInHand.includes(arrayOfInputValues[i]);
-    arrayOfInputValuesBools.push(isStringValid);
-    // delete character from the list at hand
+    let isStringValid = allLettersInHand.includes(arrayOfInputValues[i]);
+    if (isStringValid === true) {
+      arrayOfInputValuesBools.push(isStringValid);
+      console.log(arrayOfInputValuesBools);
+      allLettersInHand = allLettersInHand.replace(arrayOfInputValues[i], "");
+    } else {
+      return false;
+    }
   }
   return arrayOfInputValuesBools.every((element) => element === true);
-  // for (let i = 0; i < arrayOfInputValues.length; i++) {
-  //   let isStringValid = lettersInHand.includes(arrayOfInputValues[i]);
-  //   if (isStringValid === true) {
-  //     arrayOfInputValuesBools.push(isStringValid);
-  //     // delete the characher from the array
-  //   }
-  // }
-  // if (arrayOfInputValuesBools.every((element) => element === true)) {
-  //   return true;
-  // } else {
-  //   return false;
-  // }
 };
 
 export const scoreWord = (word) => {
