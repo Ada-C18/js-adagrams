@@ -165,4 +165,45 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+  
+  let wordScores = {};
+  let highestScoring = [];
+
+  for (let word of words) {
+    wordScores[word] = scoreWord(word);
+  };
+
+  console.log(wordScores);
+
+  let maxScore = Math.max.;
+
+  console.log("max score:", maxScore)
+
+// let maxKey, maxValue = 0;
+
+// for(const [key, value] of Object.entries(b)) {
+//   if(value > max) {
+//     maxValue = value;
+//     maxKey = key;
+//   }
+// }
+
+// console.log(index);
+
+  for (const [word, score] in wordScores) {
+    if (score === maxScore) {
+      highestScoring.push(word);
+    };
+  }
+  // sort highest scoring words by length, with shortest word at the beginning
+  console.log("before sort:", highestScoring);
+  highestScoring.sort();
+  console.log("after sort:", highestScoring);
+
+  for (let word of highestScoring) {
+    if (word.length === 10) {
+      return word, maxScore;
+    }
+  } 
+  return {word: highestScoring[0], score: maxScore};
 };
