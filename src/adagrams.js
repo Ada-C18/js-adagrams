@@ -50,11 +50,12 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   const letterFrequency = {};
 
   for (const letter of lettersInHand) {
-    if (!(letter in letterFrequency)) {
-      letterFrequency[letter] = 1;
-    } else {
-      letterFrequency[letter] += 1;
-    }
+    // if (letter in letterFrequency) {
+    //   letterFrequency[letter] += 1;
+    // } else {
+    //   letterFrequency[letter] = 1;
+    // }
+    letterFrequency[letter] = letter in letterFrequency ? +1 : 1;
   }
 
   for (const char of input) {
@@ -80,10 +81,10 @@ export const scoreWord = (word) => {
 
   let score = 0;
 
-  for (const property in letterScores) {
+  for (const scoreValue in letterScores) {
     for (const letter of word) {
-      if (letterScores[property].includes(letter.toUpperCase())) {
-        score += parseFloat(property);
+      if (letterScores[scoreValue].includes(letter.toUpperCase())) {
+        score += parseFloat(scoreValue);
       }
     }
   }
