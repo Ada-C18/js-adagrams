@@ -108,34 +108,35 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // Creates a list that has information about scores
   let scoreInfo = [];
   for (let oneWord of words) {
     let infoAboutWords = {};
     let score = scoreWord(oneWord);
     infoAboutWords["score"] = score;
     infoAboutWords["word"] = oneWord;
+    infoAboutWords["length"] = oneWord.length;
     scoreInfo.push(infoAboutWords);
   }
-  // compare the Objects
-  // console.log(scoreInfo.length);
   let highestScoreInfo = [];
+  // this will be the one where highestscoreInfo is less than scoreInfo[Index]
   for (let Index = 0; Index < scoreInfo.length; Index++) {
-    // adds something to start to comparing with
     if (highestScoreInfo.length === 0) {
-      highestScoreInfo = scoreInfo[Index];
-      // console.log(highestScoreInfo);
-      // this will be the one where highestscoreInfo is greater than scoreInfo[Index]
+      highestScoreInfo["score"] = scoreInfo[Index]["score"];
+      highestScoreInfo["word"] = scoreInfo[Index]["word"];
+
+      console.log(highestScoreInfo);
+      console.log(highestScoreInfo[word.length]);
     } else if (highestScoreInfo["score"] > scoreInfo[Index]["score"]) {
       break;
     } else if (highestScoreInfo["score"] < scoreInfo[Index]["score"]) {
       highestScoreInfo["score"] = scoreInfo[Index]["score"];
       highestScoreInfo["word"] = scoreInfo[Index]["word"];
-      // console.log(ScoreInfo);
-      // console.log(highestScoreInfo);
+    } else {
+      break;
     }
-    // this will be the one where highestscoreInfo is less than scoreInfo[Index]
-
+    // this is to access the length of the word
+    // let wordFound = highestScoreInfo["word"];
+    //   console.log(wordFound.length);
     // Access the data information
     // compare one from each other
     // console.log(scoreInfo[Index]);
