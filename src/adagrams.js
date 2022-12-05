@@ -118,13 +118,9 @@ export const highestScoreFrom = (words) => {
     infoAboutWords["length"] = oneWord.length;
     scoreInfo.push(infoAboutWords);
   }
-
-  // This finds the highest score
-  let highestScoreInfo = {};
-
-  // this will be the one where highestscoreInfo is less than scoreInfo[Index]
+  let highestScoreInfo = new Object();
   for (let Index = 0; Index < scoreInfo.length; Index++) {
-    if (highestScoreInfo.length === 0) {
+    if (Index === 0) {
       highestScoreInfo["score"] = scoreInfo[Index]["score"];
       highestScoreInfo["word"] = scoreInfo[Index]["word"];
     } else if (highestScoreInfo["score"] > scoreInfo[Index]["score"]) {
@@ -132,49 +128,8 @@ export const highestScoreFrom = (words) => {
     } else if (highestScoreInfo["score"] < scoreInfo[Index]["score"]) {
       highestScoreInfo["score"] = scoreInfo[Index]["score"];
       highestScoreInfo["word"] = scoreInfo[Index]["word"];
-    } else if (highestScoreInfo["score"] === scoreInfo[Index]["score"]) {
-      highestScoreInfoWord = highestScoreInfo["word"];
-      highestScoreInfoWordLength = highestScoreInfoWord.length;
-      scoreInfoWord = scoreInfo[Index]["word"];
-      scoreInfoWordLength = scoreInfoWord.length;
-      if (highestScoreInfoWordLength === 10) {
-        return highestScoreInfo;
-      } else if (scoreInfoWordLength === 10) {
-        highestScoreInfo["score"] = scoreInfo[Index]["score"];
-        highestScoreInfo["word"] = scoreInfo[Index]["word"];
-        return highestScoreInfo;
-      } else if (highestScoreInfoWordLength > scoreInfoWordLength) {
-        highestScoreInfo["score"] = scoreInfo[Index]["score"];
-        highestScoreInfo["word"] = scoreInfo[Index]["word"];
-        return highestScoreInfo;
-      } else if (highestScoreInfoWordLength < scoreInfoWordLength) {
-        return highestScoreInfo;
-      }
-
-      // highestScoreInfo["score"] = scoreInfo[Index]["score"];
-      // highestScoreInfo["word"] = scoreInfo[Index]["word"];
-      // console.log(scoreInfo[Index]["score"]);
+      // console.log(highestScoreInfo);
     }
-
-    // this is to access the length of the word
-    // let wordFound = highestScoreInfo["word"];
-    //   console.log(wordFound.length);
-    // Access the data information
-    // compare one from each other
-    // console.log(scoreInfo[Index]);
-    // want to access the score
-    // console.log(scoreInfo[Index]["score"]);
-    // want to access the word
-    // console.log(scoreInfo[Index]["word"]);
   }
-  // console.log(highestScoreFrom);
   return highestScoreInfo;
-
-  // console.log(infoAboutWords);
-  // tie cases
-  // words with fewest letter
-  // word.length === 10 (winner) > words with fewest letter
-  // if same length of multiple words pick the first in the array of words
-
-  // returns the max value {word: "string", score: # }
 };
