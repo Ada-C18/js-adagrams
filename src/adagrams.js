@@ -1,3 +1,4 @@
+// Global variables
 const LETTER_POOL = {
   A: 9,
   B: 2,
@@ -56,7 +57,8 @@ const SCORE_CHART_DICT = {
   Z: 10,
 };
 
-// Helper Function
+// Helper Function accessed from stackOverflow
+// Used to shuffle array
 function shuffle(array) {
   let currentIndex = array.length,
     randomIndex;
@@ -77,8 +79,7 @@ function shuffle(array) {
   return array;
 }
 
-// Functions
-
+// Functions for Adagrams
 export const drawLetters = () => {
   // Wave 1
   const letterPoolList = [];
@@ -97,7 +98,7 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // wave 2
+  // Wave 2
   const lettersInHandCopy = Array.from(lettersInHand);
   for (let i = 0, len = input.length; i < len; i++) {
     if (lettersInHandCopy.includes(input[i])) {
@@ -111,18 +112,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 };
 
 export const scoreWord = (word) => {
-  // wave 3
-
-  /*const longWords = word => {
-    const len = word.length;
-    if (len >= 7) {
-      const sum = 8;
-      return sum;
-    } else {
-      return 0;
-    }
-  }*/
-
+  // Wave 3
   let sum = 0;
   const len = word.length;
   const wordUpper = word.toUpperCase();
@@ -141,5 +131,36 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  // Wave 4
+  // Input: ["X", "XX", "XXX", "XXXX"]
+  // Output: { word: "XXXX", score: scoreWord("XXXX") }
+  // Keep track of the high score value and high score word
+  let highWord = "";
+  let highScore = 0;
+  // For each word in the array, call the scoreWord function to determine score
+  for (const word of words) {
+    if (scoreWord(word) > highScore) {
+      // Update the value and word if new score is greater previous
+      highScore = scoreWord(word);
+      highWord = word;
+      // If a new score is EQUAL to the high score
+      // Check to see if the word has fewer letters (preferred)
+      // Check to see if the word has 10 letters or more (preferred over fewer)
+      // Check to see if same length (prefer the first - don't update word)
+    } else if (scoreWord(word) === highScore) {
+      if (
+        (highWord.length === 10 && word.length < highWord.length) ||
+        word.length === highWord.length
+      ) {
+        continue;
+      } else if (word.length < highWord.length || word.length === 10) {
+        highWord = word;
+      }
+    }
+  }
+  let highestScore = {
+    word: highWord,
+    score: highScore,
+  };
+  return highestScore;
 };
