@@ -162,7 +162,7 @@ describe("Adagrams", () => {
         expect(tiedWords.length).toBeGreaterThan(1);
       };
 
-      it.only("selects the word with 10 letters", () => {
+      it("selects the word with 10 letters", () => {
         const words = ["AAAAAAAAAA", "BBBBBB"];
         const correct = {
           word: "AAAAAAAAAA",

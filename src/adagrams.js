@@ -108,6 +108,7 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
+  // This has all the information regarding the scores
   let scoreInfo = [];
   for (let oneWord of words) {
     let infoAboutWords = {};
@@ -117,23 +118,44 @@ export const highestScoreFrom = (words) => {
     infoAboutWords["length"] = oneWord.length;
     scoreInfo.push(infoAboutWords);
   }
-  let highestScoreInfo = [];
+
+  // This finds the highest score
+  let highestScoreInfo = {};
+
   // this will be the one where highestscoreInfo is less than scoreInfo[Index]
   for (let Index = 0; Index < scoreInfo.length; Index++) {
     if (highestScoreInfo.length === 0) {
       highestScoreInfo["score"] = scoreInfo[Index]["score"];
       highestScoreInfo["word"] = scoreInfo[Index]["word"];
-
-      console.log(highestScoreInfo);
-      console.log(highestScoreInfo[word.length]);
     } else if (highestScoreInfo["score"] > scoreInfo[Index]["score"]) {
       break;
     } else if (highestScoreInfo["score"] < scoreInfo[Index]["score"]) {
       highestScoreInfo["score"] = scoreInfo[Index]["score"];
       highestScoreInfo["word"] = scoreInfo[Index]["word"];
-    } else {
-      break;
+    } else if (highestScoreInfo["score"] === scoreInfo[Index]["score"]) {
+      highestScoreInfoWord = highestScoreInfo["word"];
+      highestScoreInfoWordLength = highestScoreInfoWord.length;
+      scoreInfoWord = scoreInfo[Index]["word"];
+      scoreInfoWordLength = scoreInfoWord.length;
+      if (highestScoreInfoWordLength === 10) {
+        return highestScoreInfo;
+      } else if (scoreInfoWordLength === 10) {
+        highestScoreInfo["score"] = scoreInfo[Index]["score"];
+        highestScoreInfo["word"] = scoreInfo[Index]["word"];
+        return highestScoreInfo;
+      } else if (highestScoreInfoWordLength > scoreInfoWordLength) {
+        highestScoreInfo["score"] = scoreInfo[Index]["score"];
+        highestScoreInfo["word"] = scoreInfo[Index]["word"];
+        return highestScoreInfo;
+      } else if (highestScoreInfoWordLength < scoreInfoWordLength) {
+        return highestScoreInfo;
+      }
+
+      // highestScoreInfo["score"] = scoreInfo[Index]["score"];
+      // highestScoreInfo["word"] = scoreInfo[Index]["word"];
+      // console.log(scoreInfo[Index]["score"]);
     }
+
     // this is to access the length of the word
     // let wordFound = highestScoreInfo["word"];
     //   console.log(wordFound.length);
@@ -145,6 +167,7 @@ export const highestScoreFrom = (words) => {
     // want to access the word
     // console.log(scoreInfo[Index]["word"]);
   }
+  // console.log(highestScoreFrom);
   return highestScoreInfo;
 
   // console.log(infoAboutWords);
