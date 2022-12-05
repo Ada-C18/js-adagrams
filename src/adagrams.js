@@ -95,35 +95,32 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 };
 
 export const scoreWord = (word) => {
-  // return the score
   let score = 0;
-  word = word.toUpperCase();
 
-  console.log(`This is the word length ${word.length}`);
-  // if (word.length === 0) {
+  // These are three things that I tired and didn't work
+  // if (!word) {
+  //   return score;
+  // }
+  // if (word === "" || word === null) {
   //   return score;
   // }
 
-  // word is a string
-  // need to seperate the characters
+  // if (word === null) {
+  //   return score;
+  // }
 
-  //This idenifies ever letter in the word
+  word = word.trim();
+  if (word.length === 0) {
+    return score;
+  }
+  word = word.toUpperCase();
+  if (word.length >= 7) {
+    score += 8;
+  }
   for (let letter of word) {
     score += valueOfLetter[letter];
   }
   return score;
-  //   //This idenifies ever letter in the word
-  // for (let letter of word) {
-  //     // console.log(letter);
-  //     PassThrough;
-  //   }
-
-  //   // this identifies value of each letter
-  //   for (let letter in valueOfLetter) {
-  //     const letterValue = valueOfLetter[letter];
-  //     console.log(letterValue);
-  //   }
-  // };
 };
 
 export const highestScoreFrom = (words) => {
