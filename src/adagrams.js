@@ -27,6 +27,19 @@ const letterPool = {
   Z: 1,
 };
 
+export const letterCount = (word) => {
+  let wordDict = {};
+  const wordList = Array.isArray(word) ? word : word.split("");
+
+  for (let letter of wordList) {
+    wordDict[letter]
+      ? (wordDict[letter] = wordDict[letter] + 1)
+      : (wordDict[letter] = 1);
+  }
+
+  return wordDict;
+};
+
 export const drawLetters = () => {
   let randomList = [];
 
@@ -48,22 +61,38 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  const inputArr = [...input];
-  let handCopy = [...lettersInHand];
+  // const inputArr = [...input];
+  // let handCopy = [...lettersInHand];
 
-  for (const letter of inputArr) {
-    if (handCopy.includes(letter)) {
-      handCopy.splice(handCopy.indexOf(letter), 1);
-    } else {
+  // for (const letter of inputArr) {
+  //   if (handCopy.includes(letter)) {
+  //     handCopy.splice(handCopy.indexOf(letter), 1);
+  //   } else {
+  //     return false;
+  //   }
+  // }
+  // return true;
+
+  let inputDict = letterCount(input);
+  let lettersInHandDict = letterCount(lettersInHand);
+
+  for (const letter of [...input]) {
+    if (
+      !(letter in lettersInHandDict) ||
+      inputDict[letter] > lettersInHandDict[letter]
+    ) {
       return false;
     }
   }
   return true;
 };
 
-export const scoreWord = (word) => {
-  // Implement this method for wave 3
-};
+// export const scoreWord = (word) => {
+//   const scoreWord(word) {
+//     let total_score = 0;
+
+//   }
+// };
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
