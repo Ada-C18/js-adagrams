@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 const letterPool = {
   A: 9,
   B: 2,
@@ -27,13 +28,23 @@ const letterPool = {
   Z: 1,
 };
 
+const scoreChart = {
+  1: ["A", "E", "I", "O", "U", "L", "N", "R", "S", "T"],
+  2: ["D", "G"],
+  3: ["B", "C", "M", "P"],
+  4: ["F", "H", "V", "W", "Y"],
+  5: ["K"],
+  8: ["J", "X"],
+  10: ["Q", "Z"],
+};
+
 ////////////////////////////
 // BEGIN HELPER FUNCTIONS //
 ////////////////////////////
 
 function getRandomLetter(obj) {
   const letters = Object.keys(obj);
-  return letters[Math.floor(Math.random() * letters.length)];
+  return letters[Math.floor(Math.random() * letters.length) + 1];
 }
 
 function toObject(arr) {
@@ -48,6 +59,9 @@ function toObject(arr) {
   return obj;
 }
 
+function getKeyByValue(object, value) {
+  return Object.keys(object).find((key) => object[key].includes(value));
+}
 ////////////////////////////
 // END HELPER FUNCTIONS //
 ////////////////////////////
@@ -81,6 +95,14 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
+  let score = 0;
+  if (word.length >= 7) {
+    score += 8;
+  }
+  for (const letter of word) {
+    score += Number(getKeyByValue(scoreChart, letter.toUpperCase()));
+  }
+  return score;
 };
 
 export const highestScoreFrom = (words) => {
