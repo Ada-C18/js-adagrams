@@ -80,24 +80,38 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   // create a dictionary for each word in words => word:score
-  wordScores = {}; 
+  let wordScores = {};
   // or we can create a list of tuples [ ('word', score)...]
 
-  for (word of words) {
+  for (let word of words) {
     wordScores[word] = scoreWord(word);
   }
 
   //returns max score value in wordScores:
   const maxScore = Math.max(...Object.values(wordScores));
-  // returns the first matching key only:
-  const firstMaxScoreWord = Object.keys(wordScores).find(key => wordScores[key] === maxScore);
-  // returns a new list:
-  const allMaxScoringWords = Object.keys(wordScores).filter(key => wordScores[key] === maxScore);
 
-  // we want to reorder the dictionary by values- highest to lowest
-  // evaluate item 0 in the dictionary against item 1, by their values
-  // if the values are different, return item 0 in the form of an object => {word:"something", score: #}
-  // else check through tie conditions below
+  // returns a new list:
+  let allMaxScoringWords = Object.keys(wordScores).filter(
+    (key) => wordScores[key] === maxScore
+  );
+
+
+  // if allMaxScoringWords of length 1, return {word: #, score: #} => comeback if time, and refactor by grabbing object directly instead of recreating dict
+  if (allMaxScoringWords.length === 1) {
+    // find a way to make a helper function to format return statement
+    return { 'word': allMaxScoringWords[0], 'score': maxScore };
+  } else {
+    for (let word of allMaxScoringWords) {
+      if (word.length === 10) {
+        return {'word': word, 'score': maxScore};
+      } 
+    }  
+  } const tempWord = allMaxScoringWords.reduce((a,b) => a.length <= b.length ? a:b);
+  return {'word':tempWord, 'score':maxScore}
+};
+  
+  // else, evaluate tie scenarios below
+
   /* return Object = {word: #, score: #}
   
   In case of ties evaluate length of words that produce tie:
@@ -105,4 +119,3 @@ export const highestScoreFrom = (words) => {
     - prefer min(words.length)(second priority)
     - if multiple words wih same score and length:
         - pick first one in the 'words' array */
-};

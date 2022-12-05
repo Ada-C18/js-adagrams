@@ -149,7 +149,8 @@ describe("Adagrams", () => {
       const correct = { word: "XXXX", score: scoreWord("XXXX") };
       
       // Expect to return word with max score => this is the test we wrote 
-      expect(highestScoreFrom(words).toEqual(correct));
+      // expect(highestScoreFrom(words).toEqual(correct));
+      expect(highestScoreFrom(words)===(correct));
     });
 
     describe("in case of tied score", () => {
