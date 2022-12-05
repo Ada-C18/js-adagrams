@@ -34,17 +34,20 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   const hashTable = new Map();
-  for (let i = 0; i < lettersInHand.length; i++) {
-    if(hashTable.has(lettersInHand[i])) {
-      hashTable.set(lettersInHand[i], hashTable.get(lettersInHand[i])+1);
+  let word = input.toUpperCase();
+  let stringLettersInHand = (lettersInHand.join("")).toUpperCase();
+  for (let i = 0; i < stringLettersInHand.length; i++) {
+    lettersInHand
+    if(hashTable.has(stringLettersInHand[i])) {
+      hashTable.set(stringLettersInHand[i], hashTable.get(stringLettersInHand[i])+1);
     } else {
-      hashTable.set(lettersInHand[i], 1);
+      hashTable.set(stringLettersInHand[i], 1);
     }
   }
   
-  for (let i = 0; i < input.length; i++) {
-    if(hashTable.has(input[i]) && hashTable.get(input[i]) > 0) {
-      hashTable.set(input[i],hashTable.get(input[i])-1);
+  for (let i = 0; i < word.length; i++) {
+    if(hashTable.has(word[i]) && hashTable.get(word[i]) > 0) {
+      hashTable.set(word[i],hashTable.get(word[i])-1);
     } else {
       return false;
     }
