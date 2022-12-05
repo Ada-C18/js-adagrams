@@ -55,9 +55,35 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 };
 
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
+  let total = 0;
+  for (let char of word.toUpperCase()) {
+    total += letterObj[char]["score"];
+  }
+  if (word.length >= 7 && word.length <= 10) {
+    total += 8;
+  }
+  return total;
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  // collect pairs of words and scores, find max
+  let scores = words.map((word) => ({ word, score: scoreWord(word) }));
+  let max = Math.max(...scores.map((word) => word.score));
+
+  // filter low scores
+  let ties = scores.filter(({ _, score }) => score === max);
+
+  // find any words with winning score and length 10
+  let len_10 = [];
+  let min_length = Infinity;
+  for (let { word, score } of ties) {
+    if (word.length === 10) return { word, score };
+    if (word.length < min_length) min_length = word.length;
+  }
+
+  // return first word with winning score and shortest length
+  for (let word of ties) {
+    if (word.word.length === min_length) return word;
+  }
+  throw "No words supplied";
 };
