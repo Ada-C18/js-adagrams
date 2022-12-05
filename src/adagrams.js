@@ -102,6 +102,17 @@ export const scoreWord = (word) => {
   return score;
 };
 
+// Initialize winningWord to the first element of our top scored words list
+// Loop over the `topWords` list if we need to tiebreak
+// If there is only 1 element this loop will not be entered and we move right to the return statement
+// If we've already found a 10 letter word, we don't want to replace it       
+// if we found a word that has 10 letters, and it's longer than what we are currently storing in winning_word
+//         update winning_word to the current word
+// if winning_word is less than 10 letters and we've found a word that's shorter than the winning_word
+//       update winning_word to the current word
+//      
+// return winning_word
+
 export const highestScoreFrom = (words) => {
   const scoredWords = {};
   let winningWord = {};
