@@ -31,8 +31,8 @@ export const drawLetters = () => {
   // creates a letter pool based on the frequency of that letter in letterObj
   let letterPool = '';
   for (const letter in letterObj) {
-    letterPool += letter.repeat(letterObj[letter].frequency)
-  };
+    letterPool += letter.repeat(letterObj[letter].frequency);
+  }
   letterPool = letterPool.split('');
 
   // draws 10 letters from letterPool based on a random index and removes drawn letters from the pool
@@ -40,19 +40,17 @@ export const drawLetters = () => {
   while (letterDraw.length < 10) {
     const randomIndex = Math.floor(letterPool.length * Math.random());
     letterDraw.push(letterPool[randomIndex]);
-    letterPool.splice(randomIndex, 1)
-  };
+    letterPool.splice(randomIndex, 1);
+  }
   return letterDraw
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // checks if each letter in input is in lettersInHand. Removes letters from lettersInHand until all input letters are confirmed to be in hand, returns false otherwise
+  // checks if letters in input is in lettersInHand. Removes letters from lettersInHand until all input letters are confirmed to be in hand
   for (const letter of input.toUpperCase()) {
-    if (!lettersInHand.includes(letter)) {
-      return false
-    };
-    lettersInHand.splice(lettersInHand.indexOf(letter), 1)
-  };
+    if (!lettersInHand.includes(letter)) return false;
+    lettersInHand.splice(lettersInHand.indexOf(letter), 1);
+  }
    return true
 };
 
