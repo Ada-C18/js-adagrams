@@ -1,5 +1,3 @@
-import { PassThrough } from "stream";
-
 const letterPool = {
   A: 9,
   B: 2,
@@ -58,6 +56,12 @@ const valueOfLetter = {
   Z: 10,
 };
 
+export const updatingHashTable = (score, word, hashTableUpdating) => {
+  hashTableUpdating["score"] = score;
+  hashTableUpdating["word"] = word;
+  return hashTableUpdating;
+};
+
 export const drawLetters = () => {
   let allLetters = "";
   for (let letter in letterPool) {
@@ -108,27 +112,31 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // This has all the information regarding the scores
   let scoreInfo = [];
+
   for (let oneWord of words) {
     let infoAboutWords = {};
     let score = scoreWord(oneWord);
-    infoAboutWords["score"] = score;
-    infoAboutWords["word"] = oneWord;
-    infoAboutWords["length"] = oneWord.length;
+    updatingHashTable(score, oneWord, infoAboutWords);
     scoreInfo.push(infoAboutWords);
   }
+
   let highestScoreInfo = new Object();
   for (let Index = 0; Index < scoreInfo.length; Index++) {
     if (Index === 0) {
-      highestScoreInfo["score"] = scoreInfo[Index]["score"];
-      highestScoreInfo["word"] = scoreInfo[Index]["word"];
+      updatingHashTable(
+        scoreInfo[Index]["score"],
+        scoreInfo[Index]["word"],
+        highestScoreInfo
+      );
     } else if (highestScoreInfo["score"] > scoreInfo[Index]["score"]) {
       break;
     } else if (highestScoreInfo["score"] < scoreInfo[Index]["score"]) {
-      highestScoreInfo["score"] = scoreInfo[Index]["score"];
-      highestScoreInfo["word"] = scoreInfo[Index]["word"];
-      // tie breaker of socre
+      updatingHashTable(
+        scoreInfo[Index]["score"],
+        scoreInfo[Index]["word"],
+        highestScoreInfo
+      );
     } else if (highestScoreInfo["score"] === scoreInfo[Index]["score"]) {
       let highestScoreInfoWord = highestScoreInfo["word"];
       let highestScoreInfoWordLength = highestScoreInfoWord.length;
@@ -137,18 +145,23 @@ export const highestScoreFrom = (words) => {
       if (highestScoreInfoWordLength === 10 && scoreInfoWordLength == 10) {
         break;
       } else if (highestScoreInfoWordLength === 10) {
-        highestScoreInfo["score"] = highestScoreInfo["score"];
-        highestScoreInfo["word"] = highestScoreInfo["word"];
+        break;
       } else if (scoreInfoWordLength === 10) {
-        highestScoreInfo["score"] = scoreInfo[Index]["score"];
-        highestScoreInfo["word"] = scoreInfo[Index]["word"];
+        updatingHashTable(
+          scoreInfo[Index]["score"],
+          scoreInfo[Index]["word"],
+          highestScoreInfo
+        );
       } else if (
         scoreInfoWordLength !== 10 &&
         scoreInfoWordLength < highestScoreInfoWordLength &&
         scoreInfoWordLength !== 10
       ) {
-        highestScoreInfo["score"] = scoreInfo[Index]["score"];
-        highestScoreInfo["word"] = scoreInfo[Index]["word"];
+        updatingHashTable(
+          scoreInfo[Index]["score"],
+          scoreInfo[Index]["word"],
+          highestScoreInfo
+        );
       }
     }
   }
