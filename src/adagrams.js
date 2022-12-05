@@ -119,15 +119,32 @@ export const highestScoreFrom = (words) => {
   }
   // compare the Objects
   // console.log(scoreInfo.length);
+  let highestScoreInfo = [];
   for (let Index = 0; Index < scoreInfo.length; Index++) {
+    // adds something to start to comparing with
+    if (highestScoreInfo.length === 0) {
+      highestScoreInfo = scoreInfo[Index];
+      // console.log(highestScoreInfo);
+      // this will be the one where highestscoreInfo is greater than scoreInfo[Index]
+    } else if (highestScoreInfo["score"] > scoreInfo[Index]["score"]) {
+      break;
+    } else if (highestScoreInfo["score"] < scoreInfo[Index]["score"]) {
+      highestScoreInfo["score"] = scoreInfo[Index]["score"];
+      highestScoreInfo["word"] = scoreInfo[Index]["word"];
+      // console.log(ScoreInfo);
+      // console.log(highestScoreInfo);
+    }
+    // this will be the one where highestscoreInfo is less than scoreInfo[Index]
+
     // Access the data information
-    return scoreInfo[Index];
+    // compare one from each other
     // console.log(scoreInfo[Index]);
     // want to access the score
     // console.log(scoreInfo[Index]["score"]);
     // want to access the word
     // console.log(scoreInfo[Index]["word"]);
   }
+  return highestScoreInfo;
 
   // console.log(infoAboutWords);
   // tie cases
