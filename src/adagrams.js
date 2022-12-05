@@ -47,12 +47,11 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // checks if each letter in input is in lettersInHand. Removes letters from lettersInHand until all input letters are confirmed to be in hand, returns false otherwise
-  const word = input.toUpperCase();
-  for (const letter in word) {
-    if (!lettersInHand.includes(word[letter])) {
+  for (let letter of input.toUpperCase()) {
+    if (!lettersInHand.includes(letter)) {
       return false
     };
-    lettersInHand.splice(lettersInHand.indexOf(word[letter]), 1)
+    lettersInHand.splice(lettersInHand.indexOf(letter), 1)
   };
    return true
 };
