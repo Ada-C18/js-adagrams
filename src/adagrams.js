@@ -108,7 +108,25 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  // Identify the letters
 
-  words;
+  for (let oneWord of words) {
+    // console.log(`This is the word: ${word}`);
+    let score = 0;
+    let word = oneWord;
+    console.log(word);
+    for (let letter of oneWord) {
+      // console.log(
+      //   `This is letter ${letter} with the value ${letterPool[letter]}`
+      // );
+      // console.log(score);
+      // console.log(`This is the letter: ${letter}`);
+    }
+  }
+  // tie cases
+  // words with fewest letter
+  // word.length === 10 (winner) > words with fewest letter
+  // if same length of multiple words pick the first in the array of words
+
+  // returns the max value {word: "string", score: # }
 };
