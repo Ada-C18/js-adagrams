@@ -28,6 +28,7 @@ const poolOfLetters = {
   Z :1
 }
 
+// ########################### WAVE 1 ############################
 export const drawLetters = () => {
   //Returns a list of strings, each string contains one letter
 
@@ -48,6 +49,7 @@ export const drawLetters = () => {
   return letterBank
 };
 
+// ########################### WAVE 2 ############################
 export const usesAvailableLetters = (input, lettersInHand) => {
 
   /* Input: input is user input of a word. lettersInHand is a list of 10 strings (each a letter)
@@ -71,6 +73,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   };return true;
 };
 
+// ########################### WAVE 3 ############################
 export const scoreWord = (word) => {
 
   /*
@@ -119,6 +122,7 @@ export const scoreWord = (word) => {
   return score ;
 };
 
+// ########################### WAVE 4 ############################
 export const highestScoreFrom = (words) => {
   /*
   Input: words, which is a list of words.
