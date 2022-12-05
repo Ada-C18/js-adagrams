@@ -30,12 +30,6 @@ export const drawLetters = () => {
     "Y": 2,
     "Z": 1,
 };
-function getRandomInt(max) {
-  return Math.floor(Math.random() * max);
-}
-let listNum = poolList.length + 1
-let number = getRandomInt(listNum)
-
   for (const key in letterPool) {
     for(let i = 0; i < letterPool[key]; ++i) {
         poolList.push(key);  {
@@ -44,11 +38,8 @@ let number = getRandomInt(listNum)
 }  
 }
 }
-  console.log(letterList)
     return letterList
 };
-
-
 
 
 
@@ -68,7 +59,50 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 };
 
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
+    const scoreChart = {
+        "A": 1,
+        "E": 1,
+        "I": 1,
+        "O": 1,
+        "U": 1,
+        "L": 1,
+        "N": 1,
+        "R": 1,
+        "S": 1,
+        "T": 1,
+        "D": 2,
+        "G": 2,
+        "B": 3,
+        "C": 3,
+        "M": 3,
+        "P": 3,
+        "F": 4,
+        "H": 4,
+        "V": 4,
+        "W": 4,
+        "Y": 4,
+        "K": 5,
+        "J": 8,
+        "X": 8,
+        "Q": 10,
+        "Z": 10,
+    }
+    const isAlpha = str => /^[a-zA-Z]*$/.test(str);
+    const lengthList = [7, 8, 9, 10]
+    let score = 0
+    
+    for(let letter of word) {
+        if(isAlpha(letter) != true) {
+            score += 0;
+        } else {
+            score += scoreChart[letter.toUpperCase()];
+        }
+    }   
+    if(lengthList.includes(word.length)) {
+        score += 8;
+    }
+    console.log(`score is ${score}`)
+    return score
 };
 
 export const highestScoreFrom = (words) => {
