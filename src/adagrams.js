@@ -84,4 +84,55 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+  let highestScore = 0;
+  for (let i = 0; i < words.length; i++) {
+    if (scoreWord(words[i]) > highestScore) {
+      highestScore = scoreWord(words[i]);
+    }
+  }
+  let highestScoringWords = [];
+  for (let i = 0; i < words.length; i++){
+    if (scoreWord(words[i]) == highestScore) {
+      highestScoringWords.push(words[i]);
+    }
+  }
+
+  for (let i = 0; i < highestScoringWords.length; i++) {
+    if (highestScoringWords[i].length == 10)  {
+      return ([highestScoringWords[i],highestScore]);
+    }
+  }
+  
+  highestScoringWords.sort((a,b)=> a.length - b.length);
+  return highestScoringWords[0];
+
 };
+
+
+
+// const findShort = str => {
+//   // Convert string into an array of individual words:
+//   const arr = str.split(' ');
+//   // Sort array in ascending order:
+//   arr.sort((a, b) => a.length - b.length);
+//   // Return the first (shortest) element in the array:
+//   return arr[0];
+
+// def get_highest_word_score(word_list):
+//     highest_score = 0
+//     for word in word_list:
+//         if score_word(word) > highest_score:
+//             highest_score = score_word(word)
+
+//     highest_scoring_words = []
+//     for word in word_list:
+//         if score_word(word) == highest_score:
+//             highest_scoring_words.append(word)
+
+//     for word in highest_scoring_words:
+//         if len(word) == 10:
+//             return ([word, highest_score])
+//         if len(word) < 10:
+//             least_words = min(highest_scoring_words, key=len)
+
+//     return ([least_words, highest_score])
