@@ -74,7 +74,6 @@ export const highestScoreFrom = (words) => {
   let ties = scores.filter(({ _, score }) => score === max);
 
   // find any words with winning score and length 10
-  let len_10 = [];
   let min_length = Infinity;
   for (let { word, score } of ties) {
     if (word.length === 10) return { word, score };
