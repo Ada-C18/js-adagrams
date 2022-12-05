@@ -36,14 +36,17 @@ export const drawLetters = () => {
       letterBag.push(letter);
     }
   }
-  //for 10 iterations
+  //we need 10 letters
   let pickedLetter;
   for (let i = 0; i < 10; i++) {
-    //random pick from handDict   // minus one from letterDict
-    pickedLetter = letterBag.pop([
-      Math.floor(Math.random() * letterBag.length),
-    ]);
-    // push to hand
+    //logic of pop, since i can't pass an argument to it:
+    //1. random pick from handDict   // minus one from letterDict
+    let index = Math.floor(Math.random() * letterBag.length);
+    //2. use the random index in letterbag to grab it.
+    pickedLetter = letterBag[index];
+    //3. remove it from the bag
+    letterBag.splice(index, 1);
+    //4. push to hand
     hand.push(pickedLetter);
   }
 
@@ -117,41 +120,51 @@ export const scoreWord = (word) => {
 export const highestScoreFrom = (words) => {
   let wordArr = [];
   let highScore = { word: '', score: 0 };
-  let highScoreArr = [];
+  let tieArr = [];
   let low = { word: 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz', score: 0 };
+
+  //Make array with {word:'str',score: NUMBER} objects
   for (const word of words) {
-    //use helper function above to score
+    //use helper function above to score and add to array
     const wordObj = { word: word, score: scoreWord(word) };
     wordArr.push(wordObj);
-  }
-  for (const obj of wordArr) {
-    if (obj.score >= highScore.score) {
-      highScore = obj;
+    // if current object's score is higher than the highscore object <---reassign to current object
+    if (wordObj.score > highScore.score) {
+      highScore = wordObj;
     }
-    highScoreArr.push(highScore);
-    
+    // if current objects's string length is lower than low <---reassign to current object
+    // if (wordObj.word.length < highScore && wordObj.word.score === highScore){
+    //   low = wordObj
+    // }
+  }
+
+  //use highscore and low in a compound conditional that checks for high score
+  //lowest letter num && any that equal it equality && obj.word.length === 10, then append them
+  for (const obj of wordArr) {
+    if (obj.score === highScore.score && obj !== highScore) {
+      tieArr.push(obj);
+    }
+    tieArr.push(highScore);
   }
   //TIE LOGIC
-  if (highScoreArr.length > 1){
-  for (const obj of highScoreArr) {
-    if (obj.word.length === 10) {
-      return highScore = obj;
-    }
+  if (tieArr.length > 1) {
+    for (const obj of tieArr) {
+      if (obj.word.length === 10) {
+        return (highScore = obj);
+      }
 
-    if (obj.word.length === low.word.length) {
-       highScore = low;
-    }
+      if (obj.word.length === low.word.length) {
+        highScore = low;
+      }
 
-    if (obj.word.length < low.word.length) {
-      low = obj;
-      highScore = low
-      
-    } 
-   
-  }}
+      if (obj.word.length < low.word.length) {
+        low = obj;
+        highScore = low;
+      }
+    }
+  }
   return highScore;
 };
-
 
 //compare scores [{word:score},{word:score},{word:score}] by iterating 'let highScore=0' highScore<i highScore===i
 //return obj{word:score}
