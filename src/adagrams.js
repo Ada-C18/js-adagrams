@@ -41,6 +41,20 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
+  input = input.toUpperCase();
+  let inputLetterCount = {};
+  for (let char of input) {
+    if (!(char in inputLetterCount)) inputLetterCount[char] = 0;
+    inputLetterCount[char]++;
+  }
+  for (let letter of lettersInHand) {
+    if (letter in inputLetterCount)
+      inputLetterCount[letter]--;
+  }
+  for (let letter in inputLetterCount) {
+    if (inputLetterCount[letter] > 0) return false;
+  }
+  return true;
 };
 
 export const scoreWord = (word) => {
