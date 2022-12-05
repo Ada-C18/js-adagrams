@@ -79,12 +79,12 @@ return score;
 export const highestScoreFrom = (words) => {
   // want to use a callback function
   
-  let result = ({'score': 0, 'word': ''});
+  let result = {'score': 0, 'word': ''};
   for (const word of words){
     let wordScore = scoreWord(word);
     if (wordScore > result['score']){
-        (result['score'] = wordScore); 
-        (result['word'] = word);
+        result['score'] = wordScore; 
+        result['word'] = word;
   } else if (wordScore === result['score']){ 
       if ((word.length < result['word'].length) && (result['word'].length !== 10)){
         result['word'] = word;
