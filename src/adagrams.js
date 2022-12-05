@@ -32,14 +32,14 @@ export const drawLetters = () => {
   let hand = [];
 
   for (const key in lettersMap) {
-    lettersArr.push(...Array(lettersMap[key]).fill(key))
+    lettersArr.push(...Array(lettersMap[key]).fill(key));
   }
 
   for (let i = 0; i < 10; i++) {
     const j = Math.floor(Math.random() * (lettersArr.length - i) + i);
     let selectedLetter = lettersArr[j];
     hand.push(selectedLetter);
-    lettersArr[j] = lettersArr[i]
+    lettersArr[j] = lettersArr[i];
     lettersArr[i] = selectedLetter;
   }
 
