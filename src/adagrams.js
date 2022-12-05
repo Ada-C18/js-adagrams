@@ -78,12 +78,11 @@ export const scoreWord = (word) => {
 export const highestScoreFrom = (words) => {
   const scoredWords = {}; 
     let winningWord = {};
-    const topWords = [];
+    const tiedWords = [];
     let topScore = 0;
     
     for(const word of words){
         let wordScore = scoreWord(word);
-        // let topScore = scoreWord(words[0]);
         scoredWords[word] = wordScore;
         
         if (wordScore > topScore){
@@ -91,19 +90,20 @@ export const highestScoreFrom = (words) => {
         }
     }for (const [word, score] of Object.entries(scoredWords)){
         if(score === topScore){
-            topWords.push(word);
+            tiedWords.push(word);
             winningWord["word"] = word;
             winningWord["score"] = topScore
         }
     } 
-    if (topWords.length > 1){
-        const winner = topWords[0]
-        for (const word of topWords){
-            if (winner.length ===10){
+    if (tiedWords.length > 1){
+        const winner = ''
+        for (const word of tiedWords){
+            if (winner.length === 10 || word.length === 10){
                 winningWord["word"] = winner;
             } else if (word.length === 10 && winner.length != 10){
                 winningWord["word"] = word;
-            } else if (word.length < winner.length){
+            } else
+            {
                 winningWord["word"] = word;
             }
         }
