@@ -1,5 +1,3 @@
-import { indexOf } from "core-js/core/array";
-
 const letterPOOL = {
   A: 9,
   B: 2,
@@ -59,8 +57,6 @@ const scoreChart = {
 };
 
 export const drawLetters = () => {
-  // Implement this method for wave 1
-
   let poolList = [];
   for (const letter in letterPOOL) {
     for (let i = 0; i < letterPOOL[letter]; i++) {
@@ -72,7 +68,6 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
   let letterBankCopy = lettersInHand.map((x) => x);
 
   for (const letter of input) {
@@ -85,7 +80,6 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   return true;
 };
 
-// usesAvailableLetters("DOG", ["D", "O", "G", "X", "X", "X", "X", "X", "X", "X"]);
 export const scoreWord = (word) => {
   word = word.toUpperCase();
   let score = 0;
@@ -95,7 +89,6 @@ export const scoreWord = (word) => {
   else {
     for (let letter of word) {
       if (scoreChart[letter]) {
-        console.log(letter)
         score += scoreChart[letter]
       }
     }
@@ -109,45 +102,40 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // let words = ["AAAAAAAAAA", "BBBBBB"];
 
   let score = 0;
   let wordScores = {};
+
   if (words.length) {
     for (const word of words) {
       score = scoreWord(word);
       wordScores[word] = score;
     }
   };
+
   const values = Object.values(wordScores);
   const topScore = Math.max(...values)
-  console.log("top Score", topScore)
-
   let topWord = []
+
   for (const word in wordScores) {
     if (wordScores[word] == topScore) {
       topWord.push(word)
     }
   }
-  console.log("top word list", topWord)
 
+  let sortedTopWord = topWord.sort((x, y) => x.length - y.length);
   let winner = {};
-  let min = 0;
-  for (let word of topWord) {
-    if (word.length === 10) {
+
+  for (let word of sortedTopWord) {
+    if (word.length == 10) {
       winner["word"] = word;
       winner["score"] = scoreWord(word);
-      return winner;
+      break;
     }
-    else if (word.length < 10) {
-      for (let w of topWord) {
-        min = Math.min(w.length);
-        winner["word"] = w;
-        winner["score"] = scoreWord(w);
-      }
+    else {
+      winner["word"] = sortedTopWord[0];
+      winner["score"] = scoreWord(sortedTopWord[0]);
     }
   }
-  winner["word"] = topWord[0];
-  winner["score"] = scoreWord(topWord[0]);
   return winner;
 };
