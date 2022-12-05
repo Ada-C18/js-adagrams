@@ -1,8 +1,8 @@
 export const drawLetters = () => {
-  const _ = require("lodash");
-  let letterList = [];
-  const poolList = [];
-  const letterPool = {
+    const _ = require("lodash");
+    let letterList = [];
+    const poolList = [];
+    const letterPool = {
     "A": 9,
     "B": 2,
     "C": 2,
@@ -30,32 +30,30 @@ export const drawLetters = () => {
     "Y": 2,
     "Z": 1,
 };
-  for (const key in letterPool) {
-    for(let i = 0; i < letterPool[key]; ++i) {
-        poolList.push(key);  {
+    for (const key in letterPool) {
+        for(let i = 0; i < letterPool[key]; ++i) {
+            poolList.push(key);  {
 
     letterList = _.sampleSize(poolList,10);
-}  
-}
-}
+}  }}
     return letterList
 };
 
 
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  let flag = true;
-  for(let letter of input){
-    if(lettersInHand.includes(letter) === false){
-    flag = false;
+    let flag = true;
+    for(let letter of input){
+        if(lettersInHand.includes(letter) === false){
+        flag = false;
     break
 
 }
     else {
-      delete lettersInHand[lettersInHand.indexOf(letter)]
+        delete lettersInHand[lettersInHand.indexOf(letter)]
     }
 }
-  return flag
+    return flag
 };
 
 export const scoreWord = (word) => {
@@ -92,7 +90,7 @@ export const scoreWord = (word) => {
     let score = 0
     
     for(let letter of word) {
-        if(isAlpha(letter) != true) {
+        if(isAlpha(letter) === false) {
             score += 0;
         } else {
             score += scoreChart[letter.toUpperCase()];
@@ -106,5 +104,5 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+
 };
