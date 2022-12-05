@@ -6,15 +6,15 @@ import {
 export const drawLetters = () => {
   // Implement this method for wave 1
   const drawPool = [];
-  for (let [key, value] of Object.entries(LETTER_POOL)) {
+  for (const [key, value] of Object.entries(LETTER_POOL)) {
     for (let i = 0; i < value; i++) {
       drawPool.push(key);
     }
   }
   const hand = []; 
   for (let i = 0; i < 10; i++) {
-    let pieceIndex = Math.floor(Math.random() * drawPool.length);
-    let piece = drawPool[pieceIndex];
+    const pieceIndex = Math.floor(Math.random() * drawPool.length);
+    const piece = drawPool[pieceIndex];
     hand.push(piece);
     const index = drawPool.indexOf(piece);
     if (index > -1) {
@@ -66,8 +66,8 @@ export const highestScoreFrom = (words) => {
   let highScore = ['', 0];
   for (let i = 0; i < words.length; i++) {
     if (scoreWord(words[i]) > highScore[1]) {
-      highScore[1] = scoreWord(words[i])
-      highScore[0] = words[i]
+      highScore[1] = scoreWord(words[i]);
+      highScore[0] = words[i];
     } else if (scoreWord(words[i]) === highScore[1]) {
       let highWord = highScore[0]; {
       if (highWord.length === 10) {continue; } 
