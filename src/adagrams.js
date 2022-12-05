@@ -104,15 +104,19 @@ export const highestScoreFrom = (words) => {
     if (scoreWord(word) > highestScore) {
       highestScore = scoreWord(word);
       winningWord = word;
+      // don't reassign winningWord if words have same score & length
+      // or if same score, but winningWord has 10 letters
+      // ensures first word supplied in list is picked
     } else if (scoreWord(word) === highestScore) {
       if (word.length === winningWord.length || winningWord.length === 10) {
         continue; // goes back to top of loop
+        // tie break case continued below (tie score)
+        // prefer word w/ fewest letters unless one word has 10 letters
       } else if (word.length === 10) {
         winningWord = word;
       } else if (word.length < winningWord.length) {
         winningWord = word;
       }
-      console.log(winningWord, highestScore);
     }
   }
   return {
@@ -120,10 +124,3 @@ export const highestScoreFrom = (words) => {
     score: highestScore,
   };
 };
-
-//////\\\\    PSEUDOCODE    ////\\\\\\\
-
-// 1. initialize an empty string to hold highest scoring word
-// 2. initialize a variable to hold highest score
-// 3. Score each word in words array
-// 4.
