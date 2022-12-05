@@ -88,6 +88,9 @@ export const scoreWord = (word) => {
   for (const letter of word.toUpperCase()) {
     wordScore += letterValues[letter];
   }
+  if (word.length >= 7) {
+    wordScore += 8;
+  }
   return wordScore;
 };
 
