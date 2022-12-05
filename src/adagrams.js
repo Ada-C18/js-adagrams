@@ -50,13 +50,12 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   Output: returns true is all letters in input are present in letterHand in the right quantities, or false if they are not
   */
   const usedLetters = [];
-  for (let i = 0; i < input.length; i++) {
-    const currentLetter = input[i].toUpperCase();
-    if (!lettersInHand.includes(currentLetter)) {
+  for (const letter of input.toUpperCase()) {
+    if (!lettersInHand.includes(letter)) {
       return false;
     } else {
-      usedLetters.push(currentLetter);
-      lettersInHand.splice(lettersInHand.indexOf(currentLetter), 1);
+      usedLetters.push(letter);
+      lettersInHand.splice(lettersInHand.indexOf(letter), 1);
     }
   }
   if (usedLetters.length === input.length) {
@@ -99,10 +98,8 @@ export const scoreWord = (word) => {
   };
   const bonusLengths = [7, 8, 9, 10];
   let score = 0;
-  word = word.toUpperCase();
-  for (let i = 0; i < word.length; i++) {
-    const currentLetter = word[i];
-    score += POINTS[currentLetter];
+  for (const letter of word.toUpperCase()) {
+    score += POINTS[letter];
   }
   if (bonusLengths.includes(word.length)) {
     score += 8;
@@ -111,7 +108,10 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  /*
+  Input: array of strings (words) to be scored
+  Output: an object with 2 keys (word and score) which hold the winning word and its score, respectively
+  */
 };
 
 // helper functions
