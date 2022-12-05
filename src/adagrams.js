@@ -29,30 +29,38 @@ export const drawLetters = () => {
     Z: 1,
   };
 
-  let lettersArr = [];
+  // ############
+  //  alt
+  // ###########
+  let lettersHand = [];
 
   let lettersCopy = JSON.parse(JSON.stringify(letters));
 
-  const keys = Object.keys(letters);
+  let lettersPool = [];
+
+  Object.entries(lettersCopy).forEach(([letter, amount]) => {
+    for (let i = 0; i < amount; i++) {
+      lettersPool.push(letter);
+    }
+  });
 
   let i = 0;
   while (i < 10) {
-    let randomNum = Math.floor(Math.random() * keys.length);
-    let chosenLetter = keys[randomNum];
+    let randomNum = Math.floor(Math.random() * lettersPool.length);
+    let chosenLetter = lettersPool[randomNum];
+    lettersPool.splice(randomNum, 1);
 
-    if (lettersCopy[chosenLetter] > 0) {
-      lettersArr.push(chosenLetter);
-      lettersCopy[chosenLetter] -= 1;
+    lettersHand.push(chosenLetter);
+    lettersCopy[chosenLetter] -= 1;
 
-      i++;
-    }
+    i++;
   }
-  return lettersArr;
+  return lettersHand;
 };
 
 // Wave 2
 export const usesAvailableLetters = (input, lettersInHand) => {
-  for (let i = 0; i < input.length; i++) {
+  for (const i in input) {
     if (!lettersInHand.includes(input[i])) {
       return false;
     } else {
@@ -67,7 +75,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 export const scoreWord = (word) => {
   let letterPoints = {};
 
-  // all letters and points; This was my attempt at playing with the attribute functionality
+  // all letters and points; This was my attempt at playing with the attribute/property functionality
   letterPoints.A =
     letterPoints.E =
     letterPoints.I =
