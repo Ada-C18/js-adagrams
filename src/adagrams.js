@@ -48,8 +48,8 @@ export const drawLetters = () => {
   // return randomLetters;
 
   const letters = []; // created this to make a more accurate draw reflective of probability (instead of 1/26 from drawing from keys)
-  for (const key of Object.keys(letterPool)) {
-    const looped = letterPool[key];
+  for (let key of Object.keys(letterPool)) {
+    let looped = letterPool[key];
     for (let i = 0; i < looped; i++) {
       letters.push(key);
     }
@@ -130,13 +130,16 @@ export const highestScoreFrom = (words) => {
       highestWord = word;
       highestWordScore = score;
     } else if (score === highestWordScore) {
-      if ((word.length === 10 || word.length < highestWord.length) && highestWord.length !== 10) {
+      if (
+        (word.length === 10 || word.length < highestWord.length) &&
+        highestWord.length !== 10
+      ) {
         highestWord = word;
       }
     }
   }
   return {
-    "word": highestWord, 
-    "score": highestWordScore 
+    word: highestWord,
+    score: highestWordScore,
   };
 };
