@@ -27,6 +27,17 @@ const letterPool = {
   'Z': 1
 }
 
+const scoreChart = {
+  1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
+  2: ['D', 'G'],
+  3: ['B', 'C', 'M', 'P'],
+  4: ['F', 'H', 'V', 'W', 'Y'],
+  5: ['K'],
+  8: ['J', 'X'],
+  10: ['Q', 'Z'],
+}
+
+
 export const drawLetters = () => {
   let letterArray = []
   for (const letter in letterPool){
@@ -49,12 +60,36 @@ export const drawLetters = () => {
 
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  for(const letter of input){
+    let result = lettersInHand.includes(letter);
+    if (result != true){
+      return false;
+    }
+  }
+
+  let wordArray = Array.from(input);
+
+  const letterCounter = (array, letter) => {
+    return array.filter((currentLetter) => currentLetter == letter).length;
 };
+  for(const letter of input){
+    const wordCount = letterCounter(wordArray, letter); 
+    const handCount = letterCounter(lettersInHand, letter); 
+    if (wordCount > handCount){
+      return false;  
+    }
+  }
+  return true; 
+};
+
+
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
 };
+
+
+
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
