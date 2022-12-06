@@ -76,6 +76,31 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
+  const inputFreq = {};
+  const handFreq = {};
+
+  for (const letter of input) {
+    if (!(letter in inputFreq)) {
+      inputFreq[letter] = countFrequency(input, letter);
+    }
+  }
+  for (const letter of lettersInHand) {
+    if (!(letter in handFreq)) {
+      handFreq[letter] = countFrequency(lettersInHand, letter);
+    }
+  }
+
+  for (const letter of Object.keys(inputFreq)){
+    if (!(letter in handFreq)) {
+      return false;
+    }
+    else if (inputFreq[letter] > handFreq[letter]) {
+      return false;
+    }
+  }
+
+  return true;
+
 };
 
 export const scoreWord = (word) => {
