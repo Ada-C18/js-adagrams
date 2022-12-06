@@ -5,6 +5,8 @@ import {
 	highestScoreFrom,
 } from "adagrams";
 
+// import Adagrams from "adagrams";
+
 const LETTER_POOL = {
 	A: 9,
 	B: 2,
@@ -72,8 +74,6 @@ describe("Adagrams", () => {
 	});
 
 	// WAVE 2
-	// remove .skip later
-	// it.skip
 	describe("usesAvailableLetters", () => {
 		it("returns true if the submitted letters are valid against the drawn letters", () => {
 			const drawn = ["D", "O", "G", "X", "X", "X", "X", "X", "X", "X"];
@@ -181,7 +181,7 @@ describe("Adagrams", () => {
 				expect(highestScoreFrom(words.reverse())).toEqual(correct);
 			});
 
-			it.skip("selects the word with fewer letters when neither are 10 letters", () => {
+			it("selects the word with fewer letters when neither are 10 letters", () => {
 				const words = ["MMMM", "WWW"];
 				const correct = { word: "WWW", score: scoreWord("WWW") };
 				expectTie(words);
@@ -190,7 +190,7 @@ describe("Adagrams", () => {
 				expect(highestScoreFrom(words.reverse())).toEqual(correct);
 			});
 
-			it.skip("selects the first word when both have same length", () => {
+			it("selects the first word when both have same length", () => {
 				const words = ["AAAAAAAAAA", "EEEEEEEEEE"];
 				const first = {
 					word: "AAAAAAAAAA",
