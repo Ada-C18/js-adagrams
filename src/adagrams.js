@@ -119,6 +119,8 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   var letter_counter = {};
   //for each letter in the hand, if it's not in the letter_counter, put it in with value 1.
   //if it is already in letter_counter, add one to it's count.
+
+  //later, change letter_counter to letterCounter
   for (var i = 0; i < lettersInHand.length; i++) {
     letter_counter[lettersInHand[i]] = letter_counter[lettersInHand[i]]
       ? letter_counter[lettersInHand[i]] + 1
@@ -137,20 +139,33 @@ export const usesAvailableLetters = (input, lettersInHand) => {
     }
   }
   return result;
-
-  //python:
-  //   for character in word:
-  //       if character in letter_bank_dict:
-  //           if letter_bank_dict[character] == 0:
-  //               result = False
-  //           letter_bank_dict[character] -= 1
-  //       else:
-  //           result = False
-  //   return result
 };
 
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
+  //In my last program, I made the dictionary every time. I'm going to hardcode it it.
+  //make a dictionary with keys = letters and values = score for that letter.
+  const letterScores = {};
+  letterScores["A"] = 1;
+  letterScores["E"] = 1;
+  letterScores["I"] = 1;
+  letterScores["O"] = 1;
+  letterScores["U"] = 1;
+  letterScores["L"] = 1;
+  letterScores["N"] = 1;
+  letterScores["R"] = 1;
+  letterScores["S"] = 1;
+  letterScores["T"] = 1;
+  letterScores["D"] = 2;
+  letterScores["G"] = 2;
+  letterScores["B"] = 3;
+  letterScores["C"] = 3;
+  letterScores["M"] = 3;
+  letterScores["P"] = 3;
+  letterScores["K"] = 5;
+  letterScores["J"] = 8;
+  letterScores["X"] = 8;
+  letterScores["Q"] = 10;
+  letterScores["Z"] = 10;
 };
 
 export const highestScoreFrom = (words) => {
