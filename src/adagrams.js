@@ -81,15 +81,25 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
   let inputCaps = input.toUpperCase();
   const inputLetters = inputCaps.split("");
-  for (let letter in inputLetters) {
+  console.log(inputLetters)
+
+  const itemCounter = (array, item) => {
+    return array.filter((currentItem) => currentItem === item).length;
+  };
+
+  for (let letter of inputLetters) {
     // const result = arrayToCount.filter(i => i === 2).length;
-    let handCount = lettersInHand.filter((i) => i === letter).length;
-    let inputCount = inputLetters.filter((i) => i === letter).length;
-    if (!lettersInHand.includes(letter) || handCount < inputCount) {
+    // let handCount = lettersInHand.filter((i) => i === letter).length;
+    // let inputCount = inputLetters.filter((i) => i === letter).length;
+    let handCount = itemCounter(lettersInHand, letter);
+    let inputCount = itemCounter(inputLetters, letter);
+    // console.log(`${handCount} and ${inputCount}`)
+    if (!lettersInHand.includes(letter) || inputCount > handCount) {
       return false;
     }
-    return true;
+    continue;
   }
+  return true;
 };
 
 export const scoreWord = (word) => {
@@ -116,7 +126,7 @@ export const highestScoreFrom = (words) => {
   let winningWord = words[0];
   let winningScore = scoreWord(winningWord);
 
-  for (let word in words) {
+  for (let word of words) {
     if (scoreWord(word) > winningScore) {
       winningWord = word;
       winningScore = scoreWord(word);
@@ -132,6 +142,7 @@ export const highestScoreFrom = (words) => {
         winningScore = scoreWord(word);
       }
     }
+    continue;
   }
   let highestScore = {};
   highestScore["word"] = winningWord;
