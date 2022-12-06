@@ -15,8 +15,6 @@ export const drawLetters = () => {
 }
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-   // check whether type(input) === str
-  // create a dictionary that will house the lettersInHand (key) and number of occurences (value)
   let playerHand = {}
   for (let i of lettersInHand) {
     if (i in playerHand) {
@@ -25,8 +23,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
       playerHand[i] = 1
     }
   } 
-  // return false if:
-  // - used letter in not available in hand
+
   for (let j of input) {
     if (!(j in playerHand)) {
       return false;
@@ -34,17 +31,13 @@ export const usesAvailableLetters = (input, lettersInHand) => {
       playerHand[j] -= 1
     }
   }
-  // return true if:
-  // - used letter is available in hand
-  // return false if:
-  // - letter has been used in input word more times than is availible in hand
+
   return Object.values(playerHand).every(
     value => value >= 0
   )
 };
 
 export const scoreWord = (word) => {
-  // let word = word.toUpperCase();
   const scoreChart = {
     1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
     2: ['D', 'G'],
@@ -70,35 +63,30 @@ export const scoreWord = (word) => {
   };
   
   return wordScore;
-  
-  // iterate through word and add points to wordScore
-  // if len(word) >= 7, wordScore +8
-  // return int(totalPoints)
 };
 
 
 
 export const highestScoreFrom = (words) => {
-  // create a dictionary for each word in words => word:score
+  
   let wordScores = {};
-  // or we can create a list of tuples [ ('word', score)...]
+ 
 
   for (let word of words) {
     wordScores[word] = scoreWord(word);
   }
 
-  //returns max score value in wordScores:
+
   const maxScore = Math.max(...Object.values(wordScores));
 
-  // returns a new list:
+
   let allMaxScoringWords = Object.keys(wordScores).filter(
     (key) => wordScores[key] === maxScore
   );
 
 
-  // if allMaxScoringWords of length 1, return {word: #, score: #} => comeback if time, and refactor by grabbing object directly instead of recreating dict
   if (allMaxScoringWords.length === 1) {
-    // find a way to make a helper function to format return statement
+
     return { 'word': allMaxScoringWords[0], 'score': maxScore };
   } else {
     for (let word of allMaxScoringWords) {
@@ -109,13 +97,4 @@ export const highestScoreFrom = (words) => {
   } const tempWord = allMaxScoringWords.reduce((a,b) => a.length <= b.length ? a:b);
   return {'word':tempWord, 'score':maxScore}
 };
-  
-  // else, evaluate tie scenarios below
 
-  /* return Object = {word: #, score: #}
-  
-  In case of ties evaluate length of words that produce tie:
-    - prefer words.length === 10 (first priority)
-    - prefer min(words.length)(second priority)
-    - if multiple words wih same score and length:
-        - pick first one in the 'words' array */
