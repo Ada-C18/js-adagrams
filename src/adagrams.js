@@ -1,54 +1,34 @@
 // helper function to call for range for letterBank
 function range(stop) {
-  let start = 0;
-  let step = 1;
-
   let result = [];
-  for (let i = start; step > 0 ? i < stop : 1 > stop; i += step) {
-    result.push(i);
+  // creates a list of integers starting and 0 and ending at stop variable
+  for (let i = 0; i < stop; i += 1) {
+    result.push(i)
   }
   return result;
 };
 
+
 export const drawLetters = () => {
   const letterPool = {
-    'A': 9, 
-    'B': 2, 
-    'C': 2, 
-    'D': 4, 
-    'E': 12, 
-    'F': 2, 
-    'G': 3, 
-    'H': 2, 
-    'I': 9, 
-    'J': 1, 
-    'K': 1, 
-    'L': 4, 
-    'M': 2, 
-    'N': 6, 
-    'O': 8, 
-    'P': 2, 
-    'Q': 1, 
-    'R': 6, 
-    'S': 4, 
-    'T': 6, 
-    'U': 4, 
-    'V': 2, 
-    'W': 2, 
-    'X': 1, 
-    'Y': 2, 
-    'Z': 1
+    'A': 9, 'B': 2, 'C': 2, 'D': 4, 'E': 12, 'F': 2,
+    'G': 3, 'H': 2, 'I': 9, 'J': 1, 'K': 1, 'L': 4,
+    'M': 2, 'N': 6, 'O': 8, 'P': 2, 'Q': 1, 'R': 6,
+    'S': 4, 'T': 6, 'U': 4, 'V': 2, 'W': 2, 'X': 1,
+    'Y': 2, 'Z': 1
   };
 
   let returnList = [];
   let letterBank = [];
 
+  // creates letter bank with num of letters equal to letterPool values
   for (let [key,value] of Object.entries(letterPool)) {
     for (value in range(value)) {
       letterBank.push(key);
     }
   }
 
+  // draws 10 random letters from letterBank
   while (returnList.length < 10) {
     let letter = letterBank[Math.floor(Math.random()* letterBank.length)];
     returnList.push(letter);
@@ -61,14 +41,20 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (word, letterBank) => {
   let letters = letterBank.copyWithin();
+
   const checkWord = []
   for (let letter of word.toUpperCase()) {
+    // checks if letter in word is in letterBank
     if (letters.includes(letter)) {
+      // adds letter to checkWord list
       checkWord.push(letter);
+      // removes letter from letterBank so multiples can't be used
       let index = letters.indexOf(letter);
       letters.splice(index,1);
     }
   }
+
+  // if checkWord is the same length as input word, then the word uses available letters
   if (checkWord.length == word.length) {
     return true;
   } else {
@@ -78,42 +64,21 @@ export const usesAvailableLetters = (word, letterBank) => {
 
 export const scoreWord = (word) => {
   const scoreDict = {
-    'A': 1, 
-    'B': 3, 
-    'C': 3, 
-    'D': 2, 
-    'E': 1, 
-    'F': 4, 
-    'G': 2, 
-    'H': 4, 
-    'I': 1, 
-    'J': 8, 
-    'K': 5, 
-    'L': 1, 
-    'M': 3, 
-    'N': 1, 
-    'O': 1, 
-    'P': 3, 
-    'Q': 10, 
-    'R': 1, 
-    'S': 1, 
-    'T': 1, 
-    'U': 1, 
-    'V': 4, 
-    'W': 4, 
-    'X': 8, 
+    'A': 1, 'B': 3, 'C': 3, 'D': 2, 'E': 1, 'F': 4, 
+    'G': 2, 'H': 4, 'I': 1, 'J': 8, 'K': 5, 'L': 1, 
+    'M': 3, 'N': 1, 'O': 1, 'P': 3, 'Q': 10, 'R': 1, 
+    'S': 1, 'T': 1, 'U': 1, 'V': 4, 'W': 4, 'X': 8, 
     'Y': 4, 
     'Z': 10
   };
 
-  const wordUpper = word.toUpperCase();
-  const wordList = wordUpper.split('');
+  // calculates score by iterating through each letter in word and adding its value from scoreDict
   let score = 0;
-
-  wordList.forEach((letter) => {
+  word.toUpperCase().split('').forEach((letter) => {
     score += scoreDict[letter];
   })
 
+  // adds 8 bonus points if word length is >= 7 and <= 10
   if (word.length >= 7 && word.length <= 10) {
     score += 8;
   }
@@ -123,63 +88,44 @@ export const scoreWord = (word) => {
 
 
 export const highestScoreFrom = (words) => {
+  // creates dictionary of scores for each word
   let dictOfScores = {}
-
   for (let word of words) {
     let wordScore = scoreWord(word);
     dictOfScores[word] = wordScore;
-  } 
-
-  let highestScore = 0
-  for (let [key, value] of Object.entries(dictOfScores)){
-    if (value > highestScore){
-      highestScore = value;
-    }
   }
 
-  let maxScoreDict = {}
-  for (let [key,value] of Object.entries(dictOfScores)){
-      if (value === highestScore){
-        maxScoreDict[key] = value
-      }
-    }
-  
-  let minLenWord = Object.keys(maxScoreDict)[0]
-  for (let [key,value] of Object.entries(maxScoreDict)){
-    if (key < minLenWord){
-      minLenWord = key
+  // creates list of words with highest score
+  let highestScore = Math.max.apply(null, Object.values(dictOfScores));
+  let maxScoreList = []
+  for (let [key, value] of Object.entries(dictOfScores)) {
+    if (value === highestScore) {
+      maxScoreList.push(key)
     }
   }
   
-  for (let [key, value] of Object.entries(maxScoreDict)){
-    if (key.length === 10){
-      return {word: key, score: value}
+  // returns highest score if length of list is only 1
+  if (maxScoreList.length === 1) {
+    return {word: maxScoreList[0], score: scoreWord(maxScoreList[0])}
+  }
+
+  // gets max and min length word of highest scoring words
+  let maxLenWord = maxScoreList[0];
+  let minLenWord = maxLenWord;
+  for (let word of maxScoreList) {
+    if (word.length > maxLenWord.length) {
+      maxLenWord = word;
     }
-    if (key === minLenWord){
-      return {word: key, score: value}
+    if (word.length < minLenWord.length) {
+      minLenWord = word;
     }
   }
   
+  // returns highest scoring word if length of word is 10
+  if (maxLenWord.length === 10) {
+    return {word: maxLenWord, score: scoreWord(maxLenWord)};
+  }
 
-  // let highestWords = []
-  // for (let [key, value] of Object.entries(dictOfScores)) {
-  //   if (value === highestScore){
-  //     highestWords.push(key);
-  //   } 
-  //   if (highestWords.length === 1) {
-  //     return { word: highestWords[0], score: scoreWord(highestWords[0]) };
-  //   } else {
-  //   let bestWord = highestWords[0]
-  //   let counter = 1
-  //   while (counter < highestWords.length){
-  //   if (highestWords[counter].length === 10) {
-  //   bestWord = highestWords[counter];
-  //   } else if (highestWords[counter].length < bestWord.length && bestWord.length !== 10) {
-  //       bestWord = highestWords[counter];
-  //     }  
-
-  //     counter += 1
-  //   } 
-  // } 
-  // } return {word: bestWord, score: scoreWord(bestWord)}
+  // returns the first shortest length word of high scoring word list
+  return {word: minLenWord, score: scoreWord(minLenWord)};
   };
