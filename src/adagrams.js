@@ -85,3 +85,13 @@ export const scoreWord = (word) => {
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
 };
+
+const countFrequency = (input, target) => {
+  let count = 0
+  for (const element of input) {
+    if (element === target) {
+      count ++;
+    }
+  }
+  return count;
+}
