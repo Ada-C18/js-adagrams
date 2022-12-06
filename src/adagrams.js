@@ -108,7 +108,8 @@ export const drawLetters = () => {
   // loop to randomly populate tenLetters
   while (tenLetters.length < 10) {
     // choose randomLetter from randomized index from todaysSoup array, between 0 and todaysSoup length
-    let randomLetter = todaysSoup[Math.floor(Math.random() * todaysSoup.length + 1)];
+    let randomLetter =
+      todaysSoup[Math.floor(Math.random() * todaysSoup.length + 1)];
 
     // check if randomLetter count within tenLetters is less than allotted letter quantity
     // if true, add randomLetter to tenLetters array
@@ -147,7 +148,7 @@ export const scoreWord = (word) => {
   if (word.length >= 7) {
     score += 8;
   }
-  return score
+  return score;
 };
 
 export const highestScoreFrom = (words) => {
@@ -156,7 +157,7 @@ export const highestScoreFrom = (words) => {
 
   for (let word of words) {
     wordScores[word] = scoreWord(word);
-  };
+  }
 
   let maxScore = Math.max(...Object.values(wordScores));
 
@@ -169,18 +170,14 @@ export const highestScoreFrom = (words) => {
     }
   }
 
-
-  // find highest score without sorting
-  // 
-
   // sort highest scoring words by length, with shortest word at the beginning
-  // highestScoring.sort();
-
+  highestScoring.sort((a, b) => a.length - b.length);
+  console.log(highestScoring);
 
   for (let word of highestScoring) {
     if (word.length === 10) {
-      return {word: word, score: maxScore};
+      return { word: word, score: maxScore };
     }
-  } 
-  return {word: highestScoring[0], score: maxScore};
+  }
+  return { word: highestScoring[0], score: maxScore };
 };
