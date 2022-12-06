@@ -122,10 +122,7 @@ export const highestScoreFrom = (words) => {
     wordScores[word] = score;
   }
   for (const [key, value] of Object.entries(wordScores)){
-    if (Object.keys(bestWord).length === 0){
-      bestWord["word"] = key;
-      bestWord["score"] = value;
-    } else if (bestWord["score"] < value){
+    if (Object.keys(bestWord).length === 0 || bestWord["score"] < value){
       bestWord["word"] = key;
       bestWord["score"] = value;
     } else if (bestWord["score"] === value){
