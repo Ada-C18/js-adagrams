@@ -60,64 +60,64 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   return true;
 };
 
-// export const scoreWord = (word) => {
-//   if (!word ){
-//     return 0
-//   }
-//   let letterValsObj = {
-//     A: 1,
-//     B: 3,
-//     C: 3,
-//     D: 2,
-//     E: 1,
-//     F: 4,
-//     G: 2,
-//     H: 4,
-//     I: 1,
-//     J: 8,
-//     K: 5,
-//     L: 1,
-//     M: 3,
-//     N: 1,
-//     O: 1,
-//     P: 3,
-//     Q: 10,
-//     R: 1,
-//     S: 1,
-//     T: 1,
-//     U: 1,
-//     V: 4,
-//     W: 4,
-//     X: 8,
-//     Y: 4,
-//     Z: 10,
-//   };
-//   let scoreWord = 0;
-//   const wordUpper = word.toUpperCase();
-//   for (let letter of wordUpper) {
-//     scoreWord += letterValsObj[letter];
-//   }
-//   if (wordUpper.length >= 7 && word.length <= 10) {
-//     scoreWord += 8;
-//   }
-//   return scoreWord;
-// };
+export const scoreWord = (word) => {
+  if (!word ){
+    return 0
+  }
+  let letterValsObj = {
+    A: 1,
+    B: 3,
+    C: 3,
+    D: 2,
+    E: 1,
+    F: 4,
+    G: 2,
+    H: 4,
+    I: 1,
+    J: 8,
+    K: 5,
+    L: 1,
+    M: 3,
+    N: 1,
+    O: 1,
+    P: 3,
+    Q: 10,
+    R: 1,
+    S: 1,
+    T: 1,
+    U: 1,
+    V: 4,
+    W: 4,
+    X: 8,
+    Y: 4,
+    Z: 10,
+  };
+  let scoreWord = 0;
+  const wordUpper = word.toUpperCase();
+  for (let letter of wordUpper) {
+    scoreWord += letterValsObj[letter];
+  }
+  if (wordUpper.length >= 7 && word.length <= 10) {
+    scoreWord += 8;
+  }
+  return scoreWord;
+};
 
-// export const highestScoreFrom = (words) => {
-//   let highestWord = "";
-//   let highestScore = 0;
-//   let score = scoreWord(word);
-//   for (let word in words){
-//     if (score> highestScore){
-//       highestScore = score;
-//       highestWord = word;
-//     }else if (score == highestScore){
-//       if(highestWord.length==10){
-//         break
-//       }else if (word.length == 10 || word.length< highestWord.length){
-//         highestWord = word;
-//         highestScore = score;
-//         }
-//     }
-//   }
-// };
+export const highestScoreFrom = (words) => {
+  let highestWord = "";
+  let highestScore = 0;
+  let score = scoreWord(word);
+  for (let word in words){
+    if (score> highestScore){
+      highestScore = score;
+      highestWord = word;
+    }else if (score == highestScore){
+      if(highestWord.length==10){
+        break
+      }else if (word.length == 10 || word.length< highestWord.length){
+        highestWord = word;
+        highestScore = score;
+        }
+    }
+  }
+};
