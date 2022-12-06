@@ -58,23 +58,22 @@ const SCORE_POOL = {
 export const drawLetters = () => {
   // Implement this method for wave 1
   
-  const letterInHand = [];
-  const copyLetterPool = { ...LETTER_POOL };
-
-  const randomLetter = (LetterPool) => {
-  const poolKeys = Object.keys(LetterPool);
-  return keys[Math.floor(Math.random() * poolKeys.length)];
-};
-
-  while (letterInHand.length < 10) {
-    const OneLetter = randomLetter(copyLetterPool);
-    letterInHand.push(OneLetter);
-    copyLetterPool[OneLetter] -= 1;
-    if (copyLetterPool[OneLetter] === 0) {
-      delete copyLetterPool[OneLetter];
-    }
+  const letterInHand = []
+  for (const [letter, frequency] of Object.entries(LETTER_POOL)) {
+      for (let i = 0; i < frequency; i++) {
+          letterInHand.push(letter)
+      }
   }
-  return letterInHand;
+
+  const hand = []
+
+  for (let i = 0; i < 10; i++) {
+      const letterkeys = letterInHand[Math.floor(Math.random() * letterInHand.length)]
+      hand.push(letterkeys)
+      let letterIndex = letterInHand.indexOf(letterkeys)
+      letterInHand.splice(letterIndex, 1)
+  }
+  return hand
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
@@ -88,14 +87,24 @@ export const usesAvailableLetters = (input, lettersInHand) => {
             lettersInHand.splice(letterIndex, 1)
         } else {
             return false
-        }
+          }
     }
     return true
 };
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
-
+  let capsWord = word.toUpperCase();
+  let score = 0;
+      
+  for (const letter of capsWord){
+    score += SCORE_POOL[letter];
+  }
+      
+  if (capsWord.length >= 7 && capsWord.length <= 10){
+    score += 8;
+  }
+  return score;
 };
 
 export const highestScoreFrom = (words) => {
