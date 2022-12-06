@@ -83,29 +83,43 @@ export const scoreWord = (word) => {
     return 0;
   }
   
-  let wordScore = 0
+  let score = 0
   const wordCapitalized = word.toUpperCase();
   const wordLength = wordCapitalized.length 
 
   if (wordLength >= 7){
-    wordScore += 8; 
+    score += 8; 
   }
 
-  let keys = Object.keys(scoreChart);
+  const keys = Object.keys(scoreChart);
   for (const letter of wordCapitalized){
-    let l = letter;
+    const l = letter;
     for (const key of keys){
       if (key.includes(l)){
-        wordScore += scoreChart[key];
+        score += scoreChart[key];
       }
     }
   }
-  return wordScore;
+  return score;
 };
-
 
 
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  let bestScore = scoreWord(words[0]);
+  let bestWord = words[0]; 
+  for(const word of words){
+    const currentWord = scoreWord(word);
+    if (currentWord > bestScore){
+      bestScore = currentWord;
+      bestWord = word;
+    } 
+  }
+  const bestPair = {
+  word: bestWord, 
+  score: bestScore
+  };
+  return bestPair;  
 };
+
+
