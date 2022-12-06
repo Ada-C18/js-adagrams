@@ -53,7 +53,7 @@ It passes the tests but I'm not certain if it meets the requirements
 for "draw with replacement."
 */
 
-export const drawLetters = () => {
+export const drawLetters = function () {
   let deck = buildDeck(LETTER_POOL);
   for (let i = 0; i < 10; i++) {
     // find a random index.
@@ -65,7 +65,8 @@ export const drawLetters = () => {
   return deck.slice(0, 10);
 };
 
-export const usesAvailableLetters = (input, lettersInHand) => {
+/* return true if input (str) can be built from lettersInHand (arr of str). */
+export const usesAvailableLetters = function (input, lettersInHand) {
   const freqMapHand = {};
   lettersInHand.forEach(function (letter) {
     freqMapHand[letter]
@@ -139,7 +140,7 @@ const sum = function (integerList) {
 Uses SCORE_TABLE to define base score and WORD_LENGTH_BONUS and 
 WORD_LENGTH_THRESHOLD to define bonus for word length. 
 */
-export const scoreWord = (word) => {
+export const scoreWord = function (word) {
   const scoreList = word
     .toUpperCase()
     .split("")
@@ -153,7 +154,7 @@ export const scoreWord = (word) => {
   return wordTotal;
 };
 
-const tenLetterTieBreaker = (a, b) => {
+const tenLetterTieBreaker = function (a, b) {
   /* the comparator function for sort needs to 
   return negative, positive, or zero. Assign 
   a fake score to a and b, if either or both are 
@@ -170,18 +171,38 @@ const tenLetterTieBreaker = (a, b) => {
   return bScore - aScore;
 };
 
-export const highestScoreFrom = (words) => {
-  const sortedWords = words.sort((a, b) => {
-    return (
-      // try to sort by score first.
-      scoreWord(b) - scoreWord(a) ||
-      // if scores are equal check the tenLetterTieBreaker.
-      tenLetterTieBreaker(a, b) ||
-      // if there's no 10 letter tiebreaker, favor the shortest.
-      a.length - b.length
-      // and if everything is equal, sort should be stable
-      // (I'm grateful for that.)
-    );
-  });
-  return { word: sortedWords[0], score: scoreWord(sortedWords[0]) };
+/* Compare words a and b including tiebreakers. 
+Return negative int if a is 'better than' b. 
+Return positive int if b is 'better than' a.
+Return 0 if a and be are equal. */
+export const scoreComparator = function (a, b) {
+  return (
+    // try to sort by score first.
+    scoreWord(b) - scoreWord(a) ||
+    // if scores are equal check the tenLetterTieBreaker.
+    tenLetterTieBreaker(a, b) ||
+    // if there's no 10 letter tiebreaker, favor the shortest.
+    a.length - b.length
+    // and if everything is equal, sort should be stable
+    // (I'm grateful for that.)
+  );
+};
+
+/* Return the best-scoring word including tiebreakers
+from a list of words. */
+export const maxScoreWord = function (words, comparatorFun) {
+  let max = words[0];
+  for (const word of words.slice(0)) {
+    let c = comparatorFun(max, word);
+    if (c > 0) {
+      max = word;
+    }
+  }
+
+  return max;
+};
+
+export const highestScoreFrom = function (words) {
+  const winningWord = maxScoreWord(words, scoreComparator);
+  return { word: winningWord, score: scoreWord(winningWord) };
 };
