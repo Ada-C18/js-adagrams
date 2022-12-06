@@ -29,19 +29,19 @@ const LETTERPOOL = {
 
 export const drawLetters = () => {
     let letterFreq = {};
-    let selectedLetters = [];
-    while ((selectedLetters.length) < 10) {
+    let selectedLetter = [];
+    while ((selectedLetter.length) < 10) {
       let random = Object.keys(LETTERPOOL)[Math.floor(Math.random()*Object.keys(LETTERPOOL).length)];
           if (random in letterFreq) {
               letterFreq[random] += 1;
           } else {
               letterFreq[random] = 1;
           if (letterFreq[random] <= LETTERPOOL[random]){
-            selectedLetters.push(random)
+            selectedLetter.push(random)
           }        
           }        
     }
-    return (selectedLetters)
+    return (selectedLetter)
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
@@ -100,11 +100,10 @@ export const highestScoreFrom = (words) => {
   let highestScore = {'score':0,'word':''};
 
   for (let word of words){
-    let wordScore = scoreWord(word);
-    if (wordScore > highestScore['score']) {
-        highestScore['score'] = wordScore;
+    if (scoreWord(word)> highestScore['score']) {
+        highestScore['score'] = scoreWord(word);
         highestScore['word']= word;
-    } else if (wordScore === highestScore['score']){
+    } else if (scoreWord(word) === highestScore['score']){
         if ( (word.length < highestScore['word'].length) && (highestScore['word'].length !== 10)){
             highestScore['word']= word;
         } else if ((word.length ===10) && (highestScore['word'].length !== 10)) {
