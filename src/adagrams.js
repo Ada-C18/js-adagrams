@@ -115,8 +115,8 @@ export const highestScoreFrom = (words) => {
   }
 
   let winningWordAndScore = {
-    word: Object.keys(wordsAndScores)[0],
-    score: Object.values(wordsAndScores)[0],
+    'word': Object.keys(wordsAndScores)[0],
+    'score': Object.values(wordsAndScores)[0],
   };
 
   for (const [key, value] of Object.entries(wordsAndScores)) {
