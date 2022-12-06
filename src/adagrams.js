@@ -82,9 +82,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
     } else {
       return false;
     }
-  }
-  return true;
-  
+  }return true;
 };
 
 export const scoreWord = (word) => {
@@ -95,8 +93,7 @@ export const scoreWord = (word) => {
     }
     if (word.length > 6){
       sumScore += 8;
-    }    
-    return sumScore
+    }return sumScore
 };
 
 export const highestScoreFrom = (words) => {
