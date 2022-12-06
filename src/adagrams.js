@@ -125,29 +125,27 @@ export const highestScoreFrom = (words) => {
   let tieBreaker = [];
   let highestScore = 0;
 
-  for (let word in words) {
-      let score = scoreWord(word);
-      if (score > highestScore) {
-          highestScore = score;
-          tieBreaker = [(word, score)];
-      else if (score === highestScore) {
-          tieBreaker.push((word, score));
-      }
+  for (let word of words) {
+    let score = scoreWord(word);
+    if (score > highestScore) {
+      highestScore = score;
+      tieBreaker = [{ word: word, score: score }];
+    } else if (score === highestScore) {
+      tieBreaker.push({ word: word, score: score });
     }
   }
 
   let shortestWord = 11;
-  let winner = ("", 0);
+  let winner = { word: "", score: 0 };
 
-  for (eachWord in tieBreaker) {
-      let winnerResult = len(eachWord[0]);
-      if (winnerResult === 10) {
-          winner = eachWord; 
-          break;
-      else if (winnerResult < shortestWord) {
-          shortestWord = winnerResult;
-          winner = eachWord;
-      
+  for (let eachWinner of tieBreaker) {
+    let winnerResult = eachWinner.word.length;
+    if (winnerResult === 10) {
+      winner = eachWinner;
+      break;
+    } else if (winnerResult < shortestWord) {
+      shortestWord = winnerResult;
+      winner = eachWinner;
     }
   }
   return winner;
