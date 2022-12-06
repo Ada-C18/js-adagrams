@@ -28,7 +28,16 @@ const LETTERPOOL = {
 };
 
 export const drawLetters = () => {
-  // Implement this method for wave 1
+  let letterPool = Object.entries(LETTERPOOL);
+  let hand = [];
+  for (let i = 0; i < 10; i++) {
+    let letterIndex = Math.floor(Math.random() * 26);
+    if (letterPool[letterIndex][1] > 0) {
+      hand.push(letterPool[letterIndex][0]);
+      letterPool[letterIndex][1] -= 1;
+    }
+  }
+  return hand;
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
@@ -42,3 +51,9 @@ export const scoreWord = (word) => {
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
 };
+
+// // HELPER FUNCTIONS
+// const drawLetter = (wordPool, currentHand) => {
+//   const letterIndex = Math.floor(Math.random() * 26)
+//   if (wordPool)
+// }
