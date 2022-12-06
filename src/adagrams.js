@@ -112,12 +112,38 @@ export const highestScoreFrom = (words) => {
   Input: array of strings (words) to be scored
   Output: an object with 2 keys (word and score) which hold the winning word and its score, respectively
   */
+  let highestScore = 0;
+  let highestWord;
+  for (let currentWord of words) {
+    const currentWordScore = scoreWord(currentWord);
+    if (currentWordScore > highestScore) {
+      highestScore = currentWordScore;
+      highestWord = currentWord;
+    } else if (currentWordScore === highestScore) {
+      let highestLength = highestWord.length;
+      if (highestLength != 10) {
+        let currentWordLength = currentWord.length;
+        if (currentWordLength < highestLength || currentWordLength === 10) {
+          highestWord = currentWord;
+        }
+      }
+    }
+  }
+  return {
+    word: highestWord,
+    score: highestScore,
+  };
 };
 
-// helper functions
+/*
+=================
+HELPER FUNCTIONS
+=================
+*/
+
 const weightedRandom = (items) => {
   /*
-  Input: an object
+  Input: an object with a list of items in the keys and the values being their respective weights for random selection
   Output: a randomly chosen item from the object keys, based on the weightings in the object values
   */
   const cummulativeWeights = [];
@@ -128,8 +154,9 @@ const weightedRandom = (items) => {
     cummulativeWeights[i] = itemValues[i] + (cummulativeWeights[i - 1] || 0);
   }
 
-  const randomNumber =
-    Math.random() * cummulativeWeights[cummulativeWeights.length - 1];
+  const randomNumber = Math.floor(
+    Math.random() * cummulativeWeights[cummulativeWeights.length - 1]
+  );
 
   for (let j = 0; j < cummulativeWeights.length; j++) {
     if (cummulativeWeights[j] >= randomNumber) {
