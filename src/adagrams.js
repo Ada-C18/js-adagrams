@@ -22,65 +22,137 @@ for (let letter of atoz) {
   }
 };
 
-export const drawLetters = () => {
-  let inHand = [];
-  let allLetters_copy = [...allLetters];
-  
-  for (let i=0; i<10; i++) {
-    let allLetters_length = allLetters_copy.length;
-    let randomIndex = Math.floor(Math.random()*allLetters_length);
-    inHand.push(allLetters_copy[randomIndex]);
-    allLetters_copy.splice(randomIndex,1);
-  }
-  return inHand;
-};
+class Adagrams {
+  // constructor() {}
 
-export const usesAvailableLetters = (input, lettersInHand) => {
-  let lettersInHand_copy = [...lettersInHand];
-  for (let letter of input) {
-    if (lettersInHand_copy.includes(letter)){
-      lettersInHand_copy.splice(letter,1);
-    } else {
-      return false;
-    }
-  }
-  return true;
-};
-
-export const scoreWord = (word) => {
-  let input_word = word.toUpperCase();
-  let total = 0;
-  if (input_word.length >= 7){
-    total += 8;
-  }
-  
-  for (let letter of input_word) {
-    total += LETTER_VALUE[letter];
-  };
-  return total;
-};
-
-export const highestScoreFrom = (words) => {
-  let result = {word: "", score: 0};
-
-  for (let word of words) {
-    let word_score = scoreWord(word);
+  drawLetters = () => {
+    let inHand = [];
+    let allLetters_copy = [...allLetters];
     
-    if (result.score < word_score){
-      result.word = word;
-      result.score = word_score;
-    } else if (result.score == word_score) {
-      let word_length = word.length;
-      let result_length = result.word.length;
-      
-      if (result_length === 10) {
-        result = result;
-      } else if (word_length === 10) {
-        result.word = word;
-      } else if (word_length < result_length){
-        result.word = word;
+    for (let i=0; i<10; i++) {
+      let allLetters_length = allLetters_copy.length;
+      let randomIndex = Math.floor(Math.random()*allLetters_length);
+      inHand.push(allLetters_copy[randomIndex]);
+      allLetters_copy.splice(randomIndex,1);
+    }
+    return inHand;
+  }
+  
+  usesAvailableLetters = (input, lettersInHand) => {
+    for (let letter of input) {
+      if (lettersInHand.includes(letter)){
+        lettersInHand.splice(letter,1);
+      } else {
+        return false;
       }
     }
+    return true;
   }
-  return result;
-};
+  
+  scoreWord = (word) => {
+    let input_word = word.toUpperCase();
+    let total = 0;
+    if (input_word.length >= 7){
+      total += 8;
+    }
+    
+    for (let letter of input_word) {
+      total += LETTER_VALUE[letter];
+    };
+    return total;
+  }
+  
+  highestScoreFrom = (words) => {
+    let result = {word: "", score: 0};
+  
+    for (let word of words) {
+      let word_score = scoreWord(word);
+      
+      if (result.score < word_score){
+        result.word = word;
+        result.score = word_score;
+      } else if (result.score == word_score) {
+        let word_length = word.length;
+        let result_length = result.word.length;
+        
+        if (result_length === 10) {
+          result = result;
+        } else if (word_length === 10) {
+          result.word = word;
+        } else if (word_length < result_length){
+          result.word = word;
+        }
+      }
+    }
+    return result;
+  }
+
+}
+
+export default Adagrams;
+
+
+
+
+
+// export const drawLetters = () => {
+//   let inHand = [];
+//   let allLetters_copy = [...allLetters];
+  
+//   for (let i=0; i<10; i++) {
+//     let allLetters_length = allLetters_copy.length;
+//     let randomIndex = Math.floor(Math.random()*allLetters_length);
+//     inHand.push(allLetters_copy[randomIndex]);
+//     allLetters_copy.splice(randomIndex,1);
+//   }
+//   return inHand;
+// };
+
+// export const usesAvailableLetters = (input, lettersInHand) => {
+//   for (let letter of input) {
+//     if (lettersInHand.includes(letter)){
+//       lettersInHand.splice(letter,1);
+//     } else {
+//       return false;
+//     }
+//   }
+//   return true;
+// };
+
+// export const scoreWord = (word) => {
+//   let input_word = word.toUpperCase();
+//   let total = 0;
+//   if (input_word.length >= 7){
+//     total += 8;
+//   }
+  
+//   for (let letter of input_word) {
+//     total += LETTER_VALUE[letter];
+//   };
+//   return total;
+// };
+
+// export const highestScoreFrom = (words) => {
+//   let result = {word: "", score: 0};
+
+//   for (let word of words) {
+//     let word_score = scoreWord(word);
+    
+//     if (result.score < word_score){
+//       result.word = word;
+//       result.score = word_score;
+//     } else if (result.score == word_score) {
+//       let word_length = word.length;
+//       let result_length = result.word.length;
+      
+//       if (result_length === 10) {
+//         result = result;
+//       } else if (word_length === 10) {
+//         result.word = word;
+//       } else if (word_length < result_length){
+//         result.word = word;
+//       }
+//     }
+//   }
+//   return result;
+// };
