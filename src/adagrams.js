@@ -28,14 +28,12 @@ const POOL_OF_LETTERS = {
 };
 
 export const drawLetters = () => {
-  // Implement this method for wave 1
   let weight = [];
   for (const [key, value] of Object.entries(POOL_OF_LETTERS)) {
     for (let i = 0; i < value; i++) {
       weight.push(key);
     }
   }
-  // console.log(weight);
   let letters = [];
   for (let i = 0; i < 10; i++) {
     let index = Math.floor(Math.random() * weight.length);
@@ -47,7 +45,6 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
   let counter = {};
   lettersInHand.forEach((letter) => {
     if (letter in counter) {
@@ -69,7 +66,6 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 };
 
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
   const scoreChart = {
     AEIOULNRST: 1,
     DG: 2,
@@ -96,7 +92,6 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
   let bestWord;
 
   for (const word of words) {
