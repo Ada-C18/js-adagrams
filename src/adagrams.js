@@ -40,7 +40,9 @@ export const drawLetters = () => { //wave 1
   for (let i = 0; i < 10; i++) {
     let index = Math.floor(Math.random() * 26);
     resultArray.push(letterArray[index]);
+    letterArray.splice(index, 1);
   }
+
   return resultArray;
 };
 
