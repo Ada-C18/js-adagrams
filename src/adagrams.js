@@ -108,8 +108,7 @@ export const drawLetters = () => {
   // loop to randomly populate tenLetters
   while (tenLetters.length < 10) {
     // choose randomLetter from randomized index from todaysSoup array, between 0 and todaysSoup length
-    let randomLetter =
-      todaysSoup[Math.floor(Math.random() * todaysSoup.length + 1)];
+    let randomLetter = todaysSoup[Math.floor(Math.random() * todaysSoup.length + 1)];
 
     // check if randomLetter count within tenLetters is less than allotted letter quantity
     // if true, add randomLetter to tenLetters array
@@ -118,28 +117,16 @@ export const drawLetters = () => {
     }
   }
 
-  console.log(todaysSoup);
-  console.log(tenLetters);
   return tenLetters;
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // use js method on input word to ignore case: input.toUpperCase()
-  // loop through input word,
-  // check if letter from input is also in letterInHand
-  // return False if not
-  // outside of loop, return true
-
   const availableLetters = lettersInHand;
-  console.log(availableLetters);
   const upperInput = input.toUpperCase();
-  console.log(upperInput);
 
   for (let i = 0; i < upperInput.length; i++) {
     if (availableLetters.includes(upperInput[i])) {
-      console.log(upperInput[i]);
       availableLetters.shift(upperInput[i]);
-      console.log(availableLetters);
     } else {
       return false;
     }
@@ -164,8 +151,6 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
-  
   let wordScores = {};
   let highestScoring = [];
 
@@ -173,36 +158,28 @@ export const highestScoreFrom = (words) => {
     wordScores[word] = scoreWord(word);
   };
 
-  console.log(wordScores);
+  let maxScore = Math.max(...Object.values(wordScores));
 
-  let maxScore = Math.max.;
+  console.log("word scores obj:", wordScores);
+  console.log("max score:", maxScore);
 
-  console.log("max score:", maxScore)
-
-// let maxKey, maxValue = 0;
-
-// for(const [key, value] of Object.entries(b)) {
-//   if(value > max) {
-//     maxValue = value;
-//     maxKey = key;
-//   }
-// }
-
-// console.log(index);
-
-  for (const [word, score] in wordScores) {
-    if (score === maxScore) {
+  for (let word in wordScores) {
+    if (wordScores[word] === maxScore) {
       highestScoring.push(word);
-    };
+    }
   }
+
+
+  // find highest score without sorting
+  // 
+
   // sort highest scoring words by length, with shortest word at the beginning
-  console.log("before sort:", highestScoring);
-  highestScoring.sort();
-  console.log("after sort:", highestScoring);
+  // highestScoring.sort();
+
 
   for (let word of highestScoring) {
     if (word.length === 10) {
-      return word, maxScore;
+      return {word: word, score: maxScore};
     }
   } 
   return {word: highestScoring[0], score: maxScore};
