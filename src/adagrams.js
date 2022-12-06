@@ -51,9 +51,23 @@ export const drawLetters = () => {
   return letterHand;
 };
 
-// export const usesAvailableLetters = (input, lettersInHand) => {
-//   // Implement this method for wave 2
-// };
+export const usesAvailableLetters = (input, lettersInHand) => {
+  // Implement this method for wave 2
+  const capitalizedWord = input.toUpperCase();
+  const splitWord = capitalizedWord.split("");
+
+  let submittedLetter = true;
+  splitWord.forEach((letter) => {
+    if (lettersInHand.includes(letter)) {
+      // remove letter from lettersInHand
+      const letterIndex = lettersInHand.indexOf(letter);
+      lettersInHand.splice(letterIndex, 1);
+    } else {
+      submittedLetter = false;
+    }
+  });
+  return submittedLetter;
+};
 
 // export const scoreWord = (word) => {
 //   // Implement this method for wave 3
