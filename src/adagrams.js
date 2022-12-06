@@ -85,7 +85,7 @@ export const scoreWord = (word) => {
       totalScore++;
     }
   }
-  if (7 <= word.length && word.length <= 10) {
+  if (word.length >= 7 && word.length <= 10) {
     totalScore += 8;
   }
   return totalScore;
@@ -93,4 +93,25 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+  const winningObj = {
+    word: "",
+    score: 0,
+  };
+  for (let word of words) {
+    const wordScore = scoreWord(word);
+    if (wordScore > winningObj.score) {
+      winningObj.word = word;
+      winningObj.score = wordScore;
+    } else if (wordScore === winningObj.score && winningObj.word.length !== 10) {
+      //Tie breaking logic for words with same score
+      if (word.length === 10) {
+        winningObj.word = word;
+        winningObj.score = wordScore;
+      } else if (word.length < winningObj.word.length) {
+        winningObj.word = word;
+        winningObj.score = wordScore;
+      }
+    }
+  }
+  return winningObj;
 };
