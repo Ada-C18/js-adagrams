@@ -99,10 +99,46 @@ export const scoreWord = (word) => {
     if(lengthList.includes(word.length)) {
         score += 8;
     }
-    console.log(`score is ${score}`)
+    
     return score
 };
 
 export const highestScoreFrom = (words) => {
+let wordScores = []
+let winners = []
 
-};
+
+for (let word in words){
+  let highest = 0
+  wordScores.push(scoreWord(words[word]))
+
+}
+
+let max = Math.max(...wordScores);
+
+
+for (let word in words){
+  if(scoreWord(words[word]) === max){
+    winners.push( {
+      "word": words[word],
+      "score":  scoreWord(words[word])
+      })
+  }
+
+ 
+}
+
+if(winners.length > 1){
+  if(winners[0]["word"].length === 10){
+    return winners[0]}
+  else if(winners[1]["word"].length === 10){
+    return winners[1]}
+  else if(winners[0]["word"].length < winners[1]["word"].length){
+    return winners[0]}
+  else{return winners[1]}
+}
+else{
+  return winners[0]
+}
+}
+
