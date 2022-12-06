@@ -40,6 +40,7 @@ export const drawLetters = () => {
   while (letterHand.length < 10) {
     const randomIndex = Math.floor(Math.random() * letterDistribution.length);
     const randomLetter = letterDistribution[randomIndex];
+    console.log(randomIndex);
 
     letterHand.push(randomLetter);
     letterDistribution.splice(randomIndex, 1);
@@ -47,13 +48,16 @@ export const drawLetters = () => {
   return letterHand;
 };
 
-// export const usesAvailableLetters = (input, lettersInHand) => {
-// const word = word.toUpperCase()
-// const listOfWords =
-// const frequencyInWord = {}
-// };
-
-// // input is
+export const usesAvailableLetters = (input, lettersInHand) => {
+  for (let letter in input) {
+    if (lettersInHand.includes(input[letter])) {
+      delete lettersInHand[letter];
+    } else {
+      return false;
+    }
+  }
+  return true;
+};
 
 // export const scoreWord = (word) => {
 //   // Implement this method for wave 3
