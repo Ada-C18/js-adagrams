@@ -105,19 +105,57 @@ export const scoreWord = (word) => {
   }
   return total;
 };
-
+const getMax = (object) => {
+  return Object.keys(object).filter((x) => {
+    return object[x] == Math.max.apply(null, Object.values(object));
+  });
+};
 export const highestScoreFrom = (words) => {
-  let WinnerWord = {};
-  for (let b = 0; b < words.length; b++) {
-    let word = words[b];
-    let score = scoreWord(word);
-    WinnerWord.word = word;
-    WinnerWord.score = score;
-    if (score > WinnerWord.score) {
-      WinnerWord.word = word;
-      WinnerWord.score = score;
-    }
+  let Winner = {};
+  let AllWords = {};
+  let score = 0;
 
-    return WinnerWord;
+  for (let word of words) {
+    score = scoreWord(word);
+    AllWords[word] = score;
   }
+
+  let Winners = getMax(AllWords);
+  let win = Winners[0];
+
+  if (Winners.length > 1) {
+    if (Winners.find((element) => element.length === 10)) {
+      win = Winners.find((element) => element.length === 10);
+    } else {
+      win = Winners.sort((a, b) => a.length - b.length)[0];
+    }
+  }
+  Winner.word = win;
+  Winner.score = scoreWord(win);
+  return Winner;
+
+  // let highScoreWords = [];
+  // let highScore = 0;
+  // for (let word of words) {
+  //   let score = scoreWord(word);
+  //   if (score > highScore) {
+  //     highScoreWords.push(word);
+  //     highScore = score;
+  //   } else if (score === highScore) {
+  //     highScoreWords.push(word);
+  //   }
+  // }
+  // let shortestWordLen = highScoreWords.reduce((a, b) =>
+  //   a.length <= b.length ? a : b
+  // );
+  // let shortestWord = highScoreWords[0];
+  // for (let word in highScoreWords) {
+  //   if (word.length === 10) {
+  //     return { word: word, score: scoreWord(word) };
+  //   } else if (word.length < shortestWordLen) {
+  //     shortestWordLen = word.length;
+  //     shortestWord = word;
+  //   }
+  //   return { word: shortestWord, score: scoreWord(shortestWord) };
+  // }
 };
