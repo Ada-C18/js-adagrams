@@ -2,10 +2,16 @@ import { parseSync } from "@babel/core";
 // import { random } from "core-js/core/number";
 
 /* Hi, Ansel!
-I made a goal for this project to avoid for loops as much as possible.
-Occasionally, I will include the original for loop as a comment, so that you can 
-see what I originally had. If you feel that the original would have been better, 
-please let me know. Thanks!
+I made a personal goal for this project to avoid for loops as much as possible.
+Occasionally, I will include an alternative for loop as a comment, for comparison. 
+If you feel that the for loop would have been better code, please let me know. Thanks!
+
+I use some data structures and methods that were not covered in class. To avoid 
+this file becoming cluttered with comments, I have created an additional file, 
+comments.md (in the root folder) with explanations of my understandings of these 
+structures and methods as they appear in this file, ordered by line number in this file. 
+If you would like to check on my understanding of anything here, please refer to 
+that file.
 */
 
 const POOL = {
@@ -37,37 +43,14 @@ const POOL = {
   Z: 1,
 };
 
-Object.freeze(POOL); // prevents accidental mutation of POOL
-// this should hopefully not be necessary, but I'm doing it from the start, just in case
-
-/*
-const letterFreq = (POOL) => {
-  const TABLE = {};
-  for (let [key, value] of Object.entries(POOL)) {
-    if (TABLE[value]) {
-      TABLE[value].push(key);
-    } else {
-      TABLE[value] = [key];
-    }
-  }
-  return TABLE;
-}
-*/
+Object.freeze(POOL);
 
 export const drawLetters = () => {
-  /* The below creates a list from POOL such that an outer list element holds 
-  each of POOL's key:value pairs separate inner list elements. I then use map to 
-  take the letters and values from POOL and, for each letter, create a new array 
-  of ${value} elements that are all each ${letter}. I then use flat to pull the 
-  elements out of the inner lists and concatenate them into one (not nested) list. 
-  I am writing this comment only so that you can know that I know what this does.*/
-
   let freqList = Object.entries(POOL)
     .map(([letter, value]) => Array(value).fill(letter))
     .flat();
 
-  /*   refactored the original code in this comment so I could ditch the for loop:
-  I used what's assigned to freqList (above) instead.
+  /*   alternative for loop that could have generated freqList:
 
   for (let [key, value] of Object.entries(POOL)) {
     for (let i = 0; i < value; i++) {
@@ -76,28 +59,56 @@ export const drawLetters = () => {
   }
   */
 
-  /* The below creates a list of 10 empty items that are then filled with 0. I 
-  then use map to replace the zeros with the randomly selected letters. Map assigns a 
-  random number between [0,length of freqList) to index, which is then used to select the
-  letter corresponding to that index value from freqList. I then update freqList to 
-  remove the selected letter. I am writing this comment only so that you can know 
-  that I know what this does. */
   let hand = Array(10)
     .fill(0)
     .map(() => {
       let index = Math.floor(Math.random() * freqList.length);
       let result = freqList[index];
-      freqList = freqList
-        .slice(0, index)
-        .concat(freqList.slice(index + 1, freqList.length));
+      freqList.splice(index, 1);
       return result;
     });
 
   return hand;
 };
 
+const makeMap = (elem, mapObj) =>
+  mapObj.has(elem)
+    ? mapObj.set(elem, mapObj.get(elem) + 1)
+    : mapObj.set(elem, 1);
+
+const makeWordMap = (word) => {
+  const wordMap = new Map();
+  Array.from(word.toUpperCase()).forEach((elem) => makeMap(elem, wordMap));
+  return wordMap;
+};
+
+const makeHandMap = (hand) => {
+  const handMap = new Map();
+  hand.forEach((elem) => makeMap(elem, handMap));
+  return handMap;
+};
+
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  let inputMap = makeWordMap(input);
+
+  let handMap = makeHandMap(lettersInHand);
+
+  let inputIterator = inputMap[Symbol.iterator]();
+
+  for (let item of inputIterator) {
+    let [key, value] = item;
+
+    if (handMap.has(key)) {
+      let hmVal = handMap.get(key);
+      if (hmVal === 0 || hmVal - value < 0) {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  return true;
 };
 
 export const scoreWord = (word) => {
