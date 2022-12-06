@@ -109,11 +109,24 @@ export const highestScoreFrom = (words) => {
   let bestScore = scoreWord(words[0]);
   let bestWord = words[0]; 
   for(const word of words){
-    const currentWord = scoreWord(word);
-    if (currentWord > bestScore){
-      bestScore = currentWord;
+    const currentWordScore = scoreWord(word);
+    if (currentWordScore > bestScore){
+      bestScore = currentWordScore;
       bestWord = word;
-    } 
+    } else if (currentWordScore === bestScore){
+      if(word.length === 10){
+        bestScore = currentWordScore; 
+        bestWord = word;
+        const bestPair = {
+          word: bestWord, 
+          score: bestScore
+        };
+        return bestPair 
+      }else if(word.length < bestWord.length){
+        bestScore = currentWordScore; 
+        bestWord = word;
+      }
+    }
   }
   const bestPair = {
   word: bestWord, 
