@@ -65,10 +65,25 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
+  // input is string datatype
+  // lettersInHand ten letters string
+  let tempLettersInHand = [...lettersInHand];
+  // itreate the input by using looping decrement
+  // for (let i = 0; i < input.length - 1; ++i) {
+  for (let i = input.length - 1; i >= 0; --i){
+    if(tempLettersInHand.includes(input[i])) {
+      tempLettersInHand.splice(i, 1);
+      console.log(tempLettersInHand);
+    } else {
+      return false;
+    }
+  } 
+  return true;
 };
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
+  console.log(word);
 };
 
 export const highestScoreFrom = (words) => {
