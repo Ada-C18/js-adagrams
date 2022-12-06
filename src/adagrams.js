@@ -88,6 +88,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
       letterQuantities[letter] = 1;
     }
   });
+
   for (let character of Array.from(capitalInput)) {
     let isPresent = Object.keys(letterQuantities).includes(character);
     if (isPresent) {
@@ -115,5 +116,44 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  const wordsAndScores = {};
+  words.forEach((word) => {
+    let score = scoreWord(word);
+    Object.assign(wordsAndScores, { [word]: score });
+  });
+
+  const allScores = Object.values(wordsAndScores);
+  const highScore = Math.max(...allScores);
+
+  const highestScoring = [];
+  let hasLengthTen = false;
+  let minLength = 10;
+  for (let [word, score] of Object.entries(wordsAndScores)) {
+    if (score === highScore) {
+      highestScoring.push(word);
+      if (word.length === 10) {
+        hasLengthTen = true;
+      } else if (word.length < minLength) {
+        minLength = word.length;
+      }
+    }
+  }
+
+  const winningObject = { word: null, score: highScore };
+  if (highestScoring.length === 1) {
+    winningObject.word = highestScoring[0];
+  }
+  for (let word of words) {
+    if (hasLengthTen) {
+      if (word.length === 10) {
+        winningObject.word = word;
+        return winningObject;
+      }
+    } else {
+      if (word.length === minLength) {
+        winningObject.word = word;
+        return winningObject;
+      }
+    }
+  }
 };
