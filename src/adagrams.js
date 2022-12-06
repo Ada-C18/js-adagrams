@@ -54,19 +54,20 @@ const LETTER_SCORES = {
   X: 8,
   Y: 4,
   Z: 10,
-}
+};
 
-
-export const drawLetters = () => { //wave 1
-  let letterArray = []; //make this a helper function?? 
+export const drawLetters = () => {
+  //wave 1
+  let letterArray = []; //make this a helper function??
   for (const [key, value] of Object.entries(LETTER_POOL)) {
     for (let i = 0; i < value; i++) {
-      letterArray.push(key)
+      letterArray.push(key);
     }
   }
 
   let resultArray = [];
-  for (let i = 0; i < 10; i++) { //refactor to avoid magic nums??
+  for (let i = 0; i < 10; i++) {
+    //refactor to avoid magic nums??
     let index = Math.floor(Math.random() * 26);
     resultArray.push(letterArray[index]);
     letterArray.splice(index, 1);
@@ -75,21 +76,22 @@ export const drawLetters = () => { //wave 1
   return resultArray;
 };
 
-export const usesAvailableLetters = (input, lettersInHand) => { //wave 2
+export const usesAvailableLetters = (input, lettersInHand) => {
+  //wave 2
   for (let i = 0; i < input.length; i++) {
     let letter = input[i];
     if (lettersInHand.includes(letter)) {
       let letterIndex = lettersInHand.indexOf(letter);
       lettersInHand.splice(letterIndex, 1);
-      }
-    else {
+    } else {
       return false;
     }
   }
-  return true; //refactor??? 
+  return true; //refactor???
 };
 
-export const scoreWord = (word) => { //wave 3
+export const scoreWord = (word) => {
+  //wave 3
   let score = 0;
   if (word.length >= 7) {
     score += 8;
@@ -102,5 +104,50 @@ export const scoreWord = (word) => { //wave 3
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  //wave 4
+  let winner = {};
+
+  //create an object with scores as keys and words as arrays of words
+  let scoreTable = {};
+  for (const word of words) {
+    let score = scoreWord(word);
+    if (Object.keys(scoreTable).includes(score.toString())) {
+      scoreTable[score].push(word);
+    } else {
+      scoreTable[score] = [word];
+    }
+  }
+
+  let maxScore = Math.max.apply(null, Object.keys(scoreTable));
+
+  if (scoreTable[maxScore].length === 1) {
+    winner = {
+      score: maxScore,
+      word: scoreTable[maxScore][0],
+    };
+  } else {
+    const tenLetters = scoreTable[maxScore].filter(
+      (word) => word.length === 10
+    );
+    if (tenLetters.length === 0) {
+      const shortestLength = Math.min.apply(
+        null,
+        scoreTable[maxScore].map((el) => el.length)
+      );
+      const shortestWord = scoreTable[maxScore].filter(
+        (word) => word.length === shortestLength
+      );
+      winner = {
+        score: maxScore,
+        word: shortestWord[0],
+      };
+    } else {
+      winner = {
+        score: maxScore,
+        word: tenLetters[0],
+      };
+    }
+  }
+
+  return winner;
 };
