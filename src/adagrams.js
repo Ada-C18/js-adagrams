@@ -89,7 +89,7 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   // creates dictionary of scores for each word
-  let dictOfScores = {}
+  let dictOfScores = {};
   for (let word of words) {
     let wordScore = scoreWord(word);
     dictOfScores[word] = wordScore;
@@ -97,10 +97,10 @@ export const highestScoreFrom = (words) => {
 
   // creates list of words with highest score
   let highestScore = Math.max.apply(null, Object.values(dictOfScores));
-  let maxScoreList = []
+  let maxScoreList = [];
   for (let [key, value] of Object.entries(dictOfScores)) {
     if (value === highestScore) {
-      maxScoreList.push(key)
+      maxScoreList.push(key);
     }
   }
   
