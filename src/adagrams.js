@@ -81,7 +81,6 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
   let inputCaps = input.toUpperCase();
   const inputLetters = inputCaps.split("");
-  console.log(inputLetters)
 
   const itemCounter = (array, item) => {
     return array.filter((currentItem) => currentItem === item).length;

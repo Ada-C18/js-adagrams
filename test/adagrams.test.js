@@ -122,7 +122,7 @@ describe("Adagrams", () => {
     it("returns a score of 0 if given an empty input", () => {
       // throw "Complete test";
       expectScores({
-        "": 0
+        "": 0,
       });
     });
 
