@@ -54,20 +54,43 @@ let scoreDict = {
   'Y': 4,
   'Z': 10
   }
+
 export const drawLetters = () => {
-  // Implement this method for wave 1
+  const letterList = Object.entries(letterDict)
+  let letterFreq = [];
+  for (let i = 0; i < 26; ++i) {
+    for (let j = 0; j < letterList[i][1]; ++j) {
+        letterFreq.push(letterList[i][0]);
+    }
+  }
   let letterBank = []
   let letterDict_deepcopy = JSON.parse(JSON.stringify(letterDict));
-  while (letterBank.length < 10) {
-    const keyList = Object.keys(letterDict_deepcopy);
-    let randomLetter = keyList[Math.floor(Math.random() * keyList.length )];
-    // console.log(randomLetter)
+  while (letterBank.length < 10){
+    let randomLetter = letterFreq[Math.floor(Math.random() * 26)];
     if (letterDict_deepcopy[randomLetter] > 0) {
       letterBank.push(randomLetter)
       letterDict_deepcopy[randomLetter] -= 1
     }
-  } return letterBank
-};
+  };
+  return letterBank
+
+}
+
+// export const drawLetters = () => {
+//   // Implement this method for wave 1
+//   let letterBank = []
+//   let letterDict_deepcopy = JSON.parse(JSON.stringify(letterDict));
+//   while (letterBank.length < 10) {
+//     const keyList = Object.keys(letterDict_deepcopy);
+//     let randomLetter = keyList[Math.floor(Math.random() * keyList.length )];
+//     // console.log(randomLetter)
+//     if (letterDict_deepcopy[randomLetter] > 0) {
+//       letterBank.push(randomLetter)
+//       letterDict_deepcopy[randomLetter] -= 1
+//     }
+//   } return letterBank
+// };
+
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
   let caseWord = input.toUpperCase()
