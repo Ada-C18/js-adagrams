@@ -32,6 +32,8 @@
   },
   "dependencies": {
     "core-js": "^3.8.0",
+    "underscore": "^1.13.6",
+    "underscore-contrib": "^0.3.0",
     "vorpal": "^1.12.0"
   }
 }

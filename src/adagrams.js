@@ -1,3 +1,5 @@
+var _ = require("underscore-contrib");
+
 export const drawLetters = () => {
   const letterPool = [
     "A",
@@ -100,20 +102,8 @@ export const drawLetters = () => {
     "Z",
   ];
 
-  LETTER_POOL = {
-    O: 8,
-    P: 2,
-    Q: 1,
-    R: 6,
-    S: 4,
-    T: 6,
-    U: 4,
-    V: 2,
-    W: 2,
-    X: 1,
-    Y: 2,
-    Z: 1,
-  };
+  var drawnLetters = _.sample(letterPool, 10);
+  return drawnLetters;
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
