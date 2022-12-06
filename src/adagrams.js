@@ -107,7 +107,35 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  /* input is the word the user entered.
+  letters in hand is the array of drawn letters.
+  returns true if every letter is in letters in hand (in right quantities)
+  returns false if not.
+  */
+
+  var result = true;
+  //make a counter dict
+
+  var letter_counter = {};
+  //for each letter in the hand, if it's not in the letter_counter, put it in with value 1.
+  //if it is already in letter_counter, add one to it's count.
+  for (var i = 0; i < lettersInHand.length; i++) {
+    letter_counter[lettersInHand[i]] = letter_counter[lettersInHand[i]]
+      ? letter_counter[lettersInHand[i]] + 1
+      : 1;
+  }
+
+  //take away each letter count.
+  //if you get to a letter in input and it's not in the dict, result is false.
+
+  //   for character in word:
+  //       if character in letter_bank_dict:
+  //           if letter_bank_dict[character] == 0:
+  //               result = False
+  //           letter_bank_dict[character] -= 1
+  //       else:
+  //           result = False
+  //   return result
 };
 
 export const scoreWord = (word) => {
