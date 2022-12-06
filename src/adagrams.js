@@ -72,7 +72,7 @@ export const highestScoreFrom = (words) => {
 
   if (scores[highestScore].length > 1) {
     let result;
-    console.log("not yet");
+
     for (const word of scores[highestScore]) {
       if (word.length === 10) {
         return { word: word, score: highestScore };
@@ -119,13 +119,7 @@ const randomLetter = (letters) => {
 
   return letter;
 };
-const letterIsAvailable = (letter, amountOfLetters) => {
-  if (amountOfLetters[letter] !== 0) {
-    return true;
-  } else {
-    return false;
-  }
-};
+
 const LETTER_POOL = {
   A: 9,
   B: 2,
