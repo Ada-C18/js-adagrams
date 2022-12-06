@@ -79,17 +79,17 @@ export const drawLetters = () => {
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
 
-    const capsInput = input.toUpperCase();
+  const capsInput = input.toUpperCase();
 
-    for (const letter of capsInput) {
-        if (lettersInHand.includes(letter)) {
-            const letterIndex = lettersInHand.indexOf(letter)
-            lettersInHand.splice(letterIndex, 1)
-        } else {
-            return false
-          }
-    }
-    return true
+  for (const letter of capsInput) {
+      if (lettersInHand.includes(letter)) {
+          const letterIndex = lettersInHand.indexOf(letter)
+          lettersInHand.splice(letterIndex, 1)
+      } else {
+          return false
+        }
+  }
+  return true
 };
 
 export const scoreWord = (word) => {
@@ -109,4 +109,34 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+
+  const n = words.length;
+  let bestScore = {
+      word: "",
+      score: null,
+  };
+
+  for (let i = 0; i < n; i++) {
+      if (scoreWord(words[i]) > bestScore.score) {
+          bestScore = {
+              word: words[i],
+              score: scoreWord(words[i]),
+          };
+      } else if (scoreWord(words[i]) === bestScore.score) {
+          if (bestScore.word.length === 10) {
+              bestScore = bestScore;
+          } else if (words[i].length === 10) {
+              bestScore = {
+                  word: words[i],
+                  score: scoreWord(words[i]),
+              };
+          } else if (words[i].length < bestScore.word.length) {
+              bestScore = {
+                  word: words[i],
+                  score: scoreWord(words[i]),
+              };
+          }
+      }
+  };
+  return bestScore
 };
