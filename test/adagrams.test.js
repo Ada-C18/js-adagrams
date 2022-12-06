@@ -148,6 +148,7 @@ describe("Adagrams", () => {
       const correct = { word: "XXXX", score: scoreWord("XXXX") };
 
       // throw "Complete test by adding an assertion";
+      // Added assertsion
       expect(highestScoreFrom(words)).toEqual(correct);
     });
 
