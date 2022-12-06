@@ -30,11 +30,13 @@ const LETTERPOOL = {
 export const drawLetters = () => {
   let letterPool = Object.entries(LETTERPOOL);
   let hand = [];
-  for (let i = 0; i < 10; i++) {
+  let i = 0;
+  while (i < 10) {
     let letterIndex = Math.floor(Math.random() * 26);
     if (letterPool[letterIndex][1] > 0) {
       hand.push(letterPool[letterIndex][0]);
       letterPool[letterIndex][1] -= 1;
+      i += 1;
     }
   }
   return hand;
