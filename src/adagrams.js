@@ -1,4 +1,3 @@
-
 const LETTER_POOL = {
   A: 9,
   B: 2,
@@ -112,7 +111,46 @@ export const scoreWord = (word) => {
   return score;
 };
 
-
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+  /*
+  - create a new string to hold the winning word
+  - assign the inital score as 0
+  - loop the word in the words 
+    - get the word's score
+    - compare the word's score with inital score
+    - if current score > score 
+      - set the current word to winning word
+      - set the current score to the score
+    - else if current score === score
+        - if current word len === 10
+          - assign word as winning word
+        - if current word len < winning word len and winning word len === 10
+          - current word != winnig word 
+        - else if current word len < winning word len 
+          - assign current word to winnig word 
+    - return
+  */
+  
+  let winningWord = "";
+  let updatingScore = 0;
+
+  for (let word of words){
+    let score = scoreWord(word);
+    if (score > updatingScore) {
+      winningWord = word;
+      updatingScore = score;
+    } else if (score === updatingScore){
+        if (word.length === 10 && winningWord.length !== 10){
+          winningWord = word;
+        } 
+        if (word.length < winningWord.length && winningWord.length === 10) {
+            winningWord !== word;
+        }
+        else if (word.length < winningWord.length) {
+          winningWord = word;
+        }
+    }
+  }
+  return ({"word": winningWord, "score": updatingScore})
 };
