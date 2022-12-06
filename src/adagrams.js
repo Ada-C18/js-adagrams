@@ -1,6 +1,6 @@
 
+// Implement this method for wave 1
 export const drawLetters = () => {
-   // Implement this method for wave 1
   const allLetters = []
   const LETTER_POOL = {
     A: 9, 
@@ -45,21 +45,17 @@ export const drawLetters = () => {
       allLetters.splice(number,1);
       j-=1;
     }
-  console.log(gameLetters)
+  return gameLetters
+
 };
 
-console.log(drawLetters())
-
-// 2 inputs: string + list ten letters
-//output : boolen
-
+// Implement this method for wave 2
 export const usesAvailableLetters = (input, lettersInHand) => {
   const inputUpper = input.toUpperCase();
 
   const lettersInHandUpper = lettersInHand.map(letter => {
     return letter.toUpperCase();
   });
-  // console.log(lettersInHandUpper);
 
   const lettersInHandUpperObject = { };
   lettersInHandUpper.forEach(letter => {
@@ -70,13 +66,9 @@ export const usesAvailableLetters = (input, lettersInHand) => {
     }
   })
 
-  console.log(lettersInHandUpperObject);
-
   for (let letter of inputUpper){
-    console.log(letter)
     if (letter in lettersInHandUpperObject && lettersInHandUpperObject[letter]>0){
       lettersInHandUpperObject[letter] -= 1;
-      console.log(lettersInHandUpperObject)
       continue
     } else {
       return false
@@ -85,15 +77,75 @@ export const usesAvailableLetters = (input, lettersInHand) => {
     return true
   };
 
-// //  Implement this method for wave 2
 
-console.log(usesAvailableLetters("carr",['I', 'R', 'A', 'h','O', 'c', 't', 'X','Q', 'O']))
+// Implement this method for wave 3
+export const scoreWord = (word) => {
+  const pointsDict = {
+    'A': 1, 
+    'B': 3, 
+    'C': 3, 
+    'D': 2, 
+    'E': 1, 
+    'F': 4, 
+    'G': 2, 
+    'H': 4, 
+    'I': 1, 
+    'J': 8, 
+    'K': 5, 
+    'L': 1, 
+    'M': 3, 
+    'N': 1, 
+    'O': 1, 
+    'P': 3, 
+    'Q': 10, 
+    'R': 1, 
+    'S': 1, 
+    'T': 1, 
+    'U': 1, 
+    'V': 4, 
+    'W': 4, 
+    'X': 8, 
+    'Y': 4, 
+    'Z': 10
+    }
+  
+  let pointsWord = 0
+  let wordUpper = word.toUpperCase();
+  
+  if (wordUpper.length === 0){
+    return 0;
+  }
+  
+  for (let char of wordUpper) {
+    pointsWord += pointsDict[char];
+  };
 
+  if (wordUpper.length >= 7 && wordUpper.length <=10){
+      pointsWord += 8;
+    }  
+  
+  return pointsWord
+  };
 
-// export const scoreWord = (word) => {
-//   // Implement this method for wave 3
-// };
+// Implement this method for wave 4
+export const highestScoreFrom = (words) => {
+  let maxScore = 0;
+  let maxWord = "";
 
-// export const highestScoreFrom = (words) => {
-//   // Implement this method for wave 4
-// };
+  for(const word of words) {
+    let scoreOneWord = scoreWord(word);
+    if (maxScore < scoreOneWord) {
+        maxScore = scoreOneWord;
+        maxWord = word;
+    }else if 
+      (maxScore === scoreOneWord && word.length === 10 && maxWord.length !== 10)
+      {
+          maxWord = word;
+      }else if 
+      (maxScore === scoreOneWord && word.length < maxWord.length && maxWord.length !== 10)
+      {
+          maxWord = word;
+        }
+    };
+    return {word:maxWord, score: maxScore};
+};
