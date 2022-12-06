@@ -1,7 +1,8 @@
 # Explanations of Data Structures and Methods Used
 
 ### line 47
-`Object.freeze(POOL);`: prevents accidental mutation of POOL. Ultimately, my code didn't generate any errors caused by mutating POOL but I thought that it was prudent to include, just in case, particularly since a project requirement for at least one wave is that the code does not mutate POOL.
+`Object.freeze(POOL);`
+This prevents accidental mutation of POOL. Ultimately, my code didn't generate any errors caused by mutating POOL but I thought that it was prudent to include, just in case, particularly since a project requirement for at least one wave is that the code does not mutate POOL.
 
 ### lines 51-53
 ```
@@ -57,4 +58,5 @@ const makeHandMap = (hand) => {
 This function takes in an array of ten strings (`hand`), where each element in the array is a single letter. (Note: This function would work for any array but I am writing about it in the context in which it is being used.) The function returns a Map object that contains each of the unique elements (letters) in the array as keys, with the number of times that the key appears in the array as the associated value. To do so, it generates a new Map object, then loops through the array using `forEach`. The `forEach` loop uses the `makeMap` helper function to set each unique element as a key in the Map object, with the number of times that the key appears in the array as the associated value. The function then returns the updated Map object.
 
 ### line 96
-`let inputIterator = inputMap[Symbol.iterator]();`: This creates an iterator that yields the inputMap's key-value pairs one by one, formatted as an array (`[key, value]`). I later use it in the for...of loop to iterate through inputMap's keys. I used a for...of loop instead of `Map.forEach()` because I needed to break the loop to return false if the letters in the word passed in to `usesAvailableLetters` were not in the hand that was passed in or were used more times than the letter was available in the hand.
+`let inputIterator = inputMap[Symbol.iterator]();`
+This creates an iterator that yields the inputMap's key-value pairs one by one, formatted as an array (`[key, value]`). I later use it in the for...of loop to iterate through inputMap's keys. I used a for...of loop instead of `Map.forEach()` because I needed to break the loop to return false if the letters in the word passed in to `usesAvailableLetters` were not in the hand that was passed in or were used more times than the letter was available in the hand.
