@@ -92,6 +92,27 @@ export const scoreWord = (word) => {
 function getKeyByValue(obj, letterVal) {
   return Object.entries(obj).find((i) => i[1] === letterVal);
 }
-// export const highestScoreFrom = (words) => {
-//   // Implement this method for wave 4
-// };
+export const highestScoreFrom = (words) => {
+  //   // Implement this method for wave 4
+  let highestScore = 0;
+  let winningWord = null;
+
+  for (let word of words) {
+    if (scoreWord(word) > highestScore) {
+      highestScore = scoreWord(word);
+      winningWord = word;
+    } else if (scoreWord(word) === highestScore) {
+      if (word.length === winningWord.length || winningWord.length === 10) {
+        continue;
+      } else if (word.length === 10) {
+        winningWord = word;
+      } else if (word.length < winningWord.length) {
+        winningWord = word;
+      }
+    }
+  }
+  return {
+    word: winningWord,
+    score: highestScore,
+  };
+};
