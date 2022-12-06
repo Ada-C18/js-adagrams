@@ -28,13 +28,13 @@ const letterPool = {
 }
 
 const scoreChart = {
-  1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
-  2: ['D', 'G'],
-  3: ['B', 'C', 'M', 'P'],
-  4: ['F', 'H', 'V', 'W', 'Y'],
-  5: ['K'],
-  8: ['J', 'X'],
-  10: ['Q', 'Z'],
+  'AEIOULNRST': 1,
+  'DG': 2,
+  'BCMP': 3,
+  'FHVWY': 4,
+  'K': 5,
+  'JX':8,
+  'QZ':10,
 }
 
 
@@ -78,11 +78,29 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
 
 export const scoreWord = (word) => {
-  const wordCapitalized = word.toUpperCase(); 
-  
+
   if (word.length === 0){
     return 0;
   }
+  
+  let wordScore = 0
+  const wordCapitalized = word.toUpperCase();
+  const wordLength = wordCapitalized.length 
+
+  if (wordLength >= 7){
+    wordScore += 8; 
+  }
+
+  let keys = Object.keys(scoreChart);
+  for (const letter of wordCapitalized){
+    let l = letter;
+    for (const key of keys){
+      if (key.includes(l)){
+        wordScore += scoreChart[key];
+      }
+    }
+  }
+  return wordScore;
 };
 
 
