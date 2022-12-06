@@ -34,7 +34,7 @@ LETTER_POOL is Not A Map! So keys() and entries() don't work.
 
 const buildDeck = function (freqsMap) {
   let deck = [];
-  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   for (const char of letters) {
     for (let i = 0; i < freqsMap[char]; i++) {
       deck.push(char);
@@ -143,7 +143,7 @@ WORD_LENGTH_THRESHOLD to define bonus for word length.
 export const scoreWord = function (word) {
   const scoreList = word
     .toUpperCase()
-    .split("")
+    .split('')
     .map((c) => SCORE_TABLE[c]);
   let wordTotal = sum(scoreList);
   // If the length of the word is 7, 8, 9, or 10,
