@@ -25,7 +25,7 @@ let letterDict = {
   'X': 1,
   'Y': 2,
   'Z': 1
-}
+};
 let scoreDict = {
   'A': 1,
   'B': 3,
@@ -53,7 +53,7 @@ let scoreDict = {
   'X': 8,
   'Y': 4,
   'Z': 10
-  }
+  };
 
 export const drawLetters = () => {
   const letterList = Object.entries(letterDict)
@@ -72,87 +72,49 @@ export const drawLetters = () => {
       letterDict_deepcopy[randomLetter] -= 1
     }
   };
-  return letterBank
-
-}
-
-// export const drawLetters = () => {
-//   // Implement this method for wave 1
-//   let letterBank = []
-//   let letterDict_deepcopy = JSON.parse(JSON.stringify(letterDict));
-//   while (letterBank.length < 10) {
-//     const keyList = Object.keys(letterDict_deepcopy);
-//     let randomLetter = keyList[Math.floor(Math.random() * keyList.length )];
-//     // console.log(randomLetter)
-//     if (letterDict_deepcopy[randomLetter] > 0) {
-//       letterBank.push(randomLetter)
-//       letterDict_deepcopy[randomLetter] -= 1
-//     }
-//   } return letterBank
-// };
-
-export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
-  let caseWord = input.toUpperCase()
-  for (let i of caseWord) {
-    if (!lettersInHand.includes(i)) {
-      return false
-    } else {
-      // remove letter i from letters in hand
-      const index = lettersInHand.indexOf(i);
-      if (index > -1) { // only splice array when item is found
-        lettersInHand.splice(index, 1); // 2nd parameter means remove one item only
-      }
-    }
-  }
-  return true
+  return letterBank;
 };
 
-
-
-// # Wave 2
-
-// def uses_available_letters(word, letter_bank):
-//     letter_bank_copy = letter_bank.copy()
-//     if len(word) > len(letter_bank_copy):
-//         return False
-//     for letter in word.upper():
-//         if letter in letter_bank_copy:
-//             letter_bank_copy.remove(letter)
-//         else:
-//             return False
-
-//     return True
+export const usesAvailableLetters = (input, lettersInHand) => {
+  let caseWord = input.toUpperCase();
+  for (let i of caseWord) {
+    if (!lettersInHand.includes(i)) {
+      return false;
+    } else {
+      const index = lettersInHand.indexOf(i);
+      if (index > -1) { 
+        lettersInHand.splice(index, 1); 
+      }
+    }
+  };
+  return true;
+};
 
 export const validateLetter = function charIsLetter(char) {
   if (typeof char !== 'string') {
     return false;
   }
-
   return /^[a-zA-Z]+$/.test(char);
-}
+};
+
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
   if (word.length === 0) return 0;
-  
   let caseWord = word.toUpperCase();
   let total = 0;
   for (let i = 0; i < caseWord.length; i++){
     if(validateLetter(word[i])== true){
     let val = scoreDict[caseWord[i]]
-    total += val;}
+    total += val};
   }
   if (word.length >= 7) total += 8
   return total;
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
-let wordMap = new Map()
-let maxScore = 0
-let winningWords = []
-let tenLetterWinningWords = []
-
+let wordMap = new Map();
+let maxScore = 0;
+let winningWords = [];
+let tenLetterWinningWords = [];
   for (let word of words) {
     let score = scoreWord(word)
     wordMap.set(word, score)
@@ -160,7 +122,6 @@ let tenLetterWinningWords = []
       maxScore = score
     }
   } 
-  // destructuring
   for (let [word,score] of wordMap) {
     if (score === maxScore) {
       if (word.length === 10) {
@@ -171,10 +132,10 @@ let tenLetterWinningWords = []
   }
   }
   if (tenLetterWinningWords.length > 0) {
-    return {word : tenLetterWinningWords[0], score : maxScore}
+    return {word : tenLetterWinningWords[0], score : maxScore};
     } else {
       if (winningWords.length > 1 && winningWords.length != 10 ) {
         winningWords.sort((a, b) => a.length - b.length)
-      } return {word : winningWords[0], score : maxScore}
+      } return {word : winningWords[0], score : maxScore};
     }
 };
