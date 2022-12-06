@@ -130,4 +130,47 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+  /* 
+  pseudocode - 
+  - create empty hash table
+  - loop through array "words"
+  - pass each item through scoreWord function and assign the word as key, score as value to the hash table
+  tie breakers:
+  - create an empty string variable "finalWord"
+  - create an empty variable "finalScore", set equal to 0
+  - loop through dictionary pulling out word, and score
+  - if score is equal to finalScore 
+  - first condition - check if word length is equal to 10 and length of finalword is not equal to 10
+  - assign word to finalWord and score to finalScore if this condition is met
+  - second condition - check else if length of word is less than finalWord and length of finalWord does not euqal 10
+  - assign word to finalWord and score to finalScore if this condition is met
+  outside of tie breaker:
+  - check that score is higher than finalScore, and if it is set finalScore = to score and finalWord = to word
+  - return finalWord and finalScore as a key, value pair
+  */
+  let finalWord = "";
+  let finalScore = 0;
+
+  // final score calculator
+  for (const word of words) {
+    let score = scoreWord(word);
+
+    if (score > finalScore) {
+      finalScore = score;
+      finalWord = word;
+    }
+
+    // tie breaking logic
+    if (score === finalScore) {
+      if (finalWord.length === 10) {
+        continue;
+      }
+      if (word.length === 10) {
+        finalWord = word;
+      } else if (word.length < finalWord.length) {
+        finalWord = word;
+      }
+    }
+  }
+  return { word: finalWord, score: finalScore };
 };
