@@ -32,6 +32,7 @@ export const drawLetters = () => {
   while (returnList.length < 10) {
     let letter = letterBank[Math.floor(Math.random()* letterBank.length)];
     returnList.push(letter);
+    // grabs index of letter from letterBank and removes that letter at the index
     let index = letterBank.indexOf(letter);
     letterBank.splice(index,1);
   }
