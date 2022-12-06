@@ -50,7 +50,44 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
+  for (let letter of input) {
+    if (!lettersInHand.includes(letter)) {
+      return false;
+    } else {
+      lettersInHand.splice(lettersInHand.indexOf(letter), 1)
+    }
+  }return true;
 };
+//   const inputObj = createLetterMemo(input)
+//   const handObj = createLetterMemo(lettersInHand)
+//   console.log('============================================')
+//   console.log(inputObj)
+//   console.log(handObj)
+//   for (let key in inputObj){
+//     if (inputObj[key] > handObj[key]) {
+//       return false;
+//     } else if (!(key in handObj)){
+//       return false;
+
+//     } else {
+//       return true;
+//   }
+  
+// }
+
+
+// const createLetterMemo = (letterInput) => {
+//   let memo = {};
+//   for (let letter of letterInput) {
+//     if (letter in memo) {
+//       memo[letter]++
+//     } else {
+//       memo[letter] = 1
+//     }
+  
+//   }return memo;
+  
+// }
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
