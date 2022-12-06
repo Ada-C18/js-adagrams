@@ -28,7 +28,7 @@ export const drawLetters = () => {
     Z: 1,
   };
   let letters = [];
-  for (const letter of Object.keys(letterpool)) {
+  for (let letter of Object.keys(letterpool)) {
     for (let i = 0; i < letterpool[letter]; i++) {
       letters.push(letter);
     }
@@ -99,10 +99,8 @@ export const highestScoreFrom = (words) => {
   };
   for (let word of words) {
     const point = scoreWord(word);
-    if (
-      point > winningWord.score ||
-      (winningWord.word.length !== 10 && 
-        ((point === winningWord.score && word.length === 10 ) ||
+    if (point > winningWord.score ||
+      (winningWord.word.length !== 10 && ((point === winningWord.score && word.length === 10 ) ||
         (point === winningWord.score && winningWord.word.length > word.length)) 
         )
     ) {
