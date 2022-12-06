@@ -89,9 +89,10 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
   for (let character of input) {
     // construct a new RegExp object. 'gi' is global, case-insensitive
-    let re = new RegExp(character, "gi");
+    // let re = new RegExp(character, "gi");
     // pass the new RegExp object into match (unable to use regular 'character' here)
-    let count = input.match(re).length;
+    // let count = input.match(re).length;
+    let count = [...input.matchAll(character)].length;
     if (count > letters[character]) {
       return false;
     }
