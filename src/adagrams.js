@@ -92,21 +92,51 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 };
 
 export const scoreWord = (word) => {
-
   word = word.toUpperCase();
   let wordValue = 0;
 
   for (const letter of word) {
-      if (letter in letterValues) {
-          wordValue += letterValues[letter]
-      }
+    if (letter in letterValues) {
+      wordValue += letterValues[letter];
     }
-  if (word.length > 6) {
-      wordValue += 8
   }
-  return wordValue
+  if (word.length > 6) {
+    wordValue += 8;
+  }
+  return wordValue;
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  let wordsAndScores = {};
+
+  for (let word of words) {
+    let score = scoreWord(word);
+    wordsAndScores[word] = score;
+  }
+
+  let winningWordAndScore = {
+    word: Object.keys(wordsAndScores)[0],
+    score: Object.values(wordsAndScores)[0],
+  };
+
+  for (const [key, value] of Object.entries(wordsAndScores)) {
+    if (value > winningWordAndScore['score']) {
+      winningWordAndScore['word'] = key;
+      winningWordAndScore['score'] = value;
+    }
+
+    if (
+      value === winningWordAndScore['score'] &&
+      winningWordAndScore['word'].length < 10
+    ) {
+      if (key.length === 10) {
+        winningWordAndScore['word'] = key;
+        winningWordAndScore['score'] = value;
+      } else if (key.length < winningWordAndScore['word'].length) {
+        winningWordAndScore['word'] = key;
+        winningWordAndScore['score'] = value;
+      }
+    }
+  }
+  return winningWordAndScore;
 };
