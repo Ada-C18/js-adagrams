@@ -71,7 +71,10 @@ In addition to the provided unit tests, we provided a demo game application that
 You can start the demo game application with the following command:
 
 ```bash
-$ yarn run demo-game
+
+'
+
+op
 ```
 
 This will start the Adagrams prompt, and you can start a new game by typing `start` (or `start <num>` for a game with multiple players).
