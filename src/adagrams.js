@@ -30,7 +30,7 @@ let userLetters = [];
 const allLetters = [];
 export const drawLetters = () => {
   // Implement this method for wave 1
-  for (const letter in letterDistribution) {
+   for (const letter in letterDistribution) {
     for (let i = 0; i < letterDistribution[letter]; i++) {
       allLetters.push(letter);
     }
@@ -133,29 +133,6 @@ export const highestScoreFrom = (words) => {
   Winner.word = win;
   Winner.score = scoreWord(win);
   return Winner;
-
-  // let highScoreWords = [];
-  // let highScore = 0;
-  // for (let word of words) {
-  //   let score = scoreWord(word);
-  //   if (score > highScore) {
-  //     highScoreWords.push(word);
-  //     highScore = score;
-  //   } else if (score === highScore) {
-  //     highScoreWords.push(word);
-  //   }
-  // }
-  // let shortestWordLen = highScoreWords.reduce((a, b) =>
-  //   a.length <= b.length ? a : b
-  // );
-  // let shortestWord = highScoreWords[0];
-  // for (let word in highScoreWords) {
-  //   if (word.length === 10) {
-  //     return { word: word, score: scoreWord(word) };
-  //   } else if (word.length < shortestWordLen) {
-  //     shortestWordLen = word.length;
-  //     shortestWord = word;
-  //   }
-  //   return { word: shortestWord, score: scoreWord(shortestWord) };
-  // }
 };
+
+// export default Adagrams;
