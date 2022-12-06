@@ -124,10 +124,21 @@ export const usesAvailableLetters = (input, lettersInHand) => {
       ? letter_counter[lettersInHand[i]] + 1
       : 1;
   }
-
   //take away each letter count.
   //if you get to a letter in input and it's not in the dict, result is false.
+  for (const letter of input) {
+    if (letter in letter_counter) {
+      if (letter_counter[letter] === 0) {
+        result = false;
+      }
+      letter_counter[letter] -= 1;
+    } else {
+      result = false;
+    }
+  }
+  return result;
 
+  //python:
   //   for character in word:
   //       if character in letter_bank_dict:
   //           if letter_bank_dict[character] == 0:
