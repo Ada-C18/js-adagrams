@@ -106,7 +106,7 @@ export const highestScoreFrom = (words) => {
   
   // returns highest score if length of list is only 1
   if (maxScoreList.length === 1) {
-    return {word: maxScoreList[0], score: scoreWord(maxScoreList[0])}
+    return {word: maxScoreList[0], score: highestScore}
   }
 
   // gets max and min length word of highest scoring words
@@ -123,9 +123,9 @@ export const highestScoreFrom = (words) => {
   
   // returns highest scoring word if length of word is 10
   if (maxLenWord.length === 10) {
-    return {word: maxLenWord, score: scoreWord(maxLenWord)};
+    return {word: maxLenWord, score: highestScore};
   }
 
   // returns the first shortest length word of high scoring word list
-  return {word: minLenWord, score: scoreWord(minLenWord)};
+  return {word: minLenWord, score: highestScore};
   };
