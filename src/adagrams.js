@@ -27,6 +27,35 @@ const LETTERPOOL = {
   Z: 1,
 };
 
+const LETTERPOINTS = {
+  A: 1,
+  N: 1,
+  B: 3,
+  O: 1,
+  C: 3,
+  P: 3,
+  D: 2,
+  Q: 10,
+  E: 1,
+  R: 1,
+  F: 4,
+  S: 1,
+  G: 2,
+  T: 1,
+  H: 4,
+  U: 1,
+  I: 1,
+  V: 4,
+  J: 8,
+  W: 4,
+  K: 5,
+  X: 8,
+  L: 1,
+  Y: 4,
+  M: 3,
+  Z: 10,
+};
+
 export const drawLetters = () => {
   let letterPool = Object.entries(LETTERPOOL);
   let hand = [];
@@ -43,19 +72,41 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  let handCount = substringCount(lettersInHand);
+  let inputCount = substringCount(input.toUpperCase());
+  for (const letter in inputCount) {
+    if (handCount[letter] || inputCount[letter] > handCount[letter]) {
+      return false;
+    }
+  }
+  return true;
 };
 
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
+  let total_score = word
+    .toUpperCase()
+    .split("")
+    .map((letter) => LETTERPOINTS[letter])
+    .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+  if (word.length > 6) {
+    total_score += 8;
+  }
+  return total_score;
 };
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
 };
 
-// // HELPER FUNCTIONS
-// const drawLetter = (wordPool, currentHand) => {
-//   const letterIndex = Math.floor(Math.random() * 26)
-//   if (wordPool)
-// }
+// HELPER FUNCTIONS
+const substringCount = (string) => {
+  let count = {};
+  for (const character of string) {
+    if (count[character] === undefined) {
+      count[character] = 1;
+    } else {
+      count[character] += 1;
+    }
+  }
+  return count;
+};
