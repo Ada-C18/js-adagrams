@@ -66,11 +66,6 @@ export const createLetterPool = () => {
   return letterPoolList;
 };
 
-// export const findRandomLetter = (allLetters) => {
-//   let randomIndex = Math.floor(Math.random() * allLetters.length);
-//   return allLetters[randomIndex];
-// };
-
 export const drawLetters = () => {
   let allLetters = createLetterPool(LETTERPOOL);
   let hand = [];
@@ -103,7 +98,7 @@ export const scoreWord = (word) => {
 
   let score = 0;
 
-  for (let letter of word.toUpperCase()) {
+  for (const letter of word.toUpperCase()) {
     score += scoreMap.get(letter);
   }
   if (word.length >= 7) {
@@ -116,22 +111,23 @@ export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
 
   let highestScore = 0;
-  let highestWord = "";
+  let bestWord = "";
 
-  for (let word of words) {
+  for (const word of words) {
     let wordScore = scoreWord(word);
+
     if (wordScore > highestScore) {
-      let highestWord = word;
-      let highestScore = wordScore;
+      bestWord = word;
+      highestScore = wordScore;
     } else if (wordScore === highestScore) {
-      if (word.length === 10 && highestWord.length !== 10) {
-        let highestWord = word;
-        let highestScore = wordScore;
-      } else if (word.length < highestWord.length && highestWord !== 10) {
-        let highestWord = word;
-        let highestScore = wordScore;
+      if (word.length === 10 && bestWord.length !== 10) {
+        bestWord = word;
+        highestScore = wordScore;
+      } else if (word.length < bestWord.length && bestWord.length !== 10) {
+        bestWord = word;
+        highestScore = wordScore;
       }
-      return { highestWord, highestScore };
     }
   }
+  return { word: bestWord, score: highestScore };
 };
