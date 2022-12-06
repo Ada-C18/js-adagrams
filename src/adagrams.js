@@ -44,6 +44,8 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   let letters = input.toUpperCase();
+
+  //for-of loop iterates over the values in an iterable object, such as an array.
   for (const letter of letters) {
     if (!lettersInHand.includes(letter)) {
       return false;
@@ -58,6 +60,14 @@ export const usesAvailableLetters = (input, lettersInHand) => {
       letterCounts[letter]++;
     }
   }
+
+  //calling the filter() method on the lettersInHand array returns an array containing
+  // only the occurrences of the letter in the lettersInHand array.
+  // The length of this array is then compared to the count variable.
+
+  // another way to write this code: for (const letter of Object.keys(letterCounts)) {const count = letterCounts[letter];
+      // rest of loop body goes here
+
 
   for (const [letter, count] of Object.entries(letterCounts)) {
     if (count > lettersInHand.filter((l) => l === letter).length) {
@@ -104,10 +114,16 @@ export const scoreWord = (word) => {
   }
 
   let score = 0;
-  const letters = word.toUpperCase().split("");
+  const letters = word.toUpperCase();
   for (const letter of letters) {
     score += SCORE_CHART[letter] || 0;
   }
+
+  //The || operator is being used as a shorthand way to set a default value for the SCORE_CHART[letter] expression. 
+  //If SCORE_CHART[letter] is a falsy value (i.e. null, undefined, 0, etc.), 
+  //the || 0 part of the expression will cause 0 to be added to the score variable instead. 
+  //This ensures that the score variable is always incremented by some value, 
+  //even if the SCORE_CHART object does not have a value for the current letter.
 
   if (letters.length >= 7) {
     score += 8;
@@ -117,39 +133,36 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
+  // Return null if no words are provided
   if (!words || words.length === 0) {
     return null;
   }
 
+  // Keep track of the highest score
+  let highestScore = 0;
+
   // Calculate the scores of all words
-  const scores = words.map((word) => ({
-    word,
-    score: scoreWord(word),
-  }));
+  const scores = words.map((word) => {
+    // Calculate the score for the current word
+    const score = scoreWord(word);
 
-  // Sort the words by score, with the highest score first
-  scores.sort((a, b) => b.score - a.score);
-
-  // Find the first word with the highest score
-  const highestScores = scores.filter((s) => s.score === scores[0].score);
-  const [highestScore] = highestScores;
-  
-  // If there are multiple words with the same high score, find the one with 10 letters
-  // If there are no words with 10 letters, find the one with the fewest letters
-  // If all words have the same number of letters, return the first one
-  const tieBreakers = [
-    (s) => s.word.length === 10,
-    (s) => s.word.length < highestScores[0].word.length,
-    (s) => true,
-  ];
-  
-  for (const tieBreaker of tieBreakers) {
-    const winner = highestScores.find(tieBreaker);
-    if (winner) {
-      return winner;
+    // Update the highest score if necessary
+    if (score > highestScore) {
+      highestScore = score;
     }
-  }
 
-  // If no word was found, return null
-  return null;
+    // Return the word and its score
+    return { word, score };
+  });
+
+  // Find the object with the highest score
+  const highestScoringWord = scores.find(
+    (score) => score.score === highestScore
+  );
+
+  return highestScoringWord || null;
 };
+
+
+
+
