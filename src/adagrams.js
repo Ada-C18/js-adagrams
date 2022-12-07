@@ -60,25 +60,11 @@ class Adagrams {
     return true;
   };
 
-  validateWord = (word) => {
-    if (word.length < 1) {
-      return false;
-    }
-    console.log(this.drawLetters());
-    return this.usesAvailableLetters(word, userLetters);
-  };
-
   scoreWord = (word) => {
-    if (word.length < 3) {
-      return null;
-    }
-
     let score = 0;
     if (word) {
       for (const letter of word.toUpperCase()) {
-        console.log(letterPool[letter][1]);
         score += letterPool[letter][1];
-        console.log(`${letter}, ${score}`);
       }
       if (word.length >= 7) {
         score += 8;
