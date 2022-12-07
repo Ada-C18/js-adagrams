@@ -114,69 +114,68 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  
-    let scoredWords = {} 
-    
-    //get item = {scored_word:score}, add item to scoredWords object
-      for (let i = 0; i < words.length; i++){
-        let scoreCalculated = scoreWord(words[i])
-        //console.log(scoreCalculated)
-        scoredWords[words[i]] = scoreCalculated
-        //let scoredWords[words[i]] = scoreCalculated
-      }
-          
-  
-      // get max of scores from scoredWords{} 
-       // also keep a list of ties in tieList
-      let tieList=[]
-      let winningWord=""
-      let winningScore = 0;
-  
-      for(const [word, score] of Object.entries(scoredWords)) {
-        if(score > winningScore) {
-          winningScore = score;
-          winningWord = word;
-          //tieList.push(winningWord)
+  let scoredWords = {};
+
+  //get item = {scored_word:score}, add item to scoredWords object
+  for (let i = 0; i < words.length; i++) {
+    let scoreCalculated = scoreWord(words[i]);
+    //console.log(scoreCalculated)
+    scoredWords[words[i]] = scoreCalculated;
+    //let scoredWords[words[i]] = scoreCalculated
+  }
+
+  // get max of scores from scoredWords{}
+  // also keep a list of ties in tieList
+  let tieList = [];
+  let winningWord = "";
+  let winningScore = 0;
+
+  for (const [word, score] of Object.entries(scoredWords)) {
+    if (score > winningScore) {
+      winningScore = score;
+      winningWord = word;
+      //tieList.push(winningWord)
+    } else if (score === winningScore) {
+      tieList.push(winningWord, word);
+      console.log(score);
+    }
+    //ensure that all words in tieList have scores === winningScore
+  }
+
+  if (tieList.length === 0) {
+    console.log(winningWord);
+    return winningWord, winningScore;
+  } else {
+    //get min and max length from tieList
+    const maxLength = Math.max.apply(
+      Math,
+      tieList.map(function (tieWord) {
+        null, tieWord.length;
+      })
+    );
+    const minLength = Math.min.apply(
+      Math,
+      tieList.map(function (tieWord) {
+        null, tieWord.length;
+      })
+    );
+
+    //if maxLength===10, return word with maxLength
+    //else set word with minLength to winningWord
+    if (maxLength === 10) {
+      for (let i = 0; i < tieList.length; i++) {
+        if (tieList[i].length === 10) {
+          winningWord = tieList[i];
+          return winningWord, winningScore;
         }
-        else if (score===winningScore){
-          tieList.push(winningWord, word)
-          console.log(score)
-          
-        }
-        //ensure that all words in tieList have scores === winningScore
       }
-  
-  
-      if(tieList.length===0){
-        return winningWord, winningScore
-      }else{
-          maxLength= Math.max.apply(Math, tieList.map(function (tieWord) { return [tieWord.length] }));
-          console.log("this is maxLength")
-          console.log(maxLength)
-          
-          //console.log(maxLength)
-          minLength = Math.min.apply(Math, tieList.map(function (tieWord) { return tieWord.length }));
-          //console.log(minLength)
-        
-          // if (maxLength.length ===10){
-          //   return maxLength
-          // }
-            
-          // else{
-            
-          //   return minLength
-          // }
-  
-          // if (maxlength === 10){
-          // for (let i = 0; i< tieList.length; i++){
-          //   if (tieList[i].length===10){
-          //     winningWord = tieList[i]
-          //     console.log(winningWord)
-          //   }}}else{
-          //       for (let i = 0; i< tieList.length; i++){
-          //   if (tieList[i].length===minLength){
-          //     winningWord = tieList[i]
-          //     console.log(tieList[i])
-          //   }
-        
-      };
+    } else {
+      for (let i = 0; i < tieList.length; i++) {
+        if (tieList[i].length === minLength) {
+          winningWord = tieList[i];
+          return winningWord, winningScore;
+        }
+      }
+    }
+  }
+};
