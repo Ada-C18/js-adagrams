@@ -1,104 +1,124 @@
-const LETTER_POOL = {
-  "A": 9, "B": 2, "C": 2, "D": 4, "E": 12, "F": 2, "G": 3, "H": 2,
-  "I": 9, "J": 1, "K": 1, "L": 4, "M": 2, "N": 6, "O": 8, "P": 2,
-  "Q": 1, "R": 6, "S": 4, "T": 6, "U": 4, "V": 2, "W": 2, "X": 1,
-  "Y": 2, "Z": 1  
-};
-const LETTER_VALUE = {
-  A:1, E:1, I:1, O:1, U:1, L:1, N:1, R:1, S:1, T:1,
-  D:2, G:2,
-  B:3, C:3, M:3, P:3,
-  F:4, H:4, V:4, W:4, Y:4,
-  K:5,
-  J:8, X:8,
-  Q:10, Z:10
-};
-
-let allLetters = [];
-const atoz = "abcdefghijklmnopqrstuvwxyz".toUpperCase()
-for (let letter of atoz) {
-  for (let i=0; i<LETTER_POOL[letter]; i++) {
-    allLetters.push(letter);
-  }
+const letterPool = {
+  A: [9, 1],
+  B: [2, 3],
+  C: [2, 3],
+  D: [4, 2],
+  E: [12, 1],
+  F: [2, 4],
+  G: [3, 2],
+  H: [2, 4],
+  I: [9, 1],
+  J: [1, 8],
+  K: [1, 5],
+  L: [4, 1],
+  M: [2, 3],
+  N: [6, 1],
+  O: [8, 1],
+  P: [2, 3],
+  Q: [1, 10],
+  R: [6, 1],
+  S: [4, 1],
+  T: [6, 1],
+  U: [4, 1],
+  V: [2, 4],
+  W: [2, 4],
+  X: [1, 8],
+  Y: [2, 4],
+  Z: [1, 10],
 };
 
 class Adagrams {
   // constructor() {}
 
   drawLetters = () => {
-    let inHand = [];
-    let allLetters_copy = [...allLetters];
-    
-    for (let i=0; i<10; i++) {
-      let allLetters_length = allLetters_copy.length;
-      let randomIndex = Math.floor(Math.random()*allLetters_length);
-      inHand.push(allLetters_copy[randomIndex]);
-      allLetters_copy.splice(randomIndex,1);
+    let allLetters = [];
+    for (const letter in letterPool) {
+      const amount = letterPool[letter][0];
+      const letterArray = new Array(amount).fill(letter);
+      allLetters = allLetters.concat(letterArray);
     }
-    return inHand;
-  }
-  
+    const userLetters = [];
+    for (let i = 0; i < 10; i++) {
+      const index = Math.floor(Math.random() * allLetters.length);
+      const randomLetter = allLetters[index];
+      userLetters.push(randomLetter);
+      allLetters = allLetters
+        .slice(0, index)
+        .concat(allLetters.slice(index + 1));
+    }
+    return userLetters;
+  };
+
   usesAvailableLetters = (input, lettersInHand) => {
     for (let letter of input) {
-      if (lettersInHand.includes(letter)){
-        lettersInHand.splice(letter,1);
+      if (lettersInHand.includes(letter)) {
+        lettersInHand.splice(letter, 1);
       } else {
         return false;
       }
     }
     return true;
-  }
-  
-  scoreWord = (word) => {
-    let input_word = word.toUpperCase();
-    let total = 0;
-    if (input_word.length >= 7){
-      total += 8;
+  };
+
+  validateWord = (word) => {
+    if (word.length < 1) {
+      return false;
     }
-    
-    for (let letter of input_word) {
-      total += LETTER_VALUE[letter];
-    };
-    return total;
-  }
-  
+    console.log(this.drawLetters());
+    return this.usesAvailableLetters(word, userLetters);
+  };
+
+  scoreWord = (word) => {
+    if (word.length < 3) {
+      return null;
+    }
+
+    let score = 0;
+    if (word) {
+      for (const letter of word.toUpperCase()) {
+        console.log(letterPool[letter][1]);
+        score += letterPool[letter][1];
+        console.log(`${letter}, ${score}`);
+      }
+      if (word.length >= 7) {
+        score += 8;
+      }
+    }
+    return score;
+  };
+
   highestScoreFrom = (words) => {
-    let result = {word: "", score: 0};
-  
+    let result = { word: "", score: 0 };
+
     for (let word of words) {
-      let word_score = scoreWord(word);
-      
-      if (result.score < word_score){
+      let word_score = this.scoreWord(word);
+
+      if (result.score < word_score) {
         result.word = word;
         result.score = word_score;
       } else if (result.score == word_score) {
         let word_length = word.length;
         let result_length = result.word.length;
-        
+
         if (result_length === 10) {
           result = result;
         } else if (word_length === 10) {
           result.word = word;
-        } else if (word_length < result_length){
+        } else if (word_length < result_length) {
           result.word = word;
         }
       }
     }
     return result;
-  }
-
+  };
 }
 
 export default Adagrams;
 
-
-
-
-
 // export const drawLetters = () => {
 //   let inHand = [];
 //   let allLetters_copy = [...allLetters];
-  
+
 //   for (let i=0; i<10; i++) {
 //     let allLetters_length = allLetters_copy.length;
 //     let randomIndex = Math.floor(Math.random()*allLetters_length);
@@ -125,7 +145,7 @@ export default Adagrams;
 //   if (input_word.length >= 7){
 //     total += 8;
 //   }
-  
+
 //   for (let letter of input_word) {
 //     total += LETTER_VALUE[letter];
 //   };
@@ -137,14 +157,14 @@ export default Adagrams;
 
 //   for (let word of words) {
 //     let word_score = scoreWord(word);
-    
+
 //     if (result.score < word_score){
 //       result.word = word;
 //       result.score = word_score;
 //     } else if (result.score == word_score) {
 //       let word_length = word.length;
 //       let result_length = result.word.length;
-      
+
 //       if (result_length === 10) {
 //         result = result;
 //       } else if (word_length === 10) {
