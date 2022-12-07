@@ -60,22 +60,28 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   const wordObjs = words.map((word, index) => ({
-    index, word, length: word.length, score: scoreWord(word),
+    index, word, 
+    length: word.length, 
+    score: scoreWord(word),
   }));
 
-  const filteredScores = words.filter((word) => scoreWord(word) === Math.max.apply(Math, wordObjs.map((word) => word.score)));
+  const scoreFilteredWords = words.filter(
+    (word) => scoreWord(word) === Math.max.apply(Math, wordObjs.map((word) => word.score)));
 
-  if (filteredScores.length === 1) {
-    const singleHighScore = wordObjs.find((item) => item.word === filteredScores[0]);
+  if (scoreFilteredWords.length === 1) {
+    const singleHighScore = wordObjs.find((word) => word.word === scoreFilteredWords[0]);
     return { word: singleHighScore.word, score: singleHighScore.score }
   }
 
-  const tenLetterWords = wordObjs.filter((item) => item.length === 10);
+  const tenLetterWords = wordObjs.filter((word) => word.length === 10);
+
   if (!!tenLetterWords.length > 0) {
-    const smallestIndex = tenLetterWords.find((item) => item.index === Math.min(item.index));
+    const smallestIndex = tenLetterWords.find((word) => word.index === Math.min(word.index));
     return { word: smallestIndex.word, score: smallestIndex.score };
   }
 
-  const smallestWord = wordObjs.find((item) => item.length === (Math.min(...filteredScores.map((word) => word.length))));
+  const smallestWord = wordObjs.find(
+    (word) => word.length === (Math.min(...scoreFilteredWords.map((word) => word.length))));
+    
   return { word: smallestWord.word, score: smallestWord.score };
 };
