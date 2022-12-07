@@ -56,8 +56,8 @@ const SCORECHART = {
   Z: 10,
 };
 
+// Return an array of ten strings
 export const drawLetters = () => {
-  // Implement this method for wave 1
   const letterBank = [];
   const handOfLetters = [];
 
@@ -88,8 +88,10 @@ const countLettersInHand = (lettersInHand) => {
   return lettersInHandCount;
 };
 
+// Returns true if every letter in input is available (in the right quantities) in lettersInHand
+// Returns false if there is a letter in input that is not present in lettersInHand or has too much
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  // Call countLettersInHand helper function to get an object that includes the letters and # of times the letter is in the hand
   const lettersInHandCount = countLettersInHand(lettersInHand);
 
   for (const letter of input) {
@@ -102,8 +104,8 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   return true;
 };
 
+// Returns score of a given word
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
   const wordInUpper = word.toUpperCase();
   let score = 0;
 
@@ -118,8 +120,8 @@ export const scoreWord = (word) => {
   return score;
 };
 
+//Returns winning word
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
   const wordScores = {};
   let maxScore = 0;
   const maxScoreWordsList = [];
