@@ -56,22 +56,11 @@ export const scoreChart = {
   Z: 10,
 };
 
-export const createLetterPoolArr = (letterPool) => {
-  let letterPoolArr = [];
-  for (const letter in letterPool) {
-    for (let i = 0; i < letterPool[letter]; i++) {
-      letterPoolArr.push(letter);
-    }
-  }
-  return letterPoolArr;
-};
-
 export const drawLetters = () => {
-  const letterPoolArr = createLetterPoolArr(letterPool);
   let hand = [];
+  let keysArr = Object.keys(letterPool);
   while (hand.length < 10) {
-    let randomLetter =
-      letterPoolArr[Math.floor(Math.random() * letterPoolArr.length)];
+    let randomLetter = keysArr[Math.floor(Math.random() * 26)];
     let count = hand.filter((x) => x === randomLetter).length;
     if (count < letterPool[randomLetter]) {
       hand.push(randomLetter);
