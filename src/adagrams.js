@@ -61,7 +61,7 @@ export const drawLetters = () => {
   let letters = [];
   let letterFreq = {};
   while (letters.length < 10) {
-    const letter = arrayLetter[Math.floor(Math.random() * 26)];
+    const letter = arrayLetter[Math.floor(Math.random() * arrayLetter.length)];
     // console.log(letter);
     if (letter in letterFreq) {
       letterFreq[letter] += 1;
