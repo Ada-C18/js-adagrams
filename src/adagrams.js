@@ -103,11 +103,8 @@ export const scoreWord = (word) => {
   return score;
 };
 
-export const highestScoreFrom = (words) => {
-  //wave 4
-  let winner = {};
-
-  //create an object with scores as keys and words as arrays of words
+//helper function to create an object with scores as keys and words as arrays of words
+const createScoreTable = (words) => {
   let scoreTable = {};
   for (const word of words) {
     let score = scoreWord(word);
@@ -117,6 +114,14 @@ export const highestScoreFrom = (words) => {
       scoreTable[score] = [word];
     }
   }
+  return scoreTable;
+};
+
+export const highestScoreFrom = (words) => {
+  //wave 4
+  let winner = {};
+
+  const scoreTable = createScoreTable(words);
 
   let maxScore = Math.max.apply(null, Object.keys(scoreTable));
 
