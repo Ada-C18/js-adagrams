@@ -119,7 +119,31 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  const winningWord = {
+    word: '',
+    score: 0
+  };
+
+  for (const word of words) {
+    let currentScore = scoreWord(word)
+    if (currentScore > winningWord['score']) {
+      winningWord['word'] = word;
+      winningWord['score'] = currentScore;
+    } else if (currentScore === winningWord['score']) {
+      if (word.length === winningWord['word'].length || winningWord['word'].length === 10) {
+        continue;
+      } else if (word.length === 10) {
+        winningWord['word'] = word;
+        winningWord['score'] = currentScore;
+      } else if (word.length < winningWord['word'].length) {
+        winningWord['word'] = word;
+        winningWord['score'] = currentScore;
+      }
+    }
+  }
+
+  return winningWord;
+
 };
 
 const countFrequency = (input, target) => {
