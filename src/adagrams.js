@@ -107,21 +107,57 @@ const wordlist = []
   }
   let score = 0
 
-  if (wordlist.length < 7){
-    score = 0;
-    }
-    else {
+  if (wordlist.length >= 7 && wordlist.length < 11){
       score +=8
     }
 
   for (let i = 0; i < wordlist.length; i++){
-    if (SCORECHART.hasOwnProperty(wordlist[i])){
       score += SCORECHART[wordlist[i]];
-    }
+    
   }
   return score 
   };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  
+  
+  const scoretList = []
+
+  for (let i=0; i < words.length; i++){
+    let score = scoreWord(words[i])
+    scoretList.push({word:words[i], score: score, idx:i})
+  }
+  scoretList.sort(compare)
+  console.log(scoretList)
+  delete scoretList[scoretList.length-1].idx
+  return scoretList[scoretList.length-1]
+
 };
+
+// Helper Function to compare two words
+
+const compare = (word1,word2) => {
+  if (word1.score > word2.score){
+    return 1
+  }
+  if (word1.score < word2.score ){
+    return -1
+  }
+  if (word1.word.length === word2.word.length ){
+    if (word1.idx < word2.idx){
+    return 1
+    }
+    else return -1
+  }
+  if(word1.word.length === 10){
+    return 1
+  }
+  if (word2.word.length === 10){
+    return -1
+  }
+  if (word1.word.length < word2.word.length){
+    return 1
+  }
+return -1
+
+}
