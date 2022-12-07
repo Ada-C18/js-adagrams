@@ -53,7 +53,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
       isAnagram = false;
     } 
     else {
-      copyLetterBank.splice(letter, 1)
+      copyLetterBank.splice(letter, 1);
     }
   }
   return isAnagram;
@@ -63,53 +63,79 @@ export const scoreWord = (word) => {
   // Implement this method for wave 3
   let score = 0;
   const scoreChart = {
-    1: [A, E, I, O, U, L, N, R, S, T],
-    2: [D, G],
-    3: [B, C, M, P],
-    4: [F, H, V, W, Y],
-    5: [K],
-    8: [J, X],
-    10: [Q, Z]
+    1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
+    2: ['D', 'G'],
+    3: ['B', 'C', 'M', 'P'],
+    4: ['F', 'H', 'V', 'W', 'Y'],
+    5: ['K'],
+    8: ['J', 'X'],
+    10: ['Q', 'Z']
   };
 
-  for(const letter of word){
-    for(const key of scoreChart){
-      if (scoreChart.includes(letter)){
-        score += key;
-      }
+  for (let letter of word) {
+    letter = letter.toUpperCase()
+    for (const [key, value] of Object.entries(scoreChart)) {
+        if (value.includes(letter)) {
+            score += parseInt(key);
+        }
     }
-  } if (word.length >= 7){
+
+} if (word.length >= 7) {
     score += 8;
-  } 
-  return score;
+}
+return score;
 };
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
-  // let wordScoreDict = {}
-  // let maxScoresDict = {}
+  let wordScoreDict = {}
+  let maxScoresDict = {}
 
-  // for (const word of words){
-  //   wordScoreDict[word] = scoreWord(word)
-  // }
-  // let highestScore = Math.max(wordScoreDict.values());
+  for (const word of words){
+    wordScoreDict[word] = scoreWord(word)
+  }
+    
+  let wordScoreList = Object.values(wordScoreDict);
+  let max = wordScoreList[0];
 
-  // for (const word, score of wordScoresDict.items()){
-  //   if (score === highestScore){
-  //     maxScoresDict[word] = score;
-  //   }
-  // }
+  for (let i = 1; i < wordScoreList.length; i++) {
+      max = Math.max(max, wordScoreList[i]);
+  }  
+    
+  for (const [key,value] of Object.entries(wordScoreDict)){
+      if (value === max) {
+        maxScoresDict[key] = value;
+      } 
+  }
+    
 
-  // if (maxScoresDict.length <= 1) {
-  //   for (key,value of maxScoresDict.items()) {
-  //     return key, value;
-  //   }
-  // }
+  if (Object.values(maxScoresDict).length <= 1) {
+    for (const [key,value] of Object.entries(maxScoresDict)) {
+      return {word: key, score: value};
+    }
+  }
+
+  for (const [key,value] of Object.entries(maxScoresDict)) {
+    if (key.length === 10) {
+      return {word: key, score: value};
+    }
+  }   
   
-  // for (key, value of maxScoresDict.items()) {
-  //   if (key.length === 10) {
-  //     return key, value;
-  //   }
-  // } 
+  let keyLength = []
+    
+  for (const key of Object.keys(maxScoresDict)) {
+        keyLength.push(key.length)
+  }
+
+  let min = keyLength[0]
   
+  for (let i = 1; i < keyLength.length; i++) {
+      min = Math.min(min, keyLength[i]);
+  }
+
+  for (const [key,value] of Object.entries(maxScoresDict)) {
+    if (key.length === min) {
+      return {word: key, score: value};
+    }
+  }
 };
