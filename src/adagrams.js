@@ -123,7 +123,7 @@ export const highestScoreFrom = (words) => {
 
   for (let Index = 0; Index < scoreInfo.length; Index++) {
     if (Index === 0) {
-      updatingHashTable(
+      highestScoreInfo = updatingHashTable(
         scoreInfo[Index]["score"],
         scoreInfo[Index]["word"],
         highestScoreInfo
