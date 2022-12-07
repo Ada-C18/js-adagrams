@@ -56,24 +56,30 @@ const LETTER_SCORES = {
   Z: 10,
 };
 
-export const drawLetters = () => {
-  //wave 1
-  let letterArray = []; //make this a helper function??
+//helper function to create an array of letters according to LETTER_POOL distribution
+const createLetterPoolArray = () => {
+  let letterArray = [];
+
   for (const [key, value] of Object.entries(LETTER_POOL)) {
     for (let i = 0; i < value; i++) {
       letterArray.push(key);
     }
   }
+  return letterArray;
+};
 
-  let resultArray = [];
-  for (let i = 0; i < 10; i++) {
-    //refactor to avoid magic nums??
-    let index = Math.floor(Math.random() * 26);
-    resultArray.push(letterArray[index]);
-    letterArray.splice(index, 1);
+// wave 1 main function:
+export const drawLetters = () => {
+  let letterArray = createLetterPoolArray(LETTER_POOL);
+  const maxNumInHand = 10;
+  let hand = [];
+
+  for (let i = 0; i < maxNumInHand; i++) {
+    let randomIndex = Math.floor(Math.random() * letterArray.length);
+    hand.push(letterArray[randomIndex]);
+    letterArray.splice(randomIndex, 1);
   }
-
-  return resultArray;
+  return hand;
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
@@ -123,12 +129,12 @@ export const highestScoreFrom = (words) => {
   const maxScore = Math.max.apply(null, Object.keys(scoreTable));
   const maxScoreWords = scoreTable[maxScore];
   let winner = {
-    score: maxScore
+    score: maxScore,
   };
 
   for (let word of maxScoreWords) {
     if (word.length === 10) {
-      winner['word'] = word;
+      winner["word"] = word;
       break;
     } else {
       const shortestLength = Math.min.apply(
@@ -138,7 +144,7 @@ export const highestScoreFrom = (words) => {
       const shortestWord = maxScoreWords.filter(
         (word) => word.length === shortestLength
       );
-      winner['word'] = shortestWord[0];
+      winner["word"] = shortestWord[0];
     }
   }
   return winner;
