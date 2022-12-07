@@ -3,9 +3,9 @@
 
 
 
-export const drawLetters = () => {
+export const drawLetters = () =>{
   // Implement this method for wave 1
-  const LETTER_POOL={
+  let LETTER_POOL={
     'A': 9,
     'B': 2, 
     'C': 2, 
@@ -32,23 +32,25 @@ export const drawLetters = () => {
     'X': 1, 
     'Y': 2, 
     'Z': 1
-  }
-  let remaining_letters_pool=[];
+  };
+  let remainingletterspool=[];
   //create a varibale (let perhaps)parse out the letters
   let letterChoice=Object.assign({},LETTER_POOL)
-  while (remaining_letters_pool.length<10){
+  while (remainingletterspool.length < 10){
     let randoNum=(Math.floor(Math.random() * 26))
     //chooses a random number between 0-26
     let selectKey=Object.keys(letterChoice)[randoNum]
     //accesses the key and value associated 
     if (letterChoice[selectKey]!==0){
-      remaining_letters_pool.push(selectKey);
+      remainingletterspool.push(selectKey);
       // adds the key to the empty list
-      letterChoice[selectKey]=-1;
-      // if letter exists pops the key
-  return remaining_letters_pool;
-    }
-  }
+      letterChoice[selectKey]-=1;
+    } 
+    }// if letter exists pops the key
+    return remainingletterspool;
+    
+  
+
 }
 
 
@@ -57,19 +59,61 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   let word=input.toUpperCase()
   let trueInput=true;
   for (const letter of word){
-    if(lettersInHand.includes(letter)){
-      trueInput=false;}
-    
+    if (!lettersInHand.includes(letter)){
+      trueInput=false;
+    }
     lettersInHand.splice(0,1,letter)
-    return trueInput;
   }
-}
+    return trueInput;
+  };
 
-
+  let LETTER_POOLZ=
+    {'A': 1, 
+    'B': 3, 
+    'C': 3, 
+    'D': 2, 
+    'E': 1, 
+    'F': 4, 
+    'G': 2, 
+    'H': 4, 
+    'I': 1, 
+    'J': 8, 
+    'K': 5, 
+    'L': 1, 
+    'M': 3, 
+    'N': 1, 
+    'O': 1, 
+    'P': 3, 
+    'Q': 10, 
+    'R': 1, 
+    'S': 1, 
+    'T': 1, 
+    'U': 1, 
+    'V': 4, 
+    'W': 4, 
+    'X': 8, 
+    'Y': 4, 
+    'Z': 10,}
+  
 export const scoreWord = (word) => {
   // Implement this method for wave 3
+  let score=0
+  for (let letter of word.toUpperCase()){
+    score+=LETTER_POOLZ[letter];
+    if (word.length > 6){
+    score+=8;
+    }
+  }
+  return score;
 };
-
+//total_sum=0
+//#Test case sensitivity
+///cap_word=word.upper()
+//if len(word) > 6:
+    //total_sum=8
+//for letter in cap_word:
+    ///total_sum+=letter_value[letter]
+//return total_sum
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
 };
