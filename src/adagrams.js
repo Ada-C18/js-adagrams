@@ -36,14 +36,32 @@ export const drawLetters = () => {
     if (letterCount <letterBank[randomLetter]) {
       letterArray.push(randomLetter);
     }
-    // return letterArray;
   }
   return letterArray;
 };
 
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  // function findCount(input) {
+    const count = {};
+    for (const element of input) {
+      if (count[element]) {
+        count[element] += 1;
+      } else {
+        count[element] = 1;
+      }
+  }
+ // iterate through input and check if each letter is in letters in hand
+ // find the count of each letter in letters in Hand
+  for (const letter of input) {
+    let handLetterCount = lettersInHand.filter((x) => x === letter).length;
+    // let inputLetterCount = input.match(/element/g || []).length;
+    if (lettersInHand.includes(letter) === false || handLetterCount < count[letter]) {
+      // letter in lettersInHand === false 
+      return false;
+    }
+  }
+  return true;
 };
 
 export const scoreWord = (word) => {
