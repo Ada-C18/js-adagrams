@@ -69,10 +69,64 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   return submittedLetter;
 };
 
-// export const scoreWord = (word) => {
-//   // Implement this method for wave 3
-// };
+export const scoreWord = (word) => {
+  // Implement this method for wave 3
+  const letterValues = {
+    A: 1,
+    B: 3,
+    C: 3,
+    D: 2,
+    E: 1,
+    F: 4,
+    G: 2,
+    H: 4,
+    I: 1,
+    J: 8,
+    K: 5,
+    L: 1,
+    M: 3,
+    N: 1,
+    O: 1,
+    P: 3,
+    Q: 10,
+    R: 1,
+    S: 1,
+    T: 1,
+    U: 1,
+    V: 4,
+    W: 4,
+    X: 8,
+    Y: 4,
+    Z: 10,
+  };
 
-// export const highestScoreFrom = (words) => {
-//   // Implement this method for wave 4
-// };
+  const capitalizedWord = word.toUpperCase();
+
+  let score = 0;
+
+  for (let letter = 0; letter < capitalizedWord.length; letter++) {
+    let wordValue = capitalizedWord[letter];
+    score += letterValues[wordValue];
+  }
+  if (capitalizedWord.length >= 7) {
+    score += 8;
+  }
+  return score;
+};
+
+export const highestScoreFrom = (words) => {
+  // Implement this method for wave 4
+  // initiate emtpy string
+  let highestWord = "";
+  // initiate score at 0
+  let highestScore = 0;
+
+  // iterate through the array of words
+  // define a new variable to keep track of score of words using callback func
+  // if the score of the first element in array is less than score of words
+  // highest score becomes score of words
+  // word becomes highest word
+  // else if highest score is same as score of word and length of word is 10 and highest word is not 10
+  // word becomes that highest word
+  // return word and score in an object style
+};
