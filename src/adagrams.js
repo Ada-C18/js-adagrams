@@ -123,15 +123,19 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+  //create variables that will hold highest score and highest word
   let highestWordScore = 0;
   let highestWord;
 
   for (let word of words) {
     let score = scoreWord(word);
+    //check if the score of the word is greater than the current highest score
     if (score > highestWordScore) {
       highestWord = word;
       highestWordScore = score;
+    //if equal to current highest score, will go into tie breaking logic
     } else if (score === highestWordScore) {
+      // if equal 10 or shorter than length of the current highest word while the lenght of the current highest word is not 10, then make it new highest score word
       if (
         (word.length === 10 || word.length < highestWord.length) &&
         highestWord.length !== 10
