@@ -27,10 +27,13 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^24.8.0",
     "babel-plugin-module-resolver": "^3.2.0",
+    "eslint": "^8.28.0",
+    "eslint-plugin-jest": "^27.1.6",
     "jest": "^24.8.0",
     "regenerator-runtime": "^0.12.1"
   },
   "dependencies": {
+    "axios": "^1.2.1",
     "core-js": "^3.8.0",
     "vorpal": "^1.12.0"
   }
