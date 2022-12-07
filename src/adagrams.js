@@ -186,17 +186,20 @@ export const scoreWord = (word) => {
   }
 
   return score;
-  //     char = char.upper()
-  //     #look for the character in the keys of letter_scores.
-  //     #add the associated value to score
-  //     score += letter_scores[char]
-  //     #print(char, word, score)
-  // if len(word) >= 7:
-  //     score += 8
-
-  // return score
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  /* this should take as input a list of all the words
+  then return a hash that has the best word and the score of that best word
+  */
+  var wordScoresList = [];
+  for (const word of words) {
+    wordScoresList.push({ word: word, score: scoreWord(word) });
+  }
+  //wordScoresList is now a list of objects that have the word and the score of the word
+  //now i need to find the word with the max score.
+  var sortedWordScoresList = wordScoresList.sort((a, b) => b.score - a.score);
+
+  var maxWordScore = sortedWordScoresList[0];
+  return maxWordScore;
 };
