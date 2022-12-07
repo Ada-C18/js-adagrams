@@ -65,20 +65,14 @@ class Adagrams {
     for (let i = 1; i < words.length; i++) {
       const currWord = words[i];
       const currWordScore = this.scoreWord(currWord);
-      if (currWordScore > bestScore) {
-        bestScore = currWordScore;
-        bestWord = currWord;
-      } else if (
-        currWordScore === bestScore &&
-        currWord.length === 10 &&
-        bestWord.length !== 10
-      ) {
-        bestScore = currWordScore;
-        bestWord = currWord;
-      } else if (
-        currWordScore === bestScore &&
-        currWord.length < bestWord.length &&
-        bestWord.length !== 10
+      if (
+        currWordScore > bestScore ||
+        (currWordScore === bestScore &&
+          currWord.length === 10 &&
+          bestWord.length !== 10) ||
+        (currWordScore === bestScore &&
+          currWord.length < bestWord.length &&
+          bestWord.length !== 10)
       ) {
         bestScore = currWordScore;
         bestWord = currWord;
