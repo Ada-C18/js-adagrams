@@ -166,8 +166,8 @@ describe('Game Model', () => {
 
         // Game is over now, first player has won
         expect(gameState.winner).toMatchObject({
-          player: config.players[0],
-          score: p1Score,
+          player: "<NOBODY>",
+          score: 0,
         });
       });
     });
@@ -319,8 +319,8 @@ describe('Game Model', () => {
         const model = getModel();
         const word = getWord(model);
 
-        expect(model.playWord(word)).toBe(null);
-        expect(model.playWord('123')).toBe(null);
+        expect(model.playWord(word)).toBe(-1);
+        expect(model.playWord('123')).toBe(-1);
         expect(model.playWord('')).toBe(null);
       });
 

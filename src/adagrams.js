@@ -15,17 +15,29 @@ const LETTER_VALUE = {
 };
 
 let allLetters = [];
-const atoz = "abcdefghijklmnopqrstuvwxyz".toUpperCase()
-for (let letter of atoz) {
-  for (let i=0; i<LETTER_POOL[letter]; i++) {
-    allLetters.push(letter);
-  }
+for (let letter in LETTER_POOL) {
+  const amount = LETTER_POOL[letter];
+  const letterArray = new Array(amount).fill(letter);
+  allLetters = allLetters.concat(letterArray)
 };
 
 class Adagrams {
   // constructor() {}
 
   drawLetters = () => {
+    let inHand = [];
+    let allLetters_copy = [...allLetters];
+    
+    for (let i=0; i<10; i++) {
+      let allLetters_length = allLetters_copy.length;
+      let randomIndex = Math.floor(Math.random()*allLetters_length);
+      inHand.push(allLetters_copy[randomIndex]);
+      allLetters_copy.splice(randomIndex,1);
+    }
+    return inHand;
+  }
+
+    drawLetters = () => {
     let inHand = [];
     let allLetters_copy = [...allLetters];
     
@@ -66,7 +78,7 @@ class Adagrams {
     let result = {word: "", score: 0};
   
     for (let word of words) {
-      let word_score = scoreWord(word);
+      let word_score = this.scoreWord(word);
       
       if (result.score < word_score){
         result.word = word;
