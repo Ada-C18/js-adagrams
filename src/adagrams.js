@@ -193,14 +193,14 @@ export const highestScoreFrom = (words) => {
     }
   }
 
-  let winnignWord = tied[0];
+  let winningWord = tied[0];
 
   for (let word of tied) {
-    if (word.length === 10 && winnignWord.length !== 10) {
-      winnignWord = word;
-    } else if (word.length < winnignWord.length && winnignWord.length !== 10) {
-      winnignWord = word;
+    if (word.length === 10 && winningWord.length !== 10) {
+      winningWord = word;
+    } else if (word.length < winningWord.length && winningWord.length !== 10) {
+      winningWord = word;
     }
   }
-  return { score: score, word: winnignWord };
+  return { score: score, word: winningWord };
 };
