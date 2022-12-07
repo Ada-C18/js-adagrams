@@ -51,14 +51,21 @@ export const drawLetters = () => {
 // Test Wave 02
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  for (let letter in input) {
-    if (letter in lettersInHand) {
-      return true;
+  let word = input.toUpperCase();
+  let copy = lettersInHand.slice();
+  let result = true;
+
+  for (let letter of word) {
+    if (copy.includes(letter)) {
+      let index = copy.indexOf(letter);
+      if (index > -1) {
+        copy.splice(index, 1);
+      }
+    } else {
+      result = false;
     }
-    else {
-      return false;
-    };
   }
+  return result;
 };
 
 
@@ -99,13 +106,63 @@ export const scoreWord = (word) => {
     let letterValue = scoreChart[capLetter];
     totalScore += letterValue;
   }
-  if (word.length > 7) {
+  if (word.length > 6) {
     totalScore += 8;
   }
   return totalScore;
 };
 
 
+// highestScoreForm takes in an array of words. 
 export const highestScoreFrom = (words) => {
+  
 
-};
+//1. Converts words into scores using scoreWord() and stores scores into scoreList.
+let scoreList = [];
+  for (const word of words) {
+    scoreList.push(scoreWord(word));
+  };
+
+// 2. Finds the maximum score from scoreList.
+  const max = scoreList.reduce((a, b) => Math.max(a,b), -Infinity);
+  let index = scoreList.indexOf(max);
+  let maxWord = words[index];
+  
+// 3. Handle any tying words according to the tie-breaking rules.
+let tiedWords = []
+let maxScore = 0
+for (const word of words) {
+  let currentScore = scoreWord(word);
+  if (currentScore === max) {
+    tiedWords.push(word)
+  };
+  };
+
+if (tiedWords.length === 1) {
+  let winningWord = {
+    "score": max,
+    "word" : maxWord
+  };
+  return winningWord;
+} else {
+    for (const word of tiedWords) {
+      if (word.length === 10) {
+        let winningWord = {
+          "score": max,
+          "word": word
+        };
+        return winningWord
+      } else {
+        let minWord = tiedWords.reduce((a, b) => a.length <= b.length ? a : b)
+        let winningWord = {
+          "score": max,
+          "word": minWord
+        }
+        return winningWord
+        };
+      };
+      }  
+    };
+   
+
+
