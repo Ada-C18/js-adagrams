@@ -119,54 +119,51 @@ export const scoreWord = (word) => {
 //wave 4
 export const highestScoreFrom = (words) => {
   let wordArr = [];
-  let highScore = { word: '', score: 0 };
+  let highScoreObj = { word: '', score: 0 };
   let tieArr = [];
-  let low = { word: 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz', score: 0 };
+  let lowestLetterObj = { word: 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz', score: 0 };
 
   //Make array with {word:'str',score: NUMBER} objects
   for (const word of words) {
     //use helper function above to score and add to array
     const wordObj = { word: word, score: scoreWord(word) };
     wordArr.push(wordObj);
-    // if current object's score is higher than the highscore object <---reassign to current object
-    if (wordObj.score > highScore.score) {
-      highScore = wordObj;
+    // if current object's score is higher than the highScoreObj object <---reassign to current object
+    if (wordObj.score > highScoreObj.score) {
+      highScoreObj = wordObj;
     }
-    // if current objects's string length is lower than low <---reassign to current object
-    // if (wordObj.word.length < highScore && wordObj.word.score === highScore){
-    //   low = wordObj
-    // }
+
   }
 
-  //use highscore and low in a compound conditional that checks for high score
-  //lowest letter num && any that equal it equality && obj.word.length === 10, then append them
+  //use highScoreObj and lowestLetterObj in a compound conditional that checks for high score
+  //lowestLetterObjest letter num && any that equal it equality && obj.word.length === 10, then append them
   for (const obj of wordArr) {
-    if (obj.score === highScore.score && obj !== highScore) {
+    if (obj.score === highScoreObj.score && obj !== highScoreObj) {
       tieArr.push(obj);
     }
-    tieArr.push(highScore);
+    tieArr.push(highScoreObj);
   }
   //TIE LOGIC
   if (tieArr.length > 1) {
     for (const obj of tieArr) {
       if (obj.word.length === 10) {
-        return (highScore = obj);
+        return (highScoreObj = obj);
       }
 
-      if (obj.word.length === low.word.length) {
-        highScore = low;
+      if (obj.word.length === lowestLetterObj.word.length) {
+        highScoreObj = lowestLetterObj;
       }
 
-      if (obj.word.length < low.word.length) {
-        low = obj;
-        highScore = low;
+      if (obj.word.length < lowestLetterObj.word.length) {
+        lowestLetterObj = obj;
+        highScoreObj = lowestLetterObj;
       }
     }
   }
-  return highScore;
+  return highScoreObj;
 };
 
-//compare scores [{word:score},{word:score},{word:score}] by iterating 'let highScore=0' highScore<i highScore===i
+//compare scores [{word:score},{word:score},{word:score}] by iterating 'let highScoreObj={word:'',score: 0} highScoreObj<i.score highScoreObj===i.score
 //return obj{word:score}
 //tie: word with fewest letters word.length < word
 //tie: unless word.length === 10;
