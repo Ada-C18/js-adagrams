@@ -222,5 +222,15 @@ export const highestScoreFrom = (words) => {
   );
 
   //now return the shortest one (for now.  we'll add more tie breaking in a second.)
-  return sortedPotentialWinners[0];
+  //return sortedPotentialWinners[-1];
+  const minWord = sortedPotentialWinners[sortedPotentialWinners.length - 1];
+  const minWordLength = minWord.word.length;
+
+  for (const wordScore of sortedPotentialWinners) {
+    if (wordScore.word.length === 10) {
+      return wordScore;
+    } else if (wordScore.word.length === minWordLength) {
+      return wordScore;
+    }
+  }
 };
