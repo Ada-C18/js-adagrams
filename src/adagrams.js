@@ -209,7 +209,7 @@ export const highestScoreFrom = (words) => {
   var potentialWinners = [];
   for (const wordScore of wordScoresList) {
     if (wordScore.score === maxScore) {
-      wordScoresList.push(wordScore);
+      potentialWinners.push(wordScore);
     }
   }
   if (potentialWinners.length === 1) {
