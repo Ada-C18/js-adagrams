@@ -1,11 +1,4 @@
 
-
-
-export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
-};
-
-
 let scoreChart = {
   'A': 1, 
   'B': 3, 
@@ -33,7 +26,7 @@ let scoreChart = {
   'X': 8, 
   'Y': 4, 
   'Z': 10
-}
+};
 
 
 let LETTER_POOL = {
@@ -65,14 +58,14 @@ let LETTER_POOL = {
   'Z': 1
 };
 
- 
 
 
+function minLenString(arr) {
+  return arr.reduce((a, b) => a.length <= b.length ? a : b);
+}
 
-
-
-export const drawLetters = function() {
-  let pool = {...LETTER_POOL} 
+export const drawLetters = () => {
+  let pool = {...LETTER_POOL};
   let hand = [];
   let choices = [];
 
@@ -82,25 +75,19 @@ export const drawLetters = function() {
     }
   }
   while(hand.length < 10) {
-     
-
-      let RandomLetter = choices[Math.floor(Math.random() * choices.length)] //selects random, not sure if i can do this with JSON or array
+      let RandomLetter = choices[Math.floor(Math.random() * choices.length)] 
       hand.push(RandomLetter);
       const indexOfLetter = choices.indexOf(RandomLetter);
       choices.splice(indexOfLetter, 1);
-
-
-      
     } return hand;
 }
 
 
-
-export const usesAvailableLetters = function(input, lettersInHand) {
+export const usesAvailableLetters = (input, lettersInHand) => {
   for(let letter of input.toUpperCase()) {
     if(lettersInHand.includes(letter)) {
      const indexOfLetter = lettersInHand.indexOf(letter);
-     lettersInHand.splice(indexOfLetter,1)
+     lettersInHand.splice(indexOfLetter,1);
     } else {
       return false;
     }  
@@ -108,28 +95,65 @@ export const usesAvailableLetters = function(input, lettersInHand) {
   return true;
 }
 
-export const scoreWord = function(word) {
-
-    
+export const scoreWord = (word) => { 
     let score = 0;
     for(let letter of word.toUpperCase()) {
       if (scoreChart.hasOwnProperty(letter)) {
-        // if (letter in scoreChart) {
-        score += scoreChart[letter] ;//should add value to score
-
-        
+        score += scoreChart[letter];       
     }
   }
     if (word.length <= 10 && word.length >= 7 ) {
       score += 8;
     }
-    return score
-    
-
-
+    return score;
 }
 
+export const highestScoreFrom = (words) => {
+  let scores = [];
+  let scoreObject = {};
+  for(let eachWord of words) {
+    const score = scoreWord(eachWord); 
+    scores.push(score);
+    scoreObject[eachWord] = score;
+  }
+
+  let arr = Object.keys(scoreObject).map(function (key) { return scoreObject[key]; });
+  let maxScore = Math.max.apply( null, arr ); 
+ 
+  let maxKeys = []
+  for (const [key, value] of Object.entries(scoreObject)) {
+    if(value === maxScore){     
+      maxKeys.push(key);
+    }
+  }
+ 
+  let bestWord = minLenString(maxKeys);
+
+  let equalPointsAndLetters = [];
+  for(let words_max_points of maxKeys) {
+    if(words_max_points.length === 10) {
+      bestWord = words_max_points
+      equalPointsAndLetters.push(bestWord)
+      bestWord = equalPointsAndLetters[0]
+    }   
+  }
+  return {"word": bestWord, "score":maxScore};
+  }
+
+
+  
+
+
+ 
+
+
+
+
+
+
+
+
+
     
 
     
-      
