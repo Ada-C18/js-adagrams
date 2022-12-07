@@ -36,8 +36,8 @@ const scoreChart = {
 }
 
 export const drawLetters = () => {
-  let letterPool = letterDistribution;
-  let letterBank = [];
+  const letterPool = letterDistribution;
+  const letterBank = [];
   
   for (let i=0; i<10; i++) {
     let randomIndex = Math.floor(Math.random() * letterPool.length);
@@ -49,7 +49,7 @@ export const drawLetters = () => {
   };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  let letterBank = lettersInHand.slice();
+  const letterBank = lettersInHand.slice();
   for (let letter of input) {
     if (letterBank.includes(letter)) {
       letterBank.splice(letter, 1);
@@ -88,7 +88,7 @@ export const highestScoreFrom = (words) => {
 
   const scoreIndex = wordScores.indexOf(highScore);
   const winningWord = words[scoreIndex];
-  let winningPair = {'word': winningWord, 'score': highScore};
+  const winningPair = {'word': winningWord, 'score': highScore};
   
   if (challenger) {
     const champion = tiebreaker(challenger, winningPair);
