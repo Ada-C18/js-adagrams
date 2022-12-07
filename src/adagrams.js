@@ -120,7 +120,6 @@ const wordlist = []
 
 export const highestScoreFrom = (words) => {
   
-  
   const scoretList = []
 
   for (let i=0; i < words.length; i++){
@@ -128,7 +127,7 @@ export const highestScoreFrom = (words) => {
     scoretList.push({word:words[i], score: score, idx:i})
   }
   scoretList.sort(compare)
-  console.log(scoretList)
+  
   delete scoretList[scoretList.length-1].idx
   return scoretList[scoretList.length-1]
 
@@ -159,5 +158,4 @@ const compare = (word1,word2) => {
     return 1
   }
 return -1
-
-}
+};
