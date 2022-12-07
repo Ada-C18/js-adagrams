@@ -125,15 +125,23 @@ let scores = [];
 let score_dict = {};
 
 for (let word of words) {
-  let score = scoreWord(word); // trying to call in score word function but this is pythonic I think
+  const score = scoreWord(word); // trying to call in score word function but this is pythonic I think
   scores.push(score); // create a list of the scores
-  score_dict[word]
+  score_dict[word] = score;
 
 }
 
-let max_score = scores[0]; {
-  if (score > max_score);
-    max_score = score;
+const max_score = Math.max(...scores);
+
+for (let [word, score] of Object.entries(score_dict)) {
+  if (score === max_score) {
+    return {word,
+    score
+    }
+  }
 }
+// tie-breaking: could use empty list for equal word and score then use
+// if word score is tied return word.length > 10 
+// if word.length is equal then return [0] first index word within the new list
 
 };
