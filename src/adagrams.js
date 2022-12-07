@@ -54,6 +54,7 @@ export const drawLetters = () => {
       letters.push(key);
     }
   }
+
   const pickLetter = () => {
     let letter = letters[Math.floor(Math.random() * letters.length)];
     return letter;
@@ -79,15 +80,16 @@ export const usesAvailableLetters = (input, lettersInHand) => {
     letterPool[letter] = lettersInHand.filter(
       (character) => character === letter
     ).length;
-  }
+  };
   for (let letter of input) {
     const check = input.split(letter).length - 1;
-    if (!lettersInHand.includes(letter)) {
+    if (!lettersInHand.includes(letter) ||check > letterPool[letter]) {
       return false;
-    } else if (check > letterPool[letter]) {
-      return false;
+    // } else if (check > letterPool[letter]) {
+    //   return false;
+    // }
     }
-  }
+  };
   return true;
 };
 
