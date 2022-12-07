@@ -108,6 +108,37 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
-  
-};
+    // Implement this method for wave 4
+  // {word: "WWW", scoreWord: 12}
+  let scoreDict = {
+    word: words[0],
+    score: 0,
+  };
+  //for word in words list, call scoreWord function on each word
+  // assign word and score to word and score in scoreDict
+  for (let word of words) {
+    let score = scoreWord(word);
+    if (score > scoreDict.score) {
+      scoreDict.score = score;
+      scoreDict.word = word;
+      // check to see if the value === highScore if so its a tye
+    } else if (score === scoreDict.score) {
+      if (scoreDict.word.length === 10) {
+        continue;
+      } else if (word.length === 10) {
+        scoreDict.score = score;
+        scoreDict.word = word;
+      } else if (word.length < scoreDict.word.length) {
+        scoreDict.word = word;
+        scoreDict.score = score;
+      }
+    }
+  }
+  return scoreDict;
+} 
+  // in case of a tye
+    // winner is 1 with less letters
+    // check if length is < other player
+    // else if length == 10 === winner
+    // is total tye then return what is in the list first
+  // return winning object/dict
