@@ -119,40 +119,27 @@ const createScoreTable = (words) => {
 
 export const highestScoreFrom = (words) => {
   //wave 4
-  let winner = {};
-
   const scoreTable = createScoreTable(words);
+  const maxScore = Math.max.apply(null, Object.keys(scoreTable));
+  const maxScoreWords = scoreTable[maxScore];
+  let winner = {
+    score: maxScore
+  };
 
-  let maxScore = Math.max.apply(null, Object.keys(scoreTable));
-
-  if (scoreTable[maxScore].length === 1) {
-    winner = {
-      score: maxScore,
-      word: scoreTable[maxScore][0],
-    };
-  } else {
-    const tenLetters = scoreTable[maxScore].filter(
-      (word) => word.length === 10
-    );
-    if (tenLetters.length === 0) {
+  for (let word of maxScoreWords) {
+    if (word.length === 10) {
+      winner['word'] = word;
+      break;
+    } else {
       const shortestLength = Math.min.apply(
         null,
-        scoreTable[maxScore].map((el) => el.length)
+        maxScoreWords.map((el) => el.length)
       );
-      const shortestWord = scoreTable[maxScore].filter(
+      const shortestWord = maxScoreWords.filter(
         (word) => word.length === shortestLength
       );
-      winner = {
-        score: maxScore,
-        word: shortestWord[0],
-      };
-    } else {
-      winner = {
-        score: maxScore,
-        word: tenLetters[0],
-      };
+      winner['word'] = shortestWord[0];
     }
   }
-
   return winner;
 };
