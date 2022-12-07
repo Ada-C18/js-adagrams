@@ -75,7 +75,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   let handCount = substringCount(lettersInHand);
   let inputCount = substringCount(input.toUpperCase());
   for (const letter in inputCount) {
-    if (handCount[letter] || inputCount[letter] > handCount[letter]) {
+    if (!handCount[letter] || inputCount[letter] > handCount[letter]) {
       return false;
     }
   }
@@ -95,7 +95,22 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  let wordScores = {};
+  for (const word of words) {
+    wordScores[word] = scoreWord(word);
+  }
+  let highestScore = Math.max(...Object.values(wordScores));
+  // let highestScore = Object.values(wordScores).reduce(
+  //   (a, b) => Math.max(a, b),
+  //   -Infinity
+  // );
+  let tiedWords = [];
+  for (const [word, score] of Object.entries(wordScores)) {
+    if (score === highestScore) {
+      tiedWords.push(word);
+    }
+  }
+  return { word: breakTie(tiedWords), score: highestScore };
 };
 
 // HELPER FUNCTIONS
@@ -109,4 +124,25 @@ const substringCount = (string) => {
     }
   }
   return count;
+};
+
+const breakTie = (words) => {
+  let wordLengths = {};
+  for (const word of words) {
+    if (word.length === 10) {
+      wordLengths[word] = 0;
+    } else {
+      wordLengths[word] = word.length;
+    }
+  }
+  let minLength = Math.min(...Object.values(wordLengths));
+  // let minLength = Object.values(wordLengths).reduce(
+  //   (a, b) => Math.min(a, b),
+  //   -Infinity
+  // );
+  for (const word in wordLengths) {
+    if (wordLengths[word] === minLength) {
+      return word;
+    }
+  }
 };
