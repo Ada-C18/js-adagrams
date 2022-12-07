@@ -40,15 +40,15 @@ export const drawLetters = () => {
       allLetters += letter;
     }
   }
-  let hand = [];
+  let drawnletters = [];
   for (let i = 0; i < 10; i++) {
     let randomLetter = allLetters.charAt(
       Math.floor(Math.random() * allLetters.length)
     );
     allLetters = allLetters.replace(randomLetter, "");
-    hand.push(randomLetter);
+    drawnletters.push(randomLetter);
   }
-  return hand;
+  return drawnletters;
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
