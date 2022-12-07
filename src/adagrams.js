@@ -161,11 +161,40 @@ export const scoreWord = (word) => {
   letterScores["C"] = 3;
   letterScores["M"] = 3;
   letterScores["P"] = 3;
+  letterScores["F"] = 4;
+  letterScores["H"] = 4;
+  letterScores["V"] = 4;
+  letterScores["W"] = 4;
+  letterScores["Y"] = 4;
   letterScores["K"] = 5;
   letterScores["J"] = 8;
   letterScores["X"] = 8;
   letterScores["Q"] = 10;
   letterScores["Z"] = 10;
+
+  word = word.toUpperCase();
+
+  var score = 0;
+  for (const char of word) {
+    //look for char in keys of letterScores.
+    //add associated value to score
+    score += letterScores[char];
+  }
+
+  if (word.length >= 7) {
+    score += 8;
+  }
+
+  return score;
+  //     char = char.upper()
+  //     #look for the character in the keys of letter_scores.
+  //     #add the associated value to score
+  //     score += letter_scores[char]
+  //     #print(char, word, score)
+  // if len(word) >= 7:
+  //     score += 8
+
+  // return score
 };
 
 export const highestScoreFrom = (words) => {
