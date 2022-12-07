@@ -1,5 +1,32 @@
 export const drawLetters = () => {
-  const LETTER_POOL = {'A': 9, 'B': 2, 'C': 2,'D': 4, 'E': 12, 'F': 2, 'G': 3, 'H': 2, 'I': 9,'J': 1, 'K': 1, 'L': 4, 'M': 2, 'N': 6, 'O': 8, 'P': 2,  'Q': 1, 'R': 6, 'S': 4, 'T': 6, 'U': 4, 'V': 2, 'W': 2, 'X': 1, 'Y': 2, 'Z': 1};
+  const LETTER_POOL = {
+    'A': 9,
+    'B': 2, 
+    'C': 2,
+    'D': 4, 
+    'E': 12, 
+    'F': 2, 
+    'G': 3, 
+    'H': 2, 
+    'I': 9,
+    'J': 1, 
+    'K': 1, 
+    'L': 4, 
+    'M': 2, 
+    'N': 6, 
+    'O': 8, 
+    'P': 2,  
+    'Q': 1, 
+    'R': 6,
+    'S': 4, 
+    'T': 6, 
+    'U': 4, 
+    'V': 2, 
+    'W': 2, 
+    'X': 1, 
+    'Y': 2, 
+    'Z': 1
+  };
   
   let avaliableLetters = [];
   for (const [letter, freq] of Object.entries(LETTER_POOL)){
@@ -29,9 +56,14 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   return true; 
   } 
 
+function getKeyByValue (obj, val) {
+    return Object.entries(obj).find(i => i[1] === val);
+}
+
 export const scoreWord = (word) => {
   let score = 0
-  let pointValue = {
+  let upperWord = word.toUpperCase() 
+  let pointValues = {
           1:['A', 'E', 'I', 'O', 'U','L', 'N', 'R', 'S', 'T'], 
           2:['D', 'G'], 
           3:['B', 'C', 'M', 'P'], 
@@ -40,41 +72,40 @@ export const scoreWord = (word) => {
           8:['J', 'X'],
           10:['Q', 'Z'] 
           }
-  for (let letter of word) {
-    for (const [points, letters] of Object.entries(pointValue)) {
-      if (letters.includes(letter)) {
-      score += points
+  if (upperWord.length >= 7) { 
+            score += 8;
   }
-  }
-    if (word.length > 7) {
-    score += 8
-  }
-}
-  return score;
+  for (let char of upperWord) {
+    for (const letterVal of Object.values(pointValues)) {
+      if (letterVal.includes(char)) {
+        let points = getKeyByValue(pointValues, letterVal);
+        let pointsInt = parseInt(points[0]);
+        score += pointsInt;
+        } 
+      }  
+    } 
+  return score; 
 };
-// def score_word(word):
-//     score = 0
-//     word = word.upper()
-//     points = {
-//         1:['A', 'E', 'I', 'O', 'U','L', 'N', 'R', 'S', 'T'], 
-//         2:['D', 'G'], 
-//         3:['B', 'C', 'M', 'P'], 
-//         4:['F', 'H', 'V', 'W', 'Y' ],
-//         5:['K'],
-//         8:['J', 'X'],
-//         10:['Q', 'Z'] 
-//         }
-//     for letter in word:    
-//         for key, value in points.items():
-//             if letter in value:
-//                 score += key    
-//     if len(word) >= 7:
-//         score += 8
-//     return score
-
-
-
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
-};
+    let winningWord = null
+    let highestScore = 0
+    for (let word of words) {
+      if (scoreWord(word) > highestScore) {
+        highestScore = scoreWord(word)
+        winningWord = word
+      } else if (scoreWord(word) === highestScore) {
+          if (word.length === winningWord.length || winningWord.length === 10) {
+            continue
+        } else if (word.length === 10) {
+            winningWord = word;
+        } else if (word.length < winningWord.length) {
+            winningWord = word;
+          }
+        }
+      }
+    return {
+      word : winningWord, 
+      score : highestScore
+    }
+  };
