@@ -119,6 +119,21 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+
+
+let scores = [];
+let score_dict = {};
+
+for (let word of words) {
+  let score = scoreWord(word); // trying to call in score word function but this is pythonic I think
+  scores.push(score); // create a list of the scores
+  score_dict[word]
+
+}
+
+let max_score = scores[0]; {
+  if (score > max_score);
+    max_score = score;
+}
+
 };
-
-
