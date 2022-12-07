@@ -165,5 +165,25 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  let hWord = "";
+  let hScore = 0;
+
+  let WORDS = words.map((word) => [word, scoreWord(word)]);
+
+  for (let item of WORDS) {
+    let [thisWord, thisScore] = item;
+
+    if (thisScore > hScore) {
+      [hWord, hScore] = [thisWord, thisScore];
+    } else if (thisScore === hScore) {
+      if (
+        hWord.length < 10 &&
+        (thisWord.length < hWord.length || thisWord.length === 10)
+      ) {
+        [hWord, hScore] = [thisWord, thisScore];
+      }
+    }
+  }
+
+  return { word: hWord, score: hScore };
 };
