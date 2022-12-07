@@ -66,8 +66,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   // The length of this array is then compared to the count variable.
 
   // another way to write this code: for (const letter of Object.keys(letterCounts)) {const count = letterCounts[letter];
-      // rest of loop body goes here
-
+  // rest of loop body goes here
 
   for (const [letter, count] of Object.entries(letterCounts)) {
     if (count > lettersInHand.filter((l) => l === letter).length) {
@@ -108,7 +107,6 @@ const SCORE_CHART = {
 };
 
 export const scoreWord = (word) => {
-  
   if (word.length === 0) {
     return 0;
   }
@@ -119,11 +117,6 @@ export const scoreWord = (word) => {
     score += SCORE_CHART[letter] || 0;
   }
 
-  //The || operator is being used as a shorthand way to set a default value for the SCORE_CHART[letter] expression. 
-  //If SCORE_CHART[letter] is a falsy value (i.e. null, undefined, 0, etc.), 
-  //the || 0 part of the expression will cause 0 to be added to the score variable instead. 
-  //This ensures that the score variable is always incremented by some value, 
-  //even if the SCORE_CHART object does not have a value for the current letter.
 
   if (letters.length >= 7) {
     score += 8;
@@ -133,36 +126,32 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // Return null if no words are provided
-  if (!words || words.length === 0) {
-    return null;
-  }
 
-  // Keep track of the highest score
-  let highestScore = 0;
+  let winningWords = {};
+  let winningScore = 0;
 
-  // Calculate the scores of all words
-  const scores = words.map((word) => {
-    // Calculate the score for the current word
+  for (const word of words) {
     const score = scoreWord(word);
 
-    // Update the highest score if necessary
-    if (score > highestScore) {
-      highestScore = score;
+    if (score > winningScore) {
+      winningScore = score;
+      winningWords["score"] = score;
+      winningWords["word"] = word;
+      //if word score is the same as the winning score (there is a tie), return the one that is a length of 10
+    } else if (score === winningScore) {
+      if (winningWords["word"].length === 10) {
+        return winningWords;
+      }
+      if (word.length === 10) {
+        winningWords["score"] = score;
+        winningWords["word"] = word;
+        //if neither of the words have a length of ten but are the same score, return the word that has the fewest letters
+      } else if (word.length < winningWords["word"].length) {
+        winningWords["score"] = score;
+        winningWords["word"] = word;
+      }
     }
+  }
 
-    // Return the word and its score
-    return { word, score };
-  });
-
-  // Find the object with the highest score
-  const highestScoringWord = scores.find(
-    (score) => score.score === highestScore
-  );
-
-  return highestScoringWord || null;
+  return winningWords;
 };
-
-
-
-
