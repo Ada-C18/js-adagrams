@@ -82,8 +82,8 @@ export const drawLetters = () => {
   return hand;
 };
 
+//wave 2:
 export const usesAvailableLetters = (input, lettersInHand) => {
-  //wave 2
   for (let i = 0; i < input.length; i++) {
     let letter = input[i];
     if (lettersInHand.includes(letter)) {
@@ -93,11 +93,11 @@ export const usesAvailableLetters = (input, lettersInHand) => {
       return false;
     }
   }
-  return true; //refactor???
+  return true;
 };
 
+//wave 3:
 export const scoreWord = (word) => {
-  //wave 3
   let score = 0;
   if (word.length >= 7) {
     score += 8;
@@ -134,7 +134,7 @@ export const highestScoreFrom = (words) => {
 
   for (let word of maxScoreWords) {
     if (word.length === 10) {
-      winner["word"] = word;
+      winner['word'] = word;
       break;
     } else {
       const shortestLength = Math.min.apply(
@@ -144,7 +144,7 @@ export const highestScoreFrom = (words) => {
       const shortestWord = maxScoreWords.filter(
         (word) => word.length === shortestLength
       );
-      winner["word"] = shortestWord[0];
+      winner['word'] = shortestWord[0];
     }
   }
   return winner;
