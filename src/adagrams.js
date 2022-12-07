@@ -63,8 +63,40 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   return true;
 };
 
-export const scoreWord = (word) => {};
+export const scoreWord = (word) => {
+  let score = 0;
+
+  const letterScores = {
+    1: ["A", "E", "I", "O", "U", "L", "N", "R", "S", "T"],
+    2: ["D", "G"],
+    3: ["B", "C", "M", "P"],
+    4: ["F", "H", "V", "W", "Y"],
+    5: ["K"],
+    8: ["J", "X"],
+    10: ["Q", "Z"],
+  };
+
+  const wordUpper = word.toUpperCase();
+
+  for (let i = 0; i < wordUpper.length; i++) {
+    let letter = wordUpper[i];
+    for (const points in letterScores) {
+      if (letterScores[points].includes(letter)) {
+        score += Number(points);
+      }
+    }
+  }
+
+  if (word.length >= 7) {
+    score += 8;
+  }
+
+  return score;
+};
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  let highestScore = 0;
+  let topWord = "";
+
+  let tieList = [];
 };
