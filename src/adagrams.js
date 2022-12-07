@@ -58,6 +58,34 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   return true
 }
 
-export const scoreWord = word => {}
+export const scoreWord = word => {
+  if (word.length >= 1) {
+    let wordUpper = word.toUpperCase()
+    let points = {
+      AEIOULNRST: 1,
+      DG: 2,
+      BCMP: 3,
+      FHVWY: 4,
+      K: 5,
+      JX: 8,
+      QZ: 10,
+    }
+    let score = 0
+    for (let key in points) {
+      for (let i = 0; i < wordUpper.length; i++) {
+        if (key.includes(wordUpper[i])) {
+          score += points[key]
+        }
+      }
+    }
+    if (wordUpper.length >= 7) {
+      score += 8
+    }
+    return score
+  } else {
+    let score = 0
+    return score
+  }
+}
 
 export const highestScoreFrom = words => {}
