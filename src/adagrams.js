@@ -42,11 +42,11 @@ export const drawLetters = () => {
   }
   let hand = [];
   for (let i = 0; i < 10; i++) {
-    let letter = allLetters.charAt(
+    let randomLetter = allLetters.charAt(
       Math.floor(Math.random() * allLetters.length)
     );
-    allLetters = allLetters.replace(letter, "");
-    hand.push(letter);
+    allLetters = allLetters.replace(randomLetter, "");
+    hand.push(randomLetter);
   }
   return hand;
 };
