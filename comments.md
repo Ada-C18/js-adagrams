@@ -6,7 +6,7 @@ This prevents accidental mutation of `POOL`. Ultimately, my code didn't generate
 
 ### lines 36-38
 ```
-let freqList = Object.entries(POOL)
+const freqList = Object.entries(POOL)
   .map(([letter, value]) => Array(value).fill(letter))
   .flat();
 ```
@@ -14,11 +14,11 @@ let freqList = Object.entries(POOL)
 
 ### lines 49-56
 ```
-let hand = Array(10)
+const hand = Array(10)
   .fill(0)
   .map(() => {
-    let index = Math.floor(Math.random() * freqList.length);
-    let result = freqList[index];
+    const index = Math.floor(Math.random() * freqList.length);
+    const result = freqList[index];
     freqList.splice(index, 1);
     return result;
   });
@@ -58,17 +58,17 @@ const makeHandMap = (hand) => {
 This function takes in an array of ten strings (`hand`), where each element in the array is a single letter. (Note: This function would work for any array but I am writing about it in the context in which it is being used.) The function returns a Map object that contains each of the unique elements (letters) in the array as keys, with the number of times that the key appears in the array as the associated value. To do so, it generates a new Map object, then loops through the array using `forEach`. The `forEach` loop uses the `makeMap` helper function to set each unique element as a key in the Map object, with the number of times that the key appears in the array as the associated value. The function then returns the updated Map object.
 
 ### line 83
-`let inputIterator = inputMap[Symbol.iterator]();`<br/>
+`const inputIterator = inputMap[Symbol.iterator]();`<br/>
 This creates an iterator that yields the inputMap's key-value pairs one by one, formatted as an array (`[key, value]`). I later use it in the for...of loop to iterate through inputMap's keys. I used a for...of loop instead of `Map.forEach()` because I needed to break the loop to return false if the letters in the word passed in to `usesAvailableLetters` were not in the hand that was passed in or were used more times than the letter was available in the hand.
 
 ### lines 168-188
 ```
-let [hsWord, highestScore] = words
+const [hsWord, highestScore] = words
     .map((word) => [word, scoreWord(word)])
     .reduce(
       (accumulator, currentValue) => {
-        let [thisWord, thisScore] = currentValue;
-        let [hWord, hScore] = accumulator;
+        const [thisWord, thisScore] = currentValue;
+        const [hWord, hScore] = accumulator;
 
         if (thisScore > hScore) {
           accumulator = [thisWord, thisScore];
@@ -85,7 +85,7 @@ let [hsWord, highestScore] = words
       ["", 0]
     );
 ```
-`let [hsWord, highestScore]` uses decomposition to create variables from the elements of the array returned from the right side of the statement (in this case, the array that is returned contains two elements: a string and an integer).<br/><br/>
+`const [hsWord, highestScore]` uses decomposition to create variables from the elements of the array returned from the right side of the statement (in this case, the array that is returned contains two elements: a string and an integer).<br/><br/>
 `words.map((word) => [word, scoreWord(word)])`<br/>
 This transforms the array of words (`words`, passed in as an argument) into an array of nested arrays, in which the inner arrays each contain a word (previously an element of `words`) and its corresponding score.
 <br/><br/>
@@ -93,8 +93,8 @@ This transforms the array of words (`words`, passed in as an argument) into an a
 I use the reduce method to compare the various array elements with each other, to determine the highest scoring word, as a means to return both the word and its score. Here, the accumulator will function as the array holding the highest scoring word and its corresponding score. The accumulator is initialized to `["", 0]`, so that if the list of words is composed of only empty strings, an empty string scoring zero will be returned.
 <br/><br/>
 ```
-let [thisWord, thisScore] = currentValue;
-let [hWord, hScore] = accumulator;
+const [thisWord, thisScore] = currentValue;
+const [hWord, hScore] = accumulator;
 ```
 I use decomposition to create individual variables that will hold the current word being compared, the score associated with that word, the highest scoring word thus far and the score associated with the highest scoring word.
 <br/><br/>

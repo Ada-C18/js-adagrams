@@ -33,24 +33,25 @@ const POOL = {
 Object.freeze(POOL);
 
 export const drawLetters = () => {
-  let freqList = Object.entries(POOL)
+  const freqList = Object.entries(POOL)
     .map(([letter, value]) => Array(value).fill(letter))
     .flat();
 
   /* // Alternative for loop that could have generated freqList:
 
-  for (let [key, value] of Object.entries(POOL)) {
+  const freqList = [];
+  for (const [key, value] of Object.entries(POOL)) {
     for (let i = 0; i < value; i++) {
       freqList.push(key);
     }
   }
   */
 
-  let hand = Array(10)
+  const hand = Array(10)
     .fill(0)
     .map(() => {
-      let index = Math.floor(Math.random() * freqList.length);
-      let result = freqList[index];
+      const index = Math.floor(Math.random() * freqList.length);
+      const result = freqList[index];
       freqList.splice(index, 1);
       return result;
     });
@@ -76,17 +77,17 @@ const makeHandMap = (hand) => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  let inputMap = makeWordMap(input);
+  const inputMap = makeWordMap(input);
 
-  let handMap = makeHandMap(lettersInHand);
+  const handMap = makeHandMap(lettersInHand);
 
-  let inputIterator = inputMap[Symbol.iterator]();
+  const inputIterator = inputMap[Symbol.iterator]();
 
-  for (let item of inputIterator) {
-    let [key, value] = item;
+  for (const item of inputIterator) {
+    const [key, value] = item;
 
     if (handMap.has(key)) {
-      let hmVal = handMap.get(key);
+      const hmVal = handMap.get(key);
       if (hmVal === 0 || hmVal - value < 0) {
         return false;
       }
@@ -139,11 +140,11 @@ export const scoreWord = (word) => {
     score += scoreBonus;
   }
 
-  let wordMap = makeWordMap(word);
-  let wordIter = wordMap[Symbol.iterator]();
+  const wordMap = makeWordMap(word);
+  const wordIter = wordMap[Symbol.iterator]();
 
-  for (let item of wordIter) {
-    let [letter, n] = item;
+  for (const item of wordIter) {
+    const [letter, n] = item;
     score += SCORECHART[letter] * n;
   }
 
@@ -153,9 +154,9 @@ export const scoreWord = (word) => {
   const bonusFloorLength = 7;
   const scoreBonus = 8;
 
-  let wordArr = Array.from(word.toUpperCase());
+  const wordArr = Array.from(word.toUpperCase());
 
-  let score = wordArr.reduce(
+  const score = wordArr.reduce(
     (tally, letter) => tally + SCORECHART[letter],
     word.length >= bonusFloorLength ? scoreBonus : 0
   );
@@ -165,12 +166,12 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  let [hsWord, highestScore] = words
+  const [hsWord, highestScore] = words
     .map((word) => [word, scoreWord(word)])
     .reduce(
       (accumulator, currentValue) => {
-        let [thisWord, thisScore] = currentValue;
-        let [hWord, hScore] = accumulator;
+        const [thisWord, thisScore] = currentValue;
+        const [hWord, hScore] = accumulator;
 
         if (thisScore > hScore) {
           accumulator = [thisWord, thisScore];
@@ -196,10 +197,10 @@ export const highestScoreFrom = (words) => {
   let hWord = "";
   let hScore = 0;
 
-  let WORDS = words.map((word) => [word, scoreWord(word)]);
+  const WORDS = words.map((word) => [word, scoreWord(word)]);
 
-  for (let item of WORDS) {
-    let [thisWord, thisScore] = item;
+  for (const item of WORDS) {
+    const [thisWord, thisScore] = item;
 
     if (thisScore > hScore) {
       [hWord, hScore] = [thisWord, thisScore];
