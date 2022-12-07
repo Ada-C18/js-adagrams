@@ -40,23 +40,20 @@ const scoreChart = {
 export const drawLetters = () => {
   // Implement this method for wave 1
 
-  const ten_strings = []; //create an empty list to return ten strings
+  const ten_strings = [];
 
   for (let letter in adaGrams) {
     for (let i = 0; i < adaGrams[letter]; i++) {
-      //while i is less than the frequency of the letter
-      ten_strings.push(letter); //it appends that letter to poolArr
-    } //it creates an array of the form [A,A,A,A,A,A,A,A,A,B.B.C,C,...]
+      ten_strings.push(letter);
+    }
   }
 
   const shuffleLetters = (ten_strings) => {
-    //javascript.info/task/shuffle
     for (let i = ten_strings.length - 1; i > 0; i--) {
-      //assigns length of array minus one to i and while i is posititve it loops subrtracting one from i each iteration
-      let j = Math.floor(Math.random() * (i + 1)); // math.random returns a value from 0-1, add 1 to i so we can caputre last index in poolArr, the result is a random number from 0-(len-1)
-      [ten_strings[i], ten_strings[j]] = [ten_strings[j], ten_strings[i]]; //the two letters switch their index
+      let j = Math.floor(Math.random() * (i + 1));
+      [ten_strings[i], ten_strings[j]] = [ten_strings[j], ten_strings[i]];
     }
-    return ten_strings.slice(0, 10); //after shuffle the first 10 are returned
+    return ten_strings.slice(0, 10);
   };
   return shuffleLetters(ten_strings);
 };
@@ -64,7 +61,7 @@ export const drawLetters = () => {
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
   const wordUp = input.toUpperCase();
-  const lettersInHandCopy = lettersInHand.slice(); //creates a copy that can be editted without copy I couldn't reuse a letter while playing
+  const lettersInHandCopy = lettersInHand.slice();
 
   for (const letter of wordUp) {
     if (!lettersInHandCopy.includes(letter)) {
@@ -88,7 +85,7 @@ export const scoreWord = (word) => {
   for (const letter of wordUp) {
     for (const letterScore in scoreChart) {
       if (scoreChart[letterScore].includes(letter)) {
-        score += parseInt(letterScore); //the key is not an int so it needs to be converted before it is added
+        score += parseInt(letterScore);
       }
     }
   }
