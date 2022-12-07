@@ -115,6 +115,47 @@ export const scoreWord = (word) => {
   return score;
 };
 
+
+// Implement the function named highestScoreFrom in src/adagrams.js. This method should have the following properties:
+
+// Has one parameter: words, which is an array of strings
+// Returns a single object that represents the data of a winning word and its score. The object should have the following keys:
+// word, whose value is a string of a word
+// score, whose value is the score of that word
+// In the case of tie in scores, use these tie-breaking rules:
+// prefer the word with the fewest letters...
+// ...unless one word has 10 letters. If the top score is tied between multiple words and one is 10 letters long, choose the one with 10 letters over the one with fewer tiles
+// If the there are multiple words that are the same score and the same length, pick the first one in the supplied list
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+// intialize score/value object
+const highestScoringWord = {};
+words.forEach((word) => {
+  const wordScore = scoreWord(word);
+  if (Object.keys(highestScoringWord).length === 0){
+  highestScoringWord['word'] = word;
+  highestScoringWord['score'] = wordScore;
+  } else if (wordScore > highestScoringWord['score']){
+  highestScoringWord['word'] = word;
+  highestScoringWord['score'] = wordScore;
+  } else if (wordScore === highestScoringWord['score']){
+    if (word.length === 10 && highestScoringWord['score'].length < 10){
+      highestScoringWord['word'] = word;
+      highestScoringWord['score'] = wordScore;
+    } else if (word.length < highestScoringWord['score'].length && highestScoringWord['score'].length !== 10){
+      highestScoringWord['word'] = word;
+      highestScoringWord['score'] = wordScore;
+    }
+  }
+});
+return highestScoringWord;
 };
+
+
+
+//  iterate through array of words and calculate score. 
+//  set the intial score and value to the object
+// for each loop, reassign score and value if the score is higher than the current one
+// if the scores are tie, use the word with the shortest length
+// if the score are tie but one word has 10 letters, that one wins
+//  if there is a tie and both have the same length, pick the first one
+
