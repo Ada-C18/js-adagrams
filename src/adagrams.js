@@ -59,5 +59,27 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  const wordScoreObjs = words
+    .map((word, index) => ({ index, word, score: scoreWord(word) }))
+    .sort((a, b) => -1 * (a.score - b.score));
+
+  const firstObj = wordScoreObjs[0]
+  const highScore = firstObj.score;
+  const highScoreObjs = wordScoreObjs.filter((wordObj) => wordObj.score === highScore );
+
+  if (highScoreObjs.length === 1) {
+    return { word: firstObj.word, score: firstObj.score }
+  }
+
+  const tenLetterObjs = highScoreObjs.filter((wordScoreObjs) => wordScoreObjs.word.length === 10);
+
+  if (tenLetterObjs.length > 0) {
+    const sortedTenLetterObjs = tenLetterObjs.sort((a, b) => a.index - b.index);
+    const firstLetterObjs = sortedTenLetterObjs[0];
+    return { word: firstLetterObjs.word, score: firstLetterObjs.score };
+  }
+
+  const byWordLength = highScoreObjs.sort((a, b) => a.word.length - b.word.length);
+  const shortestWordObj = byWordLength[0];
+  return { word: shortestWordObj.word, score: shortestWordObj.score };
 };
