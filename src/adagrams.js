@@ -28,11 +28,12 @@ const LETTER_POOL = {
 };
 
 export const drawLetters = () => {
-  let lettersStr = '';
-  Object.entries(LETTER_POOL).map(([key, value]) => {
-    lettersStr += key.repeat(value);
-  });
-  const lettersArr = lettersStr.split('');
+  const lettersArr = Object.entries(LETTER_POOL)
+    .map(([key, value]) => {
+      return key.repeat(value);
+    })
+    .join('')
+    .split('');
 
   const indices = [];
   const letters = [];
@@ -47,21 +48,28 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  const letterFrequency = {};
+  // const letterFrequency = {};
+  // for (const letterHand of lettersInHand) {
+  //   if (letterHand in letterFrequency) {
+  //     letterFrequency[letterHand] += 1;
+  //   } else {
+  //     letterFrequency[letterHand] = 1;
+  //   }
+  // }
 
-  for (const letter of lettersInHand) {
-    // if (letter in letterFrequency) {
-    //   letterFrequency[letter] += 1;
-    // } else {
-    //   letterFrequency[letter] = 1;
-    // }
-    letterFrequency[letter] = letter in letterFrequency ? +1 : 1;
-  }
+  const letterFrequency = lettersInHand.reduce((obj, letter) => {
+    if (letter in obj) {
+      obj[letter] += 1;
+    } else {
+      obj[letter] = 1;
+    }
+    return obj;
+  }, {});
 
-  for (const char of input) {
-    if (letterFrequency[char] >= 1) {
-      letterFrequency[char] -= 1;
-    } else if (!letterFrequency[char]) {
+  for (const letter of input) {
+    if (letterFrequency[letter] >= 1) {
+      letterFrequency[letter] -= 1;
+    } else {
       return false;
     }
   }
@@ -84,7 +92,7 @@ export const scoreWord = (word) => {
   for (const scoreValue in letterScores) {
     for (const letter of word) {
       if (letterScores[scoreValue].includes(letter.toUpperCase())) {
-        score += parseFloat(scoreValue);
+        score += parseInt(scoreValue);
       }
     }
   }
@@ -97,15 +105,8 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // const wordWScore = [];
-  // for (const word of words) {
-  //   wordWScore.push({
-  //     word: word,
-  //     score: scoreWord(word),
-  //   });
-  // }
   const wordWScore = words.map((word) => ({
-    word: word,
+    word,
     score: scoreWord(word),
   }));
 
@@ -121,12 +122,6 @@ export const highestScoreFrom = (words) => {
 };
 
 const checkTie = (highest, wordWScore) => {
-  // const sameScores = [];
-  // for (const wordObj of wordWScore) {
-  //   if (wordObj.score === highest.score) {
-  //     sameScores.push(wordObj);
-  //   }
-  // }
   const sameScores = wordWScore.filter(
     (wordObj) => wordObj.score === highest.score
   );
