@@ -165,6 +165,34 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
+  let [hsWord, highestScore] = words
+    .map((word) => [word, scoreWord(word)])
+    .reduce(
+      (accumulator, currentValue) => {
+        let [thisWord, thisScore] = currentValue;
+        let [hWord, hScore] = accumulator;
+
+        if (thisScore > hScore) {
+          accumulator = [thisWord, thisScore];
+        } else if (thisScore === hScore) {
+          if (
+            hWord.length < 10 &&
+            (thisWord.length < hWord.length || thisWord.length === 10)
+          ) {
+            accumulator = [thisWord, thisScore];
+          }
+        }
+        return accumulator;
+      },
+      ["", 0]
+    );
+
+  return { word: hsWord, score: highestScore };
+};
+
+/*
+// Alternative implementation of highestScoreFrom using a for...of loop:
+export const highestScoreFrom = (words) => {
   let hWord = "";
   let hScore = 0;
 
@@ -187,3 +215,4 @@ export const highestScoreFrom = (words) => {
 
   return { word: hWord, score: hScore };
 };
+*/
