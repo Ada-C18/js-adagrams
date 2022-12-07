@@ -60,11 +60,52 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   return true;
 };
 
-// export const scoreWord = (word) => {
-//   // Implement this method for wave 3
-// };
+export const scoreWord = (word = '') => {
 
-// export const highestScoreFrom = (words) => {
-//   // Implement this method for wave 4
-// };
-//
+  const WORD = word.toUpperCase();
+  let points = 0;
+
+  for (const letter of WORD) {
+    points += Number(getPointsByLetter(letter));
+  }
+
+  if (WORD.length >= 7) {
+    points += 8;
+  }
+  return points;
+};
+
+// helper function
+const getPointsByLetter = (letter) => {
+  const pointDict = {
+    1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
+    2: ['D', 'G'],
+    3: ['B', 'C', 'M', 'P'],
+    4: ['F,', 'H', 'V', 'W', 'Y'],
+    5: ['K'],
+    8: ['J', 'X'],
+    10: ['Q', 'Z']
+  }
+  return Object.keys(pointDict).find(points => pointDict[points].includes(letter));
+};
+
+export const highestScoreFrom = (words) => {
+  let winningWord = '';
+  let winningScore = 0;
+  for (const word of words) {
+    let score = scoreWord(word);
+    if (score > winningScore) {
+      winningWord = word;
+      winningScore = score;
+    } else if (score === winningScore) {
+      if (winningWord.length === 10) {
+        continue
+      } else if (word.length === 10) {
+        winningWord = word;
+      } else if (word.length < winningWord.length) {
+        winningWord = word;
+      }
+    }
+  }
+  return { 'word': winningWord, 'score': winningScore }
+};
