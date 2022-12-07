@@ -62,7 +62,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
 export const scoreWord = (word) => {
   let totalScore = 0;
-  let letters = Array.from(word.toUpperCase());
+  const letters = Array.from(word.toUpperCase());
   for (let i=0; i < letters.length; i++) {
     totalScore += scoreChart[letters[i]];
   }
@@ -73,9 +73,6 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // words = ['list', 'of', 'words']
-  // call scoreWord() on each (forEach?)
-  // returns an object {'word': winningWord, 'score': winningWordScore}
   const wordScores = words.map(scoreWord);
   let highScore = 0;
   let challenger = undefined;
@@ -89,8 +86,8 @@ export const highestScoreFrom = (words) => {
     challengerCounter += 1;
   }
 
-  let scoreIndex = wordScores.indexOf(highScore);
-  let winningWord = words[scoreIndex];
+  const scoreIndex = wordScores.indexOf(highScore);
+  const winningWord = words[scoreIndex];
   let winningPair = {'word': winningWord, 'score': highScore};
   
   if (challenger) {
