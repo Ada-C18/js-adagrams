@@ -31,7 +31,7 @@ export const drawLetters = () => {
   // Implement this method for wave 1
 
   const letterPool = 'AAAAAAAAABBCCDDDDEEEEEEEEEEEEFFGGGHHIIIIIIIIIJKLLLLMMNNNNNNOOOOOOOOPPQRRRRRRSSSSTTTTTTUUUUVVWWXYYZ';
-  let tempPool = [...letterPool];
+  let tempPool = letterPool.slice();
 
   let drawnLetters = [];
 
