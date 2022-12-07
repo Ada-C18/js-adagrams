@@ -42,7 +42,21 @@ export const drawLetters = () => {
   return tenLetters
 }
 
-export const usesAvailableLetters = (input, lettersInHand) => {}
+export const usesAvailableLetters = (input, lettersInHand) => {
+  let word = input.toUpperCase()
+  for (let i = 0; i < word.length; i++) {
+    if (lettersInHand.includes(word[i])) {
+      for (let j = 0; j < lettersInHand.length; j++) {
+        if (lettersInHand[j] === word[i]) {
+          lettersInHand.splice(j, 1)
+        }
+      }
+    } else {
+      return false
+    }
+  }
+  return true
+}
 
 export const scoreWord = word => {}
 
