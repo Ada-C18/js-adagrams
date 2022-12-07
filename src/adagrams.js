@@ -88,4 +88,44 @@ export const scoreWord = word => {
   }
 }
 
-export const highestScoreFrom = words => {}
+export const highestScoreFrom = words => {
+  let topScores = {}
+  for (let word of words) {
+    let upperWord = word.toUpperCase()
+    let wordScore = scoreWord(upperWord)
+    topScores[upperWord] = wordScore
+  }
+  let maxKey,
+    maxValue = 0
+  for (const [key, value] of Object.entries(topScores)) {
+    if (value > maxValue) {
+      maxValue = value
+      maxKey = key
+    }
+  }
+  let winningWords = []
+  for (const key in topScores) {
+    if (maxValue === topScores[key]) {
+      winningWords.push(key)
+    }
+  }
+  let length = 10
+  let winningKey,
+    winningValue = 0
+  for (let i = 0; i < winningWords.length; i++) {
+    if (winningWords[i].length === 10) {
+      winningKey = winningWords[i]
+      winningValue = topScores[winningWords[i]]
+      let winnerWinner = {score: winningValue, word: winningKey}
+      return winnerWinner
+    } else {
+      if (winningWords[i].length < length) {
+        length = winningWords[i].length
+        winningKey = winningWords[i]
+        winningValue = topScores[winningWords[i]]
+      }
+    }
+  }
+  let winnerWinner = {score: winningValue, word: winningKey}
+  return winnerWinner
+}
