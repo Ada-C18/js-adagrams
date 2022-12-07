@@ -201,5 +201,26 @@ export const highestScoreFrom = (words) => {
   var sortedWordScoresList = wordScoresList.sort((a, b) => b.score - a.score);
 
   var maxWordScore = sortedWordScoresList[0];
-  return maxWordScore;
+
+  //handling ties.
+  //if two words have the same value, return the one with the fewest letters
+  var maxScore = maxWordScore.score;
+  //make list of words with max score
+  var potentialWinners = [];
+  for (const wordScore of wordScoresList) {
+    if (wordScore.score === maxScore) {
+      wordScoresList.push(wordScore);
+    }
+  }
+  if (potentialWinners.length === 1) {
+    return potentialWinners[0];
+  }
+
+  //now sort potential winners by length of word and return the shortest one.
+  var sortedPotentialWinners = potentialWinners.sort(
+    (a, b) => b.word.length - a.word.length
+  );
+
+  //now return the shortest one (for now.  we'll add more tie breaking in a second.)
+  return sortedPotentialWinners[0];
 };
