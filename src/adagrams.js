@@ -87,19 +87,19 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 };
 
 export const scoreWord = (word) => {
-  let score = 0
+  let score = 0;
   if (word.length >= 7) {
     score += 8;
   }
   for (const letter of word.toUpperCase()) {
     score += SCORE_CHART[letter];
   }
-  return score
+  return score;
 };
 
 export const highestScoreFrom = (words) => {
-  let highestScore = 0
-  let winningWord = null
+  let highestScore = 0;
+  let winningWord = null;
   for(const word of words) {
     let score = scoreWord(word);
 
