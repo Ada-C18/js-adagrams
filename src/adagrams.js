@@ -138,10 +138,10 @@ words.forEach((word) => {
   highestScoringWord['word'] = word;
   highestScoringWord['score'] = wordScore;
   } else if (wordScore === highestScoringWord['score']){
-    if (word.length === 10 && highestScoringWord['score'].length < 10){
+    if (word.length === 10 && highestScoringWord['word'].length < word.length){
       highestScoringWord['word'] = word;
       highestScoringWord['score'] = wordScore;
-    } else if (word.length < highestScoringWord['score'].length && highestScoringWord['score'].length !== 10){
+    } else if (word.length < highestScoringWord['word'].length && highestScoringWord['word'].length !== 10){
       highestScoringWord['word'] = word;
       highestScoringWord['score'] = wordScore;
     }
