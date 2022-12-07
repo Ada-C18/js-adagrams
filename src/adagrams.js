@@ -25,42 +25,42 @@ let LETTERS = {
   X: 1,
   Y: 2,
   Z: 1,
-}
+};
 export const drawLetters = () => {
-  let listOfAllLetter = []
+  let listOfAllLetter = [];
   for (let key in LETTERS) {
     for (let i = 0; i < LETTERS[key]; i++) {
-      listOfAllLetter.push(key)
+      listOfAllLetter.push(key);
     }
   }
-  let tenLetters = []
+  let tenLetters = [];
   for (let i = 0; i < 9 + 1; i++) {
-    let randomIndex = Math.floor(Math.random() * listOfAllLetter.length)
-    tenLetters.push(listOfAllLetter[randomIndex])
-    listOfAllLetter.splice(randomIndex, 1)
+    let randomIndex = Math.floor(Math.random() * listOfAllLetter.length);
+    tenLetters.push(listOfAllLetter[randomIndex]);
+    listOfAllLetter.splice(randomIndex, 1);
   }
-  return tenLetters
-}
+  return tenLetters;
+};
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  let word = input.toUpperCase()
+  let word = input.toUpperCase();
   for (let i = 0; i < word.length; i++) {
     if (lettersInHand.includes(word[i])) {
       for (let j = 0; j < lettersInHand.length; j++) {
         if (lettersInHand[j] === word[i]) {
-          lettersInHand.splice(j, 1)
+          lettersInHand.splice(j, 1);
         }
       }
     } else {
-      return false
+      return false;
     }
   }
-  return true
-}
+  return true;
+};
 
 export const scoreWord = word => {
   if (word.length >= 1) {
-    let wordUpper = word.toUpperCase()
+    let wordUpper = word.toUpperCase();
     let points = {
       AEIOULNRST: 1,
       DG: 2,
@@ -69,63 +69,63 @@ export const scoreWord = word => {
       K: 5,
       JX: 8,
       QZ: 10,
-    }
-    let score = 0
+    };
+    let score = 0;
     for (let key in points) {
       for (let i = 0; i < wordUpper.length; i++) {
         if (key.includes(wordUpper[i])) {
-          score += points[key]
+          score += points[key];
         }
       }
     }
     if (wordUpper.length >= 7) {
-      score += 8
+      score += 8;
     }
-    return score
+    return score;
   } else {
-    let score = 0
-    return score
+    let score = 0;
+    return score;
   }
-}
+};
 
 export const highestScoreFrom = words => {
-  let topScores = {}
+  let topScores = {};
   for (let word of words) {
-    let upperWord = word.toUpperCase()
-    let wordScore = scoreWord(upperWord)
-    topScores[upperWord] = wordScore
+    let upperWord = word.toUpperCase();
+    let wordScore = scoreWord(upperWord);
+    topScores[upperWord] = wordScore;
   }
   let maxKey,
-    maxValue = 0
+    maxValue = 0;
   for (const [key, value] of Object.entries(topScores)) {
     if (value > maxValue) {
-      maxValue = value
-      maxKey = key
+      maxValue = value;
+      maxKey = key;
     }
   }
-  let winningWords = []
+  let winningWords = [];
   for (const key in topScores) {
     if (maxValue === topScores[key]) {
-      winningWords.push(key)
+      winningWords.push(key);
     }
   }
-  let length = 10
+  let length = 10;
   let winningKey,
-    winningValue = 0
+    winningValue = 0;
   for (let i = 0; i < winningWords.length; i++) {
     if (winningWords[i].length === 10) {
-      winningKey = winningWords[i]
-      winningValue = topScores[winningWords[i]]
-      let winnerWinner = {score: winningValue, word: winningKey}
-      return winnerWinner
+      winningKey = winningWords[i];
+      winningValue = topScores[winningWords[i]];
+      let winnerWinner = {score: winningValue, word: winningKey};
+      return winnerWinner;
     } else {
       if (winningWords[i].length < length) {
-        length = winningWords[i].length
-        winningKey = winningWords[i]
-        winningValue = topScores[winningWords[i]]
+        length = winningWords[i].length;
+        winningKey = winningWords[i];
+        winningValue = topScores[winningWords[i]];
       }
     }
   }
-  let winnerWinner = {score: winningValue, word: winningKey}
-  return winnerWinner
-}
+  let winnerWinner = {score: winningValue, word: winningKey};
+  return winnerWinner;
+};
