@@ -1,15 +1,49 @@
+let LETTERS = {
+  A: 9,
+  B: 2,
+  C: 2,
+  D: 4,
+  E: 12,
+  F: 2,
+  G: 3,
+  H: 2,
+  I: 9,
+  J: 1,
+  K: 1,
+  L: 4,
+  M: 2,
+  N: 6,
+  O: 8,
+  P: 2,
+  Q: 1,
+  R: 6,
+  S: 4,
+  T: 6,
+  U: 4,
+  V: 2,
+  W: 2,
+  X: 1,
+  Y: 2,
+  Z: 1,
+}
 export const drawLetters = () => {
-  // Implement this method for wave 1
-};
+  let listOfAllLetter = []
+  for (let key in LETTERS) {
+    for (let i = 0; i < LETTERS[key]; i++) {
+      listOfAllLetter.push(key)
+    }
+  }
+  let tenLetters = []
+  for (let i = 0; i < 9 + 1; i++) {
+    let randomIndex = Math.floor(Math.random() * listOfAllLetter.length)
+    tenLetters.push(listOfAllLetter[randomIndex])
+    listOfAllLetter.splice(randomIndex, 1)
+  }
+  return tenLetters
+}
 
-export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
-};
+export const usesAvailableLetters = (input, lettersInHand) => {}
 
-export const scoreWord = (word) => {
-  // Implement this method for wave 3
-};
+export const scoreWord = word => {}
 
-export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
-};
+export const highestScoreFrom = words => {}
