@@ -101,52 +101,43 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
+  // use map function to calculate score for each word and add {word, score} to list
   const buildWordScoreObject = (word) => {
     let wordScore = {};
-    wordScore[word] = scoreWord(word);
+    wordScore['word'] = word;
+    wordScore['score'] = scoreWord(word);
     return wordScore;
   }
 
   const wordScores = words.map(buildWordScoreObject);
-  // use map function(?) to calculate score for each word and add {word, score} to list
   
   let highScore = 0;
   
   // iterate through wordScores and compare each score to highScore
-  // wordScores is an ARRAY and each element is an OBJECT
-  // so for each item of wordScores, look at the VALUE
-  // can use Object.values(item)[0] bc each object has just one key-value pair
-
-
-  // if word.score is greater, let winner = word, update highScore to word.score
-  
   let winner;
 
   for (const wordObj of wordScores) {
-    const word = Object.keys(wordObj)[0];
-    const score = Object.values(wordObj)[0];
-    if (score > highScore) {
 
+  // if word.score is greater, let winner = word, update highScore to word.score
+    if (wordObj['score'] > highScore) {
       winner = wordObj;
-      highScore = score;
-  // if a tie, check whether lengths are equal: if yes, prefer current winner
-    } else if (score === highScore) {
-        if (word.length === Object.keys(winner)[0].length) {
+      highScore = wordObj['score'];
+  // if a tie, check whether lengths are equal OR if current winner is 10 letters: if yes, prefer current winner
+    } else if (wordObj['score'] === highScore) {
+        if ((wordObj['word'].length === winner['word'].length) || (winner['word'].length === 10)) {
       //do nothing  
-          break;
-      // if not, check if length of either word is 10: if yes, it's the winner
-        } else if (word.length === 10) {
+          
+      // if not, check if length of new word is 10: if yes, it's the winner
+        } else if (wordObj['word'].length === 10) {
           winner = wordObj;
-          highScore = score;
-        } else if (word.length < Object.keys(winner)[0].length) {
+          highScore = wordObj['score'];
+        // else, prefer the shorter word
+        } else if (wordObj['word'].length < winner['word'].length) {
           winner = wordObj;
-          highScore = score;
+          highScore = wordObj['score'];
         }
-
       }
-  }
-  // else, prefer the shorter word
-
+    }
   // once all words have been considered, return the winner
   return winner;
 }
