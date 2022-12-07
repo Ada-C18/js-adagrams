@@ -8,7 +8,7 @@ export const drawLetters = () => {
   // Implement this method for wave 1
 
   const letterPool = 'AAAAAAAAABBCCDDDDEEEEEEEEEEEEFFGGGHHIIIIIIIIIJKLLLLMMNNNNNNOOOOOOOOPPQRRRRRRSSSSTTTTTTUUUUVVWWXYYZ'
-  let tempPool = letterPool
+  let tempPool = letterPool.map((x) => x)
 
   let drawnLetters = [];
 
@@ -24,7 +24,7 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
-  let newList = lettersInHand
+  let newList = lettersInHand.map((x)=>x)
   let inputUpper = input.toUpperCase()
 
   for (let i = 0; i < input.length; i++) {
@@ -42,11 +42,12 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 export const scoreWord = (word) => {
   // Implement this method for wave 3
   let score = 0;
-  const wordUpper = word.toUpperCase()
-
   if (!word) {
     return score;
   }
+
+  const wordUpper = word.toUpperCase()
+
   for (let index in wordUpper) {
     score += points[wordUpper[index]]
   }
@@ -67,14 +68,15 @@ export const highestScoreFrom = (words) => {
         highestScore = score
         highestWord = words[index]
       } else if (score == highestScore){
-        if (highestWord.length != 10){
-          if (words[index].length < highestWord.length || words[index].length == 10){
-            highestWord = words[index]
+        if (
+          highestWord.length != 10 && (
+            words[index].length < highestWord.length ||
+            words[index].length == 10
+          )) {
+          highestWord = words[index]
           }
         }
       }
-  }
-      
   let wordScore = {'score': highestScore, 'word': highestWord}
   return wordScore
-};
+  };
