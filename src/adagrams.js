@@ -66,12 +66,28 @@ export const scoreWord = (word) => {
   for (let i=0; i < letters.length; i++) {
     totalScore += scoreChart[letters[i]];
   }
-  if (7 <= word.length < 11) {
+  if (word.length >= 7 && word.length < 11) {
     totalScore += 8;
   }
   return totalScore;
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  // words = ['list', 'of', 'words']
+  // call scoreWord() on each (forEach?)
+  // returns an object {'word': winningWord, 'score': winningWordScore}
+  let wordScores = words.map(scoreWord);
+  let highScore = 0;
+  for (let score of wordScores) {
+    if (score > highScore) {
+      highScore = score;
+    } else if (score === highScore) {
+      // insert tie breakers here
+      continue;
+    }
+  }
+  let scoreIndex = wordScores.indexOf(highScore);
+  let winningWord = words[scoreIndex];
+  let winningPair = {'word': winningWord, 'score': highScore};
+  return winningPair;
 };
