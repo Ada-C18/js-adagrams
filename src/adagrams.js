@@ -109,7 +109,7 @@ export const scoreWord = (word) => {
     score += letterValues[letter];
   }
   
-  if  (word.length === 7 || word.length === 8 || word.length === 9 || word.length === 10) {
+  if  (word.length >=7 && word.length <= 10) {
     score += 8;
   }
   return score;
@@ -119,19 +119,23 @@ export const scoreWord = (word) => {
 export const highestScoreFrom = (words) => {
 // intialize score/value object
 const highestScoringWord = {};
+
 words.forEach((word) => {
   const wordScore = scoreWord(word);
+  const currentHighScoreWord = highestScoringWord['word'];
+  const currentHighScore = highestScoringWord['score'];
+  
   if (Object.keys(highestScoringWord).length === 0){
   highestScoringWord['word'] = word;
   highestScoringWord['score'] = wordScore;
-  } else if (wordScore > highestScoringWord['score']){
+  } else if (wordScore > currentHighScore){
   highestScoringWord['word'] = word;
   highestScoringWord['score'] = wordScore;
-  } else if (wordScore === highestScoringWord['score']){
-    if (word.length === 10 && highestScoringWord['word'].length < word.length){
+  } else if (wordScore === currentHighScore){
+    if (word.length === 10 && currentHighScoreWord.length < word.length){
       highestScoringWord['word'] = word;
       highestScoringWord['score'] = wordScore;
-    } else if (word.length < highestScoringWord['word'].length && highestScoringWord['word'].length !== 10){
+    } else if (word.length < currentHighScoreWord.length && currentHighScoreWord.length !== 10){
       highestScoringWord['word'] = word;
       highestScoringWord['score'] = wordScore;
     }
