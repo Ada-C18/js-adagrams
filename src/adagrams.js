@@ -66,11 +66,7 @@ class MultiSet {
 
   isSubSet(superSet) {
     for (const letter in this.mSet) {
-      if (!(letter in superSet.mSet)) {
-        return false;
-      }
-      superSet.mSet[letter] = superSet.mSet[letter] - this.mSet[letter];
-      if ((superSet.mSet[letter]<0)) {
+      if (!(letter in superSet.mSet) ||(superSet.mSet[letter]<this.mSet[letter])) {
         return false;
       }
     };
