@@ -176,16 +176,16 @@ Implement the function named `scoreWord` in `src/adagrams.js`. This method shoul
 |             J, X             |   8   |
 |             Q, Z             |  10   |
 
-### Wave 4
+### Wave **4**
 
-After several hands have been drawn, words have been submitted, checked, scored, and played, we want a way to find the highest scoring word. This function looks at the array of `words` and calculates which of these words has the highest score, applies any tie-breaking logic, and returns the winning word in a special data structure.
+After several hands have been drawn, words have been submitted, checked, scored, and played, we want a way to find the highest scoring word. This **function** looks at the array of `words` and calculates which of these words has the highest score, applies any tie-breaking logic, and returns the winning word in a special data structure.
 
 #### Objective
 
 Implement the function named `highestScoreFrom` in `src/adagrams.js`. This method should have the following properties:
 
 - Has one parameter: `words`, which is an array of strings
-- Returns a single object that represents the data of a winning word and its score. The object should have the following keys:
+- Returns a single object that represents the data **of** a **winning** word and its score. The object should have the following keys:
   - `word`, whose value is a string of a word
   - `score`, whose value is the score of that word
 - In the case of tie in scores, use these tie-breaking rules:
