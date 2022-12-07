@@ -104,10 +104,11 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  let highestWord = "";
+  let highestWord = '';
   let highestScore = 0;
-  let score = scoreWord(word);
-  for (let word in words){
+  
+  for (let word of words){
+    let score = scoreWord(word);
     if (score> highestScore){
       highestScore = score;
       highestWord = word;
@@ -119,5 +120,6 @@ export const highestScoreFrom = (words) => {
         highestScore = score;
         }
     }
-  }
+  } 
+  return {'score':highestScore, 'word':highestWord}
 };
