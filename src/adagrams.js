@@ -113,5 +113,31 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  let scoreDict = createWordScoreDict(words);
+  let max = Object.keys(scoreDict).reduce(function (a, b) {
+    return scoreDict[a] > scoreDict[b] ? a : b;
+  });
+  let tiedWords = scoreDict[max];
+  let sortedTies = tiedWords.sort((a, b) => a.length - b.length);
+  for (let word of sortedTies) {
+    if (word.length === 10) {
+      return { word: word, score: parseInt(max) };
+    }
+  }
+  let word = scoreDict[max][0];
+  let result = { word: word, score: parseInt(max) };
+  return result;
+};
+
+const createWordScoreDict = (words) => {
+  let scoreDict = {};
+  words.forEach((word) => {
+    let score = scoreWord(word);
+    if (scoreDict[score] === undefined) {
+      scoreDict[score] = [];
+    }
+    scoreDict[score].push(word);
+  });
+
+  return scoreDict;
 };
