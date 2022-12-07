@@ -1,8 +1,3 @@
-// const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-// const lettersFrequency = [9, 2, 2, 4, 12, 2, 3, 2, 9, 1, 1, 4, 2, 6, 8, 2, 1, 6, 4, 6, 4, 2, 2, 1, 2, 1];
-// for (let i = 0; i < alphabet.length; i++) {
-//   letterPool[alphabet[i]] = lettersFrequency[i];
-// }
 const LETTERPOOL = {
   A: 9,
   B: 2,
@@ -29,7 +24,7 @@ const LETTERPOOL = {
   W: 2,
   X: 1,
   Y: 2,
-  Z: 1
+  Z: 1,
 };
 
 const SCORECHART = {
@@ -58,14 +53,14 @@ const SCORECHART = {
   W: 4,
   X: 8,
   Y: 4,
-  Z: 10
-}
+  Z: 10,
+};
 
 export const drawLetters = () => {
   // Implement this method for wave 1
   const letterBank = [];
   const handOfLetters = [];
-  
+
   for (const [k, v] of Object.entries(LETTERPOOL)) {
     letterBank.push(...k.repeat(v));
   }
@@ -79,9 +74,10 @@ export const drawLetters = () => {
   return handOfLetters;
 };
 
-export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+// Create an object where key is the letter and value is the number of times it appears in the hand
+const countLettersInHand = (lettersInHand) => {
   const lettersInHandCount = {};
+
   for (const letter of lettersInHand) {
     if (letter in lettersInHandCount) {
       lettersInHandCount[letter] += 1;
@@ -89,6 +85,12 @@ export const usesAvailableLetters = (input, lettersInHand) => {
       lettersInHandCount[letter] = 1;
     }
   }
+  return lettersInHandCount;
+};
+
+export const usesAvailableLetters = (input, lettersInHand) => {
+  // Implement this method for wave 2
+  const lettersInHandCount = countLettersInHand(lettersInHand);
 
   for (const letter of input) {
     if (!(letter in lettersInHandCount) || lettersInHandCount[letter] === 0) {
@@ -118,12 +120,27 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
-  const wordScores = {}
+  const wordScores = {};
+  let maxScore = 0;
+  const maxScoreWordsList = [];
 
-  for (const word of words) {
+  words.forEach((word) => {
     let score = scoreWord(word);
-    wordScores[word] = score
+    wordScores[word] = score;
+
+    if (score > maxScore) {
+      maxScore = score;
+    }
+  });
+
+  for (const [word, score] of Object.entries(wordScores)) {
+    if (score === maxScore) {
+      if (word.length === 10) {
+        return { word: word, score: score };
+      }
+      maxScoreWordsList.push(word);
+    }
   }
-
-
+  const sortedMaxScoreWords = maxScoreWordsList.sort().reverse();
+  return { word: sortedMaxScoreWords[0], score: maxScore };
 };
