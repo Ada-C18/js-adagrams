@@ -107,12 +107,13 @@ export const scoreWord = (word) => {
 
   let score = 0;
 
-  for (letter in word.toUpperCase());
-  if (letter in score_chart);
-  score += score_chart.get(letter);
-  if (word.length > 7);
+  for (let letter in word.toUpperCase()) {
+  if (letter in score_chart)
+    score += score_chart.get(letter);
+  }
+  if (word.length > 7) {
   score += 8;
-
+  }
   return score;
 };
 
@@ -121,6 +122,3 @@ export const highestScoreFrom = (words) => {
 };
 
 
-// lettersInHand.forEach(usesAvailableLetters);
-  // for each letter in the lettersInHand: IF lettersInHandHashMap doesn't contain the letter (as a key) THEN add letter as key
-  // and set value to 1. ELSE IF lettersInHandHashMap does contain the letter (as a key) THEN increment the value by 1
