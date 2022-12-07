@@ -121,12 +121,27 @@ export const highestScoreFrom = (words) => {
   // initiate score at 0
   let highestScore = 0;
 
+  for (const word of words) {
+    let wordScore = scoreWord(word);
+    if (highestScore < wordScore) {
+      highestWord = word;
+      highestScore = wordScore;
+    } else if (
+      wordScore === highestScore &&
+      word.length < 10 &&
+      word.length === 10
+    ) {
+      highestWord = word;
+    }
+  }
+  return { word: highestWord, score: highestScore };
+
   // iterate through the array of words
-  // define a new variable to keep track of score of words using callback func
-  // if the score of the first element in array is less than score of words
-  // highest score becomes score of words
-  // word becomes highest word
-  // else if highest score is same as score of word and length of word is 10 and highest word is not 10
-  // word becomes that highest word
-  // return word and score in an object style
+  // if the score of the word is greater than the highest score
+  // word becomes the highest word and score becomes highest score
+  // if score of the word equals the highest score and length of the word is less than 10
+  // the word becomes the highest word
+  // if the score of the word equals the highest score and length of the word is 10
+  // the word becomes the highest word
+  // return highest word and highest score
 };
