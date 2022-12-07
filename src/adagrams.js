@@ -57,8 +57,8 @@ const letterValues = {
 };
 
 export const drawLetters = () => {
-  let letterCount = {};
-  let drawnLetters = [];
+  const letterCount = {};
+  const drawnLetters = [];
   while (drawnLetters.length < 10) {
     const letter =
       Object.keys(letterPool)[
@@ -80,7 +80,7 @@ export const drawLetters = () => {
 export const usesAvailableLetters = (input, lettersInHand) => {
   input = input.toUpperCase();
 
-  for (let letter of input) {
+  for (const letter of input) {
     if (lettersInHand.includes(letter)) {
       lettersInHand.splice(letter, 1);
     } else {
@@ -109,14 +109,14 @@ export const scoreWord = (word) => {
 export const highestScoreFrom = (words) => {
   let wordsAndScores = {};
 
-  for (let word of words) {
-    let score = scoreWord(word);
+  for (const word of words) {
+    const score = scoreWord(word);
     wordsAndScores[word] = score;
   }
 
-  let winningWordAndScore = {
-    'word': Object.keys(wordsAndScores)[0],
-    'score': Object.values(wordsAndScores)[0],
+  const winningWordAndScore = {
+    word: Object.keys(wordsAndScores)[0],
+    score: Object.values(wordsAndScores)[0],
   };
 
   for (const [key, value] of Object.entries(wordsAndScores)) {
