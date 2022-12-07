@@ -99,21 +99,35 @@ export const scoreWord = (word) => {
   // Implement this method for wave 3
   let score=0
   for (let letter of word.toUpperCase()){
-    score+=LETTER_POOLZ[letter];
-    if (word.length > 6){
-    score+=8;
-    }
+    score+=LETTER_POOLZ[letter];}
+  if (word.length>6){
+  score+=8;
+    
   }
   return score;
 };
-//total_sum=0
-//#Test case sensitivity
-///cap_word=word.upper()
-//if len(word) > 6:
-    //total_sum=8
-//for letter in cap_word:
-    ///total_sum+=letter_value[letter]
-//return total_sum
+
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  let highestScore={'score':0,'word':''};
+  for (let word of words){
+    if(scoreWord(word) > highestScore['score']){
+      highestScore['score']=scoreWord(word);
+      highestScore['word']=word;
+    
+    }else if(scoreWord(word)===highestScore['score']){
+      if ((word.length<highestScore['word'].length)&&(highestScore['word'].length!==10)){
+        highestScore['word']=word;
+      }else if((word.length===10)&&(highestScore['word'].length!==10)){
+        highestScore['word']=word;
+      }
+  }
+  }
+  return highestScore;
+  
 };
+
+
+
+  
+  
+
