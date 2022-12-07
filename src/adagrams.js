@@ -101,5 +101,7 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  // let wordScores = []
+  //use map function(?) to calculate score for each word and add to list
+
 };
