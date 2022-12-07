@@ -97,6 +97,33 @@ export const scoreWord = (word) => {
 export const highestScoreFrom = (words) => {
   let highestScore = 0;
   let topWord = "";
-
   let tieList = [];
+
+  for (let i = 0; i < words.length; i++) {
+    let word = words[i];
+    let score = scoreWord(word);
+    if (score > highestScore) {
+      highestScore = score;
+      topWord = word;
+    } else if (score === highestScore) {
+      tieList.push(word);
+    }
+  }
+
+  for (let i = 0; i < tieList.length; i++) {
+    let word = tieList[i];
+    if (word.length === topWord.length) {
+      break;
+    } else if (word.length === 10) {
+      topWord = word;
+    } else if (word.length < topWord.length && topWord.length != 10) {
+      topWord = word;
+    }
+  }
+
+  let winner = {
+    word: topWord,
+    score: highestScore,
+  };
+  return winner;
 };
