@@ -2,7 +2,7 @@
 
 ### line 33
 `Object.freeze(POOL);`<br/>
-This prevents accidental mutation of POOL. Ultimately, my code didn't generate any errors caused by mutating POOL but I thought that it was prudent to include, just in case, particularly since a project requirement for at least one wave is that the code does not mutate POOL.
+This prevents accidental mutation of `POOL`. Ultimately, my code didn't generate any errors caused by mutating `POOL` but I thought that it was prudent to include, just in case, particularly since a project requirement for at least one wave is that the code does not mutate `POOL`.
 
 ### lines 36-38
 ```
@@ -10,7 +10,7 @@ let freqList = Object.entries(POOL)
   .map(([letter, value]) => Array(value).fill(letter))
   .flat();
 ```
-`Object.entries(POOL)` creates an array from POOL such that an outer array holds an inner array for each of POOL's key-value pairs, such that each key and value are stored as separate elements within an inner array (e.g., `{ key1: value1, key2: value2}` would become `[[key1, value1], [key2, value2]]`). I then use `map` to take the letters and values from POOL and, for each letter, create a new array of `${value}` elements that are all each `${letter}`. I then use `flat` to pull the elements out of the inner arrays and concatenate them into one (no longer nested) array.
+`Object.entries(POOL)` creates an array from `POOL` such that an outer array holds an inner array for each of `POOL`'s key-value pairs, such that each key and value are stored as separate elements within an inner array (e.g., `{ key1: value1, key2: value2}` would become `[[key1, value1], [key2, value2]]`). I then use `map` to take the letters and values from `POOL` and, for each letter, create a new array of `${value}` elements that are all each `${letter}`. I then use `flat` to pull the elements out of the inner arrays and concatenate them into one (no longer nested) array.
 
 ### lines 49-56
 ```
