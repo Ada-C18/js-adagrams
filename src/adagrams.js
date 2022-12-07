@@ -41,7 +41,27 @@ export const drawLetters = () => {
   return hand.slice(0, 10);
 };
 
-export const usesAvailableLetters = (input, lettersInHand) => {};
+export const usesAvailableLetters = (input, lettersInHand) => {
+  let availLetters = new Array();
+  for (let i = 0; i < 5; i++) {
+    let letter = lettersInHand[i];
+    availLetters.push(letter);
+  }
+
+  let word = input.toUpperCase();
+
+  for (let i = 0; i < word.length; i++) {
+    let letter = word[i];
+
+    if (availLetters.includes(letter)) {
+      availLetters.splice(availLetters.indexOf(letter), 1);
+    } else {
+      return false;
+    }
+  }
+
+  return true;
+};
 
 export const scoreWord = (word) => {};
 
