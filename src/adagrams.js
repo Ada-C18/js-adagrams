@@ -35,8 +35,8 @@ export const drawLetters = () => {
   };
   let allLetters = "";
   for (let letter in letterPool) {
-    const amountOftimes = letterPool[letter];
-    for (let i = 0; i < amountOftimes; i++) {
+    const amountOfTimes = letterPool[letter];
+    for (let i = 0; i < amountOfTimes; i++) {
       allLetters += letter;
     }
   }
@@ -115,7 +115,7 @@ export const highestScoreFrom = (words) => {
   for (let oneWord of words) {
     let infoAboutWords = new Object();
     let score = scoreWord(oneWord);
-    updatingHashTable(score, oneWord, infoAboutWords);
+    infoAboutWords = updatingHashTable(score, oneWord, infoAboutWords);
     scoreInfo.push(infoAboutWords);
   }
 
