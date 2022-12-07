@@ -52,21 +52,20 @@ describe('Adagrams', () => {
     });
 
     it('does not draw a letter too many times', () => {
-      for (let i = 0; i < 1000; i++) {
-        const drawn = drawLetters();
-        const letterFreq = {};
-        for (let letter of drawn) {
-          if (letter in letterFreq) {
-            letterFreq[letter] += 1;
-          } else {
-            letterFreq[letter] = 1;
-          }
-        }
-
-        for (let letter of drawn) {
-          expect(letterFreq[letter]).toBeLessThanOrEqual(LETTER_POOL[letter]);
+      const drawn = drawLetters();
+      const letterFreq = {};
+      for (let letter of drawn) {
+        if (letter in letterFreq) {
+          letterFreq[letter] += 1;
+        } else {
+          letterFreq[letter] = 1;
         }
       }
+
+      for (let letter of drawn) {
+        expect(letterFreq[letter]).toBeLessThanOrEqual(LETTER_POOL[letter]);
+      }
+      
     });
   });
 
