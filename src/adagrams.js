@@ -73,7 +73,7 @@ export const highestScoreFrom = (words) => {
 
   const tenLetterObjs = highScoreObjs.filter((wordScoreObjs) => wordScoreObjs.word.length === 10);
 
-  if (tenLetterObjs.length > 0) {
+  if (!!tenLetterObjs.length) {
     const sortedTenLetterObjs = tenLetterObjs.sort((a, b) => a.index - b.index);
     const firstLetterObjs = sortedTenLetterObjs[0];
     return { word: firstLetterObjs.word, score: firstLetterObjs.score };
