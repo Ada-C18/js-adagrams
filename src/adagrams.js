@@ -76,18 +76,41 @@ export const highestScoreFrom = (words) => {
   // words = ['list', 'of', 'words']
   // call scoreWord() on each (forEach?)
   // returns an object {'word': winningWord, 'score': winningWordScore}
-  let wordScores = words.map(scoreWord);
+  const wordScores = words.map(scoreWord);
   let highScore = 0;
+  let challenger = undefined;
+  let challengerCounter = 0
   for (let score of wordScores) {
     if (score > highScore) {
       highScore = score;
     } else if (score === highScore) {
-      // insert tie breakers here
-      continue;
+      challenger = {'word': words[challengerCounter], 'score': score};
     }
+    challengerCounter += 1;
   }
+
   let scoreIndex = wordScores.indexOf(highScore);
   let winningWord = words[scoreIndex];
   let winningPair = {'word': winningWord, 'score': highScore};
+  
+  if (challenger) {
+    const champion = tiebreaker(challenger, winningPair);
+    return champion;
+  }
+
   return winningPair;
 };
+
+const tiebreaker = (challenger, winningPair) => {
+  if (challenger['word'].length === winningPair['word'].length) {
+    return winningPair;
+  } else if (challenger['word'].length === 10) {
+    return challenger;
+  } else if (winningPair['word'].length === 10) {
+    return winningPair;
+  } else if (challenger['word'].length < winningPair['word'].length) {
+    return challenger;
+  } else {
+    return winningPair;
+  }
+}
