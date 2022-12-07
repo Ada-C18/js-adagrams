@@ -123,16 +123,16 @@ Our first job is to build a hand of 10 letters. To do so, implement the function
 |     A : 9     |     N : 6     |
 |     B : 2     |     O : 8     |
 |     C : 2     |     P : 2     |
-|     D : 4     |     Q : 1     |
+|     D : 4     |     Q : 1 *   |
 |    E : 12     |     R : 6     |
 |     F : 2     |     S : 4     |
 |     G : 3     |     T : 6     |
 |     H : 2     |     U : 4     |
 |     I : 9     |     V : 2     |
-|     J : 1     |     W : 2     |
-|     K : 1     |     X : 1     |
+|     J : 1 *   |     W : 2     |
+|     K : 1 *   |     X : 1 *   |
 |     L : 4     |     Y : 2     |
-|     M : 2     |     Z : 1     |
+|     M : 2     |     Z : 1 *   |
 
 **Note:** Making sure that the drawn letters match the rules of the letter pool can be straightforward or very difficult, depending on how you build the data structure for the letter pool. It is worth spending some time to think carefully about this.
 
