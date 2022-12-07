@@ -1,7 +1,40 @@
+<<<<<<< HEAD
 
 
 export const drawLetters = () => {
   // Implement this method for wave 1
+=======
+const LETTER_POOL = {
+  A: 9,
+  B: 2,
+  C: 2,
+  D: 4,
+  E: 12,
+  F: 2,
+  G: 3,
+  H: 2,
+  I: 9,
+  J: 1,
+  K: 1,
+  L: 4,
+  M: 2,
+  N: 6,
+  O: 8,
+  P: 2,
+  Q: 1,
+  R: 6,
+  S: 4,
+  T: 6,
+  U: 4,
+  V: 2,
+  W: 2,
+  X: 1,
+  Y: 2,
+  Z: 1,
+};
+
+export const drawLetters = () => {
+>>>>>>> b2339a8457d2c5cc25f4c47b8179bfcd4f9db969
   let letterBank = [];
   let letterCopy = JSON.parse(JSON.stringify(LETTER_POOL));
   let keyList = Object.keys(letterCopy);
@@ -17,6 +50,7 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
+<<<<<<< HEAD
   let letterCount = {};
   //loop through input and add each letter to a new list, count how many times each letter occur
   //count how many times each letter occurs in lettersInHand and compare
@@ -26,20 +60,73 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   return letters.every((attemptedLetter) =>
     lettersInHand.includes(attemptedLetter)
   );
+=======
+  let letters = input.toUpperCase();
+
+  //for-of loop iterates over the values in an iterable object, such as an array.
+  for (const letter of letters) {
+    if (!lettersInHand.includes(letter)) {
+      return false;
+    }
+  }
+
+  const letterCounts = {};
+  for (const letter of letters) {
+    if (!letterCounts[letter]) {
+      letterCounts[letter] = 1;
+    } else {
+      letterCounts[letter]++;
+    }
+  }
+
+  //calling the filter() method on the lettersInHand array returns an array containing
+  // only the occurrences of the letter in the lettersInHand array.
+  // The length of this array is then compared to the count variable.
+
+  // another way to write this code: for (const letter of Object.keys(letterCounts)) {const count = letterCounts[letter];
+  // rest of loop body goes here
+
+  for (const [letter, count] of Object.entries(letterCounts)) {
+    if (count > lettersInHand.filter((l) => l === letter).length) {
+      return false;
+    }
+  }
+
+  return true;
 };
 
-// for (let letter of input) {
-//   if (lettersInHand.includes(letter)) {
-//     return true; }
-
-// for (let letter of input) {
-//   if (!(letter in letterCount)) {
-//     letterCount[letter] = 0;
-//   }
-//   letterCount[letter]++;
-// }
+const SCORE_CHART = {
+  A: 1,
+  B: 3,
+  C: 3,
+  D: 2,
+  E: 1,
+  F: 4,
+  G: 2,
+  H: 4,
+  I: 1,
+  J: 8,
+  K: 5,
+  L: 1,
+  M: 3,
+  N: 1,
+  O: 1,
+  P: 3,
+  Q: 10,
+  R: 1,
+  S: 1,
+  T: 1,
+  U: 1,
+  V: 4,
+  W: 4,
+  X: 8,
+  Y: 4,
+  Z: 10,
+>>>>>>> b2339a8457d2c5cc25f4c47b8179bfcd4f9db969
+};
 
 export const scoreWord = (word) => {
+<<<<<<< HEAD
   let score = 0;
 
   let letterValues = {
@@ -75,21 +162,27 @@ export const scoreWord = (word) => {
 
   for (let i = 0; i < word.length; i++) {
     score += letterValues[word[i]];
+=======
+  if (word.length === 0) {
+    return 0;
+>>>>>>> b2339a8457d2c5cc25f4c47b8179bfcd4f9db969
   }
 
-  if (word.length > 6) {
+  let score = 0;
+  const letters = word.toUpperCase();
+  for (const letter of letters) {
+    score += SCORE_CHART[letter] || 0;
+  }
+
+
+  if (letters.length >= 7) {
     score += 8;
   }
+
   return score;
 };
+
 export const highestScoreFrom = (words) => {
-  //   returns an object that represents the data of a winning word and its score
-  //   - `word`, whose value is a string of a word
-  //   - `score`, whose value is the score of that word
-  // - In the case of tie in scores, use these tie-breaking rules:
-  //   - prefer the word with the fewest letters...
-  //   - unless one word has 10 letters.
-  //   - If the there are multiple words that are the same score and the same length, pick the first one in the supplied list
 
   let winningWords = {};
   let winningScore = 0;

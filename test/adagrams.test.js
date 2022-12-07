@@ -120,13 +120,7 @@ describe("Adagrams", () => {
     });
 
     it("returns a score of 0 if given an empty input", () => {
-<<<<<<< HEAD
-      expectScores({
-        "": 0,
-      });
-=======
       expect(scoreWord("")).toBe(0);
->>>>>>> 206792d809721ba7d1638a7562961ebacc2a14d8
     });
 
     it("adds an extra 8 points if word is 7 or more characters long", () => {
@@ -151,13 +145,9 @@ describe("Adagrams", () => {
       const words = ["XXX", "XXXX", "X", "XX"];
       const correct = { word: "XXXX", score: scoreWord("XXXX") };
 
-<<<<<<< HEAD
 
       expect(highestScoreFrom(words)).toEqual(correct);
 
-=======
-      expect(highestScoreFrom(words)).toEqual(correct);
->>>>>>> 206792d809721ba7d1638a7562961ebacc2a14d8
     });
 
     describe("in case of tied score", () => {
