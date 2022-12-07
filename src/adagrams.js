@@ -1,19 +1,6 @@
 import { parseSync } from "@babel/core";
 // import { random } from "core-js/core/number";
 
-/* Hi, Ansel!
-I made a personal goal for this project to avoid for loops as much as possible.
-Occasionally, I will include an alternative for loop as a comment, for comparison. 
-If you feel that the for loop would have been better code, please let me know. Thanks!
-
-I use some data structures and methods that were not covered in class. To avoid 
-this file becoming cluttered with comments, I have created an additional file, 
-comments.md (in the root folder) with explanations of my understandings of these 
-structures and methods as they appear in this file, ordered by line number in this file. 
-If you would like to check on my understanding of anything here, please refer to 
-that file.
-*/
-
 const POOL = {
   A: 9,
   B: 2,
@@ -50,7 +37,7 @@ export const drawLetters = () => {
     .map(([letter, value]) => Array(value).fill(letter))
     .flat();
 
-  /*   alternative for loop that could have generated freqList:
+  /* // Alternative for loop that could have generated freqList:
 
   for (let [key, value] of Object.entries(POOL)) {
     for (let i = 0; i < value; i++) {
@@ -153,7 +140,6 @@ export const scoreWord = (word) => {
   }
 
   let wordMap = makeWordMap(word);
-
   let wordIter = wordMap[Symbol.iterator]();
 
   for (let item of wordIter) {
@@ -162,6 +148,20 @@ export const scoreWord = (word) => {
   }
 
   return score;
+
+  /* // Alternative implementation using an array instead of a map object:
+  const bonusFloorLength = 7;
+  const scoreBonus = 8;
+
+  let wordArr = Array.from(word.toUpperCase());
+
+  let score = wordArr.reduce(
+    (tally, letter) => tally + SCORECHART[letter],
+    word.length >= bonusFloorLength ? scoreBonus : 0
+  );
+
+  return score;
+  */
 };
 
 export const highestScoreFrom = (words) => {
