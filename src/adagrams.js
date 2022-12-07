@@ -1,5 +1,5 @@
 export const drawLetters = () => {
-  let letterPool = {
+  const letterPool = {
     A: 9,
     B: 2,
     C: 2,
@@ -28,7 +28,7 @@ export const drawLetters = () => {
     Z: 1,
   };
 
-  let letters = [];
+  let letters = new Array();
 
   for (const letter in letterPool) {
     for (let i = 0; i < letterPool[letter]; i++) {
@@ -36,18 +36,14 @@ export const drawLetters = () => {
     }
   }
 
-  const shuffledLetters = [letters].sort(() => 0.5 - Math.random());
+  const hand = [...letters].sort(() => 0.5 - Math.random());
 
-  return shuffledLetters.slice(0, 10);
+  return hand.slice(0, 10);
 };
 
-export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
-};
+export const usesAvailableLetters = (input, lettersInHand) => {};
 
-export const scoreWord = (word) => {
-  // Implement this method for wave 3
-};
+export const scoreWord = (word) => {};
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
