@@ -113,7 +113,7 @@ export const highestScoreFrom = (words) => {
   let scoreInfo = [];
 
   for (let oneWord of words) {
-    let infoAboutWords = {};
+    let infoAboutWords = new Object();
     let score = scoreWord(oneWord);
     updatingHashTable(score, oneWord, infoAboutWords);
     scoreInfo.push(infoAboutWords);
