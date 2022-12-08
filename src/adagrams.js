@@ -51,7 +51,7 @@ export const drawLetters = () => {
   }
   return hand;
 
-};
+}
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   let hand = [...lettersInHand];
@@ -101,30 +101,33 @@ export const scoreWord = (word) => {
   let wordUpper = word.toUpperCase();
  
   if (6 < word.length && word.length < 11) {
-    console.log("we in here");
     total += 8
   }
- console.log(total);
   for (let letter of wordUpper){
     let letPoint = pointValues[letter];
     total += letPoint;
   }
-  console.log(total);
+
   return total;
-};
+}
 
 export const highestScoreFrom = (words) => {
   let winning_word = ""
   let winning_score = -1
-  console.log(words);
-  for (word of words){
-      score = score_word(word)
-      if score > winning_score:
-          winning_word = word
-          winning_score = score
-      elif score == winning_score and len(winning_word) != 10:
-          if len(word) == 10 or len(word) < len(winning_word):
-              winning_word = word           
-  }; 
-  return (winning_word, winning_score)
-};
+  for (let word of words){
+      let score = scoreWord(word);
+      if (score > winning_score){
+          winning_word = word;
+          winning_score = score;
+        }
+       else if (score === winning_score && winning_word.length != 10){
+          if (word.length == 10 || word.length < winning_word.length){
+              winning_word = word   
+          }
+      }       
+  }
+  return {
+    "score" : winning_score,
+    "word" : winning_word
+  }
+}
