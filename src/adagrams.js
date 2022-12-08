@@ -47,17 +47,27 @@ export const drawLetters = () => {
     let index = Math.floor(Math.random()*letterList.length);
     let letterDrawn = letterList[index];
     hand.push(letterDrawn);
-    letterList.splice(index, index);
+    letterList.splice(index, 1);
   }
-  console.log(hand)
   return hand;
 
-  // Implement this method for wave 1
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
-};
+  let hand = [...lettersInHand];
+  let word = input;
+  console.log(hand);
+  console.log(word);
+
+  for (let letter of word){
+      if (!hand.includes(letter)){
+        return false;}
+      else{
+          let index = hand.indexOf(letter);
+          hand.splice(index,1);}
+  }  
+  return true
+}
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
