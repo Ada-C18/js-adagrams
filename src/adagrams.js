@@ -56,21 +56,24 @@ const scoreChart = {
   Z: 10,
 };
 
+//creates string of all letters in letter pool by distribution
 const getLetters = () => {
   let multiStr = "";
   for (const letter in letterPool) {
-    //let multiStr = letter.repeat(letterPool[letter]);
     multiStr += letter.repeat(letterPool[letter]);
   }
   return multiStr;
 };
-const letterBank = getLetters();
+//const letterBank = getLetters();
 
 export const drawLetters = () => {
-  // Return an array of ten strings
   const randomHand = [];
+  let letterBank = getLetters();
   for (let i = 0; i < 10; i++) {
-    randomHand.push(letterBank[Math.floor(Math.random() * letterBank.length)]);
+    let randomLetter =
+      letterBank[Math.floor(Math.random() * letterBank.length)];
+    randomHand.push(randomLetter);
+    letterBank = letterBank.replace(randomLetter, "");
   }
   return randomHand;
 };
@@ -80,9 +83,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
   for (let i = 0; i < input.length; i++) {
     console.log(input[i]);
-    //console.log(i);
 
-    //letter = input[i]
     if (filteredHand.includes(input[i]) === false) {
       return false;
     } else if (filteredHand.includes(input[i]) === true) {
@@ -96,12 +97,10 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 };
 
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
   let totalScore = 0;
   let scoredLetter = 0;
   word = word.toUpperCase();
 
-  // function returns the score of a given word
   for (let i = 0; i < word.length; i++) {
     scoredLetter = scoreChart[word[i]];
     totalScore = totalScore + scoredLetter;
@@ -125,57 +124,45 @@ export const highestScoreFrom = (words) => {
   }
 
   // get max of scores from scoredWords{}
-  // also keep a list of ties in tieList
   let tieList = [];
   let winningWord = "";
   let winningScore = 0;
 
-  for (const [word, score] of Object.entries(scoredWords)) {
+  for (let [word, score] of Object.entries(scoredWords)) {
+    //console.log(scoredWords)
     if (score > winningScore) {
       winningScore = score;
       winningWord = word;
-      //tieList.push(winningWord)
-    } else if (score === winningScore) {
-      tieList.push(winningWord, word);
-      console.log(score);
+      console.log(scoredWords);
+      // console.log(winningWord)
+      // console.log(winningScore)
     }
+    // else if (score === winningScore) {
+    //   tieList.push(winningWord, word);
+    //   console.log(score);
+    // }
     //ensure that all words in tieList have scores === winningScore
   }
 
-  if (tieList.length === 0) {
-    console.log(winningWord);
-    return winningWord, winningScore;
-  } else {
-    //get min and max length from tieList
-    const maxLength = Math.max.apply(
-      Math,
-      tieList.map(function (tieWord) {
-        null, tieWord.length;
-      })
-    );
-    const minLength = Math.min.apply(
-      Math,
-      tieList.map(function (tieWord) {
-        null, tieWord.length;
-      })
-    );
-
-    //if maxLength===10, return word with maxLength
-    //else set word with minLength to winningWord
-    if (maxLength === 10) {
-      for (let i = 0; i < tieList.length; i++) {
-        if (tieList[i].length === 10) {
-          winningWord = tieList[i];
-          return winningWord, winningScore;
-        }
-      }
-    } else {
-      for (let i = 0; i < tieList.length; i++) {
-        if (tieList[i].length === minLength) {
-          winningWord = tieList[i];
-          return winningWord, winningScore;
-        }
-      }
+  //find ties
+  for (let [word, score] of Object.entries(scoredWords)) {
+    if (score === winningScore) {
+      tieList.push(word);
+      console.log(tieList);
     }
   }
+  if (tieList.length > 1) {
+    //find min length
+    //return word with min length
+    let sortedList = tieList.sort((a, b) => a.length - b.length);
+    if (sortedList[sortedList.length - 1].length === 10) {
+      winningWord = sortedList[sortedList.length - 1];
+    } else {
+      winningWord = sortedList[0];
+    }
+  }
+
+  const result = { score: winningScore, word: winningWord };
+
+  return result;
 };
