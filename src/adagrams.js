@@ -105,5 +105,39 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  const scoredWords = new Map();
+
+  words.forEach(word => {
+    scoredWords.set(word,scoreWord(word));
+  });
+
+  let scores = scoredWords.values();
+  let highScore = Math.max(...scores);
+
+
+  const scoredWordsArray = Array.from(scoredWords.entries());
+  function checkWord(word) {
+    return word[1] === highScore;
+    
+  }
+
+  const highScoreWords = scoredWordsArray.filter(checkWord)
+
+
+    let smallestWordLength = Infinity
+    let previousWord = ["", 0]
+    highScoreWords.forEach(wordEntry => {
+      let wordLength = wordEntry[0].length
+      if (previousWord[0].length === 10)
+        return //prevents if statement on next line from running
+      if (wordLength === 10) {
+        previousWord = wordEntry
+      } else if (wordLength < smallestWordLength) {
+        smallestWordLength = wordLength
+        previousWord = wordEntry
+      }
+    })
+    return {"score": previousWord[1], "word": previousWord[0]}
+
+
 };
