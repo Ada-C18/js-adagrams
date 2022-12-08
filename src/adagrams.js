@@ -1,6 +1,7 @@
 
 
 
+
 export const drawLetters = () => {
   
   const letterPool = {
@@ -32,22 +33,24 @@ export const drawLetters = () => {
     'Z': 1
   };
 
-  let letterList = Object.keys(letterPool);
+  let letterList = [];
 
-  for (const letter of letterList){
-    for (let i = 0; i < letterPool[letter]; i++){
+  for (let letter in letterPool){
+    let freq = letterPool[letter];
+    for (let i = 0 ; i < freq ; i++) {
       letterList.push(letter);
-    }
+    } 
   }
 
   let hand = [];
   while (hand.length < 10){
-    let letterDrawn = letterPool[Math.floodsr(Math.random()*items.length)];
+    let index = Math.floor(Math.random()*letterList.length);
+    let letterDrawn = letterList[index];
     hand.push(letterDrawn);
+    letterList.splice(index, index);
   }
-
+  console.log(hand)
   return hand;
-
 
   // Implement this method for wave 1
 };
