@@ -118,4 +118,8 @@ else if (thisScore === hScore) {
 The `else if` statement only applies if the score of the current word being inspected is strictly equal to that of the highest scoring word (thus far). If the scores are equal, the inner if statement tests for the tie-breaking rules. As I've written it, for the function to enter the if statement, the highest-scoring word (thus far) has to be shorter than 10 letters long. In addition, the current word must either be shorter than the highest-scoring word or must be ten letters long. If the words being compared meet the if statement criteria, the accumulator is updated with the current word and the current score.
 <br/><br/>
 `return accumulator;`<br/>
-After the reduce callback function has assessed the if/else if statements, the function returns the accumulator, which would have been updated if the current word being inspected met the if/else if statement criteria. If there are elements in the array that have not yet been assessed, `reduce` then moves on to the next element (containing a word and its associated score) and compares the element to the returned accumulator value, via the callback function. When `reduce` reaches the end of the array, it returns the accumulator.
+After the reduce callback function has assessed the if/else if statements, the function returns the accumulator, which would have been updated if the current word being inspected met the if/else if statement criteria.
+<br/><br/>
+If there are elements in the array that have not yet been assessed, `reduce` then moves on to the next element (containing a word and its associated score) and compares the element to the returned (updated) accumulator value, via the callback function.
+<br/><br/>
+When `reduce` reaches the end of the array, it returns the accumulator.
