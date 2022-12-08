@@ -35,7 +35,7 @@ const makeMap = (elem, mapObj) =>
     ? mapObj.set(elem, mapObj.get(elem) + 1)
     : mapObj.set(elem, 1);
 ```
-This helper function checks if the passed in Map object has the value passed in as `elem` as a key. If `elem` already exists as a key, the function adds 1 to the value of `elem`. If `elem` does not yet exist as a key in the Map object, the function adds `elem` as a key with a value of 1. Technically, I did learn ternaries as part of the curriculum, because I first saw them in the 'absurd one-liner' you posted as a solution for `mystery3` following the roundtable on JavaScript testing.
+This helper function checks if the passed in Map object has the value passed in as `elem` as a key. If `elem` already exists as a key, the function adds 1 to the value of `elem`. If `elem` does not yet exist as a key in the Map object, the function adds `elem` as a key with a value of 1. Technically, I did learn ternaries as part of the curriculum, because I first saw them in the 'absurd one-liner' posted as a solution for `mystery3` following the roundtable on JavaScript testing.
 
 ### lines 66-70
 ```
@@ -89,7 +89,7 @@ const [hsWord, highestScore] = words
 `words.map((word) => [word, scoreWord(word)])`<br/>
 This transforms the array of words (`words`, passed in as an argument) into an array of nested arrays, in which the inner arrays each contain a word (previously an element of `words`) and its corresponding score.
 <br/><br/>
-`.reduce((accumulator, currentValue) => {...}, ["", 0];`<br/>
+`.reduce((accumulator, currentValue) => {...}, ["", 0]);`<br/>
 I use the reduce method to compare the various array elements with each other, to determine the highest scoring word, as a means to return both the word and its score. Here, the accumulator will function as the array holding the highest scoring word and its corresponding score. The accumulator is initialized to `["", 0]`, so that if the list of words is composed of only empty strings, an empty string scoring zero will be returned.
 <br/><br/>
 ```
@@ -103,7 +103,7 @@ if (thisScore > hScore) {
   accumulator = [thisWord, thisScore];
 }
 ```
-The if statement compares the score of the curent word being inspected to the score of the highest scoring word (thus far), if the score of the current word is greater than the current high score, then the accumulator is updated with the current word and the current score.
+The if statement compares the score of the curent word being inspected to the score of the highest scoring word (thus far). If the score of the current word is greater than the current high score, the accumulator is updated with the current word and the current score.
 <br/><br/>
 ```
 else if (thisScore === hScore) {
@@ -115,7 +115,7 @@ else if (thisScore === hScore) {
   }
 }
 ```
-The `else if` statement only applies if the score of the current word being inspected is strictly equal to that of the highest scoring word (thus far). If the scores are equal, the inner if statement tests for the tie-breaking rules. As I've written it, to enter the if statement, the highest-scoring word (thus far) has to be shorter than 10 letters long. In addition, the current word must either be shorter than the highest-scoring word or must be ten letters long. If the words being compared meet the if statement criteria, the accumulator is updated with the current word and the current score.
+The `else if` statement only applies if the score of the current word being inspected is strictly equal to that of the highest scoring word (thus far). If the scores are equal, the inner if statement tests for the tie-breaking rules. As I've written it, for the function to enter the if statement, the highest-scoring word (thus far) has to be shorter than 10 letters long. In addition, the current word must either be shorter than the highest-scoring word or must be ten letters long. If the words being compared meet the if statement criteria, the accumulator is updated with the current word and the current score.
 <br/><br/>
 `return accumulator;`<br/>
-After the reduce callback function has assessed the if/else if statements, the function returns the accumulator, which would have been updated if the current word being inspected met the if/else if statement criteria. `reduce` would then move on to the next element (containing a word and its associated score) and compare it to the returned accumulator value, via the callback function.
+After the reduce callback function has assessed the if/else if statements, the function returns the accumulator, which would have been updated if the current word being inspected met the if/else if statement criteria. If there are elements in the array that have not yet been assessed, `reduce` then moves on to the next element (containing a word and its associated score) and compares the element to the returned accumulator value, via the callback function. When `reduce` reaches the end of the array, it returns the accumulator.
