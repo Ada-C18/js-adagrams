@@ -56,8 +56,6 @@ export const drawLetters = () => {
 export const usesAvailableLetters = (input, lettersInHand) => {
   let hand = [...lettersInHand];
   let word = input;
-  console.log(hand);
-  console.log(word);
 
   for (let letter of word){
       if (!hand.includes(letter)){
@@ -70,9 +68,63 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 }
 
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
+  const pointValues = {
+    'A': 1, 
+    'B': 3, 
+    'C': 3, 
+    'D': 2, 
+    'E': 1, 
+    'F': 4, 
+    'G': 2, 
+    'H': 4, 
+    'I': 1, 
+    'J': 8, 
+    'K': 5, 
+    'L': 1, 
+    'M': 3, 
+    'N': 1, 
+    'O': 1, 
+    'P': 3, 
+    'Q': 10, 
+    'R': 1, 
+    'S': 1, 
+    'T': 1, 
+    'U': 1, 
+    'V': 4, 
+    'W': 4, 
+    'X': 8, 
+    'Y': 4, 
+    'Z': 10
+  };
+
+  let total = 0;
+  let wordUpper = word.toUpperCase();
+ 
+  if (6 < word.length && word.length < 11) {
+    console.log("we in here");
+    total += 8
+  }
+ console.log(total);
+  for (let letter of wordUpper){
+    let letPoint = pointValues[letter];
+    total += letPoint;
+  }
+  console.log(total);
+  return total;
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  let winning_word = ""
+  let winning_score = -1
+  console.log(words);
+  for (word of words){
+      score = score_word(word)
+      if score > winning_score:
+          winning_word = word
+          winning_score = score
+      elif score == winning_score and len(winning_word) != 10:
+          if len(word) == 10 or len(word) < len(winning_word):
+              winning_word = word           
+  }; 
+  return (winning_word, winning_score)
 };
