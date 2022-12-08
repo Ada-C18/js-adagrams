@@ -122,19 +122,14 @@ const substringCount = (string) => {
 
 const breakTie = (words) => {
   let wordLengths = {};
-  for (const word of words) {
-    //Refactor with .map
+  words.forEach((word) => {
     if (word.length === 10) {
       wordLengths[word] = 0;
     } else {
       wordLengths[word] = word.length;
     }
-  }
+  });
   let minLength = Math.min(...Object.values(wordLengths));
-  // let minLength = Object.values(wordLengths).reduce(
-  //   (a, b) => Math.min(a, b),
-  //   -Infinity
-  // );
   for (const word in wordLengths) {
     //Refactor with .filter
     if (wordLengths[word] === minLength) {
