@@ -115,6 +115,7 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
+  console.log(words);
   // Implement this method for wave 4
   // initiate emtpy string
   let highestWord = "";
@@ -123,17 +124,24 @@ export const highestScoreFrom = (words) => {
 
   for (const word of words) {
     let wordScore = scoreWord(word);
-    if (highestScore < wordScore) {
+    if (wordScore > highestScore) {
       highestWord = word;
       highestScore = wordScore;
     } else if (
       wordScore === highestScore &&
-      word.length < 10 &&
-      word.length === 10
+      word.length === 10 &&
+      highestWord.length !== 10
+    ) {
+      highestWord = word;
+    } else if (
+      highestScore === wordScore &&
+      word.length < highestWord.length &&
+      highestWord.length !== 10
     ) {
       highestWord = word;
     }
   }
+
   return { word: highestWord, score: highestScore };
 
   // iterate through the array of words
