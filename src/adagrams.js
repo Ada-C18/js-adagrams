@@ -96,16 +96,11 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   let wordScores = {};
-  for (const word of words) {
-    wordScores[word] = scoreWord(word);
-  }
+  words.forEach((word) => (wordScores[word] = scoreWord(word)));
   let highestScore = Math.max(...Object.values(wordScores));
-  // let highestScore = Object.values(wordScores).reduce(
-  //   (a, b) => Math.max(a, b),
-  //   -Infinity
-  // );
   let tiedWords = [];
   for (const [word, score] of Object.entries(wordScores)) {
+    //Refactor with .filter
     if (score === highestScore) {
       tiedWords.push(word);
     }
@@ -129,6 +124,7 @@ const substringCount = (string) => {
 const breakTie = (words) => {
   let wordLengths = {};
   for (const word of words) {
+    //Refactor with .map
     if (word.length === 10) {
       wordLengths[word] = 0;
     } else {
@@ -141,6 +137,7 @@ const breakTie = (words) => {
   //   -Infinity
   // );
   for (const word in wordLengths) {
+    //Refactor with .filter
     if (wordLengths[word] === minLength) {
       return word;
     }
