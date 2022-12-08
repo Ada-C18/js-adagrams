@@ -99,9 +99,8 @@ export const highestScoreFrom = (words) => {
   words.forEach((word) => (wordScores[word] = scoreWord(word)));
   let highestScore = Math.max(...Object.values(wordScores));
   let tiedWords = [];
-  for (const [word, score] of Object.entries(wordScores)) {
-    //Refactor with .filter
-    if (score === highestScore) {
+  for (const word in wordScores) {
+    if (wordScores[word] === highestScore) {
       tiedWords.push(word);
     }
   }
