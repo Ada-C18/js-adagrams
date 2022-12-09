@@ -86,18 +86,28 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  words.sort((w, x) => {
-    if (w.length === x.length) return 0;
-    if (w.length === 10) return -1;
-    if (x.length === 10) return 1;
-    return w.length - x.length;
+  const breakTie = (ties) => {
+    let shortest_word = ties.reduce(
+      (prev, curr) => (curr.length < prev.length ? curr : prev),
+      Array(11)
+    );
+    let ten_word = false;
+    for (const w of ties) {
+      if (w.length === 10) {
+        ten_word = w;
+        break;
+      }
+    }
+    return ten_word ? ten_word : shortest_word;
+  };
+  let wordScores = {};
+  let highestScore = 0;
+  words.forEach((word) => {
+    let score = scoreWord(word);
+    highestScore = highestScore < score ? score : highestScore;
+    if (wordScores[score] === undefined) wordScores[score] = Array();
+    wordScores[score].push(word);
   });
-  let word_scores = words.map((word) => {
-    return { word: word, score: scoreWord(word) };
-  });
-  let highest_score = word_scores.reduce(
-    (prev, curr) => (curr.score > prev.score ? curr : prev),
-    { word: "", score: 0 }
-  );
-  return highest_score;
+  let bestWord = breakTie(wordScores[highestScore]);
+  return { word: bestWord, score: highestScore };
 };
