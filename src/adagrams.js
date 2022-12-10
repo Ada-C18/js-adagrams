@@ -1,4 +1,4 @@
-import { keyOf } from "core-js/core/dict";
+// import { keyOf } from "core-js/core/dict";
 
 export const drawLetters = () => {
   // Implement this method for wave 1
@@ -91,84 +91,45 @@ export const scoreWord = (word) => {
     Z: 10,
   };
 
-  let sum = 0;
+  let score = 0;
 
   for (let letter of word) {
     let value = lettersDict[letter.toUpperCase()];
-    sum += value;
+    score += value;
   }
   if (word.length > 6) {
-    sum += 8;
+    score += 8;
   } else if (word.length == "") {
     return 0;
   }
-  return sum;
+  return score;
 };
-
-// Pseudocode for wave 4:
-// Create a dictionary that will hold our words.
-// Iterate through our words and use the scoreWord function to
-// get the score of our word.
-// Create a variable called winner that takes the
-// word in index 0 in words and the word in index 0 of our words dict.
-
-// Iterate through the keys and values from our letterPool and check
-// if our value is greater than winner. If it is, we want to set
-// winner to (key, value).
-// Then check if our value is equal to winner and if the lenght of
-// winner is less than 10. If it is, we want to check the length
-// of our key and if it is equal to 10, set that key and that value to winner.
-// Then check if our key is less than our winner, and if it is, set that key
-// and value to winner. Return the winner outside of the loop.
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
-  const letterPool = {
-    A: 9,
-    B: 2,
-    C: 2,
-    D: 4,
-    E: 12,
-    F: 2,
-    G: 3,
-    H: 2,
-    I: 9,
-    J: 1,
-    K: 1,
-    L: 4,
-    M: 2,
-    N: 6,
-    O: 8,
-    P: 2,
-    Q: 1,
-    R: 6,
-    S: 4,
-    T: 6,
-    U: 4,
-    V: 2,
-    W: 2,
-    X: 1,
-    Y: 2,
-    Z: 1,
-  };
+
   const wordsDict = {};
 
   for (let word of words) {
     wordsDict[word] = scoreWord(word);
   }
-  let winner = (words[0], wordsDict[words[0]]);
+  const winner = { word: words[0], score: wordsDict[words[0]] };
 
-  for (const [key, value] of words.Object.entries(letterPool)) {
-    if (value > winner[1]) {
-      winner = (key, value);
+  for (const [word, score] of Object.entries(wordsDict)) {
+    if (score > winner["score"]) {
+      winner["word"] = word;
+      winner["score"] = score;
+      console.log(word, score);
     }
-    if (value === winner[1] && winner[0].length < 10) {
-      if (key.length == 10) {
-        winner = (key, value);
-      } else if (key.length < winner[0].length) {
-        winner = (key, value);
+    if (score === winner["score"] && winner["word"].length < 10) {
+      if (word.length == 10) {
+        winner["word"] = word;
+        winner["score"] = score;
+      } else if (word.length < winner["word"].length) {
+        winner["word"] = word;
+        winner["score"] = score;
       }
     }
-    return winner;
   }
+  return winner;
 };

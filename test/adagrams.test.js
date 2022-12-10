@@ -54,7 +54,7 @@ describe("Adagrams", () => {
     it("does not draw a letter too many times", () => {
       for (let i = 0; i < 1000; i++) {
         const drawn = drawLetters();
-        const letterFreg = {};
+        const letterFreq = {};
         for (let letter of drawn) {
           if (letter in letterFreq) {
             letterFreq[letter] += 1;
@@ -146,8 +146,8 @@ describe("Adagrams", () => {
     it("accurately finds best scoring word even if not sorted", () => {
       const words = ["XXX", "XXXX", "X", "XX"];
       const correct = { word: "XXXX", score: scoreWord("XXXX") };
-
-      throw "Complete test by adding an assertion";
+      // throw "Complete test by adding an assertion";
+      expect(highestScoreFrom(words)).toEqual(correct);
     });
 
     describe("in case of tied score", () => {
