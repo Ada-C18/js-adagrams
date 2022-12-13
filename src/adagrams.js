@@ -1,7 +1,7 @@
 const letterPool = Array(9)
   .fill("A")
   .concat(Array(2).fill("B"))
-  .concat(Array(2).fill("c"))
+  .concat(Array(2).fill("C"))
   .concat(Array(4).fill("D"))
   .concat(Array(12).fill("E"))
   .concat(Array(2).fill("F"))

@@ -34,7 +34,7 @@ const LETTER_POOL = {
   Z: 1,
 };
 
-describe('Adagrams', () => {
+  describe('Adagrams', () => {
   describe('drawLetters', () => {
     it('draws ten letters from the letter pool', () => {
       const drawn = drawLetters();
@@ -62,9 +62,9 @@ describe('Adagrams', () => {
           }
         }
 
-        for (let letter of drawn) {
-          expect(letterFreq[letter]).toBeLessThanOrEqual(LETTER_POOL[letter]);
-        }
+      for(let letter of drawn) {
+        expect(letterFreq[letter]).toBeLessThanOrEqual(LETTER_POOL[letter]);
+      }
       }
     });
   });
@@ -144,7 +144,7 @@ describe('Adagrams', () => {
       const correct = { word: "XXXX", score: scoreWord("XXXX") };
 
       // throw "Complete test by adding an assertion";
-      expect(highestScoreFrom(words)). toEqual(correct);
+      expect(highestScoreFrom(words)).toEqual(correct);
     });
 
     describe("in case of tied score", () => {
