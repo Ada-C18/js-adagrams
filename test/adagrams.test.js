@@ -54,17 +54,17 @@ describe("Adagrams", () => {
     it("does not draw a letter too many times", () => {
       for (let i = 0; i < 1000; i++) {
         const drawn = drawLetters();
-        const letter_freq = {};
+        const letterFreq = {};
         for (let letter of drawn) {
-          if (letter in letter_freq) {
-            letter_freq[letter] += 1;
+          if (letter in letterFreq) {
+            letterFreq[letter] += 1;
           } else {
-            letter_freq[letter] = 1;
+            letterFreq[letter] = 1;
           }
         }
 
         for (let letter of drawn) {
-          expect(letter_freq[letter]).toBeLessThanOrEqual(LETTER_POOL[letter]);
+          expect(letterFreq[letter]).toBeLessThanOrEqual(LETTER_POOL[letter]);
         }
       }
     });
@@ -120,7 +120,9 @@ describe("Adagrams", () => {
     });
 
     it("returns a score of 0 if given an empty input", () => {
-      throw "Complete test";
+      expectScores({
+        "": 0,
+      });
     });
 
     it("adds an extra 8 points if word is 7 or more characters long", () => {
@@ -133,7 +135,7 @@ describe("Adagrams", () => {
     });
   });
 
-  describe.skip("highestScoreFrom", () => {
+  describe("highestScoreFrom", () => {
     it("returns a hash that contains the word and score of best word in an array", () => {
       const words = ["X", "XX", "XXX", "XXXX"];
       const correct = { word: "XXXX", score: scoreWord("XXXX") };
@@ -144,8 +146,8 @@ describe("Adagrams", () => {
     it("accurately finds best scoring word even if not sorted", () => {
       const words = ["XXX", "XXXX", "X", "XX"];
       const correct = { word: "XXXX", score: scoreWord("XXXX") };
-
-      throw "Complete test by adding an assertion";
+      // throw "Complete test by adding an assertion";
+      expect(highestScoreFrom(words)).toEqual(correct);
     });
 
     describe("in case of tied score", () => {
