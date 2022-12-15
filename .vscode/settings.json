@@ -3,5 +3,6 @@
         "activityBar.background": "#541B13",
         "titleBar.activeBackground": "#76251B",
         "titleBar.activeForeground": "#FDF8F8"
-    }
+    },
+    "jest.jestCommandLine": "yarn test"
 }
