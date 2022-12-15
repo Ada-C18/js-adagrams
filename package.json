@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "coverage": "open coverage/lcov-report/index.html",
-    "demo-game": "babel-node src/demo.js"
+    "demo-game": "babel-node src/demo.js",
+    "adagrams": "babel-node src/adagrams.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,8 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^24.8.0",
     "babel-plugin-module-resolver": "^3.2.0",
+    "eslint": "^8.28.0",
+    "eslint-plugin-jest": "^27.1.6",
     "jest": "^24.8.0",
     "regenerator-runtime": "^0.12.1"
   },
