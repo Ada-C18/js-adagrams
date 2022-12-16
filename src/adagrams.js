@@ -79,12 +79,12 @@ export const drawLetters = () => {
 export const usesAvailableLetters = (input, lettersInHand) => {
   for (const letter of input) {
     if (lettersInHand.includes(letter)) {
-      console.log(true);
       const index = lettersInHand.indexOf(letter);
-      const remove = lettersInHand.splice(index, 1);
+      lettersInHand.splice(index, 1);
     } else {
-      console.log(false);
+      return false;
     }
+    return true;
   }
 };
 
@@ -93,38 +93,43 @@ export const scoreWord = (word) => {
   let extraPoints = 8;
   const wordUp = word.toUpperCase();
 
-  let lettersFromWord = wordUp.split("");
-
-  if (7 <= lettersFromWord.length <= 10) {
-    scoreTotal += extraPoints;
+  if (wordUp.length === 0) {
+    return scoreTotal;
   }
+
+  let lettersFromWord = wordUp.split("");
 
   for (let i = 0; i < lettersFromWord.length; i++) {
     let letter = lettersFromWord[i];
     scoreTotal += scoreChart[letter];
   }
+
+  if (lettersFromWord.length >= 7 && lettersFromWord.length <= 10) {
+    scoreTotal += extraPoints;
+  }
+
   return scoreTotal;
 };
 
-export const highScorehelper = (word) => {
-  let currentScore = scoreWord(word);
-  let wordLen = -word.length;
-  let has10 = wordLen == -10;
+// export const highScorehelper = (word) => {
+//   let currentScore = scoreWord(word);
+//   let wordLen = -word.length;
+//   let has10 = wordLen == -10;
 
-  result = (currentScore, has10, wordLen);
-  return result;
-};
+//   result = (currentScore, has10, wordLen);
+//   return result;
+// };
 
-// export const
-export const highestScoreFrom = (words) => {
-  // use our helper function to find the highest ranked
-  // word using max
+// // export const
+// export const highestScoreFrom = (words) => {
+//   // use our helper function to find the highest ranked
+//   // word using max
 
-  let highWord = words.sort();
+//   let highWord = words.sort();
 
-  return highWord;
-};
+//   return highWord;
+// };
 
-// high_word = max(word_list, key=_high_score_key_helper)
+// // high_word = max(word_list, key=_high_score_key_helper)
 
-// return (high_word, score_word(high_word))
+// // return (high_word, score_word(high_word))
