@@ -113,9 +113,6 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // let currentScore = scoreWord();
-  // const words = ["XX", "X", "XXX", "XXXX"];
-  // const words = ["X", "XX"];
   let currentHighScore = {
     score: 0,
     word: "",
@@ -128,7 +125,6 @@ export const highestScoreFrom = (words) => {
     // console.log(i === words.length - 1);
 
     if (i === words.length - 1) {
-      //False
       break;
     }
 
@@ -137,42 +133,12 @@ export const highestScoreFrom = (words) => {
 
     if (currentScore < nextScore) {
       currentHighScore.score = nextScore;
-      currentHighScore.word = word;
+      currentHighScore.word = nextWord;
       continue;
     } else {
-      // let keyName = "key"
-      // currentHighScore[keyName] = 100
-      // { key: 100 }
-      console.log(
-        "HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-      );
       currentHighScore.score = currentScore;
-      currentHighScore.word = nextWord;
+      currentHighScore.word = word;
     }
   }
   return currentHighScore;
 };
-// iterate thorgh all the words
-// then score reach word
-
-// use our helper function to find the highest ranked
-// word using max
-
-//   let highWord = words.sort();
-
-//   return highWord;
-// };
-
-// export const highScorehelper = (word) => {
-//   let currentScore = scoreWord(word);
-
-// let wordLen = -word.length;
-// let has10 = wordLen == -10;
-
-// result = (currentScore, has10, wordLen);
-// return result;
-// // export const
-
-// // high_word = max(word_list, key=_high_score_key_helper)
-
-// // return (high_word, score_word(high_word))
