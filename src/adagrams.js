@@ -84,13 +84,14 @@ export const usesAvailableLetters = (input, lettersInHand) => {
     } else {
       return false;
     }
-    return true;
   }
+  return true;
 };
 
 export const scoreWord = (word) => {
   let scoreTotal = 0;
   let extraPoints = 8;
+
   const wordUp = word.toUpperCase();
 
   if (wordUp.length === 0) {
@@ -111,24 +112,66 @@ export const scoreWord = (word) => {
   return scoreTotal;
 };
 
-// export const highScorehelper = (word) => {
-//   let currentScore = scoreWord(word);
-//   let wordLen = -word.length;
-//   let has10 = wordLen == -10;
+export const highestScoreFrom = (words) => {
+  // let currentScore = scoreWord();
+  // const words = ["XX", "X", "XXX", "XXXX"];
+  // const words = ["X", "XX"];
+  let currentHighScore = {
+    score: 0,
+    word: "",
+  };
 
-//   result = (currentScore, has10, wordLen);
-//   return result;
-// };
+  for (let i = 0; i < words.length; i++) {
+    //XX
+    let word = words[i];
+    let nextWord = words[i + 1]; //XX, 15
+    // console.log(i === words.length - 1);
 
-// // export const
-// export const highestScoreFrom = (words) => {
-//   // use our helper function to find the highest ranked
-//   // word using max
+    if (i === words.length - 1) {
+      //False
+      break;
+    }
+
+    let currentScore = scoreWord(word); //8
+    let nextScore = scoreWord(nextWord); //XX, 16
+
+    if (currentScore < nextScore) {
+      currentHighScore.score = nextScore;
+      currentHighScore.word = word;
+      continue;
+    } else {
+      // let keyName = "key"
+      // currentHighScore[keyName] = 100
+      // { key: 100 }
+      console.log(
+        "HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+      );
+      currentHighScore.score = currentScore;
+      currentHighScore.word = nextWord;
+    }
+  }
+  return currentHighScore;
+};
+// iterate thorgh all the words
+// then score reach word
+
+// use our helper function to find the highest ranked
+// word using max
 
 //   let highWord = words.sort();
 
 //   return highWord;
 // };
+
+// export const highScorehelper = (word) => {
+//   let currentScore = scoreWord(word);
+
+// let wordLen = -word.length;
+// let has10 = wordLen == -10;
+
+// result = (currentScore, has10, wordLen);
+// return result;
+// // export const
 
 // // high_word = max(word_list, key=_high_score_key_helper)
 
