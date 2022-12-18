@@ -113,32 +113,39 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  let currentHighScore = {
+  // const words = ["XXX", "XXXX", "X", "XX"];
+  let highScore = {
     score: 0,
     word: "",
   };
 
   for (let i = 0; i < words.length; i++) {
     //XX
-    let word = words[i];
-    let nextWord = words[i + 1]; //XX, 15
+    let word = words[i]; //xxxx
+    let nextWord = words[i + 1]; //X
     // console.log(i === words.length - 1);
 
     if (i === words.length - 1) {
+      //3
       break;
     }
 
-    let currentScore = scoreWord(word); //8
-    let nextScore = scoreWord(nextWord); //XX, 16
+    let currentScore = scoreWord(word); //32
+    let nextScore = scoreWord(nextWord); //1
 
     if (currentScore < nextScore) {
-      currentHighScore.score = nextScore;
-      currentHighScore.word = nextWord;
+      if (highScore.score > nextScore) {
+        continue;
+      }
+      //currentScore = 0, nextScore = 2
+      highScore.score = nextScore;
+      // 8
+      highScore.word = nextWord;
       continue;
     } else {
-      currentHighScore.score = currentScore;
-      currentHighScore.word = word;
+      highScore.score = currentScore; //32
+      highScore.word = word;
     }
   }
-  return currentHighScore;
+  return highScore;
 };
