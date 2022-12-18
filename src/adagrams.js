@@ -141,5 +141,63 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  const wordsAndScores = [];
+  for(let word of words){
+    let wordObj = {
+      "word": word,
+      "score": scoreWord(word)
+    };
+    wordsAndScores.push(wordObj);
+  }
+  //console.log(wordsAndScores);
+
+  const scores = [];
+  for(let wordObj of wordsAndScores){
+    scores.push(wordObj["score"])
+  };
+//console.log(scores)
+
+const max_score = Math.max(...scores);
+//console.log(max_score)
+
+const indices = [];
+for(let i = 0; i < scores.length; i++){
+  if (scores[i] === max_score){
+    indices.push(i);
+  }
 };
+//console.log(indices)
+
+const possibleAnswers = [];
+if(indices.length === 1){
+  return wordsAndScores[indices[0]]
+} else {
+  for(let index of indices){
+    possibleAnswers.push(wordsAndScores[index])
+  };
+  //console.log(possibleAnswers)
+};
+
+  const possibleWords = [];
+  for(let wordObj of possibleAnswers){
+    possibleWords.push(wordObj["word"])
+  };
+  //console.log(possibleWords)
+
+  const wordLengths = [];
+  for(let possibleWord of possibleWords){
+    wordLengths.push(possibleWord.length)
+  };
+  //console.log(wordLengths)
+
+  if(wordLengths.includes(10)){
+    const indexOfTen = wordLengths.indexOf(10);
+    //console.log(possibleAnswers[indexOfTen])
+    return possibleAnswers[indexOfTen]
+  }
+  const smallestLength = Math.min(...wordLengths);
+  //console.log(smallestLength);
+  const indexOfSmallestLength = wordLengths.indexOf(smallestLength);
+  return possibleAnswers[indexOfSmallestLength]
+};
+
