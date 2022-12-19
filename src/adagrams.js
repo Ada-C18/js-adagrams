@@ -112,39 +112,68 @@ export const scoreWord = (word) => {
   return scoreTotal;
 };
 
+// export const highestScoreFrom = (words) => {
+//   // const words = ["XXX", "XXXX", "X", "XX"];
+//   let highScore = {
+//     score: 0,
+//     word: "",
+//   };
+
+//   for (let i = 0; i < words.length; i++) {
+//     //XX
+//     let word = words[i]; //xxxx
+//     let nextWord = words[i + 1]; //X
+//     // console.log(i === words.length - 1);
+
+//     if (i === words.length - 1) {
+//       //3
+//       break;
+//     }
+
+//     let currentScore = scoreWord(word); //32
+//     let nextScore = scoreWord(nextWord); //1
+
+//     if (currentScore < nextScore) {
+//       if (highScore.score > nextScore) {
+//         continue;
+//       }
+//       //currentScore = 0, nextScore = 2
+//       highScore.score = nextScore;
+//       // 8
+//       highScore.word = nextWord;
+//       continue;
+
+//     } else {
+//       highScore.score = currentScore; //32
+//       highScore.word = word;
+//     }
+//   }
+//   return highScore;
+// };
+
 export const highestScoreFrom = (words) => {
   // const words = ["XXX", "XXXX", "X", "XX"];
   let highScore = {
-    score: 0,
-    word: "",
+    score: scoreWord(words[0]),
+    word: words[0],
   };
 
-  for (let i = 0; i < words.length; i++) {
-    //XX
-    let word = words[i]; //xxxx
-    let nextWord = words[i + 1]; //X
-    // console.log(i === words.length - 1);
+  for (let i = 1; i < words.length; i++) {
+    let currentWord = words[i];
+    let currentScore = scoreWord(currentWord);
 
-    if (i === words.length - 1) {
-      //3
-      break;
-    }
-
-    let currentScore = scoreWord(word); //32
-    let nextScore = scoreWord(nextWord); //1
-
-    if (currentScore < nextScore) {
-      if (highScore.score > nextScore) {
-        continue;
+    if (highScore.score < currentScore) {
+      highScore.score = currentScore;
+      highScore.word = currentWord;
+    } else if (highScore.score === currentScore) {
+      if (currentWord.length === 10) {
+        console.log("10 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        highScore.word = currentWord;
+      } else if (currentWord.length < highScore.word.length) {
+        highScore.word = currentWord;
       }
-      //currentScore = 0, nextScore = 2
-      highScore.score = nextScore;
-      // 8
-      highScore.word = nextWord;
-      continue;
     } else {
-      highScore.score = currentScore; //32
-      highScore.word = word;
+      continue;
     }
   }
   return highScore;
