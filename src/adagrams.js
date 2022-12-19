@@ -166,12 +166,13 @@ export const highestScoreFrom = (words) => {
       highScore.score = currentScore;
       highScore.word = currentWord;
     } else if (highScore.score === currentScore) {
+      if(currentWord.length == highScore.word.length){
+          highScore.word 
+      }
       if (currentWord.length === 10) {
-        console.log("10 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         highScore.word = currentWord;
       } else if (currentWord.length < highScore.word.length) {
         highScore.word = currentWord;
-      }
     } else {
       continue;
     }
