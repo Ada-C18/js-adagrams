@@ -127,10 +127,10 @@ export const highestScoreFrom = (words) => {
       highScore.score = currentScore;
       highScore.word = currentWord;
     } else if (highScore.score === currentScore) {
-      if (highScore.word.length === currentScore.length) {
-        continue;
-      }
-      if (currentWord.length === 10) {
+      // if (highScore.word.length === currentScore.length) {
+      //   continue;
+      // }
+      if (currentWord.length === 10 && highScore.word.length != 10) {
         highScore.word = currentWord;
       } else if (
         currentWord.length < highScore.word.length &&
