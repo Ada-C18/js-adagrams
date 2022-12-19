@@ -72,8 +72,8 @@ describe('Adagrams', () => {
 
   describe('usesAvailableLetters', () => {
     it('returns true if the submitted letters are valid against the drawn letters', () => {
-      const drawn = ['D', 'O', 'G', 'X', 'X', 'X', 'X', 'X', 'X', 'X'];
-      const word = 'DOG';
+      const drawn = ['D', 'O', 'X', 'X', 'G', 'X', 'X', 'X', 'X', 'X'];
+      const word = 'GOD';
 
       const isValid = usesAvailableLetters(word, drawn);
       expect(isValid).toBe(true);
@@ -120,7 +120,7 @@ describe('Adagrams', () => {
     });
 
     it('returns a score of 0 if given an empty input', () => {
-      expectScores({});
+      expectScores({'':0});
     });
 
     it('adds an extra 8 points if word is 7 or more characters long', () => {

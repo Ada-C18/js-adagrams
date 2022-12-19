@@ -53,11 +53,13 @@ export const drawLetters = () => {
   return hand;
 };
 
+//wave 2
 export const usesAvailableLetters = (input, lettersInHand) => {
   //iterate over each letter, if letter in lettersInHand remove it from lettersInHand to make sure it can't be used again.
   for (const l of input) {
-    if (lettersInHand.includes(l)) {
-      lettersInHand.splice(l, 1);
+    const letterIdx=lettersInHand.indexOf(l)
+    if (letterIdx !== -1) {
+      lettersInHand.splice(letterIdx,1);
     } else {
       //If a letter isn't in lettersInHand return false to discontinue play.
       return false;
@@ -104,7 +106,7 @@ export const scoreWord = (word) => {
   if (typeof word !== 'string' || word === '') {
     return score;
   }
-  //if letter is score object, add the value of that letter to 'score
+  //if letter is score object, add the value of that letter to 'score'
   for (let letter of word) {
     if (letter in scoreObj) {
       score += scoreObj[letter];
@@ -132,13 +134,12 @@ export const highestScoreFrom = (words) => {
     if (wordObj.score > highScoreObj.score) {
       highScoreObj = wordObj;
     }
-
   }
 
   //use highScoreObj and lowestLetterObj in a compound conditional that checks for high score
   //lowestLetterObjest letter num && any that equal it equality && obj.word.length === 10, then append them
   for (const obj of wordArr) {
-    if (obj.score === highScoreObj.score && obj !== highScoreObj) {
+    if (obj.score === highScoreObj.score) {
       tieArr.push(obj);
     }
     tieArr.push(highScoreObj);
@@ -149,11 +150,11 @@ export const highestScoreFrom = (words) => {
       if (obj.word.length === 10) {
         return (highScoreObj = obj);
       }
-
+// equality of letter length
       if (obj.word.length === lowestLetterObj.word.length) {
         highScoreObj = lowestLetterObj;
       }
-
+//checking for lowest letter length
       if (obj.word.length < lowestLetterObj.word.length) {
         lowestLetterObj = obj;
         highScoreObj = lowestLetterObj;
