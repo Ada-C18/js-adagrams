@@ -124,9 +124,37 @@ export const drawLetters = () => {
   }
 };
 
-// export const usesAvailableLetters = (input, lettersInHand) => {
-//   // Implement this method for wave 2
-// };
+export const usesAvailableLetters = (input, lettersInHand) => {
+  // Implement this method for wave 2
+  const inputObject = {};
+  const lettersInHandObject = {}
+
+  for (let letter of input.toUpperCase()) {
+    if (!(letter in inputObject)) {
+      inputObject[letter] = 1;
+    } else {
+      inputObject[letter] += 1
+    }
+    console.log('input', input)
+  }
+
+  for (let letter of lettersInHand) {
+    if (!(letter in lettersInHandObject)) {
+      lettersInHandObject[letter] = 1;
+    } else {
+      lettersInHandObject[letter] += 1
+    }
+  }
+
+  Object.entries(inputObject).forEach(([key, value]) => {
+    if (key in lettersInHandObject) {
+      if (value > lettersInHandObject[key]) {
+        return false;
+      }
+    }
+  return true;
+  });
+};
 
 // export const scoreWord = (word) => {
 //   // Implement this method for wave 3
