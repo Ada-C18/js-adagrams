@@ -1,3 +1,33 @@
+const LETTER_VALUES = {
+  'A': 1,
+  'B': 3,
+  'C': 3,
+  'D': 2,
+  'E': 1,
+  'F': 4,
+  'G': 2,
+  'H': 4,
+  'I': 1,
+  'J': 8,
+  'K': 5,
+  'L': 1,
+  'M': 3,
+  'N': 1,
+  'O': 1,
+  'P': 3,
+  'Q': 10,
+  'R': 1,
+  'S': 1,
+  'T': 1,
+  'U': 1,
+  'V': 4,
+  'W': 4,
+  'X': 8,
+  'Y': 4,
+  'Z': 10
+}
+
+
 export const drawLetters = () => {
   // Implement this method for wave 1
   const TOTAL_TILES = 98
@@ -146,42 +176,11 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
-  const LETTER_VALUES = {
-    'A': 1,
-    'B': 3,
-    'C': 3,
-    'D': 2,
-    'E': 1,
-    'F': 4,
-    'G': 2,
-    'H': 4,
-    'I': 1,
-    'J': 8,
-    'K': 5,
-    'L': 1,
-    'M': 3,
-    'N': 1,
-    'O': 1,
-    'P': 3,
-    'Q': 10,
-    'R': 1,
-    'S': 1,
-    'T': 1,
-    'U': 1,
-    'V': 4,
-    'W': 4,
-    'X': 8,
-    'Y': 4,
-    'Z': 10
-  }
-
   const wordUpper = word.toUpperCase();
   let score = 0;
-  console.log('word', word);
 
   for (const letter of wordUpper) {
-    score = score + LETTER_VALUES[letter]
-    console.log('is it tallying?', score)
+    score = score + LETTER_VALUES[letter];
   }
   if (wordUpper.length > 6) {
     score = score + 8
@@ -189,6 +188,53 @@ export const scoreWord = (word) => {
   return score;
 };
 
-// export const highestScoreFrom = (words) => {
-//   // Implement this method for wave 4
-// };
+export const highestScoreFrom = (words) => {
+  // Implement this method for wave 4
+  const winningWord = {
+    word: '',
+    score: 0
+  }
+
+
+
+  const calculateScore = (word) => {
+    console.log('in the score function', word)
+    let score = 0;
+    for (const letter of word) {
+      score = score + LETTER_VALUES[letter];
+    }
+    if (word.length > 6) {
+      score = score + 8
+    }
+    console.log('score', score)
+    return score;
+  }
+
+  for (const word of words) {
+    const wordScore = calculateScore(word);
+    if (wordScore > winningWord.score) {
+      winningWord.word = word;
+      winningWord.score = wordScore;
+    } else if (wordScore === winningWord.score) {
+      if (word.length === 10 || winningWord.word.length === 10) {
+        console.log('in the tie logic')
+        if (winningWord.word.length === 10) {
+          console.log('continue')
+          continue;
+        } else {
+          console.log('replace')
+          winningWord.word = word;
+          winningWord.score = wordScore;
+        }
+      } else {
+        console.log('fewer tiles')
+        if (word.length < winningWord.word.length) {
+          console.log('word', word)
+          winningWord.word = word;
+        }
+      }
+    }
+  }
+  console.log(winningWord.word.length)
+  return winningWord;
+};
