@@ -53,9 +53,9 @@ describe("Adagrams", () => {
 
     it("does not draw a letter too many times", () => {
       for (let i = 0; i < 1000; i++) {
-        const drawn = drawLetters();
+        const drawn = drawLetters(); //10 letter array
         const letter_freq = {};
-        for (let letter of drawn) {
+        for (let letter of drawn) {   //cycle through 10 letter array
           if (letter in letter_freq) {
             letter_freq[letter] += 1;
           } else {
