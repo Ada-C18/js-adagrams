@@ -111,7 +111,7 @@ export const drawLetters = () => {
     return Math.floor(Math.random() * TOTAL_TILES) + STARTING_NUMBER;
   }
 
-  for (let i = 0; i < MAX_DRAW; i++) {
+  for (let i = 0; keysArray.length < MAX_DRAW; i++) {
     const key = pickRandomNumber();
     if (!(key in keysArray)) {
       keysArray.push(key);
@@ -119,46 +119,75 @@ export const drawLetters = () => {
   }
 
   for (const key of keysArray) {
-    let tileLetter = weightedObject[key]
-    lettersInHand.push(tileLetter)
+    let tileLetter = weightedObject[key];
+    lettersInHand.push(tileLetter);
   }
+
+  return lettersInHand;
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
-  const inputObject = {};
-  const lettersInHandObject = {}
-
-  for (let letter of input.toUpperCase()) {
-    if (!(letter in inputObject)) {
-      inputObject[letter] = 1;
+  const inputArray = input.split('');  
+  let copyLettersInHand = [
+    ...lettersInHand
+  ];
+  
+  for (const letter of inputArray) {
+    if (copyLettersInHand.includes(letter)) {
+      const index = copyLettersInHand.indexOf(letter);
+      copyLettersInHand.splice(index, 1);
     } else {
-      inputObject[letter] += 1
-    }
-    console.log('input', input)
-  }
-
-  for (let letter of lettersInHand) {
-    if (!(letter in lettersInHandObject)) {
-      lettersInHandObject[letter] = 1;
-    } else {
-      lettersInHandObject[letter] += 1
-    }
-  }
-
-  Object.entries(inputObject).forEach(([key, value]) => {
-    if (key in lettersInHandObject) {
-      if (value > lettersInHandObject[key]) {
         return false;
-      }
     }
+  }
   return true;
-  });
 };
 
-// export const scoreWord = (word) => {
-//   // Implement this method for wave 3
-// };
+export const scoreWord = (word) => {
+  // Implement this method for wave 3
+  const LETTER_VALUES = {
+    'A': 1,
+    'B': 3,
+    'C': 3,
+    'D': 2,
+    'E': 1,
+    'F': 4,
+    'G': 2,
+    'H': 4,
+    'I': 1,
+    'J': 8,
+    'K': 5,
+    'L': 1,
+    'M': 3,
+    'N': 1,
+    'O': 1,
+    'P': 3,
+    'Q': 10,
+    'R': 1,
+    'S': 1,
+    'T': 1,
+    'U': 1,
+    'V': 4,
+    'W': 4,
+    'X': 8,
+    'Y': 4,
+    'Z': 10
+  }
+
+  const wordUpper = word.toUpperCase();
+  let score = 0;
+  console.log('word', word);
+
+  for (const letter of wordUpper) {
+    score = score + LETTER_VALUES[letter]
+    console.log('is it tallying?', score)
+  }
+  if (wordUpper.length > 6) {
+    score = score + 8
+  }
+  return score;
+};
 
 // export const highestScoreFrom = (words) => {
 //   // Implement this method for wave 4
