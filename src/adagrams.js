@@ -112,44 +112,39 @@ export const scoreWord = (word) => {
   return totalScore;
 };
 
-// 1. Create variables to hold the highest scoring word and the highest score.
-//  2. Loop through the word list and grab each word and its score.
-//  3. If its score is higher than the highest score, replace the highest scoring word and highest score.
-//  4. If there is a tie, do the comparisons for length in place within the loop itself.
-//  5. Once the loop is finished, you'll have the highest scoring word.
 export const highestScoreFrom = (words) => {
+  // 1. Create variables to hold the highest scoring word and the highest score.
   let highestScoringWord = words[0];
   let highestScore = scoreWord(words[0]);
-  let scoredWords = {};
-  let minLength = words[0].length;
+  // hold length of current winning word
+  let winLength = words[0].length;
 
-  //get item = {scored_word:score}, add item to scoredWords object
+  //  2. Loop through the word list and grab each word and its score.
   for (let i = 1; i < words.length; i++) {
     let scoreCalculated = scoreWord(words[i]);
-    scoredWords[words[i]] = scoreCalculated;
-    // if (scoreWord(words[i]) > highestScore){
+    //  3. If its score is higher than the highest score, replace the highest scoring word and highest score.
     if (scoreCalculated > highestScore) {
       highestScore = scoreCalculated;
       highestScoringWord = words[i];
-      minLength = words[i].length;
+      winLength = words[i].length;
     }
-    // apply tie-breaker logic here, if tie and winning length is not 10
+    //  4. If there is a tie, do the comparisons for length in place within the loop itself.
     else if (scoreCalculated === highestScore) {
       if (words[i].length === 10 && highestScoringWord.length < 10) {
         highestScore = scoreCalculated;
         highestScoringWord = words[i];
-        minLength = words[i].length;
+        winLength = words[i].length;
       } else if (
-        words[i].length < minLength &&
+        words[i].length < winLength &&
         highestScoringWord.length < 10
       ) {
         highestScore = scoreCalculated;
         highestScoringWord = words[i];
-        minLength = words[i].length;
+        winLength = words[i].length;
       }
     }
   }
+  //  5. Once the loop is finished, you'll have the highest scoring word.
   const winner = { score: highestScore, word: highestScoringWord };
-  // console.log(minLength)
   return winner;
 };
