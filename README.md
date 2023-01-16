@@ -70,7 +70,10 @@ In addition to the provided unit tests, we provided a demo game application that
 
 You can start the demo game application with the following command:
 
-```bash
+```For more details on how to run the demo game, click here!
+
+You can start the demo game application with the following command:
+
 $ yarn run demo-game
 ```
 
@@ -90,14 +93,14 @@ Just like our Python Adagrams project, we will only build the library code that 
 
 This repository has a baseline structure for the project that includes several files. You will only need to modify one of them:
 
-| File                  | Description                                                                                                                                                                                                              |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| src/adagrams.js       | This is the project code, your implementation should complete each of the functions. Each function is exported.                                                                                                          |
-| test/adagrams.test.js | This file contains the unit tests for all functions you must implement. This file imports the functions from `adagrams.js`.                                                                                                                                                 |
-| package.json          | This is the [yarn project description file](https://classic.yarnpkg.com/lang/en/docs/package-json/) for this project. It includes all of the dependencies, much like `requirements.txt` in our Python projects.      |
-| yarn.lock     | [yarn.lock](https://classic.yarnpkg.com/lang/en/docs/yarn-lock/) captures the exact dependency tree stored at any point in time. |
-| jest.config.js        | This is a configuration file for the Jest testing framework.                                                                                                                                                             |
-| babel.config.js       | This is a configuration file for the [Babel](https://babeljs.io/) compiler. For a short summary of why we use it, [click here](https://github.com/AdaGold/backbone-baseline#major-components)                            |
+| File                  | Description                                                                                                                                                                                                     |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| src/adagrams.js       | This is the project code, your implementation should complete each of the functions. Each function is exported.                                                                                                 |
+| test/adagrams.test.js | This file contains the unit tests for all functions you must implement. This file imports the functions from `adagrams.js`.                                                                                     |
+| package.json          | This is the [yarn project description file](https://classic.yarnpkg.com/lang/en/docs/package-json/) for this project. It includes all of the dependencies, much like `requirements.txt` in our Python projects. |
+| yarn.lock             | [yarn.lock](https://classic.yarnpkg.com/lang/en/docs/yarn-lock/) captures the exact dependency tree stored at any point in time.                                                                                |
+| jest.config.js        | This is a configuration file for the Jest testing framework.                                                                                                                                                    |
+| babel.config.js       | This is a configuration file for the [Babel](https://babeljs.io/) compiler. For a short summary of why we use it, [click here](https://github.com/AdaGold/backbone-baseline#major-components)                   |
 
 ## Implementation Requirements
 
@@ -173,16 +176,16 @@ Implement the function named `scoreWord` in `src/adagrams.js`. This method shoul
 |             J, X             |   8   |
 |             Q, Z             |  10   |
 
-### Wave 4
+### Wave **4**
 
-After several hands have been drawn, words have been submitted, checked, scored, and played, we want a way to find the highest scoring word. This function looks at the array of `words` and calculates which of these words has the highest score, applies any tie-breaking logic, and returns the winning word in a special data structure.
+After several hands have been drawn, words have been submitted, checked, scored, and played, we want a way to find the highest scoring word. This **function** looks at the array of `words` and calculates which of these words has the highest score, applies any tie-breaking logic, and returns the winning word in a special data structure.
 
 #### Objective
 
 Implement the function named `highestScoreFrom` in `src/adagrams.js`. This method should have the following properties:
 
 - Has one parameter: `words`, which is an array of strings
-- Returns a single object that represents the data of a winning word and its score. The object should have the following keys:
+- Returns a single object that represents the data **of** a **winning** word and its score. The object should have the following keys:
   - `word`, whose value is a string of a word
   - `score`, whose value is the score of that word
 - In the case of tie in scores, use these tie-breaking rules:
@@ -211,5 +214,5 @@ Please ensure that your tests still run before project submission, of course. :)
 Encapsulate the functions in a class named `Adagrams`!
 
 - To export the `Adagrams` class, use the code `export default Adagrams` at the end of `adagrams.js`
-- Update the test file to use the `Adagrams` class. 
+- Update the test file to use the `Adagrams` class.
 - Remember, methods in classes are not comma-separated!
