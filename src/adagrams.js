@@ -112,57 +112,44 @@ export const scoreWord = (word) => {
   return totalScore;
 };
 
+// 1. Create variables to hold the highest scoring word and the highest score.
+//  2. Loop through the word list and grab each word and its score.
+//  3. If its score is higher than the highest score, replace the highest scoring word and highest score.
+//  4. If there is a tie, do the comparisons for length in place within the loop itself.
+//  5. Once the loop is finished, you'll have the highest scoring word.
 export const highestScoreFrom = (words) => {
+  let highestScoringWord = words[0];
+  let highestScore = scoreWord(words[0]);
   let scoredWords = {};
+  let minLength = words[0].length;
 
   //get item = {scored_word:score}, add item to scoredWords object
-  for (let i = 0; i < words.length; i++) {
+  for (let i = 1; i < words.length; i++) {
     let scoreCalculated = scoreWord(words[i]);
-    //console.log(scoreCalculated)
     scoredWords[words[i]] = scoreCalculated;
-    //let scoredWords[words[i]] = scoreCalculated
-  }
-
-  // get max of scores from scoredWords{}
-  let tieList = [];
-  let winningWord = "";
-  let winningScore = 0;
-
-  for (let [word, score] of Object.entries(scoredWords)) {
-    //console.log(scoredWords)
-    if (score > winningScore) {
-      winningScore = score;
-      winningWord = word;
-      console.log(scoredWords);
-      // console.log(winningWord)
-      // console.log(winningScore)
+    // if (scoreWord(words[i]) > highestScore){
+    if (scoreCalculated > highestScore) {
+      highestScore = scoreCalculated;
+      highestScoringWord = words[i];
+      minLength = words[i].length;
     }
-    // else if (score === winningScore) {
-    //   tieList.push(winningWord, word);
-    //   console.log(score);
-    // }
-    //ensure that all words in tieList have scores === winningScore
-  }
-
-  //find ties
-  for (let [word, score] of Object.entries(scoredWords)) {
-    if (score === winningScore) {
-      tieList.push(word);
-      console.log(tieList);
+    // apply tie-breaker logic here, if tie and winning length is not 10
+    else if (scoreCalculated === highestScore) {
+      if (words[i].length === 10 && highestScoringWord.length < 10) {
+        highestScore = scoreCalculated;
+        highestScoringWord = words[i];
+        minLength = words[i].length;
+      } else if (
+        words[i].length < minLength &&
+        highestScoringWord.length < 10
+      ) {
+        highestScore = scoreCalculated;
+        highestScoringWord = words[i];
+        minLength = words[i].length;
+      }
     }
   }
-  if (tieList.length > 1) {
-    //find min length
-    //return word with min length
-    let sortedList = tieList.sort((a, b) => a.length - b.length);
-    if (sortedList[sortedList.length - 1].length === 10) {
-      winningWord = sortedList[sortedList.length - 1];
-    } else {
-      winningWord = sortedList[0];
-    }
-  }
-
-  const result = { score: winningScore, word: winningWord };
-
-  return result;
+  const winner = { score: highestScore, word: highestScoringWord };
+  // console.log(minLength)
+  return winner;
 };
