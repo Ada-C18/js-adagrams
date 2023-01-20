@@ -54,20 +54,60 @@ export const drawLetters = () => {
 };
 
 
-
-
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
-  const lettersInHandFrequency = {}
-    for (let char of input){
-      console.log(char)
-    if (lettersInHandFrequency[char]){
-        lettersInHandFrequency[char] += 1
+  const inputLetterFreq = {};
+  const lettersInHandFreq = {};
+
+  for (let i = 0; i < input.length; i++ ){
+    let letter = input[i];
+    if (!(lettersInHand.includes(letter))) {
+      return false;
+    } else if (!(letter in inputLetterFreq)){
+      inputLetterFreq[letter] = 1;
     }else{
-        lettersInHandFrequency[char]= 1
+      inputLetterFreq[letter] += 1;
+    }}
+
+  for (let i = 0; i < lettersInHand.length; i++ ){
+    let letter = lettersInHand[i];
+    if (!(letter in lettersInHandFreq)){
+      lettersInHandFreq[letter] = 1;
+    }else{
+      lettersInHandFreq[letter] += 1;
+    }}
+
+  for (let i = 0; i < input.length; i++ ) {
+    let letter = input[i];
+    if (inputLetterFreq[letter] > lettersInHandFreq[letter]){
+      return false;
     }
-    }
+  }
+  return true;
 };
+
+  
+
+
+
+  
+
+  // for (let char in lettersInHand){
+  //   if (!(char in lettersInHandCounter)) {
+  //     lettersInHandCounter[char] = 1;
+  //   } else {
+  //     lettersInHandCounter[char] += 1;
+  //   }
+  // }
+
+  // for (let letter in inputLetterFrequency){
+  //   if (!(letter in lettersInHand || inputLetterFrequency[letter] > lettersInHandCounter[letter])){
+  //     return false;
+  //   } else {
+  //     return true;
+  //   }
+  // }
+
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
