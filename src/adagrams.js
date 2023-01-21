@@ -94,38 +94,47 @@ export const scoreWord = (word) => {
   // if the length of the word is larger than 8 add an additional 8 points
   // return total score
   const scoreChart = {
-    1: 'AEIOULNRST',
-    2: 'DG',
-    3: 'BCMP',
-    4: 'FHVWY',
-    5: 'K',
-    8: 'JX',
-    10: 'QZ'
+    'A': 1,
+    'B': 3,
+    'C': 3,
+    'D': 2,
+    'E': 1,
+    'F': 4,
+    'G': 2,
+    'H': 4,
+    'I': 1,
+    'J': 8,
+    'K': 5,
+    'L': 1,
+    'M': 3,
+    'N': 1,
+    'O': 1,
+    'P': 4,
+    'Q': 10,
+    'R': 1,
+    'S': 1,
+    'T': 1,
+    'U': 1,
+    'V': 4,
+    'W': 4,
+    'X': 8,
+    'Y': 4,
+    'Z':10
   }
-  console.log(word);
 
-  let totalScore = 0
-
-  // if (word === ''){
-  //   totalScore = 0;
-
-  for (let i = 0; i < word.length; i++ ) {
-    if (word === ''){
-      totalScore = 0;
-    }else if (word.length >= 7){
-      totalScore += 8
-    }
-
-    let letter = word[i]
-    for (const [points,letters] of Object.entries(scoreChart)){
-      if (letters.includes(letter.toUpperCase())) {
-        totalScore += points;
-      } else if (word.length >= 7){
-        totalScore += 8;
-      }
-    }
+  let totalScore = 0;
+  if (!word){
+    return totalScore;
   }
-  return totalScore;
+  for (let i = 0; i < word.length; i++ ){
+    let letter = word[i].toUpperCase();
+    totalScore += scoreChart[letter];
+  }
+  
+  if (word.length >= 7) {
+    totalScore += 8;
+  }
+return totalScore;
 };
 
 export const highestScoreFrom = (words) => {
