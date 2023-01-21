@@ -86,31 +86,46 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   return true;
 };
 
-  
-
-
-
-  
-
-  // for (let char in lettersInHand){
-  //   if (!(char in lettersInHandCounter)) {
-  //     lettersInHandCounter[char] = 1;
-  //   } else {
-  //     lettersInHandCounter[char] += 1;
-  //   }
-  // }
-
-  // for (let letter in inputLetterFrequency){
-  //   if (!(letter in lettersInHand || inputLetterFrequency[letter] > lettersInHandCounter[letter])){
-  //     return false;
-  //   } else {
-  //     return true;
-  //   }
-  // }
-
-
 export const scoreWord = (word) => {
   // Implement this method for wave 3
+  // create a dictionary that maps the letter to the points
+  // create a total score variable that the appropriate points will be added to based on the occurence of the letter in the word
+  // for each occurence of a letter in word, add the appropriate points value to the total score variable
+  // if the length of the word is larger than 8 add an additional 8 points
+  // return total score
+  const scoreChart = {
+    1: 'AEIOULNRST',
+    2: 'DG',
+    3: 'BCMP',
+    4: 'FHVWY',
+    5: 'K',
+    8: 'JX',
+    10: 'QZ'
+  }
+  console.log(word);
+
+  let totalScore = 0
+
+  // if (word === ''){
+  //   totalScore = 0;
+
+  for (let i = 0; i < word.length; i++ ) {
+    if (word === ''){
+      totalScore = 0;
+    }else if (word.length >= 7){
+      totalScore += 8
+    }
+
+    let letter = word[i]
+    for (const [points,letters] of Object.entries(scoreChart)){
+      if (letters.includes(letter.toUpperCase())) {
+        totalScore += points;
+      } else if (word.length >= 7){
+        totalScore += 8;
+      }
+    }
+  }
+  return totalScore;
 };
 
 export const highestScoreFrom = (words) => {
