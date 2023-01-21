@@ -7,7 +7,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 };
 
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
+  // Implement this method for wave 3 
 };
 
 export const highestScoreFrom = (words) => {
