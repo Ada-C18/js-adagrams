@@ -1,7 +1,3 @@
-// import { keys } from "core-js/core/array";
-
-// import { forEach } from "core-js/core/array";
-
 const letterBank = {
   A: 9,
   B: 2,
@@ -139,4 +135,17 @@ return totalScore;
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+  // create an empty result object 
+    // iterate over every string in words array, and apply the scoreWord function to them
+      // append the object of a key word and the corresponding word and the key score and its map its corresponding score to the result object
+  // sort the result object by its score values
+  // find the max score and declare it as a variable, 
+  // create a new list top score and iterate through the list
+    //search through the dict for where this max score occurs, and append the corresponding word, score objects
+    //compare these scores to the following logic ...
+  // if there is a tie, meaning top scores list != 0:
+    // if the word.length === 10, return that word, score pair
+    // else if the tied words.length are equal, return the first word to occur in the object
+    // else return the word with the minimum word.length
+  // return the highest scoring word/score paired in the sorted result object
 };
