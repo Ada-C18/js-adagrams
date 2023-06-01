@@ -88,6 +88,7 @@ export const drawLetters = () => {
 };
 
 //Convert word/letter to dictionary for easier comparison between letter counts
+//Uppercases all letters to ignore case differences
 const wordToObj = (word) => {
   const wordObj = {};
   let currentVal;
@@ -112,7 +113,14 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 };
 
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
+  let score = 0;
+  for (const letter of word) {
+    score += letterValues[letter.toUpperCase()];
+  }
+  if (word.length >= 7) {
+    score += 8;
+  }
+  return score;
 };
 
 export const highestScoreFrom = (words) => {
