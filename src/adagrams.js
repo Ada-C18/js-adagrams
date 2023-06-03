@@ -61,14 +61,12 @@ export const drawLetters = () => {
 };
 
 // Test code
-console.log(drawLetters());
+// console.log(drawLetters());
 
   //declare a new variable to hold the drawnLetters
   //add letters to the drawn letters list from the listOfAllLetters, removing each one from the list once selected
   //return the drawnLetters list
   
-
-
 
     // list_of_letters = []
        
@@ -89,7 +87,31 @@ console.log(drawLetters());
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
-};
+  let lettersInHandCopy = Array.from(lettersInHand);
+  
+  for (let i = 0; i < input.length; i++) {
+    const currentLetter = input[i];
+    //Line below is needed because the letterIndex is what is used to loop through the lettersInHandCopy array
+    //If the currentLetter is not found, indexOf() returns -1.
+    const letterIndex = lettersInHandCopy.indexOf(currentLetter)
+    if (letterIndex !== -1) {
+      lettersInHandCopy.splice (letterIndex, 1);
+    } else {
+      return false;
+    }
+  }
+  return true;
+  }
+
+//   letter_bank_copy = list(letter_bank)
+
+//   for letter in word.upper():
+//       if  letter in letter_bank_copy:
+//           letter_bank_copy.remove(letter)
+//       else:
+//           return False
+//   return True
+// };
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
