@@ -61,7 +61,6 @@ const getRandomInt = (max) => {
 }
 
 export const drawLetters = () => {
-  // Implement this method for wave 1
   const alphabet = Object.keys(LETTER_POOL);
   const drawnLetters = [];
 
@@ -79,7 +78,7 @@ export const drawLetters = () => {
       drawnLetters.push(randomLetter);
     }
   }
-  return drawnLetters
+  return drawnLetters;
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
