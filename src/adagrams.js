@@ -82,7 +82,18 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  const lettersInHandMap = new Map()
+  lettersInHand.forEach(letter => lettersInHandMap.set(letter));
+  const inputUpper = input.toUpperCase();
+
+  for (const letter of inputUpper) {
+    if (lettersInHandMap.has(letter) === true) {
+      lettersInHandMap.delete(letter);
+    } else {
+      return false;
+    }
+  }
+  return true;
 };
 
 export const scoreWord = (word) => {
