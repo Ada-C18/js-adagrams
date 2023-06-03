@@ -24,7 +24,7 @@ const LETTER_POOL = {
     W: 2, 
     X: 1, 
     Y: 2, 
-    Z: 1
+    Z: 1,
 }
 
 const LETTER_VALUE = {
@@ -53,7 +53,7 @@ const LETTER_VALUE = {
     W: 4, 
     X: 8, 
     Y: 4, 
-    Z: 10
+    Z: 10,
 }
 
 const getRandomInt = (max) => {
@@ -97,7 +97,18 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 };
 
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
+  const wordUpper = word.toUpperCase();
+  let score = 0;
+
+  for(const letter of wordUpper) {
+    score += LETTER_VALUE[letter];
+  }
+
+  if (wordUpper.length > 6) {
+    score += 8;
+  }
+
+  return score;
 };
 
 export const highestScoreFrom = (words) => {
