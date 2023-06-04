@@ -115,7 +115,40 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
+  let score = 0;
+
+  if (word.length >= 7) {
+    score += 8;
+  }
+
+  const wordUpper = word.toUpperCase();
+
+  for (let letter of wordUpper) {
+    for (let [points, letters] of Object.entries(SCORE_CHART_DICT)) {
+      if (letters.includes(letter)) {
+        score += parseInt(points);
+      }
+    }
+  }
+  return score;
 };
+
+  // score = 0
+
+  //   if len(word) >= 7:
+  //       score += 8
+    
+  //   word = word.upper()
+
+  //   for letter in word:
+  //       for points, letters in SCORE_CHART_DICT.items():
+  //           if letter in letters:
+  //               score += points
+  //       else:
+  //           score += 0
+
+  //   return score
+// };
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4

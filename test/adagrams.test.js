@@ -34,6 +34,16 @@ const LETTER_POOL = {
   Z: 1,
 };
 
+const SCORE_CHART_DICT = {
+  1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
+  2: ['D', 'G'],
+  3: ['B', 'C', 'M', 'P'],
+  4: ['F', 'H', 'V', 'W', 'Y'],
+  5: ['K'],
+  8: ['J', 'X'],
+  10: ['Q','Z']
+};
+
 describe("Adagrams", () => {
   describe("drawLetters", () => {
     it("draws ten letters from the letter pool", () => {
@@ -120,7 +130,9 @@ describe("Adagrams", () => {
     });
 
     it("returns a score of 0 if given an empty input", () => {
-      throw "Complete test";
+      expectScores({
+        "" : 0
+      });
     });
 
     it("adds an extra 8 points if word is 7 or more characters long", () => {
