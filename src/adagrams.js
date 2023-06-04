@@ -63,30 +63,7 @@ export const drawLetters = () => {
 // Test code
 // console.log(drawLetters());
 
-  //declare a new variable to hold the drawnLetters
-  //add letters to the drawn letters list from the listOfAllLetters, removing each one from the list once selected
-  //return the drawnLetters list
-  
-
-    // list_of_letters = []
-       
-    // for letter, frequency in LETTER_POOL.items():
-    //     total_times_letter_appears = 0
-    //     while total_times_letter_appears < frequency:
-    //         list_of_letters.append(letter)
-    //         total_times_letter_appears += 1
-    
-    // letters = []
-
-    // while len(letters) < 10:
-    //     random_letter = random.choice(list_of_letters)
-    //     list_of_letters.remove(random_letter)
-    //     letters.append(random_letter)
-
-    // return letters 
-
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
   let lettersInHandCopy = Array.from(lettersInHand);
   
   for (let i = 0; i < input.length; i++) {
@@ -103,18 +80,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   return true;
   }
 
-//   letter_bank_copy = list(letter_bank)
-
-//   for letter in word.upper():
-//       if  letter in letter_bank_copy:
-//           letter_bank_copy.remove(letter)
-//       else:
-//           return False
-//   return True
-// };
-
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
   let score = 0;
 
   if (word.length >= 7) {
@@ -133,23 +99,30 @@ export const scoreWord = (word) => {
   return score;
 };
 
-  // score = 0
-
-  //   if len(word) >= 7:
-  //       score += 8
-    
-  //   word = word.upper()
-
-  //   for letter in word:
-  //       for points, letters in SCORE_CHART_DICT.items():
-  //           if letter in letters:
-  //               score += points
-  //       else:
-  //           score += 0
-
-  //   return score
-// };
-
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+  const scoresObj = {};
+  for (let word of words) {
+    scoresObj[word] = scoreWord(word);
+  }
+
+  let highScore = 0;
+  let shortestWord = "";
+
+  for (let [word, score] of Object.entries(scoresObj)) {
+    if (score > highScore) {
+      highScore = score;
+      shortestWord = word;
+    } else if (score === highScore) {
+      if (shortestWord.length === 10) {
+        shortestWord = shortestWord;
+      } else if (word.length === 10) {
+        shortestWord = word;
+      } else if (word.length < shortestWord.length) {
+        shortestWord = word;
+      }
+    }
+  }
+  const winningScore = { "score": highScore, "word": shortestWord };
+  return winningScore;
 };
