@@ -123,6 +123,35 @@ export const scoreWord = (word) => {
   return score;
 };
 
+const winConditions = (word1, word2) => {
+  if (word2.length == 10 && word1.length < 10) {
+    return true;
+  } else if (word1.length < 10 && word2.length < word1.length) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  const winningWord = {
+    word: words[0],
+    score: scoreWord(words[0]),
+  };
+  if (words.length == 1) {
+    return winningWord;
+  }
+
+  for (const word of words.slice(1)) {
+    let currScore = scoreWord(word);
+    if (currScore > winningWord.score) {
+      [winningWord.word, winningWord.score] = [word, currScore];
+    }
+    if (currScore == winningWord.score) {
+      if (winConditions(winningWord.word, word)) {
+        [winningWord.word, winningWord.score] = [word, currScore];
+      }
+    }
+  }
+  return winningWord;
 };
