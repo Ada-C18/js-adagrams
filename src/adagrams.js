@@ -27,6 +27,17 @@ const LETTER_POOL = {
   Z: 1,
 };
 
+// create array of all letters
+const createLetterList = letters => {
+  const letterList = [];
+  for (const letter in letters) {
+    for(let i = 0; i < letters[letter]; i++) {
+      letterList.push(letter);
+    }
+  }
+  return letterList;
+}
+
 export const drawLetters = () => {
   // Implement this method for wave 1
 };
