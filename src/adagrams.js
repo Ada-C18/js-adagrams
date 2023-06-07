@@ -1,3 +1,4 @@
+// global variable
 const LETTER_POOL = {
   A: 9,
   B: 2,
@@ -26,34 +27,16 @@ const LETTER_POOL = {
   Y: 2,
   Z: 1
 }
-
+// the following line of code imports the library lodash
+// we use this library because we want to use the method sampleSize and the method cloneDeep 
 const _ = require('lodash');
 
 export const drawLetters = () => {
-  const letterList = [];
-  for (const [letter, freq] of Object.entries(LETTER_POOL)) {
+  let letterList = [];
+  for (let [letter, freq] of Object.entries(LETTER_POOL)) {
     letterList.push(...Array(freq).fill(letter));
   }
   return _.sampleSize(letterList, 10);
-
-  // build an array of letters from the letter pool
-  // let letter_list = [];
-  // for (let letter in LETTER_POOL) {
-  //   let freq = LETTER_POOL[letter];
-  //   for (let i = 0; i < freq; i++) {
-  //     letter_list.push(letter);
-  //   }
-  // }
-
-  // drawing letters
-  // let drawn_letters = [];
-  // while (letter_list.length > 0 && drawn_letters.length < 10) {
-  //   let randomIndex = Math.floor(Math.random() * letter_list.length);
-  //   let randomLetter = letter_list.splice(randomIndex, 1)[0];
-  //   drawn_letters.push(randomLetter);
-  // }
-
-  // return drawn_letters;
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
@@ -66,10 +49,10 @@ export const usesAvailableLetters = (input, lettersInHand) => {
     }
   }
   return true;
-
 };
 
 export const scoreWord = (word) => {
+  //  we are using Map instead of Object because the keys in Object must be string, symbol or number
   const values_map = new Map([
     [['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'], 1],
     [['D', 'G'], 2],
@@ -81,16 +64,51 @@ export const scoreWord = (word) => {
   ]);
 
   let word_value = 0;
-    for (let letter of word) {
-        let letter_value = [...values_map].find(([key, value]) => key.includes(letter.toUpperCase()))[1];
-        word_value += letter_value;
+  for (let letter of word) {
+    let letter_value = 0;
+    for (let letter_array of values_map.keys()) {
+      if (letter_array.includes(letter.toUpperCase())) {
+        letter_value = values_map.get(letter_array);
+      }
     }
-    if (word.length >= 7 && word.length <= 10) {
-        word_value += 8;
-    }
-    return word_value;
+    // we can find letter_value with just 1 line of code
+    // but I prefer the previous approach because of its readability
+    // let letter_value = [...values_map].find(([key, value]) => key.includes(letter.toUpperCase()))[1];
+    word_value += letter_value;
+  }
+
+  if (word.length >= 7 && word.length <= 10) {
+    word_value += 8;
+  }
+  return word_value;
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
-};
+  let result = {
+    word: '',
+    score: 0
+  };
+
+  // iterate through the array of words and choose the word with highest score
+  // when there are words with the same score, we use a helper function to determine which word will be chosen
+  words.forEach(word => {
+    const currentScore = scoreWord(word);
+
+    if (currentScore > result.score || (currentScore === result.score && compareTiedCase(word, result.word))) {
+      result.word = word;
+      result.score = currentScore;
+    }
+  });
+
+  return result;
+}
+
+const compareTiedCase = (wordA, wordB) => {
+  if (wordA.length === 10 && wordB.length !== 10) {
+    return true;
+  } else if (wordA.length !== 10 && wordB.length === 10) {
+    return false;
+  } else if (wordA.length < wordB.length) {
+    return true;
+  }
+}
