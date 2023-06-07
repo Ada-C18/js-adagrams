@@ -53,7 +53,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
 export const scoreWord = (word) => {
   //  we are using Map instead of Object because the keys in Object must be string, symbol or number
-  const values_map = new Map([
+  const valuesMap = new Map([
     [['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'], 1],
     [['D', 'G'], 2],
     [['B', 'C', 'M', 'P'], 3],
@@ -63,24 +63,24 @@ export const scoreWord = (word) => {
     [['Q', 'Z'], 10]
   ]);
 
-  let word_value = 0;
+  let wordValue = 0;
   for (let letter of word) {
-    let letter_value = 0;
-    for (let letter_array of values_map.keys()) {
-      if (letter_array.includes(letter.toUpperCase())) {
-        letter_value = values_map.get(letter_array);
+    let letterValue = 0;
+    for (let lettersArray of valuesMap.keys()) {
+      if (lettersArray.includes(letter.toUpperCase())) {
+        letterValue = valuesMap.get(lettersArray);
       }
     }
-    // we can find letter_value with just 1 line of code
+    // we can find letterValue with just 1 line of code
     // but I prefer the previous approach because of its readability
-    // let letter_value = [...values_map].find(([key, value]) => key.includes(letter.toUpperCase()))[1];
-    word_value += letter_value;
+    // let letterValue = [...valuesMap].find(([key, value]) => key.includes(letter.toUpperCase()))[1];
+    wordValue += letterValue;
   }
 
   if (word.length >= 7 && word.length <= 10) {
-    word_value += 8;
+    wordValue += 8;
   }
-  return word_value;
+  return wordValue;
 };
 
 export const highestScoreFrom = (words) => {
