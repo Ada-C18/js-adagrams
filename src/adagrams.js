@@ -90,25 +90,20 @@ export const highestScoreFrom = (words) => {
   };
 
   // iterate through the array of words and choose the word with highest score
-  // in case of tied score, we use a helper function to determine which word will be chosen
+  // in case of tied score, we compare the words'length and determine which word will be chosen
   words.forEach(word => {
     const currentScore = scoreWord(word);
 
-    if (currentScore > result.score || (currentScore === result.score && compareTiedCase(word, result.word))) {
+    if (currentScore > result.score) {
       result.word = word;
       result.score = currentScore;
+    } else if (currentScore === result.score) {
+        if (word.length === 10 && result.word.length !== 10) {
+          result.word = word;
+        } else if (word.length < result.word.length && result.word.length !== 10) {
+          result.word = word;
+        }
     }
   });
-
   return result;
-}
-
-const compareTiedCase = (wordA, wordB) => {
-  if (wordA.length === 10 && wordB.length !== 10) {
-    return true;
-  } else if (wordA.length !== 10 && wordB.length === 10) {
-    return false;
-  } else if (wordA.length < wordB.length) {
-    return true;
-  }
 }
