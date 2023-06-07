@@ -27,9 +27,9 @@ const LETTER_POOL = {
   Z: 1
 }
 
-export const drawLetters = () => {
+const _ = require('lodash');
 
-  const _ = require('lodash');
+export const drawLetters = () => {
   const letterList = [];
   for (const [letter, freq] of Object.entries(LETTER_POOL)) {
     letterList.push(...Array(freq).fill(letter));
@@ -57,11 +57,21 @@ export const drawLetters = () => {
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  const lettersInHand_deepcopy = _.cloneDeep(lettersInHand);
+  for (let letter of input.toUpperCase()) {
+    if (lettersInHand_deepcopy.includes(letter)) {
+      lettersInHand_deepcopy.splice(lettersInHand_deepcopy.indexOf(letter), 1);
+    } else {
+      return false;
+    }
+  }
+  return true;
+
 };
 
+
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
+  
 };
 
 export const highestScoreFrom = (words) => {
