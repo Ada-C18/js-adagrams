@@ -53,6 +53,7 @@ console.log(hand);
 return hand
 };
 
+
 export const usesAvailableLetters = (input, lettersInHand) => {
   input = input.toUpperCase();
   let isWordValid = true;
@@ -61,10 +62,10 @@ export const usesAvailableLetters = (input, lettersInHand) => {
     const letter = input[i];
 
     if (!lettersInHand.includes(letter)) {
-      iswordValid = false;
+      isWordValid = false;
     } else {
       const v = lettersInHand.filter(l => l === letter).length;
-      const v2 = word.split(letter).length - 1;
+      const v2 = input.split(letter).length - 1;
 
       if (v2 > v) {
         isWordValid = false;
@@ -73,10 +74,15 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   }
   console.log(isWordValid);
   return isWordValid;
-}
+};
+
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
+  if (word.length === 0) {
+    return 0;
+  }
+
   const scoreChart = {
     'A': 1,
     'B': 3,
@@ -114,15 +120,40 @@ export const scoreWord = (word) => {
     const value = scoreChart[letter];
     scoreSum += value;
   }
-  console.log(word.length);
 
   if (word.length >= 7 && word.length <= 10) {
     scoreSum += 8;
   }
-  console.log(scoreSum);
+  console.log(word.length);
   return scoreSum;
 };
 
+
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+  let winner = {
+    word: "",
+    score: 0
+  };
+
+  for (let i = 0; i < words.length; i++) {
+    const word = words[i];
+    const score = scoreWord(word);
+
+    if (score > winner.score) {
+      winner.word = word;
+      winner.score = score;
+    } else if (score === winner.score) {
+      if (word.length === 10 && winner.word.length !== 10) {
+        winner.word = word;
+        winner.score = score;
+      } else if (word.length < winner.word.length && winner.word.length !== 10) {
+        winner.word = word;
+        winner.score = score;
+      }
+    }
+  }
+
+  return winner;
 };
+
