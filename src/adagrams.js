@@ -130,10 +130,6 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 export const scoreWord = (word) => {
   let score = 0;
 
-  // if (word == " ") {
-  //   return 0;
-  // }
-
   if (word.length > 6 && word.length < 11) {
     score += 8;
   }
@@ -182,6 +178,52 @@ export const scoreWord = (word) => {
   return score;
 };
 
+console.log(scoreWord("A"));
+
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  let wordsAndScores = {};
+
+  for (let word of words) {
+    const key = word;
+    const value = scoreWord(word);
+
+    wordsAndScores[key] = value;
+  }
+
+  let potentialWinners = [];
+  const vals = Object.values(wordsAndScores);
+  const max = Math.max(...vals);
+  for (let word in wordsAndScores) {
+    if (wordsAndScores[word] === max) {
+      potentialWinners.push(word);
+    }
+  }
+
+  let tenLetteredWinners = [];
+  let shortestWinners = [];
+  if (potentialWinners.length === 1) {
+    return { word: potentialWinners[0], score: scoreWord(potentialWinners[0]) };
+  } else {
+    for (let word of potentialWinners) {
+      if (word.length === 10) {
+        tenLetteredWinners.push(word);
+      } else {
+        var min = Math.min(...words.map((o) => o.length));
+        if (word.length === min) {
+          shortestWinners.push(word);
+        }
+      }
+    }
+  }
+  if (tenLetteredWinners.length === 1 || tenLetteredWinners.length > 1) {
+    return {
+      word: tenLetteredWinners[0],
+      score: scoreWord(tenLetteredWinners[0]),
+    };
+  } else if (tenLetteredWinners.length === 0 && shortestWinners.length === 1) {
+    return {
+      word: shortestWinners[0], 
+      score: scoreWord(shortestWinners[0]) 
+    };
+  }
 };
