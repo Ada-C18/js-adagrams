@@ -90,7 +90,7 @@ export const highestScoreFrom = (words) => {
   };
 
   // iterate through the array of words and choose the word with highest score
-  // when there are words with the same score, we use a helper function to determine which word will be chosen
+  // in case of tied score, we use a helper function to determine which word will be chosen
   words.forEach(word => {
     const currentScore = scoreWord(word);
 
