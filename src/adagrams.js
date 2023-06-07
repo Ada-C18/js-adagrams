@@ -69,9 +69,26 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
 };
 
-
 export const scoreWord = (word) => {
-  
+  const values_map = new Map([
+    [['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'], 1],
+    [['D', 'G'], 2],
+    [['B', 'C', 'M', 'P'], 3],
+    [['F', 'H', 'V', 'W', 'Y'], 4],
+    [['K'], 5],
+    [['J', 'X'], 8],
+    [['Q', 'Z'], 10]
+  ]);
+
+  let word_value = 0;
+    for (let letter of word) {
+        let letter_value = [...values_map].find(([key, value]) => key.includes(letter.toUpperCase()))[1];
+        word_value += letter_value;
+    }
+    if (word.length >= 7 && word.length <= 10) {
+        word_value += 8;
+    }
+    return word_value;
 };
 
 export const highestScoreFrom = (words) => {
