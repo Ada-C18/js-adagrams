@@ -27,6 +27,18 @@ export const drawLetters = () => {
     ...Array(2).fill('Y'),
     'Z',
   ];
+  const hand = [];
+
+  while (hand.length < 10) {
+    const randomIndex = Math.floor(Math.random() * letterPool.length);
+    const letter = letterPool[randomIndex];
+
+    if (hand.filter((l) => l === letter).length < letterPool.filter((l) => l === letter).length) {
+      hand.push(letter);
+    }
+  }
+
+  return hand;
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
