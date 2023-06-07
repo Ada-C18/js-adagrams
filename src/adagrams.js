@@ -41,6 +41,7 @@ export const drawLetters = () => {
   return hand;
 };
 
+// check for input validity - can given letters form word
 export const usesAvailableLetters = (input, lettersInHand) => {
   const handCopy = [...lettersInHand];
 
@@ -57,18 +58,65 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   return true;
 };
 
-
+// calculate score for a word
 export const scoreWord = (word) => {
-    const letterScores = {
-      A: 1, E: 1, I: 1, O: 1,
-      U: 1, L: 1, N: 1, R: 1,
-      S: 1, T: 1, D: 2, G: 2,
-      B: 3, C: 3, M: 3, P: 3,
-      F: 4, H: 4, V: 4, W: 4,
-      Y: 4, K: 5, J: 8, X: 8,
-      Q: 10, Z: 10,
+  if (word === "") {
+    return 0;
+  }
+
+  const letterScores = {
+    A: 1, E: 1, I: 1, O: 1,
+    U: 1, L: 1, N: 1, R: 1,
+    S: 1, T: 1, D: 2, G: 2,
+    B: 3, C: 3, M: 3, P: 3,
+    F: 4, H: 4, V: 4, W: 4,
+    Y: 4, K: 5, J: 8, X: 8,
+    Q: 10, Z: 10,
   };
 
+  let score = 0;
+
+  for (const letter of word.toUpperCase()) {
+    score += letterScores[letter];
+  }
+
+  if (word.length >= 7 && word.length <= 10) {
+    score += 8;
+  }
+
+  return score;
+};
+
+
+// find word w/ highest score
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  let highestScore = 0;
+  let highestScoringWords = [];
+
+  for (const word of words) {
+    const score = scoreWord(word);
+
+    if (score > highestScore) {
+      highestScore = score;
+      highestScoringWords = [{ word, score }];
+    } else if (score === highestScore) {
+      highestScoringWords.push({ word, score });
+    }
+  }
+
+  if (highestScoringWords.length === 1) {
+    return highestScoringWords[0];
+  } else {
+    let winningWord = highestScoringWords[0];
+
+    for (const wordData of highestScoringWords) {
+      if (wordData.word.length === 10) {
+        return wordData;
+      } else if (wordData.word.length < winningWord.word.length && winningWord.word.length !== 10) {
+        winningWord = wordData;
+      }
+    }
+
+    return winningWord;
+  }
 };
