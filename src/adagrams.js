@@ -38,6 +38,12 @@ const createLetterList = letters => {
   return letterList;
 }
 
+const generateRandomLetter = () => {
+  const letters = createLetterList(LETTER_POOL);
+  const randomLetter = letters[Math.floor(Math.random() * letters.length)];
+  return randomLetter;
+}
+
 export const drawLetters = () => {
   // Implement this method for wave 1
 };
