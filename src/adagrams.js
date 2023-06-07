@@ -142,7 +142,8 @@ export const highestScoreFrom = (words) => {
     return winningWord;
   }
 
-  for (const word of words.slice(1)) {
+  for (let i = 1; i < length(words); i++) {
+    let word = words[i];
     let currScore = scoreWord(word);
     if (currScore > winningWord.score) {
       [winningWord.word, winningWord.score] = [word, currScore];
