@@ -108,6 +108,8 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   return true;
 };
 
+// scores each letter in the user submitted word
+// if word is 7 or more letters, word gets 8 bonus points
 export const scoreWord = (word) => {
   // Implement this method for wave 3
   const playerWord = word.toUpperCase()
@@ -123,6 +125,29 @@ export const scoreWord = (word) => {
   return score;
 };
 
+// finds the highest scoring word from all words submitted
+// in case of tie, will break tie based on shortest length unless word is 10 letters exactly
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+
+  let highestScore = 0;
+  let highestScoringWord = '';
+
+  for(const word of words){
+    let score = scoreWord(word);
+
+    if (score > highestScore) {
+      highestScore = score;
+      highestScoringWord = word;
+    }
+    else if (score === highestScore) {
+      if(highestScoringWord.length != 10 && (word.length === 10 || word.length < highestScoringWord.length)) {
+        highestScoringWord = word
+      }
+    }
+  }
+  return {
+    'score': highestScore,
+    'word': highestScoringWord
+  }
 };
