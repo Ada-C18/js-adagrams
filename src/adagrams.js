@@ -63,8 +63,20 @@ export const drawLetters = () => {
   return lettersDrawnForHand;
 };
 
+// handles input that doesn't contain letters in hand
+// handles the correct quantity of letters in hand
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
+  const letterHandCopy = JSON.parse(JSON.stringify(lettersInHand));
+
+  for(let i = 0; i < input.length; i++) {
+    let letterIndex = letterHandCopy.indexOf(input[i]);
+    if (letterIndex === -1) {
+      return false;
+    }
+    letterHandCopy[letterIndex] = '';
+  }
+  return true;
 };
 
 export const scoreWord = (word) => {
