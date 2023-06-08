@@ -56,7 +56,7 @@ const LETTER_VALUES = {
   X: 8,
   Y: 4, 
   Z: 10, 
-}
+};
 
 // create array of all letters
 const createLetterList = letters => {
@@ -110,6 +110,17 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
 export const scoreWord = (word) => {
   // Implement this method for wave 3
+  const playerWord = word.toUpperCase()
+  let score = 0;
+
+  for(const letter of playerWord) {
+    score += LETTER_VALUES[letter];
+  }
+  if (playerWord.length > 6) {
+    score += 8;
+  }
+
+  return score;
 };
 
 export const highestScoreFrom = (words) => {
