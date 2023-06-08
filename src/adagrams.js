@@ -39,7 +39,7 @@ const createLetterList = () => {
       letterList.push(letter);
     }
   }
-  console.log(letterList)
+  
   return letterList;
 };
 
@@ -78,27 +78,28 @@ export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
   const word = input.toUpperCase();
   const wordArray = word.split('');
-  
-  
+  const handString = lettersInHand.toString();
+  const validLetters = []
+ 
   for (const letter of word) {
-    const occurencesHand = lettersInHand.filter( letter => letter === letter).length; 
-    const occurencesWord = wordArray.filter( letter => letter === letter).length;
-    if (occurencesWord <= occurencesHand) {
-      if (lettersInHand.includes(letter)) {
-        return true
-
-    }
-      else {
+    if (lettersInHand.includes(letter)) {
+      const wordOccur = wordArray.filter( word => word === letter).length;
+      const handOccur = lettersInHand.filter( hand => hand === letter).length;
+      validLetters.push(letter)
+      if (wordOccur > handOccur) {
         return false
-      }
-      
+      } 
     }
-    
     else {
       return false
     }
+  if (validLetters.length === word.length) {
+    return true
   }
-  
+
+  }
+
+      
 };
 
 export const scoreWord = (word) => {
