@@ -98,11 +98,9 @@ export const highestScoreFrom = (words) => {
       result.word = word;
       result.score = currentScore;
     } else if (currentScore === result.score) {
-        if (word.length === 10 && result.word.length !== 10) {
-          result.word = word;
-        } else if (word.length < result.word.length && result.word.length !== 10) {
-          result.word = word;
-        }
+      if (result.word.length !== 10 && (word.length === 10 || word.length < result.word.length)) {
+        result.word = word;
+      }
     }
   });
   return result;
