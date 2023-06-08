@@ -1,3 +1,5 @@
+// import { random } from "core-js/core/number";
+
 const LETTER_POOL = {
   A: 9,
   B: 2,
@@ -38,14 +40,27 @@ const createLetterList = letters => {
   return letterList;
 }
 
+// generates random letter
 const generateRandomLetter = () => {
   const letters = createLetterList(LETTER_POOL);
   const randomLetter = letters[Math.floor(Math.random() * letters.length)];
   return randomLetter;
 }
 
+// draw 10 letters into hand
+// ensure each drawn letter is drawn no more than the total amount of that letter
 export const drawLetters = () => {
   // Implement this method for wave 1
+  const lettersDrawnForHand = [];
+
+  while (lettersDrawnForHand.length < 10) {
+    let randomLetter = generateRandomLetter();
+    const numberOfOccurences = lettersDrawnForHand.filter(element => element === randomLetter).length
+    if ( numberOfOccurences < LETTER_POOL[randomLetter]){
+      lettersDrawnForHand.push(randomLetter);
+    }
+  }
+  return lettersDrawnForHand;
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
