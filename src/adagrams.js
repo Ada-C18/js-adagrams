@@ -153,5 +153,62 @@ return sumScore;
 
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
+  const wordListDict = {};
+  const maxWordList = [];
+  const wordLenTenList = [];
+  const highestWordList = [];
+  let resultDict = {}
+
+  // calculate the highest score of all the words
   
+  // calculate the score of each word in word_list
+  for (const word of words) {
+    wordListDict[word] = scoreWord(word); 
+  }
+  // calculate highest score in scoreWord dictionary
+  let scores = Object.values(wordListDict);
+  let highestWordScore = Math.max(...scores);
+  
+  // append all words with the highest score to the highest word dictionary
+  
+  for (const [key, value] of Object.entries(wordListDict)) {
+    if (wordListDict[key] === highestWordScore) {
+      highestWordList.push(key)
+    }
+  }
+  // if there is more than one word with the highest score 
+  // and if one of any of those words are 10 letters use that word
+  if (highestWordList.length > 1) {
+    for (const word of highestWordList) {
+      if (word.length === 10) {
+        wordLenTenList.push(word);
+        resultDict['word'] = wordLenTenList[0];
+        resultDict['score'] = highestWordScore;
+        return resultDict
+      }
+      else {
+        const lens = highestWordList.map(words => words.length)
+        console.log(lens)
+        const shortestWord = Math.min(...lens)
+        for (const item of highestWordList) {
+          if (item.length === shortestWord) {
+            resultDict['word'] = item;
+            resultDict['score'] = highestWordScore;
+          }
+        }
+      }  
+    }
+  } 
+  else {
+    resultDict['word'] = highestWordList[0];
+    resultDict['score'] = highestWordScore;
+  }
+  // if no 10 letter words use the shortest word
+  // console.log(wordListDict);
+  // console.log(`score ${highestWordScore}`);
+  // console.log(wordLenTenList);
+  console.log(resultDict);
+  return resultDict;
+  
+
 };
