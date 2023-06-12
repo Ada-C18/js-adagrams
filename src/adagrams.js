@@ -59,6 +59,7 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 };
 
 export const scoreWord = (word) => {
+
   const SCORE_CHART = {
     "A": 1, "B": 3, "C": 3, "D": 2,
     "E": 1, "F": 4, "G": 2, "H": 4,
@@ -71,8 +72,8 @@ export const scoreWord = (word) => {
 
   let sum = 0;
   word = word.toUpperCase();
-
   const higherPointValues = [7, 8, 9, 10];
+  
   for (let letter of word) {
     let pointValue = SCORE_CHART[letter];
     sum += pointValue;
@@ -85,5 +86,33 @@ export const scoreWord = (word) => {
 };
 
 export const highestScoreFrom = (words) => {
+  let scoreDict = {};
+  let highestScoreWord = [];
 
+  for (let word of words) {
+    scoreDict[word] = scoreWord(word);
+  }
+
+  let maxScore = Math.max(...Object.values(scoreDict));
+
+  for (let [word, pointValue] of Object.entries(scoreDict)) {
+    if (pointValue === maxScore) {
+      highestScoreWord.push(word);
+    }
+  }
+
+  if (highestScoreWord.length > 1) {
+    for (let word of highestScoreWord) {
+      for (let i = 0; i < highestScoreWord.length; i++) {
+        if (highestScoreWord[i].length === 10) {
+          return { score: scoreWord(highestScoreWord[i]), word: highestScoreWord[i] };
+        }
+      }
+
+      let bestestWord = highestScoreWord.reduce((a, b) => a.length <= b.length ? a : b);
+      return { score: scoreWord(bestestWord), word: bestestWord };
+    }
+  } else {
+    return { score: scoreWord(highestScoreWord[0]), word: highestScoreWord[0] };
+  }
 };
