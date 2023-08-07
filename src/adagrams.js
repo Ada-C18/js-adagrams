@@ -57,6 +57,17 @@ export const drawLetters = () => {
 
 export const usesAvailableLetters = (input, lettersInHand) => {
   // Implement this method for wave 2
+  let myLettersInHand = JSON.parse(JSON.stringify(lettersInHand));
+  for (let i = 0; i < input.length; i++) {
+    const currLetter = input[i].toUpperCase();
+    if (myLettersInHand.includes(currLetter)) {
+      const index = myLettersInHand.indexOf(currLetter);
+      myLettersInHand.splice(index, 1);
+    } else {
+      return false;
+    }
+  }
+  return true;
 };
 
 export const scoreWord = (word) => {
