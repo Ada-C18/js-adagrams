@@ -4,6 +4,7 @@
   "description": "JavaScript version of the Adagrams project",
   "main": "index.js",
   "scripts": {
+    "build": "babel src -d lib",
     "test": "jest",
     "coverage": "open coverage/lcov-report/index.html",
     "demo-game": "babel-node src/demo.js"
