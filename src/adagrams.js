@@ -110,36 +110,65 @@ export const scoreWord = (word) => {
   return score;
 };
 
-export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
-  const bestWord = words[0];
-  const bestScore = scoreWord(bestWord);
-  
-  for (let i = 0; i < words.length; i++) {
-    const currWord = words[i];
-    const currWordScore = scoreWord(currWord);
-    if (currWordScore > bestScore) {
-      bestScore = currWordScore;
-      bestWord = currWord;
-    } else if (
-      currWordScore === bestScore &&
-      currWord.length < bestWord.length
-    ) {
-      bestScore = currWordScore;
-      bestWord = currWord;
-    } else if (
-      currWordScore === bestScore &&
-      currWord.length === 10 &&
-      bestWord.length !== 10
-    ) {
-      bestScore = currWordScore;
-      bestWord = currWord;
+const tieBreaker = (potentialWinningWords) => {
+  const tenLetterWords = [];
+  const shortestWords = [];
+  let shortestWordLength = 11
+
+  for (const word of potentialWinningWords) {
+    if (word.length === 10) {
+      tenLetterWords.push(word)
+    } else if (word.length < shortestWordLength) {
+      shortestWordLength = word.length;
     }
   }
-  return {
-    word: bestWord,
-    score: bestScore
-  };
+
+  for (const word of potentialWinningWords) {
+    if (word.length === shortestWordLength) {
+      shortestWords.push(word);
+    }
+  }
+
+  if (tenLetterWords.length > 0) {
+    return tenLetterWords[0];
+  } else {
+    return shortestWords[0];
+  }
+};
+
+export const highestScoreFrom = (words) => {
+  // Implement this method for wave 4
+  const wordsScores = new Map();
+  let scoreCounter = 0;
+  const potentialWinners = [];
+
+  for (const word of words) {
+    wordsScores.set(word, scoreWord(word));
+    if (wordsScores.get(word) > scoreCounter) {
+      scoreCounter = wordsScores.get(word);
+    }
+  }
+
+  for (const word of wordsScores.keys()) {
+    if (wordsScores.get(word) === scoreCounter) {
+      potentialWinners.push(word);
+    }
+  }
+
+  if (potentialWinners.length === 1) {
+    const winningWord = {
+      'word': potentialWinners[0],
+      'score': wordsScores.get(potentialWinners[0]),
+    };
+    return winningWord;
+  } else {
+    const tieBreakerWinner = tieBreaker(potentialWinners);
+    const winningWord = {
+      'word': tieBreakerWinner,
+      'score': wordsScores.get(tieBreakerWinner),
+    };
+    return winningWord;
+  }
 };
 
 export default {
