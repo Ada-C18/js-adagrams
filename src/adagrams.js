@@ -16,7 +16,7 @@ export const drawLetters = () => {
     playerHand.push(currentLetter);
     letterBank.splice(index, 1);
   }
-    return playerHand
+    return playerHand;
 
 };
 
@@ -26,12 +26,12 @@ export const usesAvailableLetters = (input, lettersInHand) => {
 
   for (let letter of word) {
     if (!availableLetters.includes(letter)) {
-      return false
+      return false;
     }
     availableLetters.splice(availableLetters.lastIndexOf(letter), 1);
   }
 
-  return true
+  return true;
 };
 
 export const scoreWord = (word) => {
@@ -47,9 +47,22 @@ export const scoreWord = (word) => {
     score += 8
   }
 
-  return score
+  return score;
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  let allScores = {};
+  let bestWord = null;
+  let bestScore = 0;
+
+  words.forEach((word) => {allScores[word] = scoreWord(word)});
+
+  for (let word of words) {
+    let currentScore = allScores[word]
+    if (currentScore > bestScore) {
+      bestWord = word;
+      bestScore = currentScore;
+    }
+  }
+  return {"word": bestWord, "score": bestScore};
 };
