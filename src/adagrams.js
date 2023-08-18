@@ -38,6 +38,7 @@ export const scoreWord = (word) => {
   // Implement this method for wave 3
 };
 
+
 export const highestScoreFrom = (words) => {
   // Implement this method for wave 4
 };
