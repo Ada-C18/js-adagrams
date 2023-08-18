@@ -2,14 +2,13 @@ import LetterTiles from '../letters.json';
 
 export const drawLetters = () => {
   let letterBank = [];
-  let playerHand = [];
-  
   for (let letter of Object.keys(LetterTiles)) {
     for (let step = 0; step < LetterTiles[letter].frequency; step++) {
       letterBank.push(letter)
     }
   }
 
+  let playerHand = [];
   while (playerHand.length < 10) {
     let index = (Math.floor(Math.random() * letterBank.length));
     let currentLetter = letterBank[index];
@@ -51,17 +50,20 @@ export const scoreWord = (word) => {
 
 export const highestScoreFrom = (words) => {
   let allScores = {};
+  words.forEach((word) => {allScores[word] = scoreWord(word)});
+
   let bestWord = null;
   let bestScore = 0;
 
-  words.forEach((word) => {allScores[word] = scoreWord(word)});
-
   for (let word of words) {
     let currentScore = allScores[word]
+
     if (currentScore > bestScore) {
       bestWord = word;
       bestScore = currentScore;
-    } else if (currentScore === bestScore) {
+    }
+
+    if (currentScore === bestScore) {
         if (word.length === 10 && bestWord.length != 10) {
           bestWord = word;
         } else if (word.length < bestWord.length && bestWord.length != 10) {
@@ -69,5 +71,6 @@ export const highestScoreFrom = (words) => {
             }
       }
     }
+
   return {"word": bestWord, "score": bestScore};
 };
