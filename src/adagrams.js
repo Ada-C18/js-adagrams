@@ -40,7 +40,6 @@ export const scoreWord = (word) => {
 
   for (let letter of word) {
     score += LetterTiles[letter].value
-    console.log(LetterTiles[letter].value)
   }
 
   if (7 <= word.length && word.length <= 10) {
@@ -62,7 +61,13 @@ export const highestScoreFrom = (words) => {
     if (currentScore > bestScore) {
       bestWord = word;
       bestScore = currentScore;
+    } else if (currentScore === bestScore) {
+        if (word.length === 10 && bestWord.length != 10) {
+          bestWord = word;
+        } else if (word.length < bestWord.length && bestWord.length != 10) {
+              bestWord = word;
+            }
+      }
     }
-  }
   return {"word": bestWord, "score": bestScore};
 };
