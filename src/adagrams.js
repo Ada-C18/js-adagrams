@@ -1,15 +1,76 @@
+import LetterTiles from '../letters.json';
+
 export const drawLetters = () => {
-  // Implement this method for wave 1
+  let letterBank = [];
+  for (let letter of Object.keys(LetterTiles)) {
+    for (let step = 0; step < LetterTiles[letter].frequency; step++) {
+      letterBank.push(letter)
+    }
+  }
+
+  let playerHand = [];
+  while (playerHand.length < 10) {
+    let index = (Math.floor(Math.random() * letterBank.length));
+    let currentLetter = letterBank[index];
+    playerHand.push(currentLetter);
+    letterBank.splice(index, 1);
+  }
+    return playerHand;
+
 };
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  const word = input.toUpperCase();
+  let availableLetters = [...lettersInHand];
+
+  for (let letter of word) {
+    if (!availableLetters.includes(letter)) {
+      return false;
+    }
+    availableLetters.splice(availableLetters.lastIndexOf(letter), 1);
+  }
+
+  return true;
 };
 
 export const scoreWord = (word) => {
-  // Implement this method for wave 3
+  let score = 0;
+  word = word.toUpperCase();
+
+  for (let letter of word) {
+    score += LetterTiles[letter].value
+  }
+
+  if (7 <= word.length && word.length <= 10) {
+    score += 8
+  }
+
+  return score;
 };
 
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 4
+  let allScores = {};
+  words.forEach((word) => {allScores[word] = scoreWord(word)});
+
+  let bestWord = null;
+  let bestScore = 0;
+
+  for (let word of words) {
+    let currentScore = allScores[word]
+
+    if (currentScore > bestScore) {
+      bestWord = word;
+      bestScore = currentScore;
+    }
+
+    if (currentScore === bestScore) {
+        if (word.length === 10 && bestWord.length != 10) {
+          bestWord = word;
+        } else if (word.length < bestWord.length && bestWord.length != 10) {
+              bestWord = word;
+            }
+      }
+    }
+
+  return {"word": bestWord, "score": bestScore};
 };
